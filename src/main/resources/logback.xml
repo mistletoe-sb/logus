@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="true">
+	<property name="LOG_PATH" value="C:/project_labs/logs"/> <!-- log 파일 저장 경로 -->
+	<appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<pattern>%n========== Log ==========%n%d{HH:mm:ss.SSS} [%thread] %-4level [%logger.%method:%line]%n&gt;&gt;&gt; %msg%n</pattern>
+		</layout>
+	</appender>
+	<!-- 
+		- log pattern -
+		%n : 줄바꿈 ,  %d{날짜형식포맷} - ex: yyyy-MM-dd HH:mm:ss.SSS // HH: 24H표기, hh: 12H표기, MM: 월, mm: 분, ss: 초, SSS: 밀리초
+		%thread : 현재 쓰레드명 ,  %nlevel : 로그레벨(DEBUG, INFO, WARN 등), n은 고정 자릿수
+		%logger : 로그가 기록되는 클래스명(패키지명 포함) -> %logger{n} 이용 시 n으로 표시할 글자 수 제한 설정(0인 경우 클래스명만 표시)
+		%method : 로그가 기록되는 메서드명 ,  %line : 로그가 기록되는 라인
+		&gt; : > 기호
+	 -->
+	 <!-- appender도 종류가 많다. class 속성에 사용할 appender클래스 작성 -->
+	<appender name="LOGFILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${LOG_PATH}/app/test.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>test.%d{yyyy-MM-dd}.log</fileNamePattern>
+			<!-- 7일 지난 파일은 삭제한다. -->
+			<maxHistory>7</maxHistory>
+		</rollingPolicy>
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-4level [%logger.%method:%line]- %msg %n</pattern>
+		</encoder>
+	</appender>
+	
+	<appender name="LOGINLOGFILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${LOG_PATH}/app/login.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>login.%d{yyyy-MM-dd}.log</fileNamePattern>
+			<!-- 7일 지난 파일은 삭제한다. -->
+			<maxHistory>7</maxHistory>
+		</rollingPolicy>
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-4level [%logger.%method:%line]- %msg %n</pattern>
+		</encoder>
+	</appender>
+
+	<!-- RULES for logging DEBUG < INFO < WARN < ERROR < FATAL. (중요도 순) ex:WARN 사용 시 INFO, DEBUG도 실행됨 -->
+ 
+ 	<logger name="org.springframework" level="info" additivity="false">
+		<appender-ref ref="CONSOLE" />
+	</logger>
+
+ 	<logger name="org.apache.commons" level="info" additivity="false">
+		<appender-ref ref="CONSOLE" />
+	</logger>
+
+ 	<logger name="base.login.AdminLoginHelper" level="debug" additivity="false">
+		<appender-ref ref="LOGINLOGFILE" />
+	</logger>
+	
+	<!-- sql이나 resultset 정보 등을 로그로 출력 가능 -->
+	<logger name="jdbc" level="off"/>
+	<logger name="jdbc.sqlonly" level="info"/>
+	<logger name="jdbc.resultsettable" level="off"/>
+	<logger name="jdbc.sqltiming" level="off"/>
+
+	<root>
+		<level value="debug" additivity="false"/>
+		<appender-ref ref="CONSOLE" /><!-- 콘솔에 출력 -->
+		<!-- appender-ref ref="LOGFILE" / --><!-- 파일로 저장 -->
+		<!-- DB에 저장? -->
+	</root>
+
+</configuration>
