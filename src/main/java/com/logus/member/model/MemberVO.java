@@ -1,4 +1,4 @@
-package com.test.logus.member.model;
+package com.logus.member.model;
 
 import java.sql.Date;
 

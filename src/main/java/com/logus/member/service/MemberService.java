@@ -1,12 +1,12 @@
-package com.test.logus.member.service;
+package com.logus.member.service;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.test.logus.member.dao.IMemberDAO;
-import com.test.logus.member.model.MemberVO;
+import com.logus.member.dao.IMemberDAO;
+import com.logus.member.model.MemberVO;
 
 @Service
 // 회원정보 관련 서비스 구현 클래스

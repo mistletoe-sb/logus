@@ -1,8 +1,8 @@
-package com.test.logus.member.service;
+package com.logus.member.service;
 
 import java.util.List;
 
-import com.test.logus.member.model.MemberVO;
+import com.logus.member.model.MemberVO;
 
 // 회원정보 관련 서비스 인터페이스
 public interface IMemberService {

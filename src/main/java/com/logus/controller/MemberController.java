@@ -1,11 +1,11 @@
-package com.test.logus.controller;
+package com.logus.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.test.logus.member.service.IMemberService;
+import com.logus.member.service.IMemberService;
 
 @Controller
 // 회원정보 서비스 컨트롤러 클래스
