@@ -20,4 +20,5 @@ public class MemberController {
 		model.addAttribute("count", memberService.countMember());
 		return view_pos + "count";
 	}
+
 }
