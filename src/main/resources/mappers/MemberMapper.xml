@@ -41,4 +41,8 @@
 			#{memberEmail}, #{memberPhone}, #{memberBirth}, #{memberSex}, #{memberJob}, #{memberProfile}, SYSDATE, NULL)
 		]]>
 	</insert>
+	
+	<update id="updateMember">
+	
+	</update>
 </mapper>
