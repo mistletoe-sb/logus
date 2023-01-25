@@ -20,9 +20,5 @@ public class MemberController {
 		model.addAttribute("count", memberService.countMember());
 		return view_pos + "count";
 	}
-	
-	@RequestMapping(value="/")
-	public String empCount11() {
-		return "index"; 
-	}
+
 }
