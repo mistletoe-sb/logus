@@ -2,20 +2,20 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- mapper의 namespace와 Interface 경로 동일하게 설정 >> mapper 후보로 등록 -->
-<mapper namespace="com.test.logus.member.dao.IMemberDAO">
+<mapper namespace="com.logus.member.dao.IMemberDAO">
 	<select id="countMember" resultType="int">
 		<![CDATA[
 			SELECT COUNT(*) FROM LOGUS.MEMBER
 		]]>
 	</select>
 	
-	<select id="selectMemberInfo" resultType="com.test.logus.member.model.MemberVO" parameterType="string">
+	<select id="selectMemberInfo" resultType="com.logus.member.model.MemberVO" parameterType="string">
 		<![CDATA[
 			SELECT * FROM LOGUS.MEMBER WHERE member_id = #{memberId}
 		]]>
 	</select>
 	
-	<select id="selectMemberList" resultType="com.test.logus.member.model.MemberVO" parameterType="boolean">
+	<select id="selectMemberList" resultType="com.logus.member.model.MemberVO" parameterType="boolean">
 		<![CDATA[
 			SELECT * FROM LOGUS.MEMBER
 		]]>
@@ -34,7 +34,7 @@
 		</if>
 	</select>
 	
-	<insert id="insertMember" parameterType="com.test.logus.member.model.MemberVO">
+	<insert id="insertMember" parameterType="com.logus.member.model.MemberVO">
 		<![CDATA[
 			INSERT INTO LOGUS.MEMBER
 			VALUES(member_code_seq.NEXTVAL, #{memberId}, #{memberPassword}, #{memberNickname}, #{memberName},

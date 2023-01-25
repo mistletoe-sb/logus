@@ -1,10 +1,10 @@
-package com.test.logus.member.dao;
+package com.logus.member.dao;
 
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
-import com.test.logus.member.model.MemberVO;
+import com.logus.member.model.MemberVO;
 
 // 회원정보 DAO 인터페이스
 public interface IMemberDAO {
