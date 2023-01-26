@@ -46,7 +46,7 @@
 	
 	<select id="findDailystoryList" resultType="com.logus.dailystory.model.DailystoryVO">
 		<![CDATA[SELECT * FROM LOGUS.DAILYSTORY]]>
-		<where>
+		<!-- <where>
 			<choose>
 				<when test='option.equals("tag")'></when>
 				<when test='option.equals("title")'></when>
@@ -54,7 +54,7 @@
 				<when test='option.equals("nickname")'></when>
 				<otherwise></otherwise>
 			</choose>
-		</where>
+		</where> -->
 	</select>
 	
 </mapper>
