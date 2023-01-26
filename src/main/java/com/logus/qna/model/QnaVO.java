@@ -10,8 +10,8 @@ public class QnaVO {
 	private String qnaTitle;
 	private String qnaContent;
 	private Date qnaDate;
-	private String memberId;
+	private String memberNickname;
 	private String answerContent;
 	private Date answerDate;
-	private String managerId;
+	private String managerNickname;
 }

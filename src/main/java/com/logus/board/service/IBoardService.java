@@ -1,13 +1,10 @@
-package com.logus.board.dao;
+package com.logus.board.service;
 
 import java.util.List;
 
-import org.springframework.stereotype.Repository;
-
 import com.logus.board.model.BoardVO;
 
-@Repository
-public interface IBoardDAO {
+public interface IBoardService {
 	int countBoard(int boardCategory);
 	List<BoardVO> selectBoardList(int boardCategory);
 	BoardVO selectBoardInfo(int boardCode);

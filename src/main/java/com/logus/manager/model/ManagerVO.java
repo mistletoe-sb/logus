@@ -9,5 +9,4 @@ public class ManagerVO {
 	private String managerPassword;
 	private int managerLevel;
 	private String managerNickname;
-	
 }

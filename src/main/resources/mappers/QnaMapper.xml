@@ -1,1 +1,78 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- mapper의 namespace와 Interface 경로 동일하게 설정 >> mapper 후보로 등록 -->
+<mapper namespace="com.logus.qna.dao.IQnaDAO">
+	<select id="countQna" parameterType="String" resultType="int">
+		<![CDATA[
+			SELECT COUNT(*) FROM logus.qna
+		]]>
+		<if test="memberNickname != null">
+			<![CDATA[
+				WHERE member_nickname = #{memberNickname}
+			]]>
+		</if>
+	</select>
+	
+	<select id="selectBoardList" parameterType="String" resultType="com.logus.qna.model.QnaVO">
+		<![CDATA[
+			SELECT * FROM logus.qna
+		]]>
+		<if test="memberNickname != null">
+			<![CDATA[
+				WHERE member_nickname = #{memberNickname}
+			]]>
+		</if>
+	</select>
+
+	<select id="selectQnaInfo" parameterType="int" resultType="com.logus.qna.model.QnaVO">
+		<![CDATA[
+			SELECT * FROM logus.qna WHERE qna_code = #{qnaCode}
+		]]>
+	</select>
+	
+	<insert id="insertQna" parameterType="com.logus.qna.model.QnaVO">
+		<![CDATA[
+			INSERT INTO logus.qna
+			VALUES(qna_code_seq.NEXTVAL, #{qTitle}, #{qContent}, SYSDATE, #{memberNickname})
+		]]>
+	</insert>
+	
+	<update id="updateQ" parameterType="com.logus.qna.model.QnaVO">
+		<![CDATA[
+			UPDATE logus.qna
+			SET q_title = #{qTitle}, q_content = #{qContent}
+			WHERE qna_code = #{qnaCode}
+		]]>
+	</update>
+	
+	<delete id="deleteQna" parameterType="int">
+		<![CDATA[
+			DELETE logus.qna WHERE qna_code = #{qnaCode}
+		]]>
+	</delete>
+	
+	<update id="insertAnswer" parameterType="com.logus.qna.model.QnaVO">
+		<![CDATA[
+			UPDATE logus.qna
+			SET a_content = #{aContent}, a_date = SYSDATE
+			WHERE qna_code = #{qnaCode}
+		]]>
+	</update>
+	
+	<update id="updateAnswer" parameterType="com.logus.qna.model.QnaVO">
+		<![CDATA[
+			UPDATE logus.qna
+			SET a_content = #{aContent}
+			WHERE qna_code = #{qnaCode}
+		]]>
+	</update>
+	
+	<update id="deleteAnswer" parameterType="com.logus.qna.model.QnaVO">
+		<![CDATA[
+			UPDATE logus.qna
+			SET a_content = null
+			WHERE qna_code = #{qnaCode}
+		]]>
+	</update>
+</mapper>

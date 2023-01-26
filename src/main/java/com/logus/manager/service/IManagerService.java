@@ -1,14 +1,11 @@
-package com.logus.manager.dao;
+package com.logus.manager.service;
 
 import java.util.ArrayList;
-
-import org.springframework.stereotype.Repository;
 
 import com.logus.manager.model.ManagerVO;
 import com.logus.member.model.MemberVO;
 
-@Repository
-public interface IManagerDAO {
+public interface IManagerService {
 	void insertManager(ManagerVO vo);
 	ManagerVO selectManagerInfo(String managerId);
 	ArrayList<MemberVO> selectManagerList();

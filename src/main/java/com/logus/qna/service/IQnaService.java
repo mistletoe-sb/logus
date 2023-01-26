@@ -1,18 +1,14 @@
-package com.logus.qna.dao;
+package com.logus.qna.service;
 
 import java.util.ArrayList;
 
-import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Repository;
-
 import com.logus.qna.model.QnaVO;
 
-@Repository
-public interface IQnaDAO {
+public interface IQnaService {
 	int countQna();
-	int countQna(@Param("memberNickname") String memberNickname);
+	int countQna(String memberNickname);
 	ArrayList<QnaVO> selectQnaList();
-	ArrayList<QnaVO> selectQnaList(@Param("memberNickname") String memberNickname);
+	ArrayList<QnaVO> selectQnaList(String memberNickname);
 	QnaVO selectQnaInfo(int qnaCode);
 	void insertQna(QnaVO vo);
 	void updateQ(QnaVO vo);

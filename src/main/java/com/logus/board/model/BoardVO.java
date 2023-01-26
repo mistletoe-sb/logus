@@ -7,7 +7,7 @@ public class BoardVO {
 	private int boardCode;
 	private String boardTitle;
 	private int boardContent;
-	private int managerId;
+	private int managerNickname;
 	private String boardCategory;
 	private int boardDate;
 }

@@ -1,1 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- mapper의 namespace와 Interface 경로 동일하게 설정 >> mapper 후보로 등록 -->
+<mapper namespace="com.logus.board.dao.IBoardDAO">
+	<select id="countBoard" parameterType="int" resultType="int">
+		<![CDATA[
+			SELECT COUNT(*) FROM logus.board WHERE board_category = #{boardCategory}
+		]]>
+	</select>
+	
+	<select id="selectBoardList" parameterType="int" resultType="com.logus.board.model.BoardVO">
+		<![CDATA[
+			SELECT * FROM logus.board WHERE board_category = #{boardCategory}
+		]]>
+	</select>
+
+	<select id="selectBoardInfo" parameterType="int" resultType="com.logus.board.model.BoardVO">
+		<![CDATA[
+			SELECT * FROM logus.board WHERE board_code = #{boardCode}
+		]]>
+	</select>
+	
+	<insert id="insertBoard" parameterType="com.logus.board.model.BoardVO">
+		<![CDATA[
+			INSERT INTO logus.board
+			VALUES(board_code_seq.NEXTVAL, #{boardTitle}, #{boardContent}, #{managerNickname}, #{boardCategory}, SYSDATE)
+		]]>
+	</insert>
+	
+	<update id="updateBoard" parameterType="com.logus.board.model.BoardVO">
+		<![CDATA[
+			UPDATE logus.board
+			SET board_title = #{boardTitle}, board_content = #{boardContent}
+			WHERE board_code = #{boardCode}
+		]]>
+	</update>	
+	
+	<delete id="deleteBoard" parameterType="int">
+		<![CDATA[
+			DELETE logus.board WHERE board_code = #{boardCode}
+		]]>
+	</delete>
+</mapper>
