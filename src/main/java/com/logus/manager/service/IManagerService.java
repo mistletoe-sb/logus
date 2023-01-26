@@ -6,6 +6,7 @@ import com.logus.manager.model.ManagerVO;
 import com.logus.member.model.MemberVO;
 
 public interface IManagerService {
+	int countManager();
 	void insertManager(ManagerVO vo);
 	ManagerVO selectManagerInfo(String managerId);
 	ArrayList<MemberVO> selectManagerList();

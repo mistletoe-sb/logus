@@ -3,6 +3,12 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- mapper의 namespace와 Interface 경로 동일하게 설정 >> mapper 후보로 등록 -->
 <mapper namespace="com.logus.manager.dao.IManagerDAO">
+	<select id="countManager" resultType="int">
+		<![CDATA[
+			SELECT COUNT(*) FROM logus.manager WHERE manager_level = 1
+		]]>
+	</select>
+
 	<select id="selectManagerInfo" parameterType="string" resultType="com.logus.manager.model.ManagerVO">
 		<![CDATA[
 			SELECT * FROM logus.manager WHERE manager_id = #{managerId}

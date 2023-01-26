@@ -16,6 +16,11 @@ public class ManagerService implements IManagerService {
 	
 	@Autowired
 	IMemberDAO memberDAO;
+
+	@Override
+	public int countManager() {
+		return managerDAO.countManager();
+	}
 	
 	@Override
 	public void insertManager(ManagerVO vo) {

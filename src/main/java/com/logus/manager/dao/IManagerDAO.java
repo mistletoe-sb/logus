@@ -9,6 +9,7 @@ import com.logus.member.model.MemberVO;
 
 @Repository
 public interface IManagerDAO {
+	int countManager();
 	void insertManager(ManagerVO vo);
 	ManagerVO selectManagerInfo(String managerId);
 	ArrayList<MemberVO> selectManagerList();
