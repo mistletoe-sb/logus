@@ -3,10 +3,12 @@ package com.logus.board.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.logus.board.dao.IBoardDAO;
 import com.logus.board.model.BoardVO;
 
+@Service
 public class BoardService implements IBoardService {
 
 	@Autowired
