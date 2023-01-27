@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- mapper의 namespace와 Interface 경로 동일하게 설정 >> mapper 후보로 등록 -->
+<mapper namespace="com.logus.manager.dao.IManagerDAO">
+	<select id="countManager" resultType="int">
+		<![CDATA[
+			SELECT COUNT(*) FROM logus.manager WHERE manager_level = 1
+		]]>
+	</select>
+
+	<select id="selectManagerInfo" parameterType="string" resultType="com.logus.manager.model.ManagerVO">
+		<![CDATA[
+			SELECT * FROM logus.manager WHERE manager_id = #{managerId}
+		]]>
+	</select>
+	
+	<select id="selectManagerList" resultType="com.logus.manager.model.ManagerVO">
+		<![CDATA[
+			SELECT * FROM logus.manager
+		]]>
+	</select>
+	
+	<insert id="insertManager" parameterType="com.logus.manager.model.ManagerVO">
+		<![CDATA[
+			INSERT INTO logus.manager
+			VALUES(manager_code_seq.NEXTVAL, #{managerId}, #{managerPassword}, #{managerLevel}, #{managerNickname})
+		]]>
+	</insert>
+	
+	<delete id="deleteManager" parameterType="string">
+		<![CDATA[
+			DELETE logus.manager WHERE manager_id = #{managerId}
+		]]>
+	</delete>
+</mapper>

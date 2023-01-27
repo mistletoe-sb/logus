@@ -1,10 +1,10 @@
-package com.logus.dailycheck.dao;
+package com.logus.dailycheck.service;
 
 import java.util.List;
 
 import com.logus.dailycheck.model.DailycheckVO;
 
-public interface IDailycheckDAO {
+public interface IdailycheckService {
 	public void insertDailycheck(DailycheckVO vo);
 	public int updateDailycheck(DailycheckVO vo);	//인풋 전체를 받아서 수정 안했어도 업데이트	
 													//controller에서 vo list 객체로 받아서 for문 처리
