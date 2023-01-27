@@ -25,5 +25,10 @@
 	
 	<view-controller path="/" view-name="index" />
 
-	
+	<!-- file upload 위한 CommonsMultipartResolver 등록 -->
+	<beans:bean id="multipartResolver"
+				class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<beans:property name="maxUploadSize" value="50000000"/>
+		<!-- 업로드 크기 제한 50MB -->
+	</beans:bean>
 </beans:beans>
