@@ -24,4 +24,14 @@ public class BoardController {
 			return "manager/report";
 		}
 	}
+	
+	@RequestMapping(value="/manager/boarddetail")
+	public String getBoardDetail(@RequestParam(value="boardcode", required=true) int boardcode, Model model) {
+		model.addAttribute("boarddetail", boardService.selectBoardInfo(boardcode));
+		if(boardService.selectBoardInfo(boardcode).getBoardCategory() == 1) {
+			return "manager/noticedetail";
+		} else {
+			return "manager/reportdetail";
+		}
+	}
 }

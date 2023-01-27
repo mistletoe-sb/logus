@@ -14,7 +14,7 @@
 		</if>
 	</select>
 	
-	<select id="selectBoardList" parameterType="String" resultType="com.logus.qna.model.QnaVO">
+	<select id="selectQnaList" parameterType="String" resultType="com.logus.qna.model.QnaVO">
 		<![CDATA[
 			SELECT * FROM logus.qna
 		]]>

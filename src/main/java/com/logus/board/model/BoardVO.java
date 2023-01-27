@@ -10,6 +10,6 @@ public class BoardVO {
 	private String boardTitle;
 	private String boardContent;
 	private String managerNickname;
-	private String boardCategory;
+	private int boardCategory;
 	private Date boardDate;
 }
