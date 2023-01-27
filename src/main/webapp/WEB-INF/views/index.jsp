@@ -14,7 +14,7 @@
 		</h1>
 		
 		<P>  This is Test Page. </P>
-		<a href="./login">로그인</a>
+		<a href="<c:url value='/login'/>">로그인</a>
 		</div>
 	</body>
 </html>

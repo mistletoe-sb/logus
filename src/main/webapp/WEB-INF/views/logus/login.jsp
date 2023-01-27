@@ -14,6 +14,7 @@
 			<input type="password" name="memberPassword">
 			<input type="submit">
 		</form>
-		<br><br><br>계정이 없으면 <a href="<c:url value='/insert'/>">회원가입</a>
+		<br><br><br>계정이 없으면 <a href="<c:url value='/insertform'/>">회원가입</a>
+		<p>${message}</p>
 	</body>
 </html>
