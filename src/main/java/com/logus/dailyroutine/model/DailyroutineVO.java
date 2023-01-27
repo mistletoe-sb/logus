@@ -8,5 +8,6 @@ public class DailyroutineVO {
 	private String memberNickname;
 	private int dailyroutineWeekopt;
 	private String dailyroutineTitle;
-	private String dailyroutineActive;
+	private int dailyroutineActive;
+	private int dailyroutineShared;
 }
