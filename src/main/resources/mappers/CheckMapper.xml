@@ -5,13 +5,47 @@
 <mapper namespace="com.logus.dailycheck.dao.IDailycheckDAO">
 <!-- daily -->
 
-<insert id="insertDailycheck" parameterType="com.logus.dailycheck.model.DailycheckVO">
-<![CDATA[
-INSERT INTO LOGUS.DAILYCHECK
-VALUES(DAILYCHECK_CODE_SEQ.nextval, #{dailyroutineCode}, #{dailycheckBegintime},
-#{dailycheckEndtime}, #{dailycheckContent})
-]]>
-</insert>
+	<insert id="insertDailycheck" parameterType="com.logus.dailycheck.model.DailycheckVO">
+		<![CDATA[
+		INSERT INTO LOGUS.DAILYCHECK
+		VALUES(DAILYCHECK_CODE_SEQ.nextval, #{dailyroutineCode}, #{dailycheckBegintime},
+		#{dailycheckEndtime}, #{dailycheckContent})
+		]]>
+	</insert>
 
-
+	
+	<update id="updateDailycheck" parameterType="com.logus.dailycheck.model.DailycheckVO">
+		<![CDATA[
+		UPDATE LOGUS.DAILYCHECK
+		SET dailycheck_begintime=#{dailycheckBegintime}, dailycheck_endtime=#{dailycheckEndtime}, dailycheck_content=#{dailycheckContent}
+		where dailycheck_code=#{dailycheckCode}
+		]]>
+	</update>
+	
+	<delete id="deleteDailycheck">
+		<![CDATA[
+		DELETE LOGUS.DAILYCHECK
+		WHERE dailycheck_code in
+		]]>
+		<foreach  item="dailycheckCode" index="index" collection="array" open="(" close=")" separator=",">
+		 	<![CDATA[
+		 	#{dailycheckCode}
+		 	]]>
+		</foreach>
+	</delete>
+	
+	<delete id="deleteDailycheckAll" parameterType="int">
+		<![CDATA[
+		DELETE LOGUS.DAILYCHECK
+		WHERE dailyroutine_code=#{dailyroutineCode}
+		]]>
+	</delete>
+	
+	<select id="selectDailycheckList" resultType="com.logus.dailycheck.model.DailycheckVO" parameterType="string">
+		<![CDATA[
+		SELECT * FROM LOGUS.DAILYCHECK
+		WHERE dailyroutine_code=#{dailyroutineCode}
+		]]>
+	</select>
+	
 </mapper>
