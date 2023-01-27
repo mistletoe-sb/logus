@@ -17,7 +17,7 @@
 	
 	<select id="selectManagerList" resultType="com.logus.manager.model.ManagerVO">
 		<![CDATA[
-			SELECT * FROM logus.manager
+			SELECT * FROM logus.manager WHERE manager_level = 1
 		]]>
 	</select>
 	
