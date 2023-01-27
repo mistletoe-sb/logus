@@ -3,51 +3,61 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- mapper의 namespace와 Interface 경로 동일하게 설정 >> mapper 후보로 등록 -->
 <mapper namespace="com.logus.dailyroutine.dao.IDailyroutineDAO">
+<!-- daily -->
 
-	<!-- <insert id="insertDailyroutine" parameterType="com.logus.dailyroutine.model.DailyroutineVO">
+	<insert id="insertDailyroutine" parameterType="com.logus.dailyroutine.model.DailyroutineVO">
 		<![CDATA[
 			INSERT INTO LOGUS.DAILYROUTINE
 			VALUES(DAILYROUTINE_CODE_SEQ.nextval, #{dailyroutineCode}, #{memberNickname}, #{dailyroutineWeekopt},
 			#{dailyroutineTitle}, #{dailyroutineActive})
 		]]>
 	</insert>
-	
-	<update id="updateDailyroutine" parameterType="com.logus.dailyroutine.model.DailyroutineVO">
+
+	<update id="updateRoutineActive">
 	<![CDATA[
 	UPDATE LOGUS.DAILYROUTINE 
-	SET member_nickname=#{memberNickname}, dailyroutine_weekopt=#{dailyroutineWeekopt},
-	dailyroutine_title=#{dailyroutineTitle}, dailyroutine_active=#{dailyroutineActive}
-	WHERE dailyroutine_code=(select dailyroutine_code from logus.dailyroutine 
-	where dailyroutine_weekopt=#{dailyroutineWeekopt} and dailyroutine_active=#{dailyroutineActive})
+	SET dailyroutine_active=0
+	WHERE dailyroutine_active=1
 	]]>
+	</update>
+
+	<update id="updateDailyroutine" parameterType="com.logus.dailyroutine.model.DailyroutineVO">
+		<![CDATA[
+		UPDATE LOGUS.DAILYROUTINE 
+		SET member_nickname=#{memberNickname}, dailyroutine_weekopt=#{dailyroutineWeekopt},
+		dailyroutine_title=#{dailyroutineTitle}, dailyroutine_active=#{dailyroutineActive}
+		WHERE dailyroutine_code=(select dailyroutine_code from logus.dailyroutine 
+		where dailyroutine_weekopt=#{dailyroutineWeekopt} and dailyroutine_active=#{dailyroutineActive})
+		]]>
 	</update>
 	
 	<delete id="deleteDailyroutine" parameterType="int">
-	<![CDATA[
-	DELETE LOGUS.DAILYROUTINE
-	WHERE dailyroutine_code=#{dailyroutineCode}
-	]]>
+		<![CDATA[
+		DELETE LOGUS.DAILYROUTINE
+		WHERE dailyroutine_code=#{dailyroutineCode}
+		]]>
 	</delete>
 	
 	<select id="selectDailyroutineInfo" resultType="com.logus.dailyroutine.model.DailyroutineVO" parameterType="int">
-	<![CDATA[
-	SELECT * FROM LOGUS.DAILYROUTINE
-	WHERE dailyroutine_code=#{dailyroutineCode}
-	]]>
+		<![CDATA[
+		SELECT * FROM LOGUS.DAILYROUTINE
+		WHERE dailyroutine_code=#{dailyroutineCode}
+		]]>
 	</select>
 	
 	<select id="selectDailyroutineList" resultType="com.logus.dailyroutine.model.DailyroutineVO" parameterType="string">
-	<![CDATA[
-	SELECT * FROM LOGUS.DAILYROUTINE
-	WHERE member_nickname=#{memberNickname}
-	]]>
+		<![CDATA[
+		SELECT * FROM LOGUS.DAILYROUTINE
+		WHERE member_nickname=#{memberNickname}
+		]]>
 	</select>
 	
 	<select id="findDailyroutineList" resultType="com.logus.dailyroutine.model.DailyroutineVO" parameterType="string">
-	<![CDATA[
-	SELECT * FROM LOGUS.DAILYROUTINE
-	]]>
-	like.... 일단 if. 옵션 숫자 몇번이 내용, 작성자 등등인지~
-	</select> -->
+		<![CDATA[
+		SELECT * FROM LOGUS.DAILYROUTINE
+		]]>
+		WHERE 
+		<!--like.... 일단 if. 옵션 숫자 몇번이 내용, 작성자 등등인지~-->
+	</select>
 </mapper>
 

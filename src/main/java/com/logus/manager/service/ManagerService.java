@@ -3,12 +3,14 @@ package com.logus.manager.service;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.logus.manager.dao.IManagerDAO;
 import com.logus.manager.model.ManagerVO;
 import com.logus.member.dao.IMemberDAO;
 import com.logus.member.model.MemberVO;
 
+@Service
 public class ManagerService implements IManagerService {
 
 	@Autowired

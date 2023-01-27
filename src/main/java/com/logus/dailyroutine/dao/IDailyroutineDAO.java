@@ -10,7 +10,10 @@ public interface IDailyroutineDAO {
 	public void insertDailyroutine(DailyroutineVO vo);
 	
 	//public int select();	//1번 active 정보를 반환
-	public int updateRoutineActive();	//1번 반환받은 정보 기반으로 
+
+	public int updateRoutineActive();	//1번 if로 컨트롤러에서 실행여부 나눔(파라미터 X)
+										//0이 기본, 1번이 메인에 걸림
+                    
 	public int updateDailyroutine(DailyroutineVO vo);	//2번 active 포함 업데이트
 	public int deleteDailyroutine(int dailyroutineCode);
 	public DailyroutineVO selectDailyroutineInfo(int dailyroutineCode);

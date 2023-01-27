@@ -3,10 +3,12 @@ package com.logus.qna.service;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.logus.qna.dao.IQnaDAO;
 import com.logus.qna.model.QnaVO;
 
+@Service
 public class QnaService implements IQnaService {
 
 	@Autowired
