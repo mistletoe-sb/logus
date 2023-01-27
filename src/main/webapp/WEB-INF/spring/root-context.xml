@@ -41,5 +41,8 @@
 	<context:component-scan base-package="com.logus" />
 	
 	<mybatis-spring:scan base-package="com.logus.*.dao" />
+	
+	<!-- AOP 설정 -->
+	<aop:aspectj-autoproxy/>
 
 </beans>
