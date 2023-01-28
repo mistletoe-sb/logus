@@ -1,13 +1,17 @@
 package com.logus.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.logus.dailystory.model.DailystoryVO;
 import com.logus.dailystory.service.IDailystoryService;
+import com.logus.util.redirectencoder.RedirEncoder;
 
 @Controller
 // 일일 스토리 서비스 제어하는 컨트롤러 클래스
@@ -15,17 +19,23 @@ public class DailystoryController {
 	@Autowired
 	IDailystoryService dailystoryService;	// 일일 스토리 서비스 객체
 
-	@GetMapping(value="/{memberNickname}/dailystory/insert")
+	@GetMapping(value="/lib")
+	// 테스트용 서재 메인으로 이동
+	public String libMain() {
+		return "redirect:/" + RedirEncoder.encode("회원닉네임테스트01") + "/library/main";
+	}
+	
+	@GetMapping(value="/{memberNickname}/library/story/insert")
 	// 일일 스토리 작성
 	public String insertDailystory() {
 		return "dailystory/insertform";
 	}
 	
-	@PostMapping(value="/{memberNickname}/dailystory/insert")
+	@PostMapping(value="/{memberNickname}/library/story/insert")
 	// 일일 스토리 작성
 	public String insertDailystory(DailystoryVO vo) {
 		dailystoryService.insertDailystory(vo);
-		return null;
+		return "redirect:/" + RedirEncoder.encode(vo.getMemberNickname()) + "/library/main";
 	}
 
 	// 일일 스토리 수정
@@ -46,9 +56,11 @@ public class DailystoryController {
 		return null;
 	}
 
-	// 일일 스토리 목록 조회(내 서재)
-	public String selectDailystoryList(String memberNickname) {
-		dailystoryService.selectDailystoryList(memberNickname);
-		return null;
+	@GetMapping(value="{memberNickname}/library/main")
+	// 일일 스토리 목록 조회(내 서재 메인)
+	public String selectDailystoryList(@PathVariable String memberNickname, Model model) {
+		List<DailystoryVO> dsList = dailystoryService.selectDailystoryList(memberNickname);	// 해당 닉네임의 일일 스토리 목록 조회
+		model.addAttribute("dsList", dsList);												// 모델에 조회한 목록 저장
+		return "dailystory/storylist";
 	}
 }
