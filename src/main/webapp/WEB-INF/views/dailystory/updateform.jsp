@@ -10,7 +10,7 @@
 	<body>
 		<p>일일 스토리 수정 폼</p>
 		<br>
-		<form action="<c:url value='/회원닉네임테스트01/library/story/insert'/>" method="post" enctype="multipart/form-data">
+		<form action="<c:url value='/회원닉네임테스트01/library/story/update'/>" method="post" enctype="multipart/form-data">
 			<label>제목 </label>
 			<input type="text" name="dailystoryTitle">
 			<br>
