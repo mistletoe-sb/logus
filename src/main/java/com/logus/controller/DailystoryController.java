@@ -2,6 +2,8 @@ package com.logus.controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,11 +20,19 @@ import com.logus.util.redirectencoder.RedirEncoder;
 public class DailystoryController {
 	@Autowired
 	IDailystoryService dailystoryService;	// 일일 스토리 서비스 객체
+	
+	private static Logger logger = LoggerFactory.getLogger(DailystoryController.class);	// logger 객체
 
 	@GetMapping(value="/lib")
 	// 테스트용 서재 메인으로 이동
 	public String libMain() {
 		return "redirect:/" + RedirEncoder.encode("회원닉네임테스트01") + "/library/main";
+	}
+	
+	@GetMapping(value="/error")
+	public String errorLog() {
+		logger.debug("error");
+		return "redirect:/";
 	}
 	
 	@GetMapping(value="/{memberNickname}/library/story/insert")

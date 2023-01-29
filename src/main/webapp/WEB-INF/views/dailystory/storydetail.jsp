@@ -8,20 +8,18 @@
 		<title>LogUs</title>
 	</head>
 	<body>
-		<p>일일 스토리 작성 폼</p>
+		<p>일일 스토리 보기</p>
 		<br>
 		<form action="<c:url value='/회원닉네임테스트01/library/story/insert'/>" method="post" enctype="multipart/form-data">
-			<label>제목 </label>
-			<input type="text" name="dailystoryTitle">
+			<p>${vo.dailystoryTitle}</p>
 			<br>
-			<label>내용 </label>
-			<textarea name="dailystoryContent" cols="50" rows="10"></textarea>
+			<p>${vo.dailystoryContent}</p>
 			<br>
-			<label>썸네일 </label>
+			<img src="${pageContext.request.contextPath}/resources/images/${vo.dailystoryImage}" alt="${vo.dailystoryImage}">
 			<input type="text" name="dailystoryImage">
 			<br><br>
-			<input type="submit" value="저장">
-			<input type="reset" value="취소">
+			<button type="submit" value="수정"></button>
+			<button type="reset" value="삭제"></button>
 		</form>
 	</body>
 </html>

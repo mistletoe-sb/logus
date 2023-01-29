@@ -8,7 +8,7 @@
 		<title>LogUs</title>
 	</head>
 	<body>
-		<p>일일 스토리 작성 폼</p>
+		<p>일일 스토리 수정 폼</p>
 		<br>
 		<form action="<c:url value='/회원닉네임테스트01/library/story/insert'/>" method="post" enctype="multipart/form-data">
 			<label>제목 </label>
@@ -20,7 +20,7 @@
 			<label>썸네일 </label>
 			<input type="text" name="dailystoryImage">
 			<br><br>
-			<input type="submit" value="저장">
+			<input type="submit" value="작성하기">
 			<input type="reset" value="취소">
 		</form>
 	</body>

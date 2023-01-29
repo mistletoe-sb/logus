@@ -1,19 +1,19 @@
 package com.logus.util.aoplogger;
 
-import org.aspectj.lang.JoinPoint;
+/*import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Component;*/
 
-@Component
-@Aspect
+//@Component
+//@Aspect
 // AOP 이용한 Logger 클래스
 public class LogAspect {
 	
-	private static Logger logger = LoggerFactory.getLogger(LogAspect.class);
+	//private static Logger logger = LoggerFactory.getLogger(LogAspect.class);
 	
 	/*
 	 * @Before("execution(* com.logus.util.redirectencoder..encode(..))") public
