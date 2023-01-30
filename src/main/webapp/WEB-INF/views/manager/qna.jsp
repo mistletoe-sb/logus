@@ -29,7 +29,7 @@
             <c:forEach var="qna" items="${qnalist}">
               <tr>
                 <th scope="row">${qna.qnaCode}</th>
-                <td>${qna.qTitle}</td>
+                <td><a href="http://localhost:8080/logus/manager/qnadetail?qnacode=${qna.qnaCode}">${qna.qTitle}</a></td>
                 <td>${qna.qDate}</td>
                 <td>
                 <c:choose>
