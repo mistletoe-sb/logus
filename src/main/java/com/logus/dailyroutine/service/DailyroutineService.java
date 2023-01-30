@@ -15,8 +15,8 @@ public class DailyroutineService implements IDailyroutineService {
 	private IDailyroutineDAO dailyroutinedao;
 	
 	@Override
-	public void insertDailyroutine(DailyroutineVO vo) {
-		 dailyroutinedao.insertDailyroutine(vo);
+	public int insertDailyroutine(DailyroutineVO vo) {
+		 return dailyroutinedao.insertDailyroutine(vo);
 	}
 
 	@Override

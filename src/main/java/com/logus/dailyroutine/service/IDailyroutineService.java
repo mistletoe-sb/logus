@@ -5,7 +5,7 @@ import java.util.List;
 import com.logus.dailyroutine.model.DailyroutineVO;
 
 public interface IDailyroutineService {
-	public void insertDailyroutine(DailyroutineVO vo);
+	public int insertDailyroutine(DailyroutineVO vo);
 	public int updateDailyroutine(DailyroutineVO vo);
 	public int deleteDailyroutine(int dailyroutineCode);
 	public DailyroutineVO selectDailyroutineInfo(int dailyroutineCode);

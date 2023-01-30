@@ -5,11 +5,11 @@
 <mapper namespace="com.logus.dailyroutine.dao.IDailyroutineDAO">
 <!-- daily -->
 
-	<insert id="insertDailyroutine" parameterType="com.logus.dailyroutine.model.DailyroutineVO">
+	<insert id="insertDailyroutine" parameterType="com.logus.dailyroutine.model.DailyroutineVO" >
 		<![CDATA[
-			INSERT INTO LOGUS.DAILYROUTINE
-			VALUES(DAILYROUTINE_CODE_SEQ.nextval, #{dailyroutineCode}, #{memberNickname}, #{dailyroutineWeekopt},
-			#{dailyroutineTitle}, #{dailyroutineActive})
+			INSERT INTO LOGUS.DAILYROUTINE (DAILYROUTINE_CODE, MEMBER_NICKNAME, DAILYROUTINE_WEEKOPT, DAILYROUTINE_TITLE, DAILYROUTINE_ACTIVE, DAILYROUTINE_SHARED)
+			VALUES(DAILYROUTINE_CODE_SEQ.nextval, #{memberNickname}, #{dailyroutineWeekopt},
+			#{dailyroutineTitle}, #{dailyroutineActive}, 0)
 		]]>
 	</insert>
 

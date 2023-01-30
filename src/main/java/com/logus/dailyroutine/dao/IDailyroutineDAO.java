@@ -7,8 +7,8 @@ import org.apache.ibatis.annotations.Param;
 import com.logus.dailyroutine.model.DailyroutineVO;
 
 public interface IDailyroutineDAO {
-	public void insertDailyroutine(DailyroutineVO vo);
-	
+	public int insertDailyroutine(DailyroutineVO vo);	//int로 key insert한거 반환받아서 check에 바로 써야 함
+		
 	//public int select();	//1번 active 정보를 반환
 
 	public int updateRoutineActive();	//1번 if로 컨트롤러에서 실행여부 나눔(파라미터 X)

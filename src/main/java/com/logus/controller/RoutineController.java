@@ -2,12 +2,15 @@ package com.logus.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.logus.dailycheck.model.DailycheckVO;
 import com.logus.dailycheck.service.IDailycheckService;
@@ -70,9 +73,56 @@ public class RoutineController {
 	}
 	
 	@PostMapping(value="/newroutine")	//새 루틴 추가-전송용
-	public String insertDailyroutine2() {
+	public String insertDailyroutine2(HttpSession session, @RequestParam("active") String active, @RequestParam("week") String week, 
+			@RequestParam("title") String title,  @RequestParam("begin") String[] begin, @RequestParam("end") String[] end, 
+			@RequestParam("content") String[] content) {
 		
-		return "redirect:/routine/routinelist";
+		int activeNum;	//일반&메인 루틴 검증
+		if(active.equals("일반 일정으로 등록")) {
+			 activeNum=0;	//일반 루틴
+		} else{
+			activeNum=1;	//메인 루틴
+		};
+		System.out.println(activeNum);
+		
+		int weekNum;	//평일&주말 검증
+		if(week.equals("평일")) {
+			weekNum=1;	//평일
+		} else {
+			weekNum=2;	//주말
+		}
+		
+		String memberNickname="회원닉네임테스트01";	//이후 session으로 대체
+		
+		String[] begintime =begin;
+		String[] endtime=end;
+		String[] con=content;
+		
+		//루틴 VO 객체 생성
+		DailyroutineVO dailyroutineVO = new DailyroutineVO();
+		dailyroutineVO.setMemberNickname(memberNickname);	//닉네임
+		dailyroutineVO.setDailyroutineActive(activeNum);	//일반or메인 여부
+		dailyroutineVO.setDailyroutineWeekopt(weekNum);		//평일or주말 여부
+		dailyroutineVO.setDailyroutineTitle(title);			//루틴 타이틀
+		
+		
+		DailyroutineService.insertDailyroutine(dailyroutineVO); //아마 해당 메서드를 setroutinecode에 넣을듯  
+		//루틴 상세 VO 객체 생성
+		DailycheckVO dailycheckVO = new DailycheckVO();
+		dailycheckVO.setDailyroutineCode(weekNum);
+		for(int i=0; i<begintime.length; i++) {
+		
+		dailycheckVO.setDailycheckBegintime(begintime[i]); 
+		dailycheckVO.setDailycheckEndtime(endtime[i]);
+		dailycheckVO.setDailycheckContent(con[i]);
+		}
+		
+		
+
+		
+		//DailycheckService.insertDailycheck(null);
+		
+		return "redirect:/routinelist";
 	}
 	
 	@GetMapping(value="/routinefix")	//루틴 수정-삭제-화면용
@@ -84,6 +134,6 @@ public class RoutineController {
 	@PostMapping(value="/routinefix")	//루틴 수정-삭제-전송용(수정, 삭제 동시에)
 	public String updateDailyroutine2() {
 		
-		return "redirect:/routine/routinelist";
+		return "redirect:/routinelist";
 	}
 }
