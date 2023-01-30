@@ -12,6 +12,18 @@
 			SELECT COUNT(*) FROM LOGUS.MEMBER
 		]]>
 	</select>
+	
+	<select id="countMemberId" parameterType="String" resultType="int">
+		<![CDATA[
+			SELECT COUNT(*) FROM LOGUS.MEMBER WHERE member_id = #{memberId}
+		]]>
+	</select>
+	
+	<select id="countMemberNickname" parameterType="String" resultType="int">
+		<![CDATA[
+			SELECT COUNT(*) FROM LOGUS.MEMBER WHERE member_nickname = #{memberNickname}
+		]]>
+	</select>
 <!-- ====================================================================================================================== -->
 
 <!-- ========================================================회원 정보============================================================== -->	

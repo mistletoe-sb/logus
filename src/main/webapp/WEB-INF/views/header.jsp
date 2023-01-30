@@ -1,10 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
@@ -18,11 +20,20 @@
     </a>
     <button type="button" class="btn btn-primary">내서재<br>바로가기</button>
   	<button type="button" class="btn btn-info">오늘의 출석체크</button>
+  	<p>${message}</p>
   </div>
   <div>
-  <button type="button" class="btn btn-outline-dark">로그인</button>
-  <button type="button" class="btn btn-outline-dark">회원가입</button>
-    <button type="button" class="btn btn-secondary">마이페이지</button>
+  <c:choose>
+  	<c:when test="${empty sessionScope.memberNickname}">
+		<button type="button" class="btn btn-outline-dark" onclick="location.href='<c:url value='/loginform'/>'">로그인</button>
+		<button type="button" class="btn btn-outline-dark"onclick="location.href='<c:url value='/insertform'/>'">회원가입</button>
+	</c:when>
+	<c:otherwise>
+		 <li><a>${sessionScope.memberId}(${sessionScope.memberNickname})님 환영합니다.</a></li>
+		<button type="button" class="btn btn-secondary">마이페이지</button>
+		<button type="button" class="btn btn-secondary" onclick="location.href='<c:url value='/logout'/>'">로그아웃</button>
+	</c:otherwise>
+  </c:choose>
     </div>
   <div class="container-fluid">
     <form class="d-flex" role="search">

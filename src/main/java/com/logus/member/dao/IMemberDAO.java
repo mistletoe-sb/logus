@@ -10,6 +10,8 @@ import com.logus.member.model.MemberVO;
 // 회원정보 DAO 인터페이스
 public interface IMemberDAO {
 	int countMember();																	// 전체 회원 수 반환
+	int countMemberId(String memberId);	
+	int countMemberNickname(String memberNickname);	
 	int countMember(@Param("nameAttr") String nameAttr, @Param("value") int value);		// 성별 해당하는 회원 수 반환
 	int countMember(@Param("nameAttr") String nameAttr, @Param("value") String value);	// 직업 해당하는 회원 수 반환
 	int countMember(@Param("nameAttr") String nameAttr, @Param("value") Date value);	// 나이 해당하는 회원 수 반환
