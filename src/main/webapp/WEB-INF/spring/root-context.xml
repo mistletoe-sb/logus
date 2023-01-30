@@ -13,10 +13,10 @@
 
 	<!-- DB 연결 설정 -->
 	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
-		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
-		<property name="url" value="jdbc:oracle:thin:@192.168.230.207:1521/xepdb1" />
-		<property name="username" value="logus" />
-		<property name="password" value="logus" />
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
+		<property name="url" value="jdbc:oracle:thin:@192.168.230.207:1521/xepdb1"/>
+		<property name="username" value="logus"/>
+		<property name="password" value="logus"/>
 	</bean>
 
 	<!-- sqlSessionFactory bean 등록 >> mapper 설정 참조 -->
@@ -33,13 +33,16 @@
 	
 	<!-- 트랜잭션 설정 -->
 	<bean class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-		<property name="dataSource" ref="dataSource" />
+		<property name="dataSource" ref="dataSource"/>
 	</bean>
 
 	<tx:annotation-driven/>
 
-	<context:component-scan base-package="com.logus" />
+	<context:component-scan base-package="com.logus"/>
 	
-	<mybatis-spring:scan base-package="com.logus.*.dao" />
+	<mybatis-spring:scan base-package="com.logus.*.dao"/>
+	
+	<!-- AOP 설정 -->
+	<aop:aspectj-autoproxy/>
 
 </beans>
