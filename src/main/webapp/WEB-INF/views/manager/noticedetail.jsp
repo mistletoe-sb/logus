@@ -12,6 +12,7 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     </head>
     <body>
+        <h2>로그인 관리자 별명 : ${sessionScope.sessionManagerNickname}</h2>
 
 	    <div class="inner">
 	        <div class="contents" id="bodyWrap">
@@ -55,8 +56,8 @@
 	                                    </div>
 	                            <div class="btnListGo">
 	                                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-	                                    <button class="btn btn-primary me-md-2" type="button">수정하기</button>
-	                                    <button class="btn btn-primary" type="button">삭제하기</button>
+	                                    <button class="btn btn-primary me-md-2" type="button" onclick="location.href='http://localhost:8080/logus/manager/updateboardform?boardCode=${boarddetail.boardCode}'">수정하기</button>
+	                                    <button class="btn btn-primary" type="button" onclick="location.href='http://localhost:8080/logus/manager/deleteboard?boardCode=${boarddetail.boardCode}'">삭제하기</button>
 	                                  </div>
 	                            </div>
 	                        </div>
