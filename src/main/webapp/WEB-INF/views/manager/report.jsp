@@ -29,7 +29,7 @@
             <c:forEach var="board" items="${boardlist}">
               <tr>
                 <th scope="row">${board.boardCode}</th>
-                <td>${board.boardTitle}</td>
+                <td><a href="http://localhost:8080/logus/manager/boarddetail?boardcode=${board.boardCode}">${board.boardTitle}</a></td>
                 <td>${board.managerNickname}</td>
                 <td>${board.boardDate}</td>
               </tr>

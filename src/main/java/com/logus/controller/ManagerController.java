@@ -89,7 +89,7 @@ public class ManagerController {
 	}
 	
 	@RequestMapping(value="/manager/deletemanager")
-	public String deleteManager(@RequestParam(value="managerId", required=true) String managerId, Model model, RedirectAttributes redirectAttributes, HttpSession session) {
+	public String deleteManager(@RequestParam(value="managerId", required=true) String managerId, Model model, RedirectAttributes redirectAttributes) {
 		managerService.deleteManager(managerId);
 		return "redirect:/manager/managerlist";
 	}
