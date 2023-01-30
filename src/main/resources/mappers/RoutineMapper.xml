@@ -45,10 +45,10 @@
 		]]>
 	</select>
 	
-	<select id="selectDailyroutineList" resultType="com.logus.dailyroutine.model.DailyroutineVO" parameterType="string">
+	<select id="selectDailyroutineList" resultType="com.logus.dailyroutine.model.DailyroutineVO">
 		<![CDATA[
 		SELECT * FROM LOGUS.DAILYROUTINE
-		WHERE member_nickname=#{memberNickname}
+		WHERE member_nickname=#{memberNickname} AND dailyroutine_weekopt=#{dailyroutineWeekopt}
 		]]>
 	</select>
 	

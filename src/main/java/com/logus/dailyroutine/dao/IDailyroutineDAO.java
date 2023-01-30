@@ -17,7 +17,8 @@ public interface IDailyroutineDAO {
 	public int updateDailyroutine(DailyroutineVO vo);	//2번 active 포함 업데이트
 	public int deleteDailyroutine(int dailyroutineCode);
 	public DailyroutineVO selectDailyroutineInfo(int dailyroutineCode);
-	public List<DailyroutineVO> selectDailyroutineList(String memberNickname);
+	public List<DailyroutineVO> selectDailyroutineList(@Param("memberNickname") String memberNickname, 
+			@Param("dailyroutineWeekopt") int dailyroutineWeekopt);
 	public List<DailyroutineVO> findDailyroutineList(@Param("option") String option, @Param("search") String search);
 	//전체, 태그, 제목, 내용, 사용자(닉네임) 검색
 	

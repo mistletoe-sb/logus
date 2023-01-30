@@ -35,8 +35,8 @@ public class DailyroutineService implements IDailyroutineService {
 	}
 
 	@Override
-	public List<DailyroutineVO> selectDailyroutineList(String memberNickname) {
-		return dailyroutinedao.selectDailyroutineList(memberNickname);
+	public List<DailyroutineVO> selectDailyroutineList(String memberNickname, int dailyroutineWeekopt) {
+		return dailyroutinedao.selectDailyroutineList(memberNickname, dailyroutineWeekopt);
 	}
 
 	@Override

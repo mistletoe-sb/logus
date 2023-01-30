@@ -33,9 +33,11 @@ public class RoutineController {
 		
 		memberNickname="회원닉네임테스트01";
 		
-		List<DailyroutineVO> routinelist= DailyroutineService.selectDailyroutineList(memberNickname);
-		System.out.println(routinelist);
-		model.addAttribute("routinelist", routinelist);
+		List<DailyroutineVO> routinelist1= DailyroutineService.selectDailyroutineList(memberNickname, 1);	//평일 리스트
+		List<DailyroutineVO> routinelist2= DailyroutineService.selectDailyroutineList(memberNickname, 2);	//주말 리스트
+		
+		model.addAttribute("routinelist1", routinelist1);
+		model.addAttribute("routinelist2", routinelist2);
 		return view_ref+"routinelist";	
 	}
 	//href="" post get 
@@ -44,25 +46,33 @@ public class RoutineController {
 		
 		DailyroutineVO routine= DailyroutineService.selectDailyroutineInfo(dailyroutineCode);	//루틴 정보
 		List<DailycheckVO> checklist =DailycheckService.selectDailycheckList(dailyroutineCode);
+		String weekopt;
 		
-		System.out.println(routine);
-		System.out.println(checklist);
+		//dailyroutine weekopt 1 =>평일 , 2 => 주말
+				if(routine.getDailyroutineWeekopt()==1) {
+					weekopt="평일";
+					
+				} else {
+					weekopt="주말";
+				}
+		
 		model.addAttribute("routine", routine);
 		model.addAttribute("checklist", checklist);
+		model.addAttribute("weekopt", weekopt);
+		
 		
 		return view_ref+"routine";
 	}
 	
 	@GetMapping(value="/newroutine")	//새 루틴 추가-화면용
 	public String insertDailyroutine() {
-		
 		return view_ref+"newroutine";
 	}
 	
 	@PostMapping(value="/newroutine")	//새 루틴 추가-전송용
 	public String insertDailyroutine2() {
 		
-		return "redirect:/routine/newroutine";
+		return "redirect:/routine/routinelist";
 	}
 	
 	@GetMapping(value="/routinefix")	//루틴 수정-삭제-화면용

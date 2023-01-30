@@ -7,21 +7,38 @@
 		<title>루틴 리스트</title>
 	</head>
 	<body>
-	<button type="button" class="btn btn-primary btn-lg" onclick="location.href='newroutine'">새 루틴 추가하기</button>
-	<c:forEach items="${routinelist}" var="routinelist" varStatus="status">
-	<ul class="list-group">
-  <li class="list-group-item d-flex justify-content-between align-items-start">
-    <div class="ms-2 me-auto">
-      <div class="fw-bold">${routinelist.dailyroutineTitle }</div>
-      여기는 태그 위치
-    </div>
-    <span class="badge bg-primary rounded-pill"></span>
-    <a href="routine/${routinelist.dailyroutineCode}" class="btn btn-primary active" aria-current="page">확인</a>
-  	<a href="routinefix" class="btn btn-primary">수정</a>
-  	<a href="#" class="btn btn-primary">삭제수정에서할듯?</a>
-  </li>
-</ul>
-
-</c:forEach>
+		<div class="d-grid gap-2 col-6 mx-auto">
+			<button type="button" class="btn btn-primary btn-lg" onclick="location.href='newroutine'">+새 루틴 추가하기</button>
+			</div>
+			<h3><span class="badge bg-dark">평일</span></h3>
+			<c:forEach items="${routinelist1}" var="routinelist1" varStatus="status">
+			<ul class="list-group">
+		  <li class="list-group-item d-flex justify-content-between align-items-start">
+		    <div class="ms-2 me-auto">
+		      <div class="fw-bold">${routinelist1.dailyroutineTitle }</div>
+		      여기는 태그 위치
+		    </div>
+		    <span class="badge bg-primary rounded-pill"></span>
+		    <a href="routine/${routinelist1.dailyroutineCode}" class="btn btn-primary active" aria-current="page">확인</a>
+		  	<a href="routinefix" class="btn btn-primary">수정</a>
+		  	<a href="#" class="btn btn-primary">삭제수정에서할듯?</a>
+		  </li>
+		</ul>
+		</c:forEach>
+		<h3><span class="badge bg-dark">주말</span></h3>
+		<c:forEach items="${routinelist2}" var="routinelist2" varStatus="status">
+			<ul class="list-group">
+		  <li class="list-group-item d-flex justify-content-between align-items-start">
+		    <div class="ms-2 me-auto">
+		      <div class="fw-bold">${routinelist2.dailyroutineTitle }</div>
+		      여기는 태그 위치
+		    </div>
+		    <span class="badge bg-primary rounded-pill"></span>
+		    <a href="routine/${routinelist2.dailyroutineCode}" class="btn btn-primary active" aria-current="page">확인</a>
+		  	<a href="routinefix" class="btn btn-primary">수정</a>
+		  	<a href="#" class="btn btn-primary">삭제수정에서할듯?</a>
+		  </li>
+		</ul>
+		</c:forEach>
 	</body>
 </html>
