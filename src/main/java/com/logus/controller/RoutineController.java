@@ -77,14 +77,6 @@ public class RoutineController {
 			@RequestParam("title") String title,  @RequestParam("begin") String[] begin, @RequestParam("end") String[] end, 
 			@RequestParam("content") String[] content) {
 		
-		int activeNum;	//일반&메인 루틴 검증
-		if(active.equals("일반 일정으로 등록")) {
-			 activeNum=0;	//일반 루틴
-		} else{
-			activeNum=1;	//메인 루틴
-		};
-		System.out.println(activeNum);
-		
 		int weekNum;	//평일&주말 검증
 		if(week.equals("평일")) {
 			weekNum=1;	//평일
@@ -92,11 +84,20 @@ public class RoutineController {
 			weekNum=2;	//주말
 		}
 		
+		int activeNum;	//일반&메인 루틴 검증
+		if(active.equals("일반 일정으로 등록")) {
+			 activeNum=0;	//일반 루틴
+		} else{
+			activeNum=1;	//메인 루틴
+		};
+		
 		String memberNickname="회원닉네임테스트01";	//이후 session으로 대체
 		
-		String[] begintime =begin;
-		String[] endtime=end;
-		String[] con=content;
+		if(weekNum==1 && activeNum==1) {	//생성한 일정이 평일이며, 메인 루틴일 때
+			DailyroutineService.updateRoutineActive(memberNickname, weekNum);
+		} else if(weekNum==2 && activeNum==1) {
+			DailyroutineService.updateRoutineActive(memberNickname, weekNum);
+		}
 		
 		//루틴 VO 객체 생성
 		DailyroutineVO dailyroutineVO = new DailyroutineVO();
@@ -105,22 +106,24 @@ public class RoutineController {
 		dailyroutineVO.setDailyroutineWeekopt(weekNum);		//평일or주말 여부
 		dailyroutineVO.setDailyroutineTitle(title);			//루틴 타이틀
 		
+		DailyroutineService.insertDailyroutine(dailyroutineVO);	//루틴 기본 정보 insert
 		
-		DailyroutineService.insertDailyroutine(dailyroutineVO); //아마 해당 메서드를 setroutinecode에 넣을듯  
+		System.out.println(dailyroutineVO.getDailyroutineCode());
+		
+		String[] begintime =begin;	//시작 시간
+		String[] endtime=end;		//종료 시간
+		String[] con=content;		//일정 상세 내용
+		
 		//루틴 상세 VO 객체 생성
 		DailycheckVO dailycheckVO = new DailycheckVO();
-		dailycheckVO.setDailyroutineCode(weekNum);
-		for(int i=0; i<begintime.length; i++) {
-		
+		dailycheckVO.setDailyroutineCode(dailyroutineVO.getDailyroutineCode());	//selectKey 루틴 인덱스 코드 반환
+		for(int i=0; i<begintime.length; i++) { 
 		dailycheckVO.setDailycheckBegintime(begintime[i]); 
 		dailycheckVO.setDailycheckEndtime(endtime[i]);
 		dailycheckVO.setDailycheckContent(con[i]);
+		
+		DailycheckService.insertDailycheck(dailycheckVO);
 		}
-		
-		
-
-		
-		//DailycheckService.insertDailycheck(null);
 		
 		return "redirect:/routinelist";
 	}

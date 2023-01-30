@@ -8,11 +8,7 @@ import com.logus.dailyroutine.model.DailyroutineVO;
 
 public interface IDailyroutineDAO {
 	public int insertDailyroutine(DailyroutineVO vo);	//int로 key insert한거 반환받아서 check에 바로 써야 함
-		
-	//public int select();	//1번 active 정보를 반환
-
-	public int updateRoutineActive();	//1번 if로 컨트롤러에서 실행여부 나눔(파라미터 X)
-										//0이 기본, 1번이 메인에 걸림
+	public int updateRoutineActive(@Param("memberNickname") String memberNickname, @Param("dailyroutineWeekopt") int dailyroutineWeekopt); //0 기본, 1번 메인
                     
 	public int updateDailyroutine(DailyroutineVO vo);	//2번 active 포함 업데이트
 	public int deleteDailyroutine(int dailyroutineCode);

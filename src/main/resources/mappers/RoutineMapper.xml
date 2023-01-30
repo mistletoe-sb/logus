@@ -5,10 +5,15 @@
 <mapper namespace="com.logus.dailyroutine.dao.IDailyroutineDAO">
 <!-- daily -->
 
-	<insert id="insertDailyroutine" parameterType="com.logus.dailyroutine.model.DailyroutineVO" >
+	<insert id="insertDailyroutine" parameterType="com.logus.dailyroutine.model.DailyroutineVO">
+	<selectKey keyProperty="dailyroutineCode" resultType="int" order="BEFORE">
+		<![CDATA[
+			select DAILYROUTINE_CODE_SEQ.nextval from dual
+		]]>
+	</selectKey>
 		<![CDATA[
 			INSERT INTO LOGUS.DAILYROUTINE (DAILYROUTINE_CODE, MEMBER_NICKNAME, DAILYROUTINE_WEEKOPT, DAILYROUTINE_TITLE, DAILYROUTINE_ACTIVE, DAILYROUTINE_SHARED)
-			VALUES(DAILYROUTINE_CODE_SEQ.nextval, #{memberNickname}, #{dailyroutineWeekopt},
+			VALUES(#{dailyroutineCode}, #{memberNickname}, #{dailyroutineWeekopt},
 			#{dailyroutineTitle}, #{dailyroutineActive}, 0)
 		]]>
 	</insert>
@@ -17,7 +22,7 @@
 	<![CDATA[
 	UPDATE LOGUS.DAILYROUTINE 
 	SET dailyroutine_active=0
-	WHERE dailyroutine_active=1
+	WHERE dailyroutine_active=1 and member_nickname=#{memberNickname} AND dailyroutine_weekopt=#{dailyroutineWeekopt}
 	]]>
 	</update>
 
