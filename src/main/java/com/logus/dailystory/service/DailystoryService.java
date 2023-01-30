@@ -47,10 +47,15 @@ public class DailystoryService implements IDailystoryService {
 	@Transactional
 	// 일일 스토리 삭제
 	public void deleteDailystory(int dailystoryCode, int tagCount, int replyCount) {
-		tagDAO.deleteTag(TagCategory.DAILY_STORY, dailystoryCode, tagCount);	// 해당 스토리의 태그 삭제
-		replyDAO.deleteReply(dailystoryCode, replyCount);						// 해당 스토리의 댓글 삭제
-		int check = dailystoryDAO.deleteDailystory(dailystoryCode);				// 해당 일일 스토리 삭제(마지막으로 처리)
-		if(check != 1) {
+		int[] checkList = new int[3];	// delete 유효성 확인을 위한 배열
+		checkList[0] = tagDAO.deleteTag(TagCategory.DAILY_STORY, dailystoryCode, tagCount);	// 해당 스토리의 태그 삭제
+		checkList[1] = replyDAO.deleteAllReplyInDailyStory(dailystoryCode);					// 해당 스토리의 댓글 삭제
+		checkList[2] = dailystoryDAO.deleteDailystory(dailystoryCode);						// 해당 일일 스토리 삭제(마지막으로 처리)
+		if(checkList[0] != tagCount) {
+			logger.debug("^ daily story tag delete failed.");
+		} else if(checkList[1] != replyCount) {
+			logger.debug("^ daily story reply delete failed.");
+		} else if(checkList[2] != 1) {
 			logger.debug("^ daily story delete failed.");
 		}
 	}
