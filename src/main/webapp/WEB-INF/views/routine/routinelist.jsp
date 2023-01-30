@@ -21,7 +21,7 @@
 		    <span class="badge bg-primary rounded-pill"></span>
 		    <a href="routine/${routinelist1.dailyroutineCode}" class="btn btn-primary active" aria-current="page">확인</a>
 		  	<a href="routinefix" class="btn btn-primary">수정</a>
-		  	<a href="#" class="btn btn-primary">삭제수정에서할듯?</a>
+		  	<a href="routinedelete/${routinelist1.dailyroutineCode}" class="btn btn-primary">삭제</a>
 		  </li>
 		</ul>
 		</c:forEach>
@@ -36,7 +36,7 @@
 		    <span class="badge bg-primary rounded-pill"></span>
 		    <a href="routine/${routinelist2.dailyroutineCode}" class="btn btn-primary active" aria-current="page">확인</a>
 		  	<a href="routinefix" class="btn btn-primary">수정</a>
-		  	<a href="#" class="btn btn-primary">삭제수정에서할듯?</a>
+		  	<a href="routinedelete/${routinelist2.dailyroutineCode}" class="btn btn-primary">삭제</a>
 		  </li>
 		</ul>
 		</c:forEach>

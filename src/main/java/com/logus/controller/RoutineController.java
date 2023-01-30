@@ -30,11 +30,11 @@ public class RoutineController {
 	//select 등 페이지에 보여줄 때는 GET
 	//입력폼에서 받아서 뭘 할 때는 POST <form action="/routinelist" method="post">
 	
-	//루틴 리스트에도 매핑 부분에 session 넣어야 함
+	//루틴 리스트에도 매핑 부분에 session 넣어야 함->session 받으면 필요 없음 path~
 	@GetMapping(value="/routinelist")	//루틴 목록-화면용
 	public String selectDailyroutineList(@PathVariable(value="membernickname", required=false) String memberNickname, Model model) {
 		
-		memberNickname="회원닉네임테스트01";
+		memberNickname="회원닉네임테스트01";		//session받기
 		
 		List<DailyroutineVO> routinelist1= DailyroutineService.selectDailyroutineList(memberNickname, 1);	//평일 리스트
 		List<DailyroutineVO> routinelist2= DailyroutineService.selectDailyroutineList(memberNickname, 2);	//주말 리스트
@@ -137,6 +137,12 @@ public class RoutineController {
 	@PostMapping(value="/routinefix")	//루틴 수정-삭제-전송용(수정, 삭제 동시에)
 	public String updateDailyroutine2() {
 		
+		return "redirect:/routinelist";
+	}
+	//post매핑 시 에러, 정상적으로 @PathVariable로 값을 가져옴 delete 메서드만 실행하면 됨
+	@GetMapping(value="/routinedelete/{dailyroutineCode}")	//루틴 수정-삭제-전송용(수정, 삭제 동시에)
+	public String deleteDailyroutine(@PathVariable(value="dailyroutineCode", required=false) int dailyroutineCode) {
+		System.out.println("실행했다 삭제  =>"+dailyroutineCode);
 		return "redirect:/routinelist";
 	}
 }
