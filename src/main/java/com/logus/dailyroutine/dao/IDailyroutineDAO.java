@@ -19,5 +19,6 @@ public interface IDailyroutineDAO {
 	public DailyroutineVO selectDailyroutineInfo(int dailyroutineCode);
 	public List<DailyroutineVO> selectDailyroutineList(String memberNickname);
 	public List<DailyroutineVO> findDailyroutineList(@Param("option") String option, @Param("search") String search);
+	//전체, 태그, 제목, 내용, 사용자(닉네임) 검색
 	
 }

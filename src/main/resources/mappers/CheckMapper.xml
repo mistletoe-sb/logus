@@ -22,12 +22,12 @@
 		]]>
 	</update>
 	
-	<delete id="deleteDailycheck">
+	<delete id="deleteDailycheck" parameterType="com.logus.dailycheck.model.DailycheckVO">
 		<![CDATA[
 		DELETE LOGUS.DAILYCHECK
-		WHERE dailycheck_code in
+		WHERE dailycheck_code =#{dailyroutineCode} and dailycheck_code NOT IN 
 		]]>
-		<foreach  item="dailycheckCode" index="index" collection="array" open="(" close=")" separator=",">
+		<foreach  item="dailycheckCode" index="index" collection="voList" open="(" close=")" separator=",">
 		 	<![CDATA[
 		 	#{dailycheckCode}
 		 	]]>
@@ -41,7 +41,7 @@
 		]]>
 	</delete>
 	
-	<select id="selectDailycheckList" resultType="com.logus.dailycheck.model.DailycheckVO" parameterType="string">
+	<select id="selectDailycheckList" resultType="com.logus.dailycheck.model.DailycheckVO" parameterType="int">
 		<![CDATA[
 		SELECT * FROM LOGUS.DAILYCHECK
 		WHERE dailyroutine_code=#{dailyroutineCode}

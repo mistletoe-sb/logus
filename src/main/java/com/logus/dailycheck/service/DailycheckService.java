@@ -7,9 +7,10 @@ import org.springframework.stereotype.Service;
 
 import com.logus.dailycheck.dao.IDailycheckDAO;
 import com.logus.dailycheck.model.DailycheckVO;
+import java.util.List;
 
 @Service
-public class DailycheckService implements IdailycheckService {
+public class DailycheckService implements IDailycheckService {
 	
 	@Autowired
 	private IDailycheckDAO dailycheckdao;
@@ -25,8 +26,8 @@ public class DailycheckService implements IdailycheckService {
 	}
 
 	@Override
-	public int deleteDailycheck(int dailycheckCode) {
-		return dailycheckdao.deleteDailycheck(dailycheckCode);
+	public int deleteDailycheck(List<DailycheckVO> voList) {
+		return dailycheckdao.deleteDailycheck(voList);
 	}
 
 	@Override
@@ -35,7 +36,7 @@ public class DailycheckService implements IdailycheckService {
 	}
 
 	@Override
-	public List<DailycheckVO> selectDailycheckList(String dailyroutineCode) {
+	public List<DailycheckVO> selectDailycheckList(int dailyroutineCode) {
 		return dailycheckdao.selectDailycheckList(dailyroutineCode);
 	}
 }
