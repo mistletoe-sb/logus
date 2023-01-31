@@ -24,6 +24,7 @@
 	            <textarea class="form-control" id="qnaContent" name="qnaContent" rows="3">${qnadetail.qnaContent}</textarea>
 	        </div>
         	<input type="hidden" id="memberNickname" name="memberNickname" value='${sessionScope.memberNickname}'>
+        	<input type="hidden" id="qnaCode" name="qnaCode" value='${qnadetail.qnaCode}'>
 	        <div class="d-grid gap-2 col-1 mx-auto">
 	            <input type="submit" class="btn btn-primary" value='수정하기'>
 	        </div>

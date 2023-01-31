@@ -64,7 +64,7 @@ public class QnaController {
 	
 	@RequestMapping(value="/manager/updateqna", method=RequestMethod.POST)
 	public String updateQna(QnaVO qnavo, Model model, RedirectAttributes redirectAttributes) {
-		System.out.println("updateqna VO프린트" + qnavo + qnavo.getQnaTitle() + qnavo.getQnaContent() + qnavo.getMemberNickname());
+//		System.out.println("updateqna VO프린트" + qnavo + qnavo.getQnaTitle() + qnavo.getQnaContent() + qnavo.getMemberNickname());
 		qnaService.updateQ(qnavo);
 		return "redirect:/manager/qnadetail?qnaCode=" + qnavo.getQnaCode();
 	}
