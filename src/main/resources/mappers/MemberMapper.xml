@@ -1,20 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
 <!-- mapper의 namespace와 Interface 경로 동일하게 설정 >> mapper 후보로 등록 -->
 <mapper namespace="com.logus.member.dao.IMemberDAO">
+
+	
+<!-- =======================================================회원 총 인원=============================================================== -->
 	<select id="countMember" resultType="int">
 		<![CDATA[
 			SELECT COUNT(*) FROM LOGUS.MEMBER
 		]]>
 	</select>
 	
+	<select id="countMemberId" parameterType="String" resultType="int">
+		<![CDATA[
+			SELECT COUNT(*) FROM LOGUS.MEMBER WHERE member_id = #{memberId}
+		]]>
+	</select>
+	
+	<select id="countMemberNickname" parameterType="String" resultType="int">
+		<![CDATA[
+			SELECT COUNT(*) FROM LOGUS.MEMBER WHERE member_nickname = #{memberNickname}
+		]]>
+	</select>
+<!-- ====================================================================================================================== -->
+
+<!-- ========================================================회원 정보============================================================== -->	
 	<select id="selectMemberInfo" resultType="com.logus.member.model.MemberVO" parameterType="string">
 		<![CDATA[
 			SELECT * FROM LOGUS.MEMBER WHERE member_id = #{memberId}
 		]]>
 	</select>
-	
+<!-- ====================================================================================================================== -->
+
+<!-- ======================================================탈퇴여부================================================================ -->	
 	<select id="selectMemberList" resultType="com.logus.member.model.MemberVO" parameterType="boolean">
 		<![CDATA[
 			SELECT * FROM LOGUS.MEMBER
@@ -33,16 +53,70 @@
 			</choose>
 		</if>
 	</select>
-	
+<!-- ====================================================================================================================== -->
+
+<!-- =======================================================회원 가입=============================================================== -->	
 	<insert id="insertMember" parameterType="com.logus.member.model.MemberVO">
 		<![CDATA[
-			INSERT INTO LOGUS.MEMBER
-			VALUES(member_code_seq.NEXTVAL, #{memberId}, #{memberPassword}, #{memberNickname}, #{memberName},
-			#{memberEmail}, #{memberPhone}, #{memberBirth}, #{memberSex}, #{memberJob}, #{memberProfile}, SYSDATE, NULL)
+			INSERT INTO 
+				LOGUS.MEMBER(
+				MEMBER_CODE, 
+				MEMBER_ID, 
+				MEMBER_PASSWORD, 
+				MEMBER_NICKNAME, 
+				MEMBER_NAME, 
+				MEMBER_EMAIL, 
+				MEMBER_PHONE, 
+				MEMBER_BIRTH, 
+				MEMBER_SEX, 
+				MEMBER_JOB, 
+				MEMBER_PROFILE, 
+				MEMBER_INDATE, 
+				MEMBER_OUTDATE
+				)VALUES(
+				member_code_seq.NEXTVAL, 
+				#{memberId}, 
+				#{memberPassword}, 
+				#{memberNickname}, 
+				#{memberName},
+				#{memberEmail}, 
+				#{memberPhone}, 
+				#{memberBirth}, 
+				#{memberSex}, 
+				#{memberJob}, 
+				#{memberProfile}, 
+				SYSDATE, 
+				NULL)
 		]]>
 	</insert>
-	
-	<update id="updateMember">
-	
+<!-- =========================================================회원 정보 수정============================================================= -->	
+	<update id="updateMember" parameterType="com.logus.member.model.MemberVO">
+		<![CDATA[
+			UPDATE
+				LOGUS.MEMBER
+			SET
+				MEMBER_NAME = #{memberName}, 
+				MEMBER_PASSWORD = #{memberPassword}, 
+				MEMBER_EMAIL = #{memberEmail}, 
+				MEMBER_PHONE = #{memberPhone}, 
+				MEMBER_JOB = #{memberJob}, 
+				MEMBER_PROFILE = #{memberProfile}
+			WHERE
+				MEMBER_ID = #{memberId}
+		]]>
 	</update>
+<!-- ====================================================================================================================== -->
+	
+<!-- ==========================================================회원 탈퇴============================================================ -->
+	<update id="outMember" parameterType="com.logus.member.model.MemberVO">
+		<![CDATA[
+			UPDATE
+				LOGUS.MEMBER
+			SET
+				MEMBER_OUTDATE = SYSDATE
+			WHERE
+				MEMBER_ID = #{memberId}
+		]]>
+	</update>
+<!-- ====================================================================================================================== -->
 </mapper>
