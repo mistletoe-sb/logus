@@ -14,6 +14,7 @@
     <body>
         <h1>Q&A</h1>
         <h6>총 Q&A 글 수 ${qnacount}개</h6>
+        <h2>로그인 관리자 별명 : ${sessionScope.sessionManagerNickname}</h2>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
         <table class="table">
             <thead>
@@ -45,7 +46,7 @@
             </tbody>
           </table>
           <div class="d-grid gap-2 col-2 mx-auto">
-            <button type="button" class="btn btn-primary">버튼</button>
+            <button type="button" class="btn btn-primary">Q&A 작성하기</button>
         </div>
     </body>
 </html>
