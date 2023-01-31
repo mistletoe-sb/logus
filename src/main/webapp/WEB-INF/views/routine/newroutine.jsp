@@ -20,12 +20,17 @@
             newE.innerHTML = "<div class='p-3 bg-info bg-opacity-10 border border-info border-start-0 rounded-end'><p>시작 시간 : <input type='time' name='begin' required>&nbsp;&nbsp;&nbsp;종료 시간 : <input type='time' name='end' required></p><div class='form-floating'><textarea class='form-control' placeholder='Leave a comment here' id='floatingTextarea' name='content' required></textarea><label for='floatingTextarea'>일정 내용을 작성해주세요</label></div></div>";
             routine.appendChild(newE);
             } else if (i >5){
-            	alert("생성한도");
+            	alert("생성한도입니다");
             } return i;
         }
         const remove = (obj) => {
+        	if(i==0){
+        		alert("최소 일정은 삭제할 수 없습니다");
+        	} else {
             document.getElementById("t"+i).remove();
             i -= 1;
+        	}
+            
         }
         
         function submit() {
@@ -66,17 +71,19 @@
 				</div>
 		</div>
 				<div id="routine">
-					<div class="p-3 bg-info bg-opacity-10 border border-info border-start-0 rounded-end">
-						<p>시작 시간 : <input type="time" name="begin" required>&nbsp;&nbsp;&nbsp;종료 시간 : <input type="time" name="end" required></p>
-							<div class="form-floating">
-								  <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" name="content" required></textarea>
-								  <label for="floatingTextarea">일정 내용을 작성해주세요</label>
+					<div id="t0">
+						<div class="p-3 bg-info bg-opacity-10 border border-info border-start-0 rounded-end">
+							<p>시작 시간 : <input type="time" name="begin" required>&nbsp;&nbsp;&nbsp;종료 시간 : <input type="time" name="end" required></p>
+								<div class="form-floating">
+									  <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" name="content" required></textarea>
+									  <label for="floatingTextarea">일정 내용을 작성해주세요</label>
+								</div>
 							</div>
 						</div>
 					</div>
-				<div>
+				<div>	
 					<button type="button" class="btn btn-primary"  onclick="add_textbox()">추가</button>
-					<button type="button" class="btn btn-primary" onclick='remove(this)'>삭제</button>
+					<button type="button" class="btn btn-primary" onclick='remove()'>삭제</button>
 				</div>
 				<div class="d-grid gap-2 col-6 mx-auto">
 	 				<button class="btn btn-primary" type="submit">일정 생성 완료하기</button>

@@ -143,6 +143,9 @@ public class RoutineController {
 	@GetMapping(value="/routinedelete/{dailyroutineCode}")	//루틴 수정-삭제-전송용(수정, 삭제 동시에)
 	public String deleteDailyroutine(@PathVariable(value="dailyroutineCode", required=false) int dailyroutineCode) {
 		System.out.println("실행했다 삭제  =>"+dailyroutineCode);
+		
+		DailyroutineService.deleteDailyroutine(dailyroutineCode);
+		DailycheckService.deleteDailycheckAll(dailyroutineCode);
 		return "redirect:/routinelist";
 	}
 }
