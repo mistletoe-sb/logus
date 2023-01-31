@@ -7,6 +7,8 @@ import com.logus.member.model.MemberVO;
 // 회원정보 관련 서비스 인터페이스
 public interface IMemberService {
 	int countMember();
+	int ckeckId(String id);
+	int ckeckNickname(String nickname);
 	void insertMember(MemberVO vo);		// 회원가입 서비스
 	void updateMember(MemberVO vo);		// 정보수정 서비스
 	void exitMember(String memberId);	// 회원탈퇴 서비스

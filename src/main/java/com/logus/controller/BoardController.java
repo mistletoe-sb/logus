@@ -5,7 +5,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,7 +19,7 @@ public class BoardController {
 	@Autowired
 	IBoardService boardService;
 	
-	@RequestMapping(value="/manager/board") // 이름짓기
+	@RequestMapping(value="/manager/board")
 	public String getAllBoardList(@RequestParam(value="boardcategory", required=true, defaultValue="1") int boardcategory, Model model) {
 		model.addAttribute("boardcount", boardService.countBoard(boardcategory));
 		model.addAttribute("boardlist", boardService.selectBoardList(boardcategory));
@@ -31,7 +30,7 @@ public class BoardController {
 		}
 	}
 	
-	@RequestMapping(value="/manager/boarddetail") //이름짓기
+	@RequestMapping(value="/manager/boarddetail")
 	public String getBoardDetail(@RequestParam(value="boardcode", required=true) int boardcode, Model model) {
 		model.addAttribute("boarddetail", boardService.selectBoardInfo(boardcode));
 		if(boardService.selectBoardInfo(boardcode).getBoardCategory() == 1) {
@@ -44,9 +43,9 @@ public class BoardController {
 	@RequestMapping(value="/manager/insertboardform", method=RequestMethod.GET)
 	public String insertBoardForm(@RequestParam(value="boardcategory", required=true, defaultValue="1") int boardcategory, Model model) {
 		if(boardcategory == 1) {
-			return "manager/insertnoticeform"; //폴더안에 있는 jsp로 포워딩하기(전달하기)
+			return "manager/insertnoticeform";
 		} else {
-			return "manager/insertreportform"; 
+			return "manager/insertreportform";
 		}
 	}
 	
@@ -60,8 +59,8 @@ public class BoardController {
 		} catch(Exception e) {
 			redirectAttributes.addFlashAttribute("message", e.getMessage());
 		}
-	
-		return "redirect:/manager/board?boardcategory=" + boardCategory; //redirect -> "/manager/board?boardcategory" 주소로 가주세요
+		
+		return "redirect:/manager/board?boardcategory=" + boardCategory;
 		
 //		if(boardCategory == 1) {
 //			return "redirect:/manager/board?boardcategory=" + boardCategory;
@@ -69,35 +68,41 @@ public class BoardController {
 //			return "redirect:/manager/board?boardcategory=" + boardCategory;
 //		}
 	}
-//
-//	@RequestMapping(value="/manager/updateboardform", method=RequestMethod.GET)
-//	public String updateBoardForm(@RequestParam(value="boardcategory", required=true, defaultValue="1") int boardcategory, Model model) {
-//		if(boardcategory == 1) {
-//			return "manager/insertnoticeform";
-//		} else {
-//			return "manager/insertreportform";
-//		}
-//	}
-//	
-//	@RequestMapping(value="/manager/updateboard", method=RequestMethod.POST)
-//	public String updateBoard(@RequestParam(value="boardCategory", required=true, defaultValue="1") int boardCategory, BoardVO boardvo, RedirectAttributes redirectAttributes, HttpSession session) {
-//		try {
-////			boardvo.setBoardCategory(boardCategory);
-////			boardvo.setManagerNickname((String)session.getAttribute("sessionManagerNickname"));
-//			boardService.insertBoard(boardvo);
-//			redirectAttributes.addFlashAttribute("message", boardvo.getBoardCode() + "번 글이 등록되었습니다.");
-//		} catch(Exception e) {
-//			redirectAttributes.addFlashAttribute("message", e.getMessage());
-//		}
-//		
-//		return "redirect:/manager/board?boardcategory=" + boardCategory;
-//		
-////		if(boardCategory == 1) {
-////			return "redirect:/manager/board?boardcategory=" + boardCategory;
-////		} else {
-////			return "redirect:/manager/board?boardcategory=" + boardCategory;
-////		}
-//	}
-//	
 
+	@RequestMapping(value="/manager/updateboardform", method=RequestMethod.GET)
+	public String updateBoardForm(@RequestParam(value="boardCategory", required=true, defaultValue="1") int boardCategory, @RequestParam(value="boardCode", required=true, defaultValue="1") int boardCode, Model model) {
+		model.addAttribute("boarddetail", boardService.selectBoardInfo(boardCode));
+		if(boardCategory == 1) {
+			return "manager/updatenoticeform";
+		} else {
+			return "manager/updatereportform";
+		}
+	}
+	
+	@RequestMapping(value="/manager/updateboard", method=RequestMethod.POST)
+	public String updateBoard(@RequestParam(value="boardCategory", required=true, defaultValue="1") int boardCategory, BoardVO boardvo, RedirectAttributes redirectAttributes) {
+		try {
+//			boardvo.setBoardCategory(boardCategory);
+//			boardvo.setManagerNickname((String)session.getAttribute("sessionManagerNickname"));
+			boardService.updateBoard(boardvo);
+			redirectAttributes.addFlashAttribute("message", boardvo.getBoardCode() + "번 글이 수정되었습니다.");
+		} catch(Exception e) {
+			redirectAttributes.addFlashAttribute("message", e.getMessage());
+		}
+		
+		return "redirect:/manager/board?boardcategory=" + boardCategory;
+		
+//		if(boardCategory == 1) {
+//			return "redirect:/manager/board?boardcategory=" + boardCategory;
+//		} else {
+//			return "redirect:/manager/board?boardcategory=" + boardCategory;
+//		}
+	}
+	
+	@RequestMapping(value="/manager/deleteboard", method=RequestMethod.GET)
+	public String deleteBoard(@RequestParam(value="boardCategory", required=true, defaultValue="1") int boardCategory, @RequestParam(value="boardCode", required=true) int boardCode, Model model, RedirectAttributes redirectAttributes) {
+		boardService.deleteBoard(boardCode);
+		return "redirect:/manager/board?boardcategory=" + boardCategory;
+	}
+	
 }

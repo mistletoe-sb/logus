@@ -23,6 +23,9 @@
 				WHERE member_nickname = #{memberNickname}
 			]]>
 		</if>
+		<![CDATA[
+			ORDER BY a_date DESC, q_date DESC
+		]]>
 	</select>
 
 	<select id="selectQnaInfo" parameterType="int" resultType="com.logus.qna.model.QnaVO">

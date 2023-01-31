@@ -55,6 +55,7 @@ public class MemberService implements IMemberService {
 			if(memberPassword.equals(vo.getMemberPassword())) {
 				return vo;
 			} else {
+				
 				// 비밀번호가 일치하지 않습니다. >> 예외처리
 			}
 		}
@@ -71,6 +72,16 @@ public class MemberService implements IMemberService {
 			// 중복된 ~~입니다. >> 예외처리(name)
 		}
 		return false;
+	}
+	
+	public int ckeckId(String id) {
+		int result = memberDAO.countMemberId(id);
+		return result;
+	}
+	
+	public int ckeckNickname(String nickname) {
+		int result = memberDAO.countMemberNickname(nickname);
+		return result;
 	}
 
 	@Override

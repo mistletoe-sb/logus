@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- mapper의 namespace와 Interface 경로 동일하게 설정 >> mapper 후보로 등록 -->
-<mapper namespace="com.logus.dailystory.dao.IDailystoryDAO">
+<mapper namespace="com.logus.tag.dao.ITagDAO">
 	<select id="countDailystory" resultType="int" parameterType="string">
 		<![CDATA[
 			SELECT COUNT(*) FROM LOGUS.DAILYSTORY WHERE member_nickname = #{memberNickname}

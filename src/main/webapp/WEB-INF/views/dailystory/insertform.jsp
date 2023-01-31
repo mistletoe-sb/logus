@@ -1,16 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ include file="../header.jsp" %>
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="UTF-8">
-		<title>LogUs</title>
-	</head>
-	<body>
+
 		<p>일일 스토리 작성 폼</p>
 		<br>
-		<form action="<c:url value='/회원닉네임테스트01/library/story/insert'/>" method="post" enctype="multipart/form-data">
+		<form action="<c:url value='/${sessionScope.user}/library/story/insert'/>" method="post" enctype="multipart/form-data">
 			<label>제목 </label>
 			<input type="text" name="dailystoryTitle">
 			<br>
@@ -21,7 +14,9 @@
 			<input type="text" name="dailystoryImage">
 			<br><br>
 			<input type="submit" value="저장">
-			<input type="reset" value="취소">
+			<input type="reset" value="취소" onclick="history.back()">
+			
+			<input type="hidden" name="memberNickname" value="${sessionScope.user}">
 		</form>
 	</body>
 </html>

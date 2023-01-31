@@ -18,14 +18,14 @@
         <form action="http://localhost:8080/logus/manager/updateboard" method="post">
 	        <div class="mb-3">
 	            <label for="exampleFormControlInput1" class="form-label">제목</label>
-	            <input type="text" class="form-control" id="boardTitle" name="boardTitle" placeholder="제목을 입력하세요">
+	            <input type="text" class="form-control" id="boardTitle" name="boardTitle" value="${boarddetail.boardTitle}">
 	        </div>
 	        <div class="mb-3">
 	            <label for="exampleFormControlTextarea1" class="form-label">본문</label>
-	            <textarea class="form-control" id="boardContent" name="boardContent" rows="3" placeholder="본문을 입력하세요"></textarea>
+	            <textarea class="form-control" id="boardContent" name="boardContent" rows="3">${boarddetail.boardContent}</textarea>
 	        </div>
 	        <input type="hidden" id="boardCategory" name="boardCategory" value='2'>
-        	<input type="hidden" id="boardCode" name="boardCode" value='${boardCode}'>
+        	<input type="hidden" id="boardCode" name="boardCode" value='${boarddetail.boardCode}'>
 	        <div class="d-grid gap-2 col-1 mx-auto">
 	            <input type="submit" class="btn btn-primary" value='등록하기'>
 	        </div>
