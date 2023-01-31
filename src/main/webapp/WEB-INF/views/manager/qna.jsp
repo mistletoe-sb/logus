@@ -29,11 +29,11 @@
             <c:forEach var="qna" items="${qnalist}">
               <tr>
                 <th scope="row">${qna.qnaCode}</th>
-                <td><a href="http://localhost:8080/logus/manager/qnadetail?qnacode=${qna.qnaCode}">${qna.qTitle}</a></td>
-                <td>${qna.qDate}</td>
+                <td><a href="http://localhost:8080/logus/manager/qnadetail?qnaCode=${qna.qnaCode}">${qna.qnaTitle}</a></td>
+                <td>${qna.qnaDate}</td>
                 <td>
                 <c:choose>
-                	<c:when test="${empty qna.aContent}">
+                	<c:when test="${empty qna.answerContent}">
                 		미답변
                 	</c:when>
                 	<c:otherwise>
@@ -46,7 +46,7 @@
             </tbody>
           </table>
           <div class="d-grid gap-2 col-2 mx-auto">
-            <button type="button" class="btn btn-primary">Q&A 작성하기</button>
+            <button type="button" class="btn btn-primary" onclick="location.href='http://localhost:8080/logus/manager/insertqnaform'">Q&A 작성하기</button>
         </div>
     </body>
 </html>

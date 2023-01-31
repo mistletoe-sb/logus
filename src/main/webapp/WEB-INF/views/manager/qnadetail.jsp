@@ -35,7 +35,7 @@
 	                                                <th scope="row">제목</th>
 	                                                <td colspan="3">
 	                                                    <div class="box01">
-	                                                        ${qnadetail.qTitle}
+	                                                        ${qnadetail.qnaTitle}
 	                                                    </div>
 	                                                </td>
 	                                            </tr>
@@ -46,35 +46,36 @@
 	                                                </td>
 	                                                <th scope="row">등록일</th>
 	                                                <td>
-	                                                    <div class="box01">${qnadetail.qDate}</div>
+	                                                    <div class="box01">${qnadetail.qnaDate}</div>
 	                                                </td>
 	                                            </tr>
 	                                </table>
 	                            </div><!--//tableWrap -->
 	                                    <div class="listView">
-	                                        <div class="viewTxt">${qnadetail.qContent}</div>
+	                                        <div class="viewTxt">${qnadetail.qnaContent}</div>
 	                                    </div>
 	                                    <div class="listView">
-	                                        <div class="viewTxt">${qnadetail.aContent}</div>
+	                                        <div class="viewTxt">${qnadetail.answerContent}</div>
 	                                    </div>
 	                            <div class="btnListGo">
+	                            	<button class="btn btn-primary" type="button" onclick="location.href='http://localhost:8080/logus/manager/qna'">목록으로</button>
+	                            	
 	                            	<c:set var="writer_nickname" value="${qnadetail.memberNickname}"></c:set>
-	                            	<c:if test="${sessionScope.sessionNickname == writer_nickname}">
+	                            	<c:if test="${sessionScope.memberNickname == writer_nickname && empty qnadetail.answerContent}">
 		                                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-		                                    <button class="btn btn-primary me-md-2" type="button">문의글 수정하기</button>
-		                                    <button class="btn btn-primary" type="button">문의글 삭제하기</button>
+		                                    <button class="btn btn-primary me-md-2" type="button" onclick="location.href='http://localhost:8080/logus/manager/updateqnaform?qnaCode=${qnadetail.qnaCode}'">문의글 수정하기</button>
+		                                    <button class="btn btn-primary" type="button" onclick="location.href='http://localhost:8080/logus/manager/deleteqna?qnaCode=${qnadetail.qnaCode}'">문의글 삭제하기</button>
 		                                </div>
 	                                </c:if>
 	                                <c:if test="${not empty sessionScope.sessionManagerNickname}">
 		                                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
 		                                	<c:choose>
-			                                	<c:when test="${empty qnadetail.aContent}">
+			                                	<c:when test="${empty qnadetail.answerContent}">
 			                                    	<button class="btn btn-primary me-md-2" type="button" onclick="location.href='http://localhost:8080/logus/manager/insertanswerform?qnaCode=${qnadetail.qnaCode}'">문의답변 등록하기</button>
 			                                    </c:when>
 			                                    <c:otherwise>
 			                                    	<button class="btn btn-primary me-md-2" type="button" onclick="location.href='http://localhost:8080/logus/manager/updateanswerform?qnaCode=${qnadetail.qnaCode}'">문의답변 수정하기</button>
 			                                    	<button class="btn btn-primary" type="button" onclick="location.href='http://localhost:8080/logus/manager/deleteanswer?qnaCode=${qnadetail.qnaCode}'">문의답변 삭제하기</button>
-				                                    <button class="btn btn-primary" type="button" onclick="location.href='http://localhost:8080/logus/manager/qna'">목록으로</button>
 			                                    </c:otherwise>
 		                                    </c:choose>
 		                                </div>
