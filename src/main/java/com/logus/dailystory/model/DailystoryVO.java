@@ -9,7 +9,7 @@ import lombok.Data;
 public class DailystoryVO {
 	private int dailystoryCode;			// 스토리 코드
 	private String memberNickname;		// 작성자(닉네임)
-	private Date dailystoryDate;		// 작성일
+	private Date dailystoryUploaddate;	// 작성일
 	private String dailystoryTitle;		// 스토리 제목
 	private String dailystoryContent;	// 스토리 내용
 	private String dailystoryImage;		// 첨부 이미지 파일명
