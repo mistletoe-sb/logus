@@ -81,7 +81,7 @@
 				
 				<div>
 					<h6><label>이메일 주소</label></h6>
-					<input type="email" name="memberEmail" id="memberEmail" value="${memberEmail}" pattern="[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+" required>
+					<input type="email" name="memberEmail" id="memberEmail" value="${memberEmail}" pattern="[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-zA-Z0-9]+" required>
 					<span id="emailConfirm"></span>
 				</div>
 				
@@ -104,7 +104,7 @@
 				
 				<div>
 					<h6><label>프로필 사진</label></h6>
-					<input type="text" name="memberProfile" value="${memberProfile}">
+					<input type="text" name="memberProfile" value="${memberProfile}" required>
 				</div>
 				
 				<div>
@@ -119,7 +119,7 @@
 				 </div>
 			</fieldset>
 			<div class="d-grid gap-2 col-6 mx-auto">
-				<button class="btn btn-primary" type="button" onclick="insertMember()">가입하기</button>
+				<button class="btn btn-primary" type="submit" onclick="insertMember()">가입하기</button>
 				<button class="btn btn-primary" type="reset">돌아가기</button>
 			</div>
 		</form>
@@ -216,7 +216,7 @@
 			var emailConfirm = document.querySelector("#emailConfirm");
 	
 			email.onkeyup = function(event) {
-				re4 = /^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
+				re4 = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-zA-Z0-9]+$/;
 				if (email.value == "") {
 					emailConfirm.innerText = "필수 정보 입니다.";
 				} else {
@@ -280,7 +280,7 @@
 				if (nickname.value == "") {
 					nicknameConfirm.innerText = "필수 정보 입니다.";
 				} else {
-					
+					nicknameConfirm.innerText = "";
 				}
 			}
 			
@@ -339,47 +339,95 @@
 				},
 				error : function() {
 					alert("에러입니다");
+					return;
 				}
 			});
 		};
 		
 		 // 정보 저장 및 입력 확인 함수
- 		function insertMember() {
+ 		 function insertMember() {
 			
+ 			var id = $('#memberId');
+ 			var hiddenId = $('#hiddenId')
 			var pw1 = $('#memberPassword');
 			var pw2 = $('#memberPasswordRe');
-			var id = $('#memberId');
+			var name = $('#mamberName');
+			var birth = $('#memberBirth');
+			var sex = $('#memberSex');
+			var phone = $('#memberPhone');
+			var mail = $('#memberMail');
 			var nickname = $('#memberNickname');
-			var hiddenId = $('#hiddenId').val();
-			var hiddenNickname = $('#hiddenNickname').val();
-			var ajaxOption = {
-				url : './insert', //Controller에서 요청 받을 주소
-				dataType : "html",
-				type : 'post', //POST 방식으로 전달
+			var hiddenNickname = $('#hiddenNickname')
+			var profile = $('#membermemberProfile');
+			var job = $('#memberJob');
+			
+			var submitAction = function(e) {
+				e.preventDefault();
+			    e.stopPropagation();
+				/* do something with Error */
 			};
+			var stopForm = $('form').bind('submit', submitAction);
+			
+			
+			if (id.val() == ""){
+				alert("아이디를 입력 해주세요.");
+		 		id.focus();
+		 		stopForm;
+			} else if(hiddenId.val() == "true"){
+		 		alert("아이디를 확인 해주세요.");
+		 		hiddenId.focus();
+		 		stopForm;
+			} else if (pw1.val() == ""){
+				alert("비밀번호를 입력 해주세요.");
+				pw1.focus();
+				stopForm;
+			} else if (pw2.val() == ""){
+				alert("비밀번호를 입력 해주세요.");
+				pw2.focus();
+				stopForm;
+			} else if (pw2.val() != pw1.val()) {
+		    	alert("비밀번호를 다시 한번 확인 해주세요.");
+		    	pw2.focus();
+		    	stopForm;
+		 	} else if (name.val() == ""){
+				alert("이름을 입력 해주세요.");
+				name.focus();
+				stopForm;
+			} else if (birth.val() == ""){
+				alert("생년월일을 선택 해주세요.");
+				birth.focus();
+				stopForm;
+			} else if (sex.val() == ""){
+				alert("성별을 선택 해주세요.");
+				sex.focus();
+				stopForm;
+			} else if (phone.val() == ""){
+				alert("전화번호를 입력 해주세요.");
+				phone.focus();
+				stopForm;
+			} else if (mail.val() == ""){
+				alert("이메일을 입력 해주세요.");
+				mail.focus();
+				stopForm;
+			} else if (nickname.val() == ""){
+				alert("닉네임을 입력 해주세요.");
+				nickname.focus();
+				stopForm;
+			} else if(hiddenNickname=="true"){
+		 		alert("닉네임을 확인 해주세요.");
+			 	nickname.focus();
+			 	stopForm;
+		 	} else if (profile.val() == ""){
+				alert("사진을 선택 해주세요.");
+				profile.focus();
+				stopForm;
+			} else if (job.val() == ""){
+				alert("직업을 선택 해주세요.");
+				job.focus();
+				stopForm;
+			} 
 
-			$.ajax({ajaxOption,
-				success: function(){
-				if (pw2.val() != pw1.val()) {
-			    	alert("비밀번호를 다시 한번 확인 해주세요.");
-			    	pw2.focus();
-			 	 }  else if(hiddenId=="true"){
-			 		alert("아이디를 확인 해주세요.");
-			 		id.focus();
-			 	 }	else if(hiddenNickname=="true"){
-			 		alert("닉네임을 확인 해주세요.");
-			 		nickname.focus();
-			 	 }	else {
-			 		alert("가입이 완료 되었습니다.");
-			 		$("#insertForm").attr("action", "<c:url value='/insert'/>").submit();
-			 	 }
-			 	 },
-					error : function() {
-						alert("에러입니다");
-				}
-			});
-
-		};
+		}; 
 		
 		
 		/* // 정보 저장 및 입력 확인 함수

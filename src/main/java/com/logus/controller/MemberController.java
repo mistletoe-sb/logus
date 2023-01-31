@@ -36,19 +36,27 @@ public class MemberController {
 		return  view_pos + "loginform";
 	}
 	
-	@RequestMapping(value="/login", method=RequestMethod.POST)
+
+	
+	@RequestMapping(value="/memberLogin", method=RequestMethod.POST)
 	public String memberLogin(String memberId, String memberPassword, HttpSession session, Model model) {
 		MemberVO vo = memberService.loginCheck(memberId, memberPassword);
-		if(vo != null) {
-			model.addAttribute("message", vo.getMemberNickname()+"님 로그인에 성공 했습니다.");
-			session.setAttribute("memberId", memberId);
-			session.setAttribute("memberNickname", vo.getMemberNickname());
-			return "index";	
+		if(vo == null) {
+			model.addAttribute("message", "존재 하지 않는 아이디 입니다.");
+			return "redirect:"+  "loginform";
+			// 존재하지 않는 ID입니다. >> 예외처리
 		} else {
-			model.addAttribute("message", "아이디와 비밀번호를 다시 확인하세요.");
+			if(memberPassword.equals(vo.getMemberPassword())) {
+				model.addAttribute("message", vo.getMemberNickname()+"님 로그인에 성공 했습니다.");
+				session.setAttribute("memberId", memberId);
+				session.setAttribute("memberNickname", vo.getMemberNickname());
+				return "index";	
+			} else {
+				model.addAttribute("message", "비밀번호를 다시 확인하세요.");
+				return "redirect:"+  "loginform";
+				// 비밀번호가 일치하지 않습니다. >> 예외처리
+			}
 		}
-		session.invalidate();
-		return "index";	
 	}
 	
 	@RequestMapping(value="/logout", method=RequestMethod.GET)
