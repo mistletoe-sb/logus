@@ -80,7 +80,7 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value="/manager/updateboard", method=RequestMethod.POST)
-	public String updateBoard(@RequestParam(value="boardCategory", required=true, defaultValue="1") int boardCategory, BoardVO boardvo, RedirectAttributes redirectAttributes, HttpSession session) {
+	public String updateBoard(@RequestParam(value="boardCategory", required=true, defaultValue="1") int boardCategory, BoardVO boardvo, RedirectAttributes redirectAttributes) {
 		try {
 //			boardvo.setBoardCategory(boardCategory);
 //			boardvo.setManagerNickname((String)session.getAttribute("sessionManagerNickname"));

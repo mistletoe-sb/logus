@@ -69,11 +69,12 @@
 		                                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
 		                                	<c:choose>
 			                                	<c:when test="${empty qnadetail.aContent}">
-			                                    	<button class="btn btn-primary me-md-2" type="button">문의답변 등록하기</button>
+			                                    	<button class="btn btn-primary me-md-2" type="button" onclick="location.href='http://localhost:8080/logus/manager/insertanswerform?qnaCode=${qnadetail.qnaCode}'">문의답변 등록하기</button>
 			                                    </c:when>
 			                                    <c:otherwise>
-			                                    	<button class="btn btn-primary me-md-2" type="button">문의답변 수정하기</button>
-			                                    	<button class="btn btn-primary" type="button">문의답변 삭제하기</button>
+			                                    	<button class="btn btn-primary me-md-2" type="button" onclick="location.href='http://localhost:8080/logus/manager/updateanswerform?qnaCode=${qnadetail.qnaCode}'">문의답변 수정하기</button>
+			                                    	<button class="btn btn-primary" type="button" onclick="location.href='http://localhost:8080/logus/manager/deleteanswer?qnaCode=${qnadetail.qnaCode}'">문의답변 삭제하기</button>
+				                                    <button class="btn btn-primary" type="button" onclick="location.href='http://localhost:8080/logus/manager/qna'">목록으로</button>
 			                                    </c:otherwise>
 		                                    </c:choose>
 		                                </div>

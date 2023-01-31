@@ -12,19 +12,66 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     </head>
     <body>
-        <h1>Q&A</h1>
+        <h1>Q&A 답변 수정</h1>
         <h2>로그인 관리자 별명 : ${sessionScope.sessionManagerNickname}</h2>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
-        <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label">제목</label>
-            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="제목을 입력하세요">
-        </div>
-        <div class="mb-3">
-            <label for="exampleFormControlTextarea1" class="form-label">본문</label>
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="본문을 입력하세요"></textarea>
-        </div>
-        <div class="d-grid gap-2 col-1 mx-auto">
-            <button class="btn btn-primary" type="button">수정하기</button>
-        </div>
+	    <div class="inner">
+	        <div class="contents" id="bodyWrap">
+	            <h3 class="title">Q&A</h3>
+	            <div class="subContents" id="contentBody">
+	                <div class="body" id="bodyCon">
+	                    <!-- 여기서부터 콘텐츠 s -->
+	                    <div class="bodyBox01">
+	                        <div class="bottomListBox">
+	                            <div class="tableWrap">
+	                                <table>
+	                                    <caption>자유게시판 뷰 페이지로 제목, 질문자, 등록일로 구성</caption>
+	                                    <colgroup>
+	                                        <col style="width:16%;"/>
+	                                        <col style="width:48%;"/>
+	                                        <col style="width:16%;"/>
+	                                        <col style="width:20%;"/>
+	                                    </colgroup>
+                                        <tr>
+                                            <th scope="row">제목</th>
+                                            <td colspan="3">
+                                                <div class="box01">
+                                                    ${qnadetail.qTitle}
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">작성자</th>
+                                            <td>
+                                                <div class="box01">${qnadetail.memberNickname}</div>
+                                            </td>
+                                            <th scope="row">등록일</th>
+                                            <td>
+                                                <div class="box01">${qnadetail.qDate}</div>
+                                            </td>
+                                        </tr>
+	                                </table>
+	                            </div><!--//tableWrap -->
+                                <div class="listView">
+                                    <div class="viewTxt">${qnadetail.qContent}</div>
+                                </div>
+                                <form action="http://localhost:8080/logus/manager/updateanswer" method="post">
+							        <div class="mb-3">
+							            <label for="exampleFormControlTextarea1" class="form-label">문의글 답변</label>
+							            <textarea class="form-control" id="aContent" name="aContent" rows="3">${qnadetail.aContent}</textarea>
+							        </div>
+							        <input type="hidden" name="managerNickname" value="${sessionScope.sessionManagerNickname}">
+							        <input type="hidden" name="qnaCode" value="${qnadetail.qnaCode}">
+						        
+		                            <div class="btnListGo">
+		                            	<input class="btn btn-primary me-md-2" type="submit" value="문의답변 수정하기">
+<%-- 				                        <button class="btn btn-primary" type="button" onclick="location.href='http://localhost:8080/logus/manager/deleteanswerform?qnaCode=${qnadetail.qnaCode}'">문의답변 삭제하기</button> --%>
+		                            </div>
+	                            </form>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
     </body>
 </html>

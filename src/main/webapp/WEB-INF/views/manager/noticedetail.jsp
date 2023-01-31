@@ -58,6 +58,7 @@
 	                                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
 	                                    <button class="btn btn-primary me-md-2" type="button" onclick="location.href='http://localhost:8080/logus/manager/updateboardform?boardCategory=${boarddetail.boardCategory}&boardCode=${boarddetail.boardCode}'">수정하기</button>
 	                                    <button class="btn btn-primary" type="button" onclick="location.href='http://localhost:8080/logus/manager/deleteboard?boardCategory=${boarddetail.boardCategory}&boardCode=${boarddetail.boardCode}'">삭제하기</button>
+	                                    <button class="btn btn-primary" type="button" onclick="location.href='http://localhost:8080/logus/manager/board?boardcategory=${boarddetail.boardCategory}'">목록으로</button>
 	                                  </div>
 	                            </div>
 	                        </div>

@@ -58,7 +58,7 @@
 	<update id="insertAnswer" parameterType="com.logus.qna.model.QnaVO">
 		<![CDATA[
 			UPDATE logus.qna
-			SET a_content = #{aContent}, a_date = SYSDATE
+			SET a_content = #{aContent}, a_date = SYSDATE, manager_nickname = #{managerNickname}
 			WHERE qna_code = #{qnaCode}
 		]]>
 	</update>
