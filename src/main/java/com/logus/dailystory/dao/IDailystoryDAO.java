@@ -19,4 +19,6 @@ public interface IDailystoryDAO {
 	public abstract List<DailystoryVO> findDailystoryList(
 			@Param("option") String option, @Param("search") String search, 
 			@Param("memberNickname") String memberNickname);						// 옵션에 따라 검색(서재 내 검색)
+	
+	// 검색 옵션 : 전체, 태그, 제목, 내용, 닉네임
 }

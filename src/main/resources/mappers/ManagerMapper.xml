@@ -17,14 +17,14 @@
 	
 	<select id="selectManagerList" resultType="com.logus.manager.model.ManagerVO">
 		<![CDATA[
-			SELECT * FROM logus.manager
+			SELECT * FROM logus.manager WHERE manager_level = 1
 		]]>
 	</select>
 	
 	<insert id="insertManager" parameterType="com.logus.manager.model.ManagerVO">
 		<![CDATA[
 			INSERT INTO logus.manager
-			VALUES(manager_code_seq.NEXTVAL, #{managerId}, #{managerPassword}, #{managerLevel}, #{managerNickname})
+			VALUES(manager_code_seq.NEXTVAL, #{managerId}, #{managerPassword}, 1, #{managerNickname})
 		]]>
 	</insert>
 	

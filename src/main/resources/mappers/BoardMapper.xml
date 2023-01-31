@@ -11,7 +11,7 @@
 	
 	<select id="selectBoardList" parameterType="int" resultType="com.logus.board.model.BoardVO">
 		<![CDATA[
-			SELECT * FROM logus.board WHERE board_category = #{boardCategory}
+			SELECT * FROM logus.board WHERE board_category = #{boardCategory} ORDER BY board_code DESC
 		]]>
 	</select>
 

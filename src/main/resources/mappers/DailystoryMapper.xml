@@ -12,9 +12,9 @@
 	<insert id="insertDailystory" parameterType="com.logus.dailystory.model.DailystoryVO">
 		<![CDATA[
 			INSERT INTO LOGUS.DAILYSTORY
-			(dailystory_code, member_nickname, dailystory_date, dailystory_title, dailystory_content, dailystory_image)
+			(dailystory_code, member_nickname, dailystory_uploaddate, dailystory_title, dailystory_content, dailystory_image)
 			VALUES
-			(dailystory_code_seq, #{memberNickname}, SYSDATE, #{dailystoryTitle}, #{dailystoryContent}, #{dailystoryImage})
+			(dailystory_code_seq.NEXTVAL, #{memberNickname}, SYSDATE, #{dailystoryTitle}, #{dailystoryContent}, #{dailystoryImage})
 		]]>
 	</insert>
 	
@@ -41,12 +41,13 @@
 	<select id="selectDailystoryList" resultType="com.logus.dailystory.model.DailystoryVO" parameterType="string">
 		<![CDATA[
 			SELECT * FROM LOGUS.DAILYSTORY WHERE member_nickname = #{memberNickname}
+			ORDER BY dailystory_code DESC
 		]]>
 	</select>
 	
 	<select id="findDailystoryList" resultType="com.logus.dailystory.model.DailystoryVO">
 		<![CDATA[SELECT * FROM LOGUS.DAILYSTORY]]>
-		<where>
+		<!-- <where>
 			<choose>
 				<when test='option.equals("tag")'></when>
 				<when test='option.equals("title")'></when>
@@ -54,7 +55,7 @@
 				<when test='option.equals("nickname")'></when>
 				<otherwise></otherwise>
 			</choose>
-		</where>
+		</where> -->
 	</select>
 	
 </mapper>

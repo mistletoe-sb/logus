@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- mapper의 namespace와 Interface 경로 동일하게 설정 >> mapper 후보로 등록 -->
+<mapper namespace="com.logus.tag.dao.ITagDAO">
+	<select id="countDailystory" resultType="int" parameterType="string">
+		<![CDATA[
+			SELECT COUNT(*) FROM LOGUS.DAILYSTORY WHERE member_nickname = #{memberNickname}
+		]]>
+	</select>
+	
+	<insert id="insertDailystory" parameterType="com.logus.dailystory.model.DailystoryVO">
+		<![CDATA[
+			INSERT INTO LOGUS.DAILYSTORY
+			(dailystory_code, member_nickname, dailystory_uploaddate, dailystory_title, dailystory_content, dailystory_image)
+			VALUES
+			(dailystory_code_seq.NEXTVAL, #{memberNickname}, SYSDATE, #{dailystoryTitle}, #{dailystoryContent}, #{dailystoryImage})
+		]]>
+	</insert>
+	
+	<update id="updateDailystory" parameterType="com.logus.dailystory.model.DailystoryVO">
+		<![CDATA[
+			UPDATE LOGUS.DAILYSTORY SET
+			dailystory_title = #{dailystoryTitle}, dailystory_content = #{dailystoryContent}, dailystory_image = #{dailystoryImage}
+			WHERE dailystory_code = #{dailystoryCode}
+		]]>
+	</update>
+	
+	<delete id="deleteDailystory" parameterType="int">
+		<![CDATA[
+			DELETE LOGUS.DAILYSTORY WHERE dailystory_code = #{dailystoryCode}
+		]]>
+	</delete>
+	
+	<select id="selectDailystoryInfo" resultType="com.logus.dailystory.model.DailystoryVO" parameterType="int">
+		<![CDATA[
+			SELECT * FROM LOGUS.DAILYSTORY WHERE dailystory_code = #{dailystoryCode}
+		]]>
+	</select>
+	
+	<select id="selectDailystoryList" resultType="com.logus.dailystory.model.DailystoryVO" parameterType="string">
+		<![CDATA[
+			SELECT * FROM LOGUS.DAILYSTORY WHERE member_nickname = #{memberNickname}
+			ORDER BY dailystory_code DESC
+		]]>
+	</select>
+	
+	<select id="findDailystoryList" resultType="com.logus.dailystory.model.DailystoryVO">
+		<![CDATA[SELECT * FROM LOGUS.DAILYSTORY]]>
+		<!-- <where>
+			<choose>
+				<when test='option.equals("tag")'></when>
+				<when test='option.equals("title")'></when>
+				<when test='option.equals("content")'></when>
+				<when test='option.equals("nickname")'></when>
+				<otherwise></otherwise>
+			</choose>
+		</where> -->
+	</select>
+	
+</mapper>
