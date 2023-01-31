@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- mapper의 namespace와 Interface 경로 동일하게 설정 >> mapper 후보로 등록 -->
+<mapper namespace="com.logus.reply.dao.IReplyDAO">
+	<select id="countReply" resultType="int" parameterType="int">
+		<![CDATA[
+			SELECT COUNT(*) FROM LOGUS.REPLY WHERE dailystory_code = #{dailystoryCode}
+		]]>
+	</select>
+	
+	<select id="countReplyDailystoryList" resultType="int" parameterType="string">
+		<![CDATA[
+			SELECT COUNT(rp.reply_code) FROM LOGUS.DAILYSTORY ds
+			LEFT OUTER JOIN LOGUS.REPLY rp
+			ON ds.dailystory_code = rp.dailystory_code
+			WHERE ds.member_nickname = #{memberNickname}
+			GROUP BY ds.dailystory_code
+			ORDER BY ds.dailystory_code DESC
+		]]>
+	</select>
+	
+	<insert id="insertReply" parameterType="com.logus.reply.model.ReplyVO">
+		<![CDATA[
+			INSERT INTO LOGUS.REPLY
+			(reply_code, reply_content, dailystory_code, member_nickname, reply_date)
+			VALUES
+			(reply_code_seq.NEXTVAL, #{replyContent}, #{dailystoryCode}, #{memberNickname}, SYSDATE)
+		]]>
+	</insert>
+	
+	<update id="updateReply" parameterType="com.logus.reply.model.ReplyVO">
+		<![CDATA[
+			UPDATE LOGUS.REPLY SET
+			reply_content = #{replyContent}
+			WHERE reply_code = #{replyCode}
+		]]>
+	</update>
+	
+	<delete id="deleteReply" parameterType="int">
+		<![CDATA[
+			DELETE LOGUS.REPLY WHERE reply_code = #{replyCode}
+		]]>
+	</delete>
+
+	<delete id="deleteAllReplyInDailyStory" parameterType="int">
+		<![CDATA[
+			DELETE LOGUS.REPLY WHERE dailystory_code = #{dailystoryCode}
+		]]>
+	</delete>
+	
+	<select id="selectReplyList" resultType="com.logus.reply.model.ReplyVO" parameterType="int">
+		<![CDATA[
+			SELECT * FROM LOGUS.REPLY WHERE dailystory_code = #{dailystoryCode} ORDER BY reply_code
+		]]>
+	</select>
+	
+</mapper>
