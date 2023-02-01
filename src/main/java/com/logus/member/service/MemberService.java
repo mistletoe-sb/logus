@@ -17,8 +17,8 @@ public class MemberService implements IMemberService {
 	
 	@Override
 	// 전체 회원 수 반환
-	public int countMember() {
-		return memberDAO.countMember(true);
+	public int countMember(boolean isExist) {
+		return memberDAO.countMember(isExist);
 	}
 	
 	@Override
