@@ -7,9 +7,9 @@
 	<head>
 		<c:set var="root" value="${pageContext.request.contextPath}"/>
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+		<link rel="stylesheet" href="${root}/resources/css/library.css">
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 		<script src="${root}/resources/js/jquery-3.6.3.min.js"></script>
-		<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 		<meta charset="UTF-8">
 		<title>Log Us</title>
 	</head>
@@ -22,7 +22,8 @@
 							 alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
 						Logus
 				    </a>
-				    <button type="button" class="btn btn-primary">내서재<br>바로가기</button>
+				    <button type="button" class="btn btn-primary"
+				    		onclick="location.href='<c:url value='/${sessionScope.memberNickname}/library/main'/>'">내서재<br>바로가기</button>
 				  	<button type="button" class="btn btn-info">오늘의 출석체크</button>
 				  	<p>${message}</p>
 				</div>
@@ -58,4 +59,4 @@
 			</nav>
 			im header
 		</div>
-
+		

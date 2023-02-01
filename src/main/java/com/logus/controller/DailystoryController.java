@@ -29,6 +29,10 @@ public class DailystoryController {
 	
 	private static Logger logger = LoggerFactory.getLogger(DailystoryController.class);	// logger 객체
 
+	/*
+	 * @GetMapping(value="/") public String appMain(){ return "index"; }
+	 */
+	
 	@GetMapping(value="/lib")
 	// 테스트용 서재 메인으로 이동
 	public String libMain(HttpSession session) {
@@ -37,6 +41,7 @@ public class DailystoryController {
 	}
 	
 	@GetMapping(value="/error")
+	// 에러(404, 500) 시 index 페이지로 redirect
 	public String errorLog() {
 		logger.debug("error");
 		return "redirect:/";
@@ -45,37 +50,38 @@ public class DailystoryController {
 	@GetMapping(value="/{memberNickname}/library/story/insert")
 	// 일일 스토리 작성 폼으로 이동
 	public String insertDailystory() {
-		return "dailystory/insertform";
+		return "dailystory/insertform";		// 스토리 작성 view로 이동
 	}
 	
 	@PostMapping(value="/{memberNickname}/library/story/insert")
 	// 일일 스토리 작성
-	public String insertDailystory(DailystoryVO vo) {
-		dailystoryService.insertDailystory(vo);
-		return "redirect:/" + RedirEncoder.encode(vo.getMemberNickname()) + "/library/main";
+	public String insertDailystory(DailystoryVO vo, HttpSession session) {
+		vo.setMemberNickname((String)session.getAttribute("memberNickname"));	// 세션으로부터 받은 닉네임 정보로 저장
+		dailystoryService.insertDailystory(vo);									// DB insert
+		return "redirect:/" + RedirEncoder.encode(vo.getMemberNickname()) + "/library/main";	// 서재 메인페이지로 redirect
 	}
 
 	@GetMapping(value="/{memberNickname}/library/story/{dailystoryCode}/update")
 	// 일일 스토리 수정 폼으로 이동
 	public String updateDailystory(@PathVariable int dailystoryCode, Model model) {
-		DailystoryVO vo = dailystoryService.selectDailystoryInfo(dailystoryCode);
-		model.addAttribute("dsVO", vo);
-		return "dailystory/updateform";
+		DailystoryVO vo = dailystoryService.selectDailystoryInfo(dailystoryCode);	// 해당 스토리의 상세 정보 select(폼에 출력하기 위함)
+		model.addAttribute("dsVO", vo);												// select 정보 model에 저장
+		return "dailystory/updateform";												// 스토리 수정 view로 이동
 	}
 	
 	@PostMapping(value="/{memberNickname}/library/story/update")
 	// 일일 스토리 수정
 	public String updateDailystory(DailystoryVO vo) {
-		dailystoryService.updateDailystory(vo);
-		return "redirect:/" + RedirEncoder.encode(vo.getMemberNickname()) + "/library/story/" + vo.getDailystoryCode();
+		dailystoryService.updateDailystory(vo);			// DB update
+		return "redirect:/" + RedirEncoder.encode(vo.getMemberNickname()) + "/library/story/" + vo.getDailystoryCode();		// 해당 스토리 상세 보기로 redirect
 	}
 
 	@GetMapping(value="/{memberNickname}/library/story/{dailystoryCode}/delete")
 	// 일일 스토리 삭제
 	public String deleteDailystory(@PathVariable String memberNickname, @PathVariable int dailystoryCode, 
 									int tagCount, int replyCount) {
-		dailystoryService.deleteDailystory(dailystoryCode, tagCount, replyCount);
-		return "redirect:/" + RedirEncoder.encode(memberNickname) + "/library/main";
+		dailystoryService.deleteDailystory(dailystoryCode, tagCount, replyCount);		// 해당 스토리 삭제
+		return "redirect:/" + RedirEncoder.encode(memberNickname) + "/library/main";	// 삭제 후 서재 메인페이지로 redirect
 	}
 
 	@GetMapping(value="{memberNickname}/library/story/{dailystoryCode}")
@@ -83,9 +89,10 @@ public class DailystoryController {
 	public String selectDailystoryInfo(@PathVariable int dailystoryCode, Model model) {
 		DailystoryVO vo = dailystoryService.selectDailystoryInfo(dailystoryCode);			// 해당 게시글 상세 내용 조회
 		List<ReplyVO> rpList = replyService.selectReplyList(dailystoryCode);				// 해당 게시글의 댓글 목록 조회
+		// 모델에 조회한 데이터 저장
 		model.addAttribute("dsVO", vo);
 		model.addAttribute("rpList", rpList);
-		return "dailystory/storydetail";
+		return "dailystory/storydetail";	// 스토리 상세 보기 view로 이동
 	}
 
 	@GetMapping(value="{memberNickname}/library/main")
@@ -94,8 +101,9 @@ public class DailystoryController {
 		List<DailystoryVO> dsList = dailystoryService.selectDailystoryList(memberNickname);	// 해당 닉네임의 일일 스토리 목록 조회
 		List<Integer> rpCount = replyService.countReplyDailystoryList(memberNickname);		// 각 스토리별 댓글 수 조회
 		// 모델에 조회한 데이터 저장
+		model.addAttribute("memberNickname", memberNickname);
 		model.addAttribute("dsList", dsList);
 		model.addAttribute("rpCount", rpCount);
-		return "dailystory/storylist";
+		return "dailystory/storylist";		// 스토리 목록 보기 view(서재 메인 페이지)로 이동
 	}
 }

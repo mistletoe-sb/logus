@@ -1,0 +1,9 @@
+.card {
+	width: 18rem;
+	cursor: pointer;
+}
+
+.reply_p {
+	cursor: pointer;
+	display: inline-block;
+}
