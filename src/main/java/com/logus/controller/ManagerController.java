@@ -105,4 +105,12 @@ public class ManagerController {
 		managerService.deleteManager(managerId);
 		return "redirect:/manager/managerlist";
 	}
+	
+	@RequestMapping(value="/manager/memberlist")
+	public String getAllMemberList(Model model) {
+		model.addAttribute("inmembercount", managerService.countMember(true));
+		model.addAttribute("outmembercount", managerService.countMember(false));
+		model.addAttribute("memberlist", managerService.selectMemberList());
+		return "manager/userlist";
+	}
 }
