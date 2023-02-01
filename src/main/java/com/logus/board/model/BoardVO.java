@@ -12,4 +12,5 @@ public class BoardVO {
 	private String managerNickname;
 	private int boardCategory;
 	private Date boardDate;
+	private String boardImage;
 }

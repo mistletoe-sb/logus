@@ -22,10 +22,23 @@ public class ManagerController {
 	IManagerService managerService;
 	
 	@RequestMapping(value="/manager/managerlist")
-	public String getAllManagerList(Model model) {
-		model.addAttribute("managercount", managerService.countManager());
-		model.addAttribute("managerlist", managerService.selectManagerList());
-		return "manager/managerlist";
+	public String getAllManagerList(Model model, HttpSession session) {
+//		ManagerVO vo = (ManagerVO)session.getAttribute("loginManager");
+//		int managerLevel = vo.getManagerLevel();
+
+		if(session.getAttribute("sessionManagerId") != null) {
+			String managerId = (String)session.getAttribute("sessionManagerId");
+			int managerLevel = managerService.selectManagerInfo(managerId).getManagerLevel();
+			if(managerLevel == 0) {
+				model.addAttribute("managercount", managerService.countManager());
+				model.addAttribute("managerlist", managerService.selectManagerList());
+				return "manager/managerlist";
+			} else {
+				return "manager/accessrestriction_generalmanager";
+			}
+		} else {
+			return "manager/accessrestriction_generalmanager";
+		}
 	}
 	
 	@RequestMapping(value="/manager/managerloginform", method=RequestMethod.GET)
@@ -90,8 +103,18 @@ public class ManagerController {
 	}
 	
 	@RequestMapping(value="/manager/insertmanagerform", method=RequestMethod.GET)
-	public String insertManagerForm(Model model) {
-		return "manager/insertmanagerform";
+	public String insertManagerForm(Model model, HttpSession session) {
+		if(session.getAttribute("sessionManagerId") != null) {
+			String managerId = (String)session.getAttribute("sessionManagerId");
+			int managerLevel = managerService.selectManagerInfo(managerId).getManagerLevel();
+			if(managerLevel == 0) {
+				return "manager/insertmanagerform";
+			} else {
+				return "manager/accessrestriction_generalmanager";
+			}
+		} else {
+			return "manager/accessrestriction_generalmanager";
+		}
 	}
 	
 	@RequestMapping(value="/manager/insertmanager", method=RequestMethod.POST)

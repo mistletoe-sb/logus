@@ -10,7 +10,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 public class StatisticsController {
 	@RequestMapping(value="/manager/statistics")
-	public String logoutManager(Model model, RedirectAttributes redirectAttributession) {
-		return "manager/statistics";
+	public String logoutManager(Model model, RedirectAttributes redirectAttributession, HttpSession session) {
+		if(session.getAttribute("sessionManagerId") != null) {
+			return "manager/statistics";
+		} else {
+			return "manager/accessrestriction_manager";
+		}
 	}
 }

@@ -1,3 +1,4 @@
+<%@ include file="../header.jsp" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
 	isELIgnored="false" %>
@@ -36,8 +37,10 @@
             </c:forEach>
             </tbody>
           </table>
-          <div class="d-grid gap-2 col-2 mx-auto">
-            <button type="button" class="btn btn-primary" onclick="location.href='http://localhost:8080/logus/manager/insertboardform?boardcategory=2'">리포트 작성하기</button>
-        </div>
+	      <c:if test="${not empty sessionScope.sessionManagerNickname}">
+	          <div class="d-grid gap-2 col-2 mx-auto">
+	            <button type="button" class="btn btn-primary" onclick="location.href='http://localhost:8080/logus/manager/insertboardform?boardcategory=2'">리포트 작성하기</button>
+	        </div>
+        </c:if>
     </body>
 </html>
