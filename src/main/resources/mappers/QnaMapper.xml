@@ -24,7 +24,7 @@
 			]]>
 		</if>
 		<![CDATA[
-			ORDER BY a_date DESC, q_date DESC
+			ORDER BY answer_date DESC, qna_date DESC
 		]]>
 	</select>
 
@@ -36,15 +36,15 @@
 	
 	<insert id="insertQna" parameterType="com.logus.qna.model.QnaVO">
 		<![CDATA[
-			INSERT INTO logus.qna
-			VALUES(qna_code_seq.NEXTVAL, #{qTitle}, #{qContent}, SYSDATE, #{memberNickname})
+			INSERT INTO logus.qna(QNA_CODE, QNA_TITLE, QNA_CONTENT, QNA_DATE, MEMBER_NICKNAME)
+			VALUES(qna_code_seq.NEXTVAL, #{qnaTitle}, #{qnaContent}, SYSDATE, #{memberNickname})
 		]]>
 	</insert>
 	
 	<update id="updateQ" parameterType="com.logus.qna.model.QnaVO">
 		<![CDATA[
 			UPDATE logus.qna
-			SET q_title = #{qTitle}, q_content = #{qContent}
+			SET qna_title = #{qnaTitle}, qna_content = #{qnaContent}
 			WHERE qna_code = #{qnaCode}
 		]]>
 	</update>
@@ -58,7 +58,7 @@
 	<update id="insertAnswer" parameterType="com.logus.qna.model.QnaVO">
 		<![CDATA[
 			UPDATE logus.qna
-			SET a_content = #{aContent}, a_date = SYSDATE, manager_nickname = #{managerNickname}
+			SET answer_content = #{answerContent}, answer_date = SYSDATE, manager_nickname = #{managerNickname}
 			WHERE qna_code = #{qnaCode}
 		]]>
 	</update>
@@ -66,7 +66,7 @@
 	<update id="updateAnswer" parameterType="com.logus.qna.model.QnaVO">
 		<![CDATA[
 			UPDATE logus.qna
-			SET a_content = #{aContent}
+			SET answer_content = #{answerContent}
 			WHERE qna_code = #{qnaCode}
 		]]>
 	</update>
@@ -74,7 +74,7 @@
 	<update id="deleteAnswer" parameterType="com.logus.qna.model.QnaVO">
 		<![CDATA[
 			UPDATE logus.qna
-			SET a_content = null
+			SET answer_content = null
 			WHERE qna_code = #{qnaCode}
 		]]>
 	</update>

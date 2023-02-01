@@ -34,7 +34,7 @@
                                             <th scope="row">제목</th>
                                             <td colspan="3">
                                                 <div class="box01">
-                                                    ${qnadetail.qTitle}
+                                                    ${qnadetail.qnaTitle}
                                                 </div>
                                             </td>
                                         </tr>
@@ -45,18 +45,18 @@
                                             </td>
                                             <th scope="row">등록일</th>
                                             <td>
-                                                <div class="box01">${qnadetail.qDate}</div>
+                                                <div class="box01">${qnadetail.qnaDate}</div>
                                             </td>
                                         </tr>
 	                                </table>
 	                            </div><!--//tableWrap -->
                                 <div class="listView">
-                                    <div class="viewTxt">${qnadetail.qContent}</div>
+                                    <div class="viewTxt">${qnadetail.qnaContent}</div>
                                 </div>
                                 <form action="http://localhost:8080/logus/manager/insertanswer" method="post">
 							        <div class="mb-3">
 							            <label for="exampleFormControlTextarea1" class="form-label">문의글 답변</label>
-							            <textarea class="form-control" id="aContent" name="aContent" rows="3" placeholder="답변을 입력하세요"></textarea>
+							            <textarea class="form-control" id="answerContent" name="answerContent" rows="3" placeholder="답변을 입력하세요"></textarea>
 							        </div>
 							        <input type="hidden" name="managerNickname" value="${sessionScope.sessionManagerNickname}">
 							        <input type="hidden" name="qnaCode" value="${qnadetail.qnaCode}">
