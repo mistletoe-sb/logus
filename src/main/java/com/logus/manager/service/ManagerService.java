@@ -25,6 +25,11 @@ public class ManagerService implements IManagerService {
 	}
 	
 	@Override
+	public int countManager(String managerId) {
+		return managerDAO.countManager(managerId);
+	}
+	
+	@Override
 	public void insertManager(ManagerVO vo) {
 		managerDAO.insertManager(vo);
 	}

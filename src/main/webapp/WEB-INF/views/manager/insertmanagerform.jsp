@@ -10,6 +10,19 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>관리자 등록</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+
+		<style>
+		.id_ok{
+		color:#008000;
+		display: none;
+		}
+		
+		.id_already{
+		color:#6A82FB; 
+		display: none;
+		}
+		</style>
+
     </head>
     <body>
         <h1>관리자 등록</h1>
@@ -18,7 +31,10 @@
         <form name="insertmanagerform" action="http://localhost:8080/logus/manager/insertmanager" method="post">
 	        <div class="mb-3">
 	            <label for="exampleFormControlInput1" class="form-label">관리자 ID</label>
-	            <input type="text" class="form-control" id="managerId" name="managerId" placeholder="ID를 입력하세요" required>
+	            <input type="text" class="form-control" id="managerId" name="managerId" oninput="checkManagerId()" placeholder="ID를 입력하세요" required>
+	        	<!-- id ajax 중복체크 -->
+				<span class="id_ok">사용 가능한 아이디입니다.</span>
+				<span class="id_already">누군가 이 아이디를 사용하고 있어요.</span>
 	        </div>
 	        <div class="mb-3">
 	            <label for="exampleFormControlInput1" class="form-label">관리자 password</label>
@@ -36,7 +52,35 @@
 	            <input type="submit" class="btn btn-primary" value='관리자 등록하기'>
 	        </div>
         </form>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+		<script src="https://cdn.jsdelivr.net/npm/vue@2.7.14"></script>
+        
         <script type="text/javascript">
+        
+	        function checkManagerId(){
+	            var managerId = $('#managerId').val(); //id값이 "id"인 입력란의 값을 저장
+	            $.ajax({
+	                url:'http://localhost:8080/logus/managerIdCheck', //Controller에서 요청 받을 주소
+	                type:'post', //POST 방식으로 전달
+	                data:{managerId:managerId},
+	                success:function(cnt){ //컨트롤러에서 넘어온 cnt값을 받는다 
+	                    if(cnt == 0){ //cnt가 1이 아니면(=0일 경우) -> 사용 가능한 아이디 
+	                        $('.id_ok').css("display","inline-block"); 
+	                        $('.id_already').css("display", "none");
+	                    } else { // cnt가 1일 경우 -> 이미 존재하는 아이디
+	                        $('.id_already').css("display","inline-block");
+	                        $('.id_ok').css("display", "none");
+	                        alert("아이디를 다시 입력해주세요");
+	                        $('#managerId').val('');
+	                    }
+	                },
+	                error:function(){
+	                    alert("에러입니다");
+	                }
+	            });
+	            };
+        
         	var password = document.getElementById("managerPassword")
 	        , confirm_password = document.getElementById("confirmManagerPassword");
 	
