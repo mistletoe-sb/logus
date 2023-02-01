@@ -27,9 +27,9 @@
 		DELETE LOGUS.DAILYCHECK
 		WHERE dailycheck_code =#{dailyroutineCode} and dailycheck_code NOT IN 
 		]]>
-		<foreach  item="dailycheckCode" index="index" collection="voList" open="(" close=")" separator=",">
+		<foreach  item="item" index="index" collection="voList" open="(" close=")" separator=",">
 		 	<![CDATA[
-		 	#{dailycheckCode}
+		 	#{item.dailycheckCode}
 		 	]]>
 		</foreach>
 	</delete>

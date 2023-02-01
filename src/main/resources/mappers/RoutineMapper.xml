@@ -31,8 +31,7 @@
 		UPDATE LOGUS.DAILYROUTINE 
 		SET member_nickname=#{memberNickname}, dailyroutine_weekopt=#{dailyroutineWeekopt},
 		dailyroutine_title=#{dailyroutineTitle}, dailyroutine_active=#{dailyroutineActive}
-		WHERE dailyroutine_code=(select dailyroutine_code from logus.dailyroutine 
-		where dailyroutine_weekopt=#{dailyroutineWeekopt} and dailyroutine_active=#{dailyroutineActive})
+		WHERE dailyroutine_code=#{dailyroutineCode}
 		]]>
 	</update>
 	

@@ -7,25 +7,23 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>새 루틴</title>
-		<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<script>
-	var i =0;
-	//i는 한 루틴에서 최대로 가능한 시간대별 일정 수
+	var i =0;	//i는 한 루틴에서 최대로 가능한 시간대별 일정 수
         const add_textbox = () => {
             const routine = document.getElementById("routine");
             const newE = document.createElement('div');
-            if(i<=5){
+            if(i<=5){	//0은 기본으로 존재해서 i+2개 일정이 생성한도(5개 기준 7개) 
             i += 1;
             newE.id="t"+i
             newE.innerHTML = "<div class='p-3 bg-info bg-opacity-10 border border-info border-start-0 rounded-end'><p>시작 시간 : <input type='time' name='begin' required>&nbsp;&nbsp;&nbsp;종료 시간 : <input type='time' name='end' required></p><div class='form-floating'><textarea class='form-control' placeholder='Leave a comment here' id='floatingTextarea' name='content' required></textarea><label for='floatingTextarea'>일정 내용을 작성해주세요</label></div></div>";
             routine.appendChild(newE);
             } else if (i >5){
-            	alert("생성한도입니다");
+            	alert("일정 생성 한도입니다");
             } return i;
         }
         const remove = (obj) => {
         	if(i==0){
-        		alert("최소 일정은 삭제할 수 없습니다");
+        		alert("일정은 최소 1개 이상 필요합니다");
         	} else {
             document.getElementById("t"+i).remove();
             i -= 1;
@@ -33,70 +31,31 @@
             
         }
         
-        
         $(function(){
-    		$("#routinenew").submit(function(){
-  var startDate = $('#t0').children('input').first().val(); //첫번째 <input> time을 찾을때 (자식요소)
-  var endDate = $('#t0').children('input').last().val(); //첫번째 <input> time을 찾을때 (자식요소)
-        
-//   var startDate = $('#t'+i).children('input').eq(0).val(); //첫번째 <input> time을 찾을때 (자식요소)
-//   var endDate = $('#t'+i).children('input').eq(1).val(); //첫번째 <input> time을 찾을때 (자식요소)
-        console.log(startDate);
-  		console.log(endDate);
+        $(document).delegate("#routinenew","submit",function(){      		
+        	var error =0;	//error 0 이상이면 에러 일정 있음
+        		for (var j = 0; j <= i; j++) {	//t0도 있으므로 i는 0부터 시작->j는 -1부터 시작해야 함
+    				var startDate = $('#t'+j).find('input').first().val(); //첫번째 <input> time을 찾을때 (자손 요소)
+    				var endDate = $('#t'+j).find('input').last().val(); //첫번째 <input> time을 찾을때 (자손 요소)
+    				
+    				console.log(startDate+"<br>"+j);
+    		  		console.log(endDate+"<br>"+j);
+    				if (startDate.valueOf() > endDate.valueOf()){
+    					error += 1;
+    				} 
+        		}	
+    				if(error>0){
+    					alert("종료 시간이 시작 시간보다 빠른 일정이 있습니다");
+   					 event.preventDefault();
+    				} else {
+    					console.log("전부 맞습니다");
+    				}
     });
-});
-        
-//    	$(function(){
-
-//     		$("#routinenew").submit(function(){
-
-//     	        var startDate = $('#startDate').val();
-
-//     	        var endDate = $('#endDate').val();
-
-//     	        //-을 구분자로 연,월,일로 잘라내어 배열로 반환
-
-//     	        var startArray = startDate.split('-');
-
-//     	        var endArray = endDate.split('-');   
-
-//     	        //배열에 담겨있는 연,월,일을 사용해서 Date 객체 생성
-
-//     	        var start_date = new Date(startArray[0], startArray[1], startArray[2]);
-
-//     	        var end_date = new Date(endArray[0], endArray[1], endArray[2]);
-
-//                   //날짜를 숫자형태의 날짜 정보로 변환하여 비교한다.
-
-//     	        if(start_date.getTime() > end_date.getTime()) {
-
-//     	            alert("종료날짜보다 시작날짜가 작아야합니다.");
-
-//     	            return false;
-
-//     	        }
-
-//     	     });
-
-//     	});
-//        $('#submit').click(function(){
-//        	 	$('form[name="routineform"]').serialize();
-//        	    $('form[name="routineform"]').attr('method', 'POST');
-//        	    $('form[name="routineform"]').attr('action', 'newroutine');
-//        	    console.log('테스트 서븦밋');
-//        	    $('form[name="routineform"]').submit();
-//        	});
-//         const $ul = document.querySelector('routine')
-
-//         const liElems =[...document.querySelectorAll('.item')]
-
-//         liElems.forEach($li=>$li.addEventListener('click',e=>{
-//         	$ul.removeChild(e.target.parentNode)
-//         }))    onsubmit="return submit();"
-    </script>
+});     
+    </script>   
 	</head>
 		<body>
-		<form id="routinenew" name="routineform" action="newroutine" method="post">
+		<form id="routinenew" name="routineform" action="<c:url value='/newroutine'/>" method="post">
 		<div class="p-3 bg-info bg-opacity-10 border border-dark border-start-0 rounded-end">
 			<select class="form-select" aria-label="Default select example" name="active">
 				  <option selected >일반 일정으로 등록</option>

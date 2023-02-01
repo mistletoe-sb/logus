@@ -26,8 +26,8 @@ public class DailycheckService implements IDailycheckService {
 	}
 
 	@Override
-	public int deleteDailycheck(List<DailycheckVO> voList) {
-		return dailycheckdao.deleteDailycheck(voList);
+	public int deleteDailycheck(List<DailycheckVO> voList , int dailyroutineCode) {
+		return dailycheckdao.deleteDailycheck(voList, dailyroutineCode);
 	}
 
 	@Override
