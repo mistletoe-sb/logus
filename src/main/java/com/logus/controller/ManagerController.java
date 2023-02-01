@@ -5,9 +5,11 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.logus.manager.model.ManagerVO;
@@ -29,6 +31,16 @@ public class ManagerController {
 	@RequestMapping(value="/manager/managerloginform", method=RequestMethod.GET)
 	public String getManagerLoginForm(Model model) {
 		return "manager/loginmanagerform";
+	}
+	
+	//아이디 중복체크
+	@PostMapping("/managerIdCheck")
+	@ResponseBody
+	public int idCheck(@RequestParam("managerId") String managerId) {
+		
+		int cnt = managerService.countManager(managerId);
+		return cnt;
+		
 	}
 	
 	@RequestMapping(value="/manager/managerlogin", method=RequestMethod.POST)
@@ -92,5 +104,13 @@ public class ManagerController {
 	public String deleteManager(@RequestParam(value="managerId", required=true) String managerId, Model model, RedirectAttributes redirectAttributes) {
 		managerService.deleteManager(managerId);
 		return "redirect:/manager/managerlist";
+	}
+	
+	@RequestMapping(value="/manager/memberlist")
+	public String getAllMemberList(Model model) {
+		model.addAttribute("inmembercount", managerService.countMember(true));
+		model.addAttribute("outmembercount", managerService.countMember(false));
+		model.addAttribute("memberlist", managerService.selectMemberList());
+		return "manager/userlist";
 	}
 }
