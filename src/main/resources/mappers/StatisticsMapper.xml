@@ -23,56 +23,83 @@
 			FROM logus.member
 			WHERE member_birth BETWEEN ADD_MONTHS(SYSDATE,-120) AND SYSDATE
 			UNION ALL
-			SELECT '20세 미만', count(*)
+			SELECT '10대', count(*)
 			FROM logus.member
 			WHERE member_birth BETWEEN ADD_MONTHS(SYSDATE,-240) AND ADD_MONTHS(SYSDATE,-120)
 			UNION ALL
-			SELECT '30세 미만', count(*)
+			SELECT '20대', count(*)
 			FROM logus.member
 			WHERE member_birth BETWEEN ADD_MONTHS(SYSDATE,-360) AND ADD_MONTHS(SYSDATE,-240)
 			UNION ALL
-			SELECT '40세 미만', count(*)
+			SELECT '30대', count(*)
 			FROM logus.member
 			WHERE member_birth BETWEEN ADD_MONTHS(SYSDATE,-480) AND ADD_MONTHS(SYSDATE,-360)
 			UNION ALL
-			SELECT '50세 미만', count(*)
+			SELECT '40대', count(*)
 			FROM logus.member
 			WHERE member_birth BETWEEN ADD_MONTHS(SYSDATE,-600) AND ADD_MONTHS(SYSDATE,-480)
 			UNION ALL
-			SELECT '60세 미만', count(*)
+			SELECT '50대', count(*)
 			FROM logus.member
 			WHERE member_birth BETWEEN ADD_MONTHS(SYSDATE,-720) AND ADD_MONTHS(SYSDATE,-600)
 			UNION ALL
-			SELECT '70세 미만', count(*)
+			SELECT '60대', count(*)
 			FROM logus.member
 			WHERE member_birth BETWEEN ADD_MONTHS(SYSDATE,-840) AND ADD_MONTHS(SYSDATE,-720)
 			UNION ALL
-			SELECT '80세 미만', count(*)
+			SELECT '70대', count(*)
 			FROM logus.member
 			WHERE member_birth BETWEEN ADD_MONTHS(SYSDATE,-960) AND ADD_MONTHS(SYSDATE,-840)
 			UNION ALL
-			SELECT '90세 미만', count(*)
+			SELECT '80대', count(*)
 			FROM logus.member
 			WHERE member_birth BETWEEN ADD_MONTHS(SYSDATE,-1080) AND ADD_MONTHS(SYSDATE,-960)
 			UNION ALL
-			SELECT '100세 미만', count(*)
+			SELECT '90대', count(*)
 			FROM logus.member
 			WHERE member_birth BETWEEN ADD_MONTHS(SYSDATE,-1320) AND ADD_MONTHS(SYSDATE,-1200)
 			UNION ALL
-			SELECT '110세 미만', count(*)
+			SELECT '100대', count(*)
 			FROM logus.member
 			WHERE member_birth BETWEEN ADD_MONTHS(SYSDATE,-1440) AND ADD_MONTHS(SYSDATE,-1320)
 			UNION ALL
-			SELECT '120세 미만', count(*)
+			SELECT '110대', count(*)
 			FROM logus.member
 			WHERE member_birth BETWEEN ADD_MONTHS(SYSDATE,-1560) AND ADD_MONTHS(SYSDATE,-1440)
 			UNION ALL
-			SELECT '130세 미만', count(*)
+			SELECT '120대', count(*)
 			FROM logus.member
 			WHERE member_birth BETWEEN ADD_MONTHS(SYSDATE,-1680) AND ADD_MONTHS(SYSDATE,-1560)
 			)
 			WHERE 가입자 <> 0
 			ORDER BY 2 DESC, 1 ASC
+		]]>
+	</select>
+
+	<select id="selectTagList" resultType="hashmap">
+		<![CDATA[
+			SELECT tag_name AS "tagName", count(*) AS "tagRank"
+			FROM logus.tag
+			GROUP BY ROLLUP(tag_name)
+			ORDER BY 2 DESC
+		]]>
+	</select>
+	
+	<select id="selectFollowedList" resultType="hashmap">
+		<![CDATA[
+			SELECT following_member_id AS "ID", count(*) AS "followRank"
+			FROM logus.follow
+			GROUP BY ROLLUP(following_member_id)
+			ORDER BY 2 DESC
+		]]>
+	</select>
+	
+	<select id="selectDailyroutineList" resultType="hashmap">
+		<![CDATA[
+			SELECT dailyroutine_title AS "routineTitle", dailyroutine_shared AS "routineShared"
+			FROM logus.dailyroutine
+			WHERE dailyroutine_shared <> 0
+			ORDER BY dailyroutine_shared DESC
 		]]>
 	</select>
 

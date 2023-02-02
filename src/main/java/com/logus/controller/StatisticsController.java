@@ -71,7 +71,7 @@ public class StatisticsController {
 		ajaxArryCols.add(ajaxObjCols1);
 		ajaxArryCols.add(ajaxObjCols2);
 				 
-		for (int i=0; i<maplist.size(); i++){        //JSONArray의 size만큼 돌면서 형식을 만듭니다.
+		for (int i=1; i<maplist.size(); i++){        //JSONArray의 size만큼 돌면서 형식을 만듭니다.
 		    JSONObject legend = new JSONObject();
 		    legend.put("v", maplist.get(i).get("memberJob"));
 		    legend.put("f", null);
@@ -115,13 +115,145 @@ public class StatisticsController {
 		ajaxArryCols.add(ajaxObjCols1);
 		ajaxArryCols.add(ajaxObjCols2);
 				 
-		for (int i=0; i<maplist.size(); i++){        //JSONArray의 size만큼 돌면서 형식을 만듭니다.
+		for (int i=0; i<(maplist.size() < 10 ? maplist.size() : 10) ; i++){        //JSONArray의 size만큼 돌면서 형식을 만듭니다.
 		    JSONObject legend = new JSONObject();
 		    legend.put("v", maplist.get(i).get("'10세미만'"));
 		    legend.put("f", null);
 		    
 		    JSONObject value = new JSONObject();
 		    value.put("v", maplist.get(i).get("가입자"));
+		    value.put("f", null);
+		 
+		    JSONArray cValueArry = new JSONArray();
+		    cValueArry.add(legend);
+		    cValueArry.add(value);
+		 
+		    JSONObject cValueObj = new JSONObject();
+		    cValueObj.put("c", cValueArry);
+		    
+		    ajaxArryRows.add(cValueObj);
+		}
+
+		data.put("cols", ajaxArryCols);
+		data.put("rows", ajaxArryRows);
+		
+		return data;
+	}
+	
+	@RequestMapping(value="/manager/statistics/json/tag")
+	public @ResponseBody JSONObject getJSONTagList() {
+		System.out.println("태그랭킹 : " + statisticsService.selectTagList());
+		
+		List<Map<String, Object>> maplist = statisticsService.selectTagList();
+//		JSONArray json_array = new JSONArray(maplist);
+		
+		JSONObject data = new JSONObject();
+		JSONObject ajaxObjCols1 = new JSONObject();    //cols의 1번째 object를 담을 JSONObject
+		JSONObject ajaxObjCols2 = new JSONObject();    //cols의 2번째 object를 담을 JSONObject
+		JSONArray ajaxArryCols = new JSONArray();        //위의 두개의 JSONObject를 담을 JSONArray
+	    JSONArray ajaxArryRows = new JSONArray();
+
+		ajaxObjCols1.put("type", "string");
+		ajaxObjCols2.put("type", "number");
+		
+		ajaxArryCols.add(ajaxObjCols1);
+		ajaxArryCols.add(ajaxObjCols2);
+				 
+		for (int i=1; i<(maplist.size() < 10 ? maplist.size() : 10) ; i++){        //JSONArray의 size만큼 돌면서 형식을 만듭니다.
+		    JSONObject legend = new JSONObject();
+		    legend.put("v", maplist.get(i).get("tagName"));
+		    legend.put("f", null);
+		    
+		    JSONObject value = new JSONObject();
+		    value.put("v", maplist.get(i).get("tagRank"));
+		    value.put("f", null);
+		 
+		    JSONArray cValueArry = new JSONArray();
+		    cValueArry.add(legend);
+		    cValueArry.add(value);
+		 
+		    JSONObject cValueObj = new JSONObject();
+		    cValueObj.put("c", cValueArry);
+		    
+		    ajaxArryRows.add(cValueObj);
+		}
+
+		data.put("cols", ajaxArryCols);
+		data.put("rows", ajaxArryRows);
+		
+		return data;
+	}
+	
+	@RequestMapping(value="/manager/statistics/json/follow")
+	public @ResponseBody JSONObject getJSONFollowList() {
+		System.out.println("팔로우랭킹 : " + statisticsService.selectFollowedList());
+		
+		List<Map<String, Object>> maplist = statisticsService.selectFollowedList();
+//		JSONArray json_array = new JSONArray(maplist);
+		
+		JSONObject data = new JSONObject();
+		JSONObject ajaxObjCols1 = new JSONObject();    //cols의 1번째 object를 담을 JSONObject
+		JSONObject ajaxObjCols2 = new JSONObject();    //cols의 2번째 object를 담을 JSONObject
+		JSONArray ajaxArryCols = new JSONArray();        //위의 두개의 JSONObject를 담을 JSONArray
+	    JSONArray ajaxArryRows = new JSONArray();
+
+		ajaxObjCols1.put("type", "string");
+		ajaxObjCols2.put("type", "number");
+		
+		ajaxArryCols.add(ajaxObjCols1);
+		ajaxArryCols.add(ajaxObjCols2);
+				 
+		for (int i=1; i<(maplist.size() < 10 ? maplist.size() : 10) ; i++){        //JSONArray의 size만큼 돌면서 형식을 만듭니다.
+		    JSONObject legend = new JSONObject();
+		    legend.put("v", maplist.get(i).get("ID"));
+		    legend.put("f", null);
+		    
+		    JSONObject value = new JSONObject();
+		    value.put("v", maplist.get(i).get("followRank"));
+		    value.put("f", null);
+		 
+		    JSONArray cValueArry = new JSONArray();
+		    cValueArry.add(legend);
+		    cValueArry.add(value);
+		 
+		    JSONObject cValueObj = new JSONObject();
+		    cValueObj.put("c", cValueArry);
+		    
+		    ajaxArryRows.add(cValueObj);
+		}
+
+		data.put("cols", ajaxArryCols);
+		data.put("rows", ajaxArryRows);
+		
+		return data;
+	}
+	
+	@RequestMapping(value="/manager/statistics/json/routine")
+	public @ResponseBody JSONObject getJSONRoutineList() {
+		System.out.println("팔로우랭킹 : " + statisticsService.selectDailyroutineList());
+		
+		List<Map<String, Object>> maplist = statisticsService.selectDailyroutineList();
+//		JSONArray json_array = new JSONArray(maplist);
+		
+		JSONObject data = new JSONObject();
+		JSONObject ajaxObjCols1 = new JSONObject();    //cols의 1번째 object를 담을 JSONObject
+		JSONObject ajaxObjCols2 = new JSONObject();    //cols의 2번째 object를 담을 JSONObject
+		JSONArray ajaxArryCols = new JSONArray();        //위의 두개의 JSONObject를 담을 JSONArray
+	    JSONArray ajaxArryRows = new JSONArray();
+
+		ajaxObjCols1.put("type", "string");
+		ajaxObjCols2.put("type", "number");
+		
+		ajaxArryCols.add(ajaxObjCols1);
+		ajaxArryCols.add(ajaxObjCols2);
+				 
+		for (int i=1; i<(maplist.size() < 10 ? maplist.size() : 10) ; i++){        //JSONArray의 size만큼 돌면서 형식을 만듭니다.
+		    JSONObject legend = new JSONObject();
+		    legend.put("v", maplist.get(i).get("routineTitle"));
+		    legend.put("f", null);
+		    
+		    JSONObject value = new JSONObject();
+		    value.put("v", maplist.get(i).get("routineShared"));
 		    value.put("f", null);
 		 
 		    JSONArray cValueArry = new JSONArray();
