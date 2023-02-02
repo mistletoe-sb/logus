@@ -1,4 +1,5 @@
 <%@ include file="../header.jsp" %>
+<%@ include file="managerside.jsp" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
 	isELIgnored="false" %>
@@ -37,5 +38,8 @@
             </c:forEach>
             </tbody>
         </table>
+        <button type="button" class="btn btn-primary" onclick="location.href='http://localhost:8080/logus/manager/insertmanagerform'">
+			관리자 등록
+        </button>
     </body>
 </html>

@@ -42,8 +42,12 @@ public class ManagerController {
 	}
 	
 	@RequestMapping(value="/manager/managerloginform", method=RequestMethod.GET)
-	public String getManagerLoginForm(Model model) {
-		return "manager/loginmanagerform";
+	public String getManagerLoginForm(Model model, HttpSession session) {
+		if(session.getAttribute("sessionManagerId") == null) {
+			return "manager/loginmanagerform";
+		} else {
+			return "manager/statistics";
+		}
 	}
 	
 	//아이디 중복체크
@@ -84,9 +88,11 @@ public class ManagerController {
 				System.out.println("로그인에 성공했습니다." + managerId);
 				
 				// 로그인 인증 처리된 관리자 정보는 다른 사이트에 갔다 돌아와도 다시 로그인하지 안하도 되도록 세션에 등록
-				session.setAttribute("loginManager", vo); // 세션에 관리자 정보 저장
+//				session.setAttribute("loginManager", vo); // 세션에 관리자 정보 저장
 				session.setAttribute("sessionManagerId", vo.getManagerId());	// 세션에 관리자 ID 저장
 				session.setAttribute("sessionManagerNickname", vo.getManagerNickname()); // 세션에 관리자 nickname 저장
+				session.setAttribute("sessionManagerLevel", vo.getManagerLevel());	// 세션에 관리자 level 저장
+
 				
 				return "redirect:/manager/statistics";
 			}
@@ -130,10 +136,14 @@ public class ManagerController {
 	}
 	
 	@RequestMapping(value="/manager/memberlist")
-	public String getAllMemberList(Model model) {
-		model.addAttribute("inmembercount", managerService.countMember(true));
-		model.addAttribute("outmembercount", managerService.countMember(false));
-		model.addAttribute("memberlist", managerService.selectMemberList());
-		return "manager/userlist";
+	public String getAllMemberList(Model model, HttpSession session) {
+		if(session.getAttribute("sessionManagerId") != null) {		
+			model.addAttribute("inmembercount", managerService.countMember(true));
+			model.addAttribute("outmembercount", managerService.countMember(false));
+			model.addAttribute("memberlist", managerService.selectMemberList());
+			return "manager/userlist";
+		} else {
+			return "manager/accessrestriction_manager";
+		}
 	}
 }
