@@ -131,6 +131,12 @@
 	        chart02.draw(data02, options02);
 	      }
 	    </script>
+	    
+	    <style type="text/css">
+	    	div{
+ 	    		clear: both;
+ 	    	}
+	    </style>
     </head>
     <body>
         <h1>관리자 통계</h1>
@@ -138,8 +144,8 @@
 		<h2>로그인 관리자 별명 : ${sessionScope.sessionManagerNickname}</h2>
 		
 	    <!--Div that will hold the pie chart-->
-	    <div id="chart_div"></div>
-	    <div id="chart_div02"></div>
+	    <ul><div id="chart_div"></div></ul>
+	    <ul><div id="chart_div02"></div></ul>
 		
 		<div class="d-grid gap-2 col-2 mx-auto">
             <button class="btn btn-primary" type="button" onclick="location.href='http://localhost:8080/logus/manager/managerlogout'">관리자 로그아웃 하기</button>
