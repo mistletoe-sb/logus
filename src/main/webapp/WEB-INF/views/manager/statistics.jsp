@@ -12,6 +12,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>관리자 통계</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+		<script src="https://cdn.jsdelivr.net/npm/vue@2.7.14"></script>
+
 		
 			    <!--Load the AJAX API-->
 	    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -28,26 +32,103 @@
 	      // draws it.
 	      function drawChart() {
 	
+	    	  var jsonData = $.ajax({
+	              url: "http://localhost:8080/logus/manager/statistics/json/memberjob",
+	              dataType:"json",
+	              data: {
+// 	            	  "id1":aId, "id2":bId
+	            		},
+	              async: false
+	              }).responseText;
+	    	  
+	    	  
+//     	    //차트 그리기에 필요한 json 데이터 로딩
+//     	    var jsonData = $.ajax({
+//     	        url: "http://localhost:8080/logus/manager/statistics/json/memberjob",
+//     	        type : "post",
+//     	    	data : {
+    	    	    
+//     	    	}
+//     	    });
+    	    
+    	    //json형식으로 데이터가 담김
+    	    console.log(jsonData);
+
 	        // Create the data table.
-	        var data = new google.visualization.DataTable();
-	        data.addColumn('string', 'Topping');
-	        data.addColumn('number', 'Slices');
-	        data.addRows([
-	          ['Mushrooms', 3],
-	          ['Onions', 1],
-	          ['Olives', 1],
-	          ['Zucchini', 1],
-	          ['Pepperoni', 2]
-	        ]);
+	        var data = new google.visualization.DataTable(jsonData);
+	        
+	        console.log("데이터 테이블 :" +data);
+	        
+// 	        data.addColumn('string', 'mJob');
+// 	        data.addColumn('number', 'Pie');
+// 	        data.addRows([
+// 	            ['Mushrooms', 3],
+// 	            ['Onions', 1],
+// 	            ['Olives', 1],
+// 	            ['Zucchini', 1],
+// 	            ['Pepperoni', 2]
+// 	        ]);
 	
 	        // Set chart options
-	        var options = {'title':'How Much Pizza I Ate Last Night',
+	        var options = {'title':'직업별 가입자 통계',
 	                       'width':400,
 	                       'height':300};
 	
 	        // Instantiate and draw our chart, passing in some options.
 	        var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
 	        chart.draw(data, options);
+	      }
+	      
+	      google.charts.setOnLoadCallback(drawChart02);
+
+	      
+	      function drawChart02() {
+	    		
+	    	  var jsonData02 = $.ajax({
+	              url: "http://localhost:8080/logus/manager/statistics/json/membergeneration",
+	              dataType:"json",
+	              data: {
+// 	            	  "id1":aId, "id2":bId
+	            		},
+	              async: false
+	              }).responseText;
+	    	  
+	    	  
+//     	    //차트 그리기에 필요한 json 데이터 로딩
+//     	    var jsonData = $.ajax({
+//     	        url: "http://localhost:8080/logus/manager/statistics/json/memberjob",
+//     	        type : "post",
+//     	    	data : {
+    	    	    
+//     	    	}
+//     	    });
+    	    
+    	    //json형식으로 데이터가 담김
+    	    console.log(jsonData02);
+
+	        // Create the data table.
+	        var data02 = new google.visualization.DataTable(jsonData02);
+	        
+	        console.log("데이터 테이블 :" +data02);
+	        
+// 	        data.addColumn('string', 'mJob');
+// 	        data.addColumn('number', 'Pie');
+// 	        data.addRows([
+// 	            ['Mushrooms', 3],
+// 	            ['Onions', 1],
+// 	            ['Olives', 1],
+// 	            ['Zucchini', 1],
+// 	            ['Pepperoni', 2]
+// 	        ]);
+	
+	        // Set chart options
+	        var options02 = {'title':'나이대별 가입자 통계',
+	                       'width':400,
+	                       'height':300};
+	
+	        // Instantiate and draw our chart, passing in some options.
+	        var chart02 = new google.visualization.PieChart(document.getElementById('chart_div02'));
+	        chart02.draw(data02, options02);
 	      }
 	    </script>
     </head>
@@ -58,6 +139,7 @@
 		
 	    <!--Div that will hold the pie chart-->
 	    <div id="chart_div"></div>
+	    <div id="chart_div02"></div>
 		
 		<div class="d-grid gap-2 col-2 mx-auto">
             <button class="btn btn-primary" type="button" onclick="location.href='http://localhost:8080/logus/manager/managerlogout'">관리자 로그아웃 하기</button>
