@@ -16,7 +16,7 @@
 			<input type="text" name="dailystoryImage" value="${dsVO.dailystoryImage}">
 			<br>
 			<label>태그 </label>
-			<input type="text" id="tags" name="tagNames" size="100">
+			<input type="text" id="tags" name="tagNames" size="100" onkeydown="splitTag(event)">
 			<br><br>
 			<input type="submit" value="저장">
 			<input type="reset" value="취소" onclick="history.back()">

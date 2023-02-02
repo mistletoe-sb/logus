@@ -21,4 +21,10 @@ public interface IDailystoryDAO {
 			@Param("memberNickname") String memberNickname);						// 옵션에 따라 검색(서재 내 검색)
 	
 	// 검색 옵션 : 전체, 태그, 제목, 내용, 닉네임
+	/*
+	 * select distinct * from dailystory where (member_nickname = 'name') and
+	 * (dailystory_code in((select distinct dailystory_code from tag where tag_name
+	 * like '%테%'),(select distinct dailystory_code from dailystory where
+	 * in(dailystory_title like '%테%', dailystory_content like '%테%', )));
+	 */
 }

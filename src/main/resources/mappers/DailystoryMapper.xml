@@ -46,16 +46,35 @@
 	</select>
 	
 	<select id="findDailystoryList" resultType="com.logus.dailystory.model.DailystoryVO">
-		<![CDATA[SELECT * FROM LOGUS.DAILYSTORY]]>
-		<!-- <where>
-			<choose>
-				<when test='option.equals("tag")'></when>
-				<when test='option.equals("title")'></when>
-				<when test='option.equals("content")'></when>
-				<when test='option.equals("nickname")'></when>
-				<otherwise></otherwise>
-			</choose>
-		</where> -->
+		<![CDATA[
+			SELECT * FROM LOGUS.DAILYSTORY
+			WHERE member_nickname = #{memberNickname}
+		]]>
+		<choose>
+			<when test='option.equals("1")'>
+				<![CDATA[
+					AND
+					dailystory_code IN(SELECT DISTINCT dailystory_code FROM LOGUS.TAG
+					WHERE tag_name LIKE #{search})
+				]]>
+			</when>
+			<when test='option.equals("2")'>
+				<![CDATA[AND dailystory_title LIKE #{search}]]>
+			</when>
+			<when test='option.equals("3")'>
+				<![CDATA[AND dailystory_content LIKE #{search}]]>
+			</when>
+			<when test='option.equals("4")'>
+				<![CDATA[AND member_nickname LIKE #{search}]]>
+			</when>
+			<otherwise>
+				<![CDATA[
+					AND
+					dailystory_code IN(SELECT dailystory_code FROM LOGUS.TAG
+					WHERE tag_name LIKE #{search})
+				]]>
+			</otherwise>
+		</choose>
 	</select>
 	
 </mapper>

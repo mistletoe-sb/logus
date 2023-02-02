@@ -14,28 +14,12 @@
 			<input type="text" name="dailystoryImage">
 			<br>
 			<label>태그 </label>
-			<input type="text" id="tags" name="tagNames" size="100">
+			<input type="text" id="tags" name="tagNames" size="100" onkeydown="splitTag(event)">
 			<br><br>
 			<input type="submit" value="저장">
 			<input type="reset" value="취소" onclick="history.back()">
 			
 			<input type="hidden" name="memberNickname" value="${sessionScope.memberNickname}">
 		</form>
-		<script>
-			$('#tags').keydown(function(event){
-				if(event.keyCode == 32){
-					var tagList = $('#tags').val().split(' ');
-					var tags = '';
-					for(x of tagList){
-						if((x.indexOf('#') != 0) && (x.length > 0)){
-							tags += ('#' + x + ' ');
-						} else if(x.indexOf('#') == 0 && (x.length > 0)){
-							tags += (x + ' ');
-						}
-					}
-				}
-				$('#test').text(event.keyCode);
-			});
-		</script>
 	</body>
 </html>
