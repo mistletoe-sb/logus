@@ -12,11 +12,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.logus.dailystory.model.DailystoryVO;
 import com.logus.dailystory.service.IDailystoryService;
 import com.logus.reply.model.ReplyVO;
 import com.logus.reply.service.IReplyService;
+import com.logus.tag.model.TagVO;
+import com.logus.tag.service.ITagService;
+import com.logus.util.constant.TagCategory;
 import com.logus.util.redirectencoder.RedirEncoder;
 
 @Controller
@@ -26,12 +30,10 @@ public class DailystoryController {
 	IDailystoryService dailystoryService;	// 일일 스토리 서비스 객체
 	@Autowired
 	IReplyService replyService;				// 댓글 서비스 객체
+	@Autowired
+	ITagService tagService;					// 태그 서비스 객체
 	
 	private static Logger logger = LoggerFactory.getLogger(DailystoryController.class);	// logger 객체
-
-	/*
-	 * @GetMapping(value="/") public String appMain(){ return "index"; }
-	 */
 	
 	@GetMapping(value="/lib")
 	// 테스트용 서재 메인으로 이동
@@ -55,24 +57,30 @@ public class DailystoryController {
 	
 	@PostMapping(value="/{memberNickname}/library/story/insert")
 	// 일일 스토리 작성
-	public String insertDailystory(DailystoryVO vo, HttpSession session) {
+	public String insertDailystory(DailystoryVO vo, @RequestParam("tagNames") String tagNames, HttpSession session) {
 		vo.setMemberNickname((String)session.getAttribute("memberNickname"));	// 세션으로부터 받은 닉네임 정보로 저장
-		dailystoryService.insertDailystory(vo);									// DB insert
-		return "redirect:/" + RedirEncoder.encode(vo.getMemberNickname()) + "/library/main";	// 서재 메인페이지로 redirect
+		dailystoryService.insertDailystory(vo, 
+				tagService.makeTagList(tagNames, TagCategory.DAILY_STORY, vo.getDailystoryCode()));	// DB insert
+		return "redirect:/" + RedirEncoder.encode(vo.getMemberNickname()) + "/library/main";		// 서재 메인페이지로 redirect
 	}
 
 	@GetMapping(value="/{memberNickname}/library/story/{dailystoryCode}/update")
 	// 일일 스토리 수정 폼으로 이동
 	public String updateDailystory(@PathVariable int dailystoryCode, Model model) {
 		DailystoryVO vo = dailystoryService.selectDailystoryInfo(dailystoryCode);	// 해당 스토리의 상세 정보 select(폼에 출력하기 위함)
-		model.addAttribute("dsVO", vo);												// select 정보 model에 저장
+		List<TagVO> tagList = tagService.selectTagList(TagCategory.DAILY_STORY, dailystoryCode);	// 해당 스토리의 태그 목록 select
+		String tags = tagService.makeTagString(tagList);											// 태그 나열된 문자열 생성
+		// 받아온 데이터를 model에 저장
+		model.addAttribute("dsVO", vo);
+		model.addAttribute("tagList", tagList);
+		model.addAttribute("tags", tags);
 		return "dailystory/updateform";												// 스토리 수정 view로 이동
 	}
 	
 	@PostMapping(value="/{memberNickname}/library/story/update")
 	// 일일 스토리 수정
 	public String updateDailystory(DailystoryVO vo) {
-		dailystoryService.updateDailystory(vo);			// DB update
+		dailystoryService.updateDailystory(vo, null);			// DB update
 		return "redirect:/" + RedirEncoder.encode(vo.getMemberNickname()) + "/library/story/" + vo.getDailystoryCode();		// 해당 스토리 상세 보기로 redirect
 	}
 
@@ -87,11 +95,13 @@ public class DailystoryController {
 	@GetMapping(value="{memberNickname}/library/story/{dailystoryCode}")
 	// 일일 스토리 상세 내용 조회
 	public String selectDailystoryInfo(@PathVariable int dailystoryCode, Model model) {
-		DailystoryVO vo = dailystoryService.selectDailystoryInfo(dailystoryCode);			// 해당 게시글 상세 내용 조회
-		List<ReplyVO> rpList = replyService.selectReplyList(dailystoryCode);				// 해당 게시글의 댓글 목록 조회
+		DailystoryVO vo = dailystoryService.selectDailystoryInfo(dailystoryCode);					// 해당 스토리 상세 내용 조회
+		List<ReplyVO> rpList = replyService.selectReplyList(dailystoryCode);						// 해당 스토리의 댓글 목록 조회
+		List<TagVO> tagList = tagService.selectTagList(TagCategory.DAILY_STORY, dailystoryCode);	// 해당 스토리의 태그 목록 조회
 		// 모델에 조회한 데이터 저장
 		model.addAttribute("dsVO", vo);
 		model.addAttribute("rpList", rpList);
+		model.addAttribute("tagList", tagList);
 		return "dailystory/storydetail";	// 스토리 상세 보기 view로 이동
 	}
 

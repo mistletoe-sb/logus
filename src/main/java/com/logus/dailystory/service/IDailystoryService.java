@@ -3,11 +3,12 @@ package com.logus.dailystory.service;
 import java.util.List;
 
 import com.logus.dailystory.model.DailystoryVO;
+import com.logus.tag.model.TagVO;
 
 // 일일 스토리 서비스 인터페이스
 public interface IDailystoryService {
-	public abstract void insertDailystory(DailystoryVO vo);										// 일일 스토리 작성
-	public abstract void updateDailystory(DailystoryVO vo);										// 일일 스토리 수정
+	public abstract void insertDailystory(DailystoryVO vo, List<TagVO> tags);										// 일일 스토리 작성
+	public abstract void updateDailystory(DailystoryVO vo, TagVO[] tags);										// 일일 스토리 수정
 	public abstract void deleteDailystory(int dailystoryCode, int tagCount, int replyCount);	// 일일 스토리 삭제
 	public abstract DailystoryVO selectDailystoryInfo(int dailystoryCode);						// 일일 스토리 상세 내용 조회
 	public abstract List<DailystoryVO> selectDailystoryList(String memberNickname);				// 일일 스토리 목록 조회

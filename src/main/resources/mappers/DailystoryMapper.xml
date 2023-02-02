@@ -10,11 +10,14 @@
 	</select>
 	
 	<insert id="insertDailystory" parameterType="com.logus.dailystory.model.DailystoryVO">
+		<selectKey keyProperty="dailystoryCode" resultType="int" order="BEFORE">
+			<![CDATA[SELECT dailystory_code_seq.NEXTVAL FROM DUAL]]>
+		</selectKey>
 		<![CDATA[
 			INSERT INTO LOGUS.DAILYSTORY
 			(dailystory_code, member_nickname, dailystory_uploaddate, dailystory_title, dailystory_content, dailystory_image)
 			VALUES
-			(dailystory_code_seq.NEXTVAL, #{memberNickname}, SYSDATE, #{dailystoryTitle}, #{dailystoryContent}, #{dailystoryImage})
+			(#{dailystoryCode}, #{memberNickname}, SYSDATE, #{dailystoryTitle}, #{dailystoryContent}, #{dailystoryImage})
 		]]>
 	</insert>
 	
@@ -45,33 +48,37 @@
 		]]>
 	</select>
 	
+	<!-- 검색 옵션 : 0 or otherwise=전체, 1=태그, 2=제목, 3=내용, 4=닉네임 -->
 	<select id="findDailystoryList" resultType="com.logus.dailystory.model.DailystoryVO">
 		<![CDATA[
 			SELECT * FROM LOGUS.DAILYSTORY
 			WHERE member_nickname = #{memberNickname}
 		]]>
 		<choose>
-			<when test='option.equals("1")'>
+			<when test="option == 1">
 				<![CDATA[
 					AND
 					dailystory_code IN(SELECT DISTINCT dailystory_code FROM LOGUS.TAG
 					WHERE tag_name LIKE #{search})
 				]]>
 			</when>
-			<when test='option.equals("2")'>
+			<when test="option == 2">
 				<![CDATA[AND dailystory_title LIKE #{search}]]>
 			</when>
-			<when test='option.equals("3")'>
+			<when test="option == 3">
 				<![CDATA[AND dailystory_content LIKE #{search}]]>
 			</when>
-			<when test='option.equals("4")'>
+			<when test="option == 4">
 				<![CDATA[AND member_nickname LIKE #{search}]]>
 			</when>
 			<otherwise>
 				<![CDATA[
 					AND
-					dailystory_code IN(SELECT dailystory_code FROM LOGUS.TAG
+					(dailystory_code IN(SELECT dailystory_code FROM LOGUS.TAG
 					WHERE tag_name LIKE #{search})
+					OR dailystory_title LIKE #{search}
+					OR dailystory_content LIKE #{search}
+					OR member_nickname LIKE #{search})
 				]]>
 			</otherwise>
 		</choose>

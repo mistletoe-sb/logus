@@ -16,6 +16,11 @@
 		<br>
 		<img src="${root}/resources/images/${dsVO.dailystoryImage}" alt="${dsVO.dailystoryImage}">
 		<input type="text" name="dailystoryImage">
+		<div>
+			<c:forEach var="tg" items="${tagList}">
+				<button style="display: inline-block">${tg}</button>
+			</c:forEach>
+		</div>
 		<br><br>
 		<table>
 		<c:choose>

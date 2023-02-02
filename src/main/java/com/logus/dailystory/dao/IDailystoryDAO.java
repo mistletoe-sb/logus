@@ -9,7 +9,7 @@ import com.logus.dailystory.model.DailystoryVO;
 // 일일 스토리 DAO 인터페이스
 public interface IDailystoryDAO {
 	public abstract int countDailystory(String memberNickname);		// 내 스토리 개수 반환
-	public abstract void insertDailystory(DailystoryVO vo);			// 일일 스토리 작성
+	public abstract int insertDailystory(DailystoryVO vo);			// 일일 스토리 작성
 	public abstract int updateDailystory(DailystoryVO vo);			// 일일 스토리 수정
 	public abstract int deleteDailystory(int dailystoryCode);		// 일일 스토리 삭제
 	public abstract DailystoryVO selectDailystoryInfo(int dailystoryCode);			// 일일 스토리 상세 내용 조회
@@ -20,11 +20,5 @@ public interface IDailystoryDAO {
 			@Param("option") String option, @Param("search") String search, 
 			@Param("memberNickname") String memberNickname);						// 옵션에 따라 검색(서재 내 검색)
 	
-	// 검색 옵션 : 전체, 태그, 제목, 내용, 닉네임
-	/*
-	 * select distinct * from dailystory where (member_nickname = 'name') and
-	 * (dailystory_code in((select distinct dailystory_code from tag where tag_name
-	 * like '%테%'),(select distinct dailystory_code from dailystory where
-	 * in(dailystory_title like '%테%', dailystory_content like '%테%', )));
-	 */
+	// 검색 옵션 : 전체:0 or else, 태그:1, 제목:2, 내용:3, 닉네임:4
 }
