@@ -49,6 +49,13 @@
 		]]>
 	</select>
 	
+	<select id="selectDailyroutineActive" resultType="com.logus.dailyroutine.model.DailyroutineVO">
+		<![CDATA[
+		SELECT * FROM LOGUS.DAILYROUTINE
+		WHERE DAILYROUTINE_ACTIVE=1 AND MEMBER_NICKNAME=#{memberNickname} AND DAILYROUTINE_WEEKOPT=#{dailyroutineWeekopt}
+		]]>
+	</select>
+	
 	<select id="selectDailyroutineList" resultType="com.logus.dailyroutine.model.DailyroutineVO">
 		<![CDATA[
 		SELECT * FROM LOGUS.DAILYROUTINE

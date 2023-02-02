@@ -16,13 +16,18 @@ import com.logus.dailycheck.model.DailycheckVO;
 import com.logus.dailycheck.service.IDailycheckService;
 import com.logus.dailyroutine.model.DailyroutineVO;
 import com.logus.dailyroutine.service.IDailyroutineService;
+import com.logus.member.model.MemberVO;
+import com.logus.member.service.IMemberService;
+
 
 @Controller
 public class LibraryController {
 	@Autowired
-	private IDailyroutineService DailyroutineService;	
+	private IDailyroutineService DailyroutineService;	//루틴 정보
 	@Autowired
-	private IDailycheckService DailycheckService;
+	private IDailycheckService DailycheckService;		//루틴 상세 정보
+	@Autowired	
+	private IMemberService	MemberService;	//멤버 정보
 	
 	private String view_ref ="library/";	//뷰 위치
 	
@@ -30,8 +35,34 @@ public class LibraryController {
 	
 	DailycheckVO dailycheckVO = new DailycheckVO();			//루틴 상세 VO 객체 생성
 	
+	MemberVO memberVO = new MemberVO();						//멤버 VO 객체 생성
+	
+	//내 서재용은 세션만 받고, 남 서재용은 Pathvariable로 받아서 매핑 구분하면 되겠음->@GetMapping(value="/library/{memberNickname}")
 	@GetMapping(value="/library")	//서재 내용-화면용
-	public String selectLibrary(HttpSession session) {
+	public String selectLibrary(HttpSession session, Model model) {
+		
+		String memberNickname="회원닉네임테스트01";		//session받기
+		
+		DailyroutineVO routine1 = DailyroutineService.selectDailyroutineActive(memberNickname, 1);	//평일 메인 루틴
+		DailyroutineVO routine2 = DailyroutineService.selectDailyroutineActive(memberNickname, 2);	//주말 메인 루틴
+		
+		model.addAttribute("routine1", routine1);
+		model.addAttribute("routine2", routine2);
+		
+		List<DailycheckVO> checklist1 = DailycheckService.selectDailycheckList(routine1.getDailyroutineCode());	//루틴 상세 정보(평일)
+		List<DailycheckVO> checklist2 = DailycheckService.selectDailycheckList(routine2.getDailyroutineCode());	//루틴 상세 정보(평일)
+		
+		model.addAttribute("checklist1", checklist1);
+		model.addAttribute("checklist2", checklist2);
+		
+		//닉네임으로 찾아야 되는데 매퍼에 조건 닉네임 대신에 id로 잡아둬서 오류남->새로 만들거나 수정해야 되는데, 매퍼 수정중이라길래 충돌 우려해서 일단 제외
+//		memberVO = MemberService.selectMemberInfo(memberNickname);
+//		System.out.println("실행됨");
+//		System.out.println(memberVO.getMemberEmail());
+//		System.out.println(memberVO.getMemberNickname());
+//		
+//		model.addAttribute("memberVO", memberVO);
+		
 		return view_ref+"library";
 	}
 }
