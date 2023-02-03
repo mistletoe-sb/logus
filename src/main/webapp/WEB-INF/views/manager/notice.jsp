@@ -56,26 +56,29 @@
 	          <nav aria-label="Page navigation example">
 				  <ul class="pagination">
 				  	<c:if test="${nowPage!=1}">
-						<li class="page-item"><a class="page-link" href="<c:url value="http://localhost:8080/logus/manager/board?boardcategory=1&nowPage=1" /> ">처음으로</a></li>
-						<li class="page-item"><a class="page-link" href="<c:url value="http://localhost:8080/logus/manager/board?boardcategory=1&nowPage=${nowPage - 1}" /> ">이전으로</a></li>
+						<li class="page-item"><a class="page-link" href="<c:url value="http://localhost:8080/logus/manager/board?boardcategory=1&nowPage=1" /> ">처음</a></li>
+						<li class="page-item"><a class="page-link" href="<c:url value="http://localhost:8080/logus/manager/board?boardcategory=1&nowPage=${nowPage - 1}" /> ">이전</a></li>
 					</c:if>
+					
 					<c:forEach var="i" begin="${nowPage > 5 ? nowPage - 4 : 1}" end="${(nowPage > 5 ? nowPage + 4 : 10) > totalPage ? totalPage : (nowPage > 5 ? nowPage + 4 : 10)}">
 						
-					<c:choose>
-						<c:when test="${nowPage==i}">
-							<li class="page-item active"><a class="page-link" href="<c:url value="http://localhost:8080/logus/manager/board?boardcategory=1&nowPage=${i}" /> ">${i}</a></li>
-						</c:when>
-						<c:otherwise>
-							<li class="page-item"><a class="page-link" href="<c:url value="http://localhost:8080/logus/manager/board?boardcategory=1&nowPage=${i}" /> ">${i}</a></li>
-						</c:otherwise>
-					</c:choose>
+						<c:choose>
+							<c:when test="${nowPage==i}">
+								<li class="page-item active"><a class="page-link" href="<c:url value="http://localhost:8080/logus/manager/board?boardcategory=1&nowPage=${i}" /> ">${i}</a></li>
+							</c:when>
+							<c:otherwise>
+								<li class="page-item"><a class="page-link" href="<c:url value="http://localhost:8080/logus/manager/board?boardcategory=1&nowPage=${i}" /> ">${i}</a></li>
+							</c:otherwise>
+						</c:choose>
+					
+					</c:forEach>
 					
 					<c:if test="${nowPage!=totalPage}">
-						<li class="page-item"><a class="page-link" href="<c:url value="http://localhost:8080/logus/manager/board?boardcategory=1&nowPage=${nowPage + 1}" /> "></a></li>
-						<li class="page-item"><a class="page-link" href="<c:url value="http://localhost:8080/logus/manager/board?boardcategory=1&nowPage=${totalPage}" /> "></a></li>
+						<li class="page-item"><a class="page-link" href="<c:url value="http://localhost:8080/logus/manager/board?boardcategory=1&nowPage=${nowPage + 1}" /> ">다음</a></li>
+						<li class="page-item"><a class="page-link" href="<c:url value="http://localhost:8080/logus/manager/board?boardcategory=1&nowPage=${totalPage}" /> ">마지막</a></li>
 					</c:if>
 	
-					</c:forEach>
+
 <!-- 				    <li class="page-item"><a class="page-link" href="#">Previous</a></li> -->
 <!-- 				    <li class="page-item"><a class="page-link" href="#">1</a></li> -->
 <!-- 				    <li class="page-item"><a class="page-link" href="#">2</a></li> -->

@@ -65,11 +65,12 @@
 	          <nav aria-label="Page navigation example">
 				  <ul class="pagination">
 				  	<c:if test="${nowPage!=1}">
-						<li class="page-item"><a class="page-link" href="<c:url value="http://localhost:8080/logus/manager/qna?nowPage=1" /> ">처음으로</a></li>
-						<li class="page-item"><a class="page-link" href="<c:url value="http://localhost:8080/logus/manager/qna?nowPage=${nowPage - 1}" /> ">이전으로</a></li>
+						<li class="page-item"><a class="page-link" href="<c:url value="http://localhost:8080/logus/manager/qna?nowPage=1" /> ">처음</a></li>
+						<li class="page-item"><a class="page-link" href="<c:url value="http://localhost:8080/logus/manager/qna?nowPage=${nowPage - 1}" /> ">이전</a></li>
 					</c:if>
+					
 					<c:forEach var="i" begin="${nowPage > 5 ? nowPage - 4 : 1}" end="${(nowPage > 5 ? nowPage + 4 : 10) > totalPage ? totalPage : (nowPage > 5 ? nowPage + 4 : 10)}">
-						
+					
 						<c:choose>
 							<c:when test="${nowPage==i}">
 								<li class="page-item active"><a class="page-link" href="<c:url value="http://localhost:8080/logus/manager/qna?nowPage=${i}" /> ">${i}</a></li>
@@ -78,13 +79,15 @@
 								<li class="page-item"><a class="page-link" href="<c:url value="http://localhost:8080/logus/manager/qna?nowPage=${i}" /> ">${i}</a></li>
 							</c:otherwise>
 						</c:choose>
-						
-						<c:if test="${nowPage!=totalPage}">
-							<li class="page-item"><a class="page-link" href="<c:url value="http://localhost:8080/logus/manager/qna?nowPage=${nowPage + 1}" /> "></a></li>
-							<li class="page-item"><a class="page-link" href="<c:url value="http://localhost:8080/logus/manager/qna?nowPage=${totalPage}" /> "></a></li>
-						</c:if>
-	
+					
 					</c:forEach>
+					
+					<c:if test="${nowPage!=totalPage}">
+						<li class="page-item"><a class="page-link" href="<c:url value="http://localhost:8080/logus/manager/qna?nowPage=${nowPage + 1}" /> ">다음</a></li>
+						<li class="page-item"><a class="page-link" href="<c:url value="http://localhost:8080/logus/manager/qna?nowPage=${totalPage}" /> ">마지막</a></li>
+					</c:if>
+	
+					
 
 				  </ul>
 				</nav>
