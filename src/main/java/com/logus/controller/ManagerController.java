@@ -5,9 +5,11 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.logus.manager.model.ManagerVO;
@@ -20,15 +22,52 @@ public class ManagerController {
 	IManagerService managerService;
 	
 	@RequestMapping(value="/manager/managerlist")
-	public String getAllManagerList(Model model) {
-		model.addAttribute("managercount", managerService.countManager());
-		model.addAttribute("managerlist", managerService.selectManagerList());
-		return "manager/managerlist";
+	public String getAllManagerList(Model model, HttpSession session) {
+//		ManagerVO vo = (ManagerVO)session.getAttribute("loginManager");
+//		int managerLevel = vo.getManagerLevel();
+
+		if(session.getAttribute("sessionManagerId") != null) {
+			String managerId = (String)session.getAttribute("sessionManagerId");
+			int managerLevel = managerService.selectManagerInfo(managerId).getManagerLevel();
+			if(managerLevel == 0) {
+				model.addAttribute("managercount", managerService.countManager());
+				model.addAttribute("managerlist", managerService.selectManagerList());
+				return "manager/managerlist";
+			} else {
+				return "manager/accessrestriction_generalmanager";
+			}
+		} else {
+			return "manager/accessrestriction_generalmanager";
+		}
 	}
 	
 	@RequestMapping(value="/manager/managerloginform", method=RequestMethod.GET)
-	public String getManagerLoginForm(Model model) {
-		return "manager/loginmanagerform";
+	public String getManagerLoginForm(Model model, HttpSession session) {
+		if(session.getAttribute("sessionManagerId") == null) {
+			return "manager/loginmanagerform";
+		} else {
+			return "manager/statistics";
+		}
+	}
+	
+	//아이디 중복체크
+	@PostMapping("/managerIdCheck")
+	@ResponseBody
+	public int idCheck(@RequestParam("managerId") String managerId) {
+		
+		int cnt = managerService.countManager(managerId);
+		return cnt;
+		
+	}
+	
+	//닉네임 중복체크
+	@PostMapping("/managerNicknameCheck")
+	@ResponseBody
+	public int nicknameCheck(@RequestParam("managerNickname") String managerNickname) {
+		
+		int cnt = managerService.countManagerNickname(managerNickname);
+		return cnt;
+		
 	}
 	
 	@RequestMapping(value="/manager/managerlogin", method=RequestMethod.POST)
@@ -59,9 +98,11 @@ public class ManagerController {
 				System.out.println("로그인에 성공했습니다." + managerId);
 				
 				// 로그인 인증 처리된 관리자 정보는 다른 사이트에 갔다 돌아와도 다시 로그인하지 안하도 되도록 세션에 등록
-				session.setAttribute("loginManager", vo); // 세션에 관리자 정보 저장
+//				session.setAttribute("loginManager", vo); // 세션에 관리자 정보 저장
 				session.setAttribute("sessionManagerId", vo.getManagerId());	// 세션에 관리자 ID 저장
 				session.setAttribute("sessionManagerNickname", vo.getManagerNickname()); // 세션에 관리자 nickname 저장
+				session.setAttribute("sessionManagerLevel", vo.getManagerLevel());	// 세션에 관리자 level 저장
+
 				
 				return "redirect:/manager/statistics";
 			}
@@ -78,8 +119,18 @@ public class ManagerController {
 	}
 	
 	@RequestMapping(value="/manager/insertmanagerform", method=RequestMethod.GET)
-	public String insertManagerForm(Model model) {
-		return "manager/insertmanagerform";
+	public String insertManagerForm(Model model, HttpSession session) {
+		if(session.getAttribute("sessionManagerId") != null) {
+			String managerId = (String)session.getAttribute("sessionManagerId");
+			int managerLevel = managerService.selectManagerInfo(managerId).getManagerLevel();
+			if(managerLevel == 0) {
+				return "manager/insertmanagerform";
+			} else {
+				return "manager/accessrestriction_generalmanager";
+			}
+		} else {
+			return "manager/accessrestriction_generalmanager";
+		}
 	}
 	
 	@RequestMapping(value="/manager/insertmanager", method=RequestMethod.POST)
@@ -92,5 +143,17 @@ public class ManagerController {
 	public String deleteManager(@RequestParam(value="managerId", required=true) String managerId, Model model, RedirectAttributes redirectAttributes) {
 		managerService.deleteManager(managerId);
 		return "redirect:/manager/managerlist";
+	}
+	
+	@RequestMapping(value="/manager/memberlist")
+	public String getAllMemberList(Model model, HttpSession session) {
+		if(session.getAttribute("sessionManagerId") != null) {		
+			model.addAttribute("inmembercount", managerService.countMember(true));
+			model.addAttribute("outmembercount", managerService.countMember(false));
+			model.addAttribute("memberlist", managerService.selectMemberList());
+			return "manager/userlist";
+		} else {
+			return "manager/accessrestriction_manager";
+		}
 	}
 }

@@ -6,7 +6,8 @@ import com.logus.board.model.BoardVO;
 
 public interface IBoardService {
 	int countBoard(int boardCategory);
-	List<BoardVO> selectBoardList(int boardCategory);
+	int countTotalPage(int boardCategory, int pageLimit);
+	List<BoardVO> selectBoardList(int boardCategory, int pageLimit, int nowPage);
 	BoardVO selectBoardInfo(int boardCode);
 	void insertBoard(BoardVO vo);
 	void updateBoard(BoardVO vo);

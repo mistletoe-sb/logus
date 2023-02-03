@@ -1,6 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../header.jsp" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -150,7 +149,7 @@ function followBtn2() {
   </div>
   <div class="offcanvas-body">
 <!--     <img src="..." class="card-img-top" alt="..."> -->
-    <p>jstl c:if로 세션 감지해서 내서재면 팔로우버튼 아예 없음, 남서재면 팔로우하기&팔로우취소</p>
+    <p>111</p>
     <dl class="row">
 	  <dt class="col-sm-3">닉네임</dt>
 	  	<dd class="col-sm-9">${memberVO.memberNickname}</dd>
@@ -231,6 +230,9 @@ function followBtn2() {
 	</div>  
   </div>
   
+ </div>
+ <div>
+ 	<a href="<c:url value='/${sessionScope.memberNickname}/library/main'/>">일일 스토리 보기</a>
  </div>
 </body>
 </html>

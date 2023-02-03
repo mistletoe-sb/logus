@@ -3,7 +3,7 @@
 	<property name="LOG_PATH" value="C:/project_labs/logs"/> <!-- log 파일 저장 경로 -->
 	<appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
 		<layout class="ch.qos.logback.classic.PatternLayout">
-			<pattern>%n========== Log ==========%n%d{HH:mm:ss.SSS} [%thread] %-4level [%logger.%method:%line]%n&gt;&gt;&gt; %msg%n</pattern>
+			<pattern>%n========== Log ==========%n%d{HH:mm:ss.SSS} [%thread] %highlight(%-4level) [%logger.%method:%line]%n&gt;&gt;&gt; %msg%n</pattern>
 		</layout>
 	</appender>
 	<!-- 
@@ -61,8 +61,8 @@
 
 	<root>
 		<level value="debug" additivity="false"/>
-		<appender-ref ref="CONSOLE" /><!-- 콘솔에 출력 -->
-		<!-- appender-ref ref="LOGFILE" / --><!-- 파일로 저장 -->
+		<appender-ref ref="CONSOLE" /><!-- name이 콘솔인 어펜더 참조 -->
+		<!-- appender-ref ref="LOGFILE" / --><!-- name이 로그파일인 어펜더 참조 -->
 		<!-- DB에 저장? -->
 	</root>
 
