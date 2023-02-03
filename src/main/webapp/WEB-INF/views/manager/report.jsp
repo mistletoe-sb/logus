@@ -52,6 +52,38 @@
             </c:forEach>
             </tbody>
           </table>
+          <div class="d-grid gap-2 col-2 mx-auto">
+	          <nav aria-label="Page navigation example">
+				  <ul class="pagination">
+				  	<c:if test="${nowPage!=1}">
+						<li class="page-item"><a class="page-link" href="<c:url value="http://localhost:8080/logus/manager/board?boardcategory=2&nowPage=1" /> ">처음으로</a></li>
+						<li class="page-item"><a class="page-link" href="<c:url value="http://localhost:8080/logus/manager/board?boardcategory=2&nowPage=${nowPage - 1}" /> ">이전으로</a></li>
+					</c:if>
+					<c:forEach var="i" begin="${nowPage > 5 ? nowPage - 4 : 1}" end="${(nowPage > 5 ? nowPage + 4 : 10) > totalPage ? totalPage : (nowPage > 5 ? nowPage + 4 : 10)}">
+						
+					<c:choose>
+						<c:when test="${nowPage==i}">
+							<li class="page-item active"><a class="page-link" href="<c:url value="http://localhost:8080/logus/manager/board?boardcategory=2&nowPage=${i}" /> ">${i}</a></li>
+						</c:when>
+						<c:otherwise>
+							<li class="page-item"><a class="page-link" href="<c:url value="http://localhost:8080/logus/manager/board?boardcategory=2&nowPage=${i}" /> ">${i}</a></li>
+						</c:otherwise>
+					</c:choose>
+					
+					<c:if test="${nowPage!=totalPage}">
+						<li class="page-item"><a class="page-link" href="<c:url value="http://localhost:8080/logus/manager/board?boardcategory=2&nowPage=${nowPage + 1}" /> "></a></li>
+						<li class="page-item"><a class="page-link" href="<c:url value="http://localhost:8080/logus/manager/board?boardcategory=2&nowPage=${totalPage}" /> "></a></li>
+					</c:if>
+	
+					</c:forEach>
+<!-- 				    <li class="page-item"><a class="page-link" href="#">Previous</a></li> -->
+<!-- 				    <li class="page-item"><a class="page-link" href="#">1</a></li> -->
+<!-- 				    <li class="page-item"><a class="page-link" href="#">2</a></li> -->
+<!-- 				    <li class="page-item"><a class="page-link" href="#">3</a></li> -->
+<!-- 				    <li class="page-item"><a class="page-link" href="#">Next</a></li> -->
+				  </ul>
+				</nav>
+			</div>
 	      <c:if test="${not empty sessionScope.sessionManagerNickname}">
 	          <div class="d-grid gap-2 col-2 mx-auto">
 	            <button type="button" class="btn btn-primary" onclick="location.href='http://localhost:8080/logus/manager/insertboardform?boardcategory=2'">리포트 작성하기</button>
