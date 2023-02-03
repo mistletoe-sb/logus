@@ -31,6 +31,16 @@
 				    <h5 class="card-title">${ds.dailystoryTitle}</h5>		<p>댓글 : ${rpCount[stat.index]}</p>
 				    <p class="card-text">${ds.dailystoryContent}<br>
 				    <fmt:formatDate value="${dsVO.dailystoryUploaddate}" pattern="yyyy.MM.dd HH:mm"/></p>
+				    <%-- <div>
+						<c:forEach var="tg" items="${tagList}" varStatus="i">
+							<c:choose>
+								<c:when test="${i < 5}">
+									<button style="display: inline-block">${tg.tagName}</button>
+								</c:when>
+								<c:when test="${i == 5}">...</c:when>
+							</c:choose>
+						</c:forEach>
+					</div> --%>
 				  </div>
 				</div>
 			</c:forEach>

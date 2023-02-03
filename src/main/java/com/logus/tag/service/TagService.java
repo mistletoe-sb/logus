@@ -1,7 +1,9 @@
 package com.logus.tag.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -108,5 +110,12 @@ public class TagService implements ITagService {
 			tags += (temp + " ");		// 문자열 붙이기(공백으로 구분)
 		}
 		return tags;	// 생성한 문자열 반환
+	}
+	
+	@Override
+	// 화면에 표시될 게시물 목록의 각 태그 목록을 Map 형태로 반환
+	public Map<Integer,List<TagVO>> makeTagListMap(int tagCategory, List<Integer> foreignKeyCode, List<TagVO> tagList) {
+		Map<Integer,List<TagVO>> map = new HashMap<Integer,List<TagVO>>();
+		return null;
 	}
 }

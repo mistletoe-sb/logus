@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.logus.dailystory.model.DailystoryVO;
 import com.logus.dailystory.service.IDailystoryService;
@@ -85,12 +86,13 @@ public class DailystoryController {
 		return "redirect:/" + RedirEncoder.encode(vo.getMemberNickname()) + "/library/story/" + vo.getDailystoryCode();		// 해당 스토리 상세 보기로 redirect
 	}
 
-	@GetMapping(value="/{memberNickname}/library/story/{dailystoryCode}/delete")
+	@PostMapping(value="/{memberNickname}/library/story/{dailystoryCode}/delete")
+	@ResponseBody
 	// 일일 스토리 삭제
-	public String deleteDailystory(@PathVariable String memberNickname, @PathVariable int dailystoryCode, 
+	public String deletePostDailystory(@PathVariable String memberNickname, @PathVariable int dailystoryCode, 
 									int tagCount, int replyCount) {
-		dailystoryService.deleteDailystory(dailystoryCode, tagCount, replyCount);		// 해당 스토리 삭제
-		return "redirect:/" + RedirEncoder.encode(memberNickname) + "/library/main";	// 삭제 후 서재 메인페이지로 redirect
+		dailystoryService.deleteDailystory(dailystoryCode, tagCount, replyCount);	// 해당 스토리 삭제
+		return "/" + memberNickname + "/library/main";			// 삭제 후 AJax로 닉네임 리턴
 	}
 
 	@GetMapping(value="{memberNickname}/library/story/{dailystoryCode}")

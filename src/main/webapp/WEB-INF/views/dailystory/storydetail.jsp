@@ -7,7 +7,7 @@
 		<br>
 		<c:if test="${dsVO.memberNickname == sessionScope.memberNickname}">
 			<button onclick='location.href="<c:url value='/${sessionScope.memberNickname}/library/story/${dsVO.dailystoryCode}/update'/>"'>수정</button>
-			<button onclick='location.href="<c:url value='/${sessionScope.memberNickname}/library/story/${dsVO.dailystoryCode}/delete'/>"'>삭제</button>
+			<button id="ds_del_btn">삭제</button>
 		</c:if>
 		<br>
 		<p>${dsVO.dailystoryTitle}</p>
@@ -64,12 +64,14 @@
 			<form action="<c:url value='/${dsVO.memberNickname}/reply/insert'/>" method="post">
 			    	<textarea name="replyContent" cols="200" rows="5"></textarea>
 			    	<input type="hidden" name="memberNickname" value="${sessionScope.memberNickname}">
-			    	<input type="hidden" name="dailystoryCode" value="${dsVO.dailystoryCode}">
+			    	<input type="hidden" id="dsCode_forD" name="dailystoryCode" value="${dsVO.dailystoryCode}">
 			    	<input type="submit" value="작성">
 			    	<input type="reset" id="reply_ins_reset_btn" value="취소" onclick="insertReply(this)">
 			</form>
 		</div>
 		<br>
 		<a href="<c:url value='/${dsVO.memberNickname}/library/main'/>">목록보기</a>
+		<input type="hidden" id="tagCount" value="${fn:length(tagList)}">
+		<input type="hidden" id="replyCount" value="${fn:length(rpList)}">
 	</body>
 </html>

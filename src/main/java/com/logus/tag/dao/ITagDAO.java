@@ -17,4 +17,6 @@ public interface ITagDAO {
 	public abstract TagVO selectTagInfo(int tagCode);									// 해당 태그 정보 조회
 	public abstract List<TagVO> selectTagList(@Param("tagCategory") int tagCategory,
 										@Param("foreignKeyCode") int foreignKeyCode);	// 해당 게시물의 태그 목록 조회
+	public abstract List<TagVO> selectAllTagList(@Param("tagCategory") int tagCategory,
+								@Param("foreignKeyCode") List<Integer> foreignKeyCode);	// 해당 게시물 목록의 모든 태그 목록 조회
 }
