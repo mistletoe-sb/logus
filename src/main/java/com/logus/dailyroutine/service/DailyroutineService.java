@@ -54,4 +54,10 @@ public class DailyroutineService implements IDailyroutineService {
 	public List<DailyroutineVO> findDailyroutineList(String option, String search) {
 		return dailyroutinedao.findDailyroutineList(option, search);
 	}
+
+	@Override
+	public void updateRoutineShared(int dailyroutineCode) {
+		
+		dailyroutinedao.updateRoutineShared(dailyroutineCode);
+	}
 }

@@ -67,7 +67,15 @@
 		<![CDATA[
 		SELECT * FROM LOGUS.DAILYROUTINE
 		]]>
-		WHERE 
+		<!--like.... 일단 if. 옵션 숫자 몇번이 내용, 작성자 등등인지~-->
+	</select>
+	
+	<select id="updateRoutineShared" parameterType="int">
+		<![CDATA[
+		UPDATE LOGUS.DAILYROUTINE 
+		SET DAILYROUTINE_SHARED=(DAILYROUTINE_SHARED + 1)
+		WHERE dailyroutine_code=#{dailyroutineCode}
+		]]>
 		<!--like.... 일단 if. 옵션 숫자 몇번이 내용, 작성자 등등인지~-->
 	</select>
 </mapper>

@@ -14,6 +14,9 @@ myModal.addEventListener('shown.bs.modal', () => {
   myInput.focus()
 })
 </script>
+<script type="text/javascript">
+
+</script>
 </head>
 <body>
 
@@ -32,7 +35,11 @@ myModal.addEventListener('shown.bs.modal', () => {
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <form id="routineshare1" name="routineshare1form" action="<c:url value='/routineshare'/>" method="post">
+        <input type="hidden" value="${routine1.dailyroutineCode}" name="dailyroutineCode">
+        <input type="hidden" value="${routine1.memberNickname}" name="memberNickname">
+        <button type="submit" class="btn btn-primary">공유 받기</button>
+      	</form>
       </div>
     </div>
   </div>
@@ -51,7 +58,11 @@ myModal.addEventListener('shown.bs.modal', () => {
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <form id="routineshare2" name="routineshare2form" action="<c:url value='/routineshare2'/>" method="post">
+        <input type="hidden" value="${routine2.memberNickname}" name="memberNickname2">
+        <input type="hidden" value="${routine2.dailyroutineCode}" name="dailyroutineCode2">
+        <button type="submit" class="btn btn-primary" >공유 받기</button>
+      	</form>
       </div>
     </div>
   </div>

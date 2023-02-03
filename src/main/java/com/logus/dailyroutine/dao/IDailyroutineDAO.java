@@ -20,4 +20,5 @@ public interface IDailyroutineDAO {
 	public List<DailyroutineVO> findDailyroutineList(@Param("option") String option, @Param("search") String search);
 	//전체, 태그, 제목, 내용, 사용자(닉네임) 검색
 	
+	public void updateRoutineShared(int dailyroutineCode);	//다른 사용자가 공유받기 버튼 클릭 시 공유 수 update
 }

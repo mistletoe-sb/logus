@@ -51,15 +51,29 @@ public class AchieveController {
 		
 		System.out.println(today);
 		
-		DailyroutineVO routine;
+		DailyroutineVO routine = null;
 		
 		if(today.equals("월") || today.equals("화") ||today.equals("수") || today.equals("목") || today.equals("금")) { 
-			routine = DailyroutineService.selectDailyroutineActive(memberNickname, 1);	//평일 메인 루틴
+				try {
+					routine = DailyroutineService.selectDailyroutineActive(memberNickname, 1);	//평일 메인 루틴
+			} catch (Exception e) {
+					e.printStackTrace();
+			}
 		} else {
-			routine = DailyroutineService.selectDailyroutineActive(memberNickname, 2);	//주말 메인 루틴
+				try {
+					routine = DailyroutineService.selectDailyroutineActive(memberNickname, 2);	//주말 메인 루틴
+			} catch (Exception e) {
+					e.printStackTrace();
+			}
 		}
 		
-		List<DailycheckVO> checklist = DailycheckService.selectDailycheckList(routine.getDailyroutineCode());	//루틴 상세 정보(평일)
+		List<DailycheckVO> checklist = null;
+		
+		try {
+			checklist = DailycheckService.selectDailycheckList(routine.getDailyroutineCode());	//루틴 상세 정보
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		model.addAttribute("routine", routine);
 		model.addAttribute("checklist", checklist);

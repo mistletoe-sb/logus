@@ -20,6 +20,9 @@ import com.logus.dailyroutine.model.DailyroutineVO;
 import com.logus.dailyroutine.service.IDailyroutineService;
 import com.logus.member.model.MemberVO;
 import com.logus.member.service.IMemberService;
+import com.logus.routineshare.model.RoutineshareVO;
+import com.logus.routineshare.service.IRoutineshareService;
+import com.logus.util.redirectencoder.RedirEncoder;
 
 
 @Controller
@@ -32,6 +35,8 @@ public class LibraryController {
 	private IMemberService	MemberService;	//멤버 정보
 	@Autowired
 	private IAchieveService achieveService;	//달성율 정보
+	@Autowired
+	private IRoutineshareService routineshareService;
 	
 	private String view_ref ="library/";	//뷰 위치
 	
@@ -43,20 +48,43 @@ public class LibraryController {
 	
 	MemberVO memberVO = new MemberVO();						//멤버 VO 객체 생성
 	
+	RoutineshareVO routineshareVO = new RoutineshareVO();	//공유 VO 객체 생성
+		
 	//내 서재용은 세션만 받고, 남 서재용은 Pathvariable로 받아서 매핑 구분하면 되겠음->@GetMapping(value="/library/{memberNickname}")
 	@GetMapping(value="/library")	//내 서재 내용-화면용
 	public String selectLibrary(HttpSession session, Model model) {
 		
 		String memberNickname=(String) session.getAttribute("memberNickname");		//session받기
 		
-		DailyroutineVO routine1 = DailyroutineService.selectDailyroutineActive(memberNickname, 1);	//평일 메인 루틴
-		DailyroutineVO routine2 = DailyroutineService.selectDailyroutineActive(memberNickname, 2);	//주말 메인 루틴
+		DailyroutineVO routine1 = null; 
+		DailyroutineVO routine2 = null; 
+		
+		try {
+			routine1 = DailyroutineService.selectDailyroutineActive(memberNickname, 1);	//평일 메인 루틴
+		} catch (Exception e) {
+			e.printStackTrace();
+		}	
+		
+		try {
+			routine2 = DailyroutineService.selectDailyroutineActive(memberNickname, 2);	//주말 메인 루틴
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		model.addAttribute("routine1", routine1);
 		model.addAttribute("routine2", routine2);
 		
-		List<DailycheckVO> checklist1 = DailycheckService.selectDailycheckList(routine1.getDailyroutineCode());	//루틴 상세 정보(평일)
-		List<DailycheckVO> checklist2 = DailycheckService.selectDailycheckList(routine2.getDailyroutineCode());	//루틴 상세 정보(평일)
+		List<DailycheckVO> checklist1 = null;
+		List<DailycheckVO> checklist2 = null;
+		try {	
+			checklist1 = DailycheckService.selectDailycheckList(routine1.getDailyroutineCode());	//루틴 상세 정보(평일)
+		} catch (Exception e) {
+			e.printStackTrace();
+		}	
+		try {	
+			checklist2 = DailycheckService.selectDailycheckList(routine2.getDailyroutineCode());	//루틴 상세 정보(주말)
+		}	catch (Exception e) {e.printStackTrace();
+		}
 		
 		model.addAttribute("checklist1", checklist1);
 		model.addAttribute("checklist2", checklist2);
@@ -90,14 +118,36 @@ public class LibraryController {
 			
 			String sessionUser= (String) session.getAttribute("memberNickname");	//jsp <c:if>를 위한 세션 전달용
 			
-			DailyroutineVO routine1 = DailyroutineService.selectDailyroutineActive(memberNickname, 1);	//평일 메인 루틴
-			DailyroutineVO routine2 = DailyroutineService.selectDailyroutineActive(memberNickname, 2);	//주말 메인 루틴
+			DailyroutineVO routine1 = null; 
+			DailyroutineVO routine2 = null; 
 			
+			try {
+				routine1 = DailyroutineService.selectDailyroutineActive(memberNickname, 1);	//평일 메인 루틴
+			} catch (Exception e) {
+				e.printStackTrace();
+			}	
+			
+			try {
+				routine2 = DailyroutineService.selectDailyroutineActive(memberNickname, 2);	//주말 메인 루틴
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+				
 			model.addAttribute("routine1", routine1);
 			model.addAttribute("routine2", routine2);
 			
-			List<DailycheckVO> checklist1 = DailycheckService.selectDailycheckList(routine1.getDailyroutineCode());	//루틴 상세 정보(평일)
-			List<DailycheckVO> checklist2 = DailycheckService.selectDailycheckList(routine2.getDailyroutineCode());	//루틴 상세 정보(평일)
+			List<DailycheckVO> checklist1 = null;
+			List<DailycheckVO> checklist2 = null;
+			try {	
+				checklist1 = DailycheckService.selectDailycheckList(routine1.getDailyroutineCode());	//루틴 상세 정보
+			} catch (Exception e) {
+				e.printStackTrace();
+			}	
+			try {	
+				checklist2 = DailycheckService.selectDailycheckList(routine2.getDailyroutineCode());	//루틴 상세 정보
+			}	catch (Exception e) {e.printStackTrace();
+			}
+			
 			
 			model.addAttribute("checklist1", checklist1);
 			model.addAttribute("checklist2", checklist2);
@@ -106,14 +156,14 @@ public class LibraryController {
 			try {	
 				todayAchieve = achieveService.selectAchieveToday(memberNickname);
 			} catch (Exception e) {
-				e.printStackTrace();
+			
 			}	
 			
 			int weekAchieve	=0; 
 			try {	
 				weekAchieve = achieveService.selectAchieveWeek(memberNickname);
 			} catch (Exception e) {
-				e.printStackTrace();
+		
 			}	
 			
 			model.addAttribute("todayAchieve", todayAchieve);
@@ -126,12 +176,77 @@ public class LibraryController {
 			return view_ref+"library";
 		}
 	
-		@PostMapping(value="/search")	//새 루틴 추가-화면용
-		public String selectSearch() {
+		@PostMapping(value="/routineshare")	//공유받기1 버튼-전송용
+		public String routineshare1(HttpSession session, @RequestParam("dailyroutineCode") int dailyroutineCode, 
+				@RequestParam("memberNickname") String memberNickname) {
 			
+			String sessionUserId= (String) session.getAttribute("memberId");
+			String sessionUserNickname = (String) session.getAttribute("memberNickname");
 			
+			int result = routineshareService.selectRoutineshare(sessionUserId, dailyroutineCode);
+			System.out.println("result"+result);
+			System.out.println("처음이야?");
+			if(result==0) {	// 0 : 처음 공유받는 경우
+				routineshareVO.setDailyroutineCode(dailyroutineCode);	//해당 루틴의 코드
+				routineshareVO.setMemberId(sessionUserId);				//해당 루틴을 공유받은 유저의 세션 아이디
+				routineshareService.insertRoutineshare(routineshareVO);	//공유 정보 저장
+				DailyroutineService.updateRoutineShared(dailyroutineCode);	//공유된 루틴의 공유 수 증가
+				System.out.println("진짜 처음이시네요?");
+			}
 			
+			dailyroutineVO = DailyroutineService.selectDailyroutineInfo(dailyroutineCode);
+			dailyroutineVO.setMemberNickname(sessionUserNickname);	//닉네임을 현재 세션 유저로 변경
+			dailyroutineVO.setDailyroutineActive(0);
 			
+			DailyroutineService.insertDailyroutine(dailyroutineVO);
+			
+			System.out.println(dailyroutineVO.getDailyroutineCode());
+			
+			List<DailycheckVO> checklist = DailycheckService.selectDailycheckList(dailyroutineCode);
+			
+			dailycheckVO.setDailyroutineCode(dailyroutineVO.getDailyroutineCode());
+			for(int i=0; i<checklist.size();i++) {
+				String beginTime=checklist.get(i).getDailycheckBegintime();
+				String endTime=checklist.get(i).getDailycheckEndtime();
+				String content=checklist.get(i).getDailycheckContent();
+				
+				
+				System.out.println("시간은? "+beginTime);
+				dailycheckVO.setDailyroutineCode(dailyroutineVO.getDailyroutineCode());
+				dailycheckVO.setDailycheckBegintime(beginTime);
+				dailycheckVO.setDailycheckEndtime(endTime);
+				dailycheckVO.setDailycheckContent(content);
+				DailycheckService.insertDailycheck(dailycheckVO);
+			}
+			
+			//DailycheckService.insertDailycheck(dailycheckVO);
+			
+			System.out.println("슬슬 리턴합니다?");
+			
+			return "redirect:/"+"library/"+RedirEncoder.encode(memberNickname);
+		}
+		
+		@PostMapping(value="/routineshare2")	//공유받기2 버튼-전송용
+		public String routineshare2(HttpSession session, @RequestParam("dailyroutineCode2") int dailyroutineCode2, 
+				@RequestParam("memberNickname2") String memberNickname) {
+			System.out.println(memberNickname);
+			System.out.println("공유하기 버튼2 누르셨음 님아");
+			System.out.println(dailyroutineCode2);
+			
+			return "redirect:/"+"library/"+RedirEncoder.encode(memberNickname);
+		}
+		
+		@PostMapping(value="/sharecheck")	//공유 수 증가시키기 전, 기존에 공유받았던 사람인지 검증 ajax 
+		public String routineshareCheck() {
+			
+			return view_ref+"search";
+		}
+		
+		@PostMapping(value="/search")	//검색-전송용
+		public String selectSearch(@RequestParam("category") String category, @RequestParam("search") String search) {
+			
+			System.out.println(category);
+			System.out.println(search);
 			
 			
 			
@@ -142,4 +257,6 @@ public class LibraryController {
 		public String selectSearch1() {
 			return view_ref+"search";
 		}
+		
+		
 }

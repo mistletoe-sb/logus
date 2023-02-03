@@ -13,4 +13,5 @@ public interface IDailyroutineService {
 	public DailyroutineVO selectDailyroutineActive(String memberNickname, int dailyroutineWeekopt);
 	public List<DailyroutineVO> selectDailyroutineList(String memberNickname, int dailyroutineWeekopt);
 	public List<DailyroutineVO> findDailyroutineList(String option, String search);
+	public void updateRoutineShared(int dailyroutineCode);
 }

@@ -42,14 +42,14 @@
 				</div>
 				<div class="container-fluid">
 					<form id="search" name="searchform" class="d-flex" role="search" action="<c:url value='/search'/>" method="post">
-						<select class="form-select" aria-label="Default select example">
+						<select class="form-select" aria-label="Default select example" name="category">
 						  <option value="0" selected>전체</option>
 						  <option value="1">태그</option>
 						  <option value="2">제목</option>
 						  <option value="3">내용</option>
 						  <option value="4">닉네임</option>
 						</select>
-				      	<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+				      	<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search">
 				      	<button class="btn btn-outline-success" type="submit" value="Submit" id="submit">검색</button>
 					</form>
 				</div>
