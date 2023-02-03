@@ -184,14 +184,12 @@ public class LibraryController {
 			String sessionUserNickname = (String) session.getAttribute("memberNickname");
 			
 			int result = routineshareService.selectRoutineshare(sessionUserId, dailyroutineCode);
-			System.out.println("result"+result);
-			System.out.println("처음이야?");
+	
 			if(result==0) {	// 0 : 처음 공유받는 경우
 				routineshareVO.setDailyroutineCode(dailyroutineCode);	//해당 루틴의 코드
 				routineshareVO.setMemberId(sessionUserId);				//해당 루틴을 공유받은 유저의 세션 아이디
 				routineshareService.insertRoutineshare(routineshareVO);	//공유 정보 저장
 				DailyroutineService.updateRoutineShared(dailyroutineCode);	//공유된 루틴의 공유 수 증가
-				System.out.println("진짜 처음이시네요?");
 			}
 			
 			dailyroutineVO = DailyroutineService.selectDailyroutineInfo(dailyroutineCode);
@@ -210,8 +208,6 @@ public class LibraryController {
 				String endTime=checklist.get(i).getDailycheckEndtime();
 				String content=checklist.get(i).getDailycheckContent();
 				
-				
-				System.out.println("시간은? "+beginTime);
 				dailycheckVO.setDailyroutineCode(dailyroutineVO.getDailyroutineCode());
 				dailycheckVO.setDailycheckBegintime(beginTime);
 				dailycheckVO.setDailycheckEndtime(endTime);
@@ -219,20 +215,45 @@ public class LibraryController {
 				DailycheckService.insertDailycheck(dailycheckVO);
 			}
 			
-			//DailycheckService.insertDailycheck(dailycheckVO);
-			
-			System.out.println("슬슬 리턴합니다?");
-			
 			return "redirect:/"+"library/"+RedirEncoder.encode(memberNickname);
 		}
 		
 		@PostMapping(value="/routineshare2")	//공유받기2 버튼-전송용
-		public String routineshare2(HttpSession session, @RequestParam("dailyroutineCode2") int dailyroutineCode2, 
+		public String routineshare2(HttpSession session, @RequestParam("dailyroutineCode2") int dailyroutineCode, 
 				@RequestParam("memberNickname2") String memberNickname) {
-			System.out.println(memberNickname);
-			System.out.println("공유하기 버튼2 누르셨음 님아");
-			System.out.println(dailyroutineCode2);
 			
+			String sessionUserId= (String) session.getAttribute("memberId");
+			String sessionUserNickname = (String) session.getAttribute("memberNickname");
+			
+			int result = routineshareService.selectRoutineshare(sessionUserId, dailyroutineCode);
+	
+			if(result==0) {	// 0 : 처음 공유받는 경우
+				routineshareVO.setDailyroutineCode(dailyroutineCode);	//해당 루틴의 코드
+				routineshareVO.setMemberId(sessionUserId);				//해당 루틴을 공유받은 유저의 세션 아이디
+				routineshareService.insertRoutineshare(routineshareVO);	//공유 정보 저장
+				DailyroutineService.updateRoutineShared(dailyroutineCode);	//공유된 루틴의 공유 수 증가
+			}
+			
+			dailyroutineVO = DailyroutineService.selectDailyroutineInfo(dailyroutineCode);
+			dailyroutineVO.setMemberNickname(sessionUserNickname);	//닉네임을 현재 세션 유저로 변경
+			dailyroutineVO.setDailyroutineActive(0);
+			
+			DailyroutineService.insertDailyroutine(dailyroutineVO);
+			
+			List<DailycheckVO> checklist = DailycheckService.selectDailycheckList(dailyroutineCode);
+			
+			dailycheckVO.setDailyroutineCode(dailyroutineVO.getDailyroutineCode());
+			for(int i=0; i<checklist.size();i++) {
+				String beginTime=checklist.get(i).getDailycheckBegintime();
+				String endTime=checklist.get(i).getDailycheckEndtime();
+				String content=checklist.get(i).getDailycheckContent();
+				
+				dailycheckVO.setDailyroutineCode(dailyroutineVO.getDailyroutineCode());
+				dailycheckVO.setDailycheckBegintime(beginTime);
+				dailycheckVO.setDailycheckEndtime(endTime);
+				dailycheckVO.setDailycheckContent(content);
+				DailycheckService.insertDailycheck(dailycheckVO);
+			}
 			return "redirect:/"+"library/"+RedirEncoder.encode(memberNickname);
 		}
 		
