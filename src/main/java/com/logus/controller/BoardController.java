@@ -70,20 +70,29 @@ public class BoardController {
 			System.out.println(boardvo);
 			
 			if(boardFile.getSize() != 0) {
+				long t = System.currentTimeMillis();
+				int r = (int)(Math.random()*1000000);
+
+				String fileId = "" + t + r;
+				
+				String[] originalFilename = boardFile.getOriginalFilename().split("\\.");
+				String fileType = originalFilename[originalFilename.length - 1];
+				fileId = fileId + "\\." + fileType;
+				
 //				boardFile.transferTo(new File(CURR_IMAGE_REPO_PATH + "\\" + boardFile.getOriginalFilename()));
 //				boardFile.transferTo(new File(REAL_PATH + "\\" + boardFile.getOriginalFilename()));
 
 				String path = session.getServletContext().getRealPath("/");				
 				System.out.println("■path:::"+path);
-				
-				boardFile.transferTo(new File(path + "resources\\images\\manager\\" + boardFile.getOriginalFilename()));
+				boardFile.transferTo(new File(path + "resources\\images\\manager\\" + fileId));
 
-				boardvo.setBoardImage(boardFile.getOriginalFilename());
+				boardvo.setBoardImage(fileId);
 			}
 			boardService.insertBoard(boardvo);
 			redirectAttributes.addFlashAttribute("message", boardvo.getBoardCode() + "번 글이 등록되었습니다.");
 		} catch(Exception e) {
 			redirectAttributes.addFlashAttribute("message", e.getMessage());
+			System.out.println("에러메시지 나옵니다~" + e.getMessage());
 		}
 		return "redirect:/manager/board?boardcategory=" + boardCategory;
 	}
@@ -111,7 +120,7 @@ public class BoardController {
 				
 				String path = session.getServletContext().getRealPath("/");
 				System.out.println("■path:::"+path);
-
+				
 				boardFile.transferTo(new File(path + "resources\\images\\manager\\" + boardFile.getOriginalFilename()));
 
 				boardvo.setBoardImage(boardFile.getOriginalFilename());

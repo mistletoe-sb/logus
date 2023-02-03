@@ -57,7 +57,7 @@ public class BoardService implements IBoardService {
 				if(indexBoardCount < (beforeBoardCount + pageLimit) && indexBoardCount <= totalRecord) {	// index값이 총 게시글수보다 작고 출력될 게시글 번호+9보다 작을 때까지 indexBoardCount에 +1하여 while문 진행
 					resultBoardList.add(totalBoardList.get(indexBoardCount-1));
 					indexBoardCount++;
-					System.out.println("resultBoardList의 크기2:"+resultBoardList.size());
+//					System.out.println("resultBoardList의 크기2:"+resultBoardList.size());
 				} else {
 					break;	// index값이 게시글 번호+9에 도달하면 while문 탈출.
 				}
