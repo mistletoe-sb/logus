@@ -33,7 +33,7 @@
 	
 	<select id="selectManagerList" resultType="com.logus.manager.model.ManagerVO">
 		<![CDATA[
-			SELECT * FROM logus.manager WHERE manager_level = 1
+			SELECT * FROM logus.manager WHERE manager_level = 1 ORDER BY manager_code DESC
 		]]>
 	</select>
 	
