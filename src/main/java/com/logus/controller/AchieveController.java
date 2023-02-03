@@ -93,6 +93,8 @@ public class AchieveController {
 		}
 		rate = num/achieverate.length;	
 		
+		System.out.println(rate+"% 입니다");
+		
 		achieveVO.setMemberNickname(memberNickname);
 		achieveVO.setAchieveRate(rate);
 		achieveVO.setAchieveDate(today);
@@ -107,6 +109,7 @@ public class AchieveController {
 	public int checkAchieve(HttpSession session, @RequestParam("today") String today) {
 		String memberNickname=(String) session.getAttribute("memberNickname");	
 		int result = achieveService.selectAchieve(memberNickname, today);	//1 반환 시 이미 출석 완료, 0 반환시 출석 진행
+		System.out.println(result+"입니다");
 		return result;
 	};
 	

@@ -20,27 +20,28 @@
 		 
 		  	function on_submit_check(){
 		  		today =$('#today').val();
-		  		console.log(today);
-		  		var result2 = false;
+		  		var result2 =false;
 		  		var i=parseInt($("#index").val());
 		  		var j=0;
  					
 		  		 $.ajax({
 		 			url : './achieve/check', //Controller에서 요청 받을 주소
 		 			type : 'post', //POST 방식으로 전달
+		 			async:false,
 		 			data : {today : today},
 		 			success: function(result){ //데이터 주고받기 성공했을 경우 실행할 결과
+		 				console.log(result);
 		 				if(result==0){
 		 			    		alert("출석체크가 완료되었습니다.");
-								result2 = true
+		 			    		result2 =true;
 		 			    	} else {
-		 			    		alert("오늘은 이미 출석체크를 하셨습니다.");
-		 			    		result2 = false
-		 			    		 	}
-		 			    		}
-		 					})
-		 					console.log(result2);
-		 					return result2
+			 			    		alert("오늘은 이미 출석체크를 하셨습니다.");
+			 			    		result2=false;
+		 			    		  }
+		 						}
+		 					});
+		  		 		console.log(result2);
+		 			return result2;
 			 }
 		</script>
 		
@@ -49,6 +50,8 @@
 	<h1>${routine.dailyroutineTitle}</h1>
 <%--&nbsp; (table-sm 넣으면 테이블 패딩 줄어듬->작아짐) --%>
 			<form id="achieve" name="achieveform" action="<c:url value='/achieve/save'/>" method="post" onsubmit="return on_submit_check();">
+			<c:choose>
+			<c:when test="${not empty routine}">
 			<input type="hidden" name="today" id="today">
 			<table class="table table-bordered table-group-divider">
 		  <thead>
@@ -83,9 +86,14 @@
 		      </c:forEach>
 		 </tbody>
 		</table>
-		<div class="d-grid gap-2 col-6 mx-auto">
-		<input class="btn btn-primary" type="submit" value="Submit" id="submit">
-		</div>
+				<div class="d-grid gap-2 col-6 mx-auto">
+					<input class="btn btn-primary" type="submit" value="출석 완료하기" id="submit">
+				</div>
+			</c:when>
+			<c:otherwise>
+				<h2>현재 등록된 루틴이 없습니다</h2>
+		 	</c:otherwise>
+		</c:choose>
 		 </form>
 	</body>
 </html>

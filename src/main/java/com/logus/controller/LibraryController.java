@@ -108,6 +108,7 @@ public class LibraryController {
 		
 		memberVO = MemberService.selectMemberInfo2(memberNickname);
 		model.addAttribute("memberVO", memberVO);
+		model.addAttribute("sessionUser", memberNickname);
 		
 		return view_ref+"library";
 	}
@@ -170,6 +171,10 @@ public class LibraryController {
 			model.addAttribute("weekAchieve", weekAchieve);
 			
 			memberVO = MemberService.selectMemberInfo2(memberNickname);
+			
+			System.out.println(memberVO.getMemberNickname());
+			System.out.println(sessionUser);
+			
 			model.addAttribute("memberVO", memberVO);
 			model.addAttribute("sessionUser", sessionUser);
 			

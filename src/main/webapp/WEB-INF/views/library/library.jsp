@@ -70,7 +70,9 @@ myModal.addEventListener('shown.bs.modal', () => {
 
 <!--오프캔버스(서재 정보 사이드 바)-->
 <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">서재 정보 보기</button>
-
+	<c:if test="${memberVO.memberNickname eq sessionUser}">
+		<button type="button" class="btn btn-outline-secondary" onclick="location.href='<c:url value='/routinelist'/>'">루틴 리스트 더보기</button>
+	</c:if>
 <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
   <div class="offcanvas-header">
     <h3 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">서재 정보</h3>
@@ -100,37 +102,61 @@ myModal.addEventListener('shown.bs.modal', () => {
   </div>
 </div>
 
-<div><ul class="list-inline">
-  <li class="list-inline-item">메인</li>
-  <li class="list-inline-item">평일 메인</li>
-  <li class="list-inline-item">주말 메인</li>
-</ul></div>
   <div>
    <div class="d-inline-block">
 	 <div class="row row-cols-1 row-cols-md-2 g-4">
-	  <div class="col">
+	  
+	  <c:choose>
+	  <c:when test="${empty routine1}"><div class="col">
 	    <div class="card">
 	      <div class="card-body">
-	        <h5 class="card-title">${routine1.dailyroutineTitle}</h5>
-	        <p class="card-text">This is a longer card with supporting text below </p>
-	      	<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal1">
-	  			평일 확인
-			</button>
+	      <h3 class="card-title">평일 루틴</h3>
+	        <h5 class="card-text">현재 등록된 루틴이 없습니다</h5>
 	      </div>
 	    </div>
-	  </div>
-	  
+	   </div></c:when>
+	  <c:otherwise>
+		  <div class="col">
+		    <div class="card">
+		      <div class="card-body">
+		      <h3 class="card-title">평일 루틴</h3>
+		        <h5 class="card-text">${routine1.dailyroutineTitle}</h5>
+		        <p class="card-text">태그 위치입니다</p>
+		      	<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal1">
+		  			평일 확인
+				</button>
+		      </div>
+		    </div>
+		  </div>
+	   </c:otherwise>
+	</c:choose>
+	
+	  <c:choose>
+	  <c:when test="${empty routine2}"><div class="col">
+	    <div class="card">
+	      <div class="card-body">
+	      <h3 class="card-title">주말 루틴</h3>
+	        <h5 class="card-text">현재 등록된 루틴이 없습니다</h5>
+	        <p class="card-text"></p>
+	      </div>
+	    </div>
+	  </div></c:when>
+	  <c:otherwise>
 	  <div class="col">
 	    <div class="card">
 	      <div class="card-body">
-	        <h5 class="card-title">${routine2.dailyroutineTitle}</h5>
-	        <p class="card-text">This is a longer card with supporting text below</p>
+	      <h3 class="card-title">주말 루틴</h3>
+	        <h5 class="card-text">${routine2.dailyroutineTitle}</h5>
+	        <p class="card-text">태그 위치 입니다</p>
 	      	<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal2">
 	  			주말 확인
 			</button>
 	      </div>
 	    </div>
 	  </div>
+	  </c:otherwise>
+	</c:choose>
+	
 	</div>  
   </div>
   
