@@ -2,7 +2,7 @@
 <%
 	if(session.getAttribute("memberNickname") != null) {
 		%>
-		<%@ include file="managerside.jsp" %>
+		<%@ include file="memberside.jsp" %>
 		<%
 	}
 %>
@@ -23,6 +23,7 @@
         <h1>Q&A 질문 수정</h1>
         <h2>로그인 관리자 별명 : ${sessionScope.sessionManagerNickname}</h2>
         <form action="http://localhost:8080/logus/manager/updateqna" method="post">
+        	<fieldset>
 	        <div class="mb-3">
 	            <label for="exampleFormControlInput1" class="form-label">제목</label>
 	            <input type="text" class="form-control" id="qnaTitle" name="qnaTitle" value="${qnadetail.qnaTitle}" required>
@@ -36,6 +37,7 @@
 	        <div class="d-grid gap-2 col-1 mx-auto">
 	            <input type="submit" class="btn btn-primary" value='수정하기'>
 	        </div>
+	        </fieldset>
         </form>
     </body>
 </html>

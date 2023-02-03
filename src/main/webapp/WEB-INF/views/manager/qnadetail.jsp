@@ -9,7 +9,7 @@
 <%
 	if(session.getAttribute("memberNickname") != null) {
 		%>
-		<%@ include file="managerside.jsp" %>
+		<%@ include file="memberside.jsp" %>
 		<%
 	}
 %>

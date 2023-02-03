@@ -56,6 +56,7 @@
                                     <div class="viewTxt">${qnadetail.qnaContent}</div>
                                 </div>
                                 <form action="http://localhost:8080/logus/manager/insertanswer" method="post">
+							        <fieldset>
 							        <div class="mb-3">
 							            <label for="exampleFormControlTextarea1" class="form-label">문의글 답변</label>
 							            <textarea class="form-control" id="answerContent" name="answerContent" rows="3" placeholder="답변을 입력하세요" required></textarea>
@@ -67,6 +68,7 @@
 		                            	<input class="btn btn-primary me-md-2" type="submit" value="문의답변 등록하기">
 <%-- 				                        <button class="btn btn-primary" type="button" onclick="location.href='http://localhost:8080/logus/manager/deleteanswerform?qnaCode=${qnadetail.qnaCode}'">문의답변 삭제하기</button> --%>
 		                            </div>
+		                            </fieldset>
 	                            </form>
 	                        </div>
 	                    </div>
