@@ -23,7 +23,8 @@ import com.logus.board.service.IBoardService;
 public class BoardController {
 	
 	private static final String CURR_IMAGE_REPO_PATH = "C:\\project_labs\\spring_workspace\\logus\\src\\main\\webapp\\resources\\images\\manager";
-	
+	private static final String REAL_PATH = "C:\\project_labs\\spring_workspace\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\logus\\resources\\images\\manager";
+
 	@Autowired
 	IBoardService boardService;
 	
@@ -69,7 +70,14 @@ public class BoardController {
 			System.out.println(boardvo);
 			
 			if(boardFile.getSize() != 0) {
-				boardFile.transferTo(new File(CURR_IMAGE_REPO_PATH + "\\" + boardFile.getOriginalFilename()));
+//				boardFile.transferTo(new File(CURR_IMAGE_REPO_PATH + "\\" + boardFile.getOriginalFilename()));
+//				boardFile.transferTo(new File(REAL_PATH + "\\" + boardFile.getOriginalFilename()));
+
+				String path = session.getServletContext().getRealPath("/");				
+				System.out.println("■path:::"+path);
+				
+				boardFile.transferTo(new File(path + "resources\\images\\manager\\" + boardFile.getOriginalFilename()));
+
 				boardvo.setBoardImage(boardFile.getOriginalFilename());
 			}
 			boardService.insertBoard(boardvo);
@@ -95,10 +103,17 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value="/manager/updateboard", method=RequestMethod.POST)
-	public String updateBoard(@RequestParam(value="boardCategory", required=true, defaultValue="1") int boardCategory, BoardVO boardvo, @RequestParam MultipartFile boardFile, RedirectAttributes redirectAttributes) {
+	public String updateBoard(@RequestParam(value="boardCategory", required=true, defaultValue="1") int boardCategory, BoardVO boardvo, @RequestParam MultipartFile boardFile, RedirectAttributes redirectAttributes, HttpSession session) {
 		try {
 			if(boardFile.getSize() != 0) {
-				boardFile.transferTo(new File(CURR_IMAGE_REPO_PATH + "\\" + boardFile.getOriginalFilename()));
+//				boardFile.transferTo(new File(CURR_IMAGE_REPO_PATH + "\\" + boardFile.getOriginalFilename()));
+//				boardFile.transferTo(new File(REAL_PATH + "\\" + boardFile.getOriginalFilename()));
+				
+				String path = session.getServletContext().getRealPath("/");
+				System.out.println("■path:::"+path);
+
+				boardFile.transferTo(new File(path + "resources\\images\\manager\\" + boardFile.getOriginalFilename()));
+
 				boardvo.setBoardImage(boardFile.getOriginalFilename());
 			}
 			boardService.updateBoard(boardvo);
