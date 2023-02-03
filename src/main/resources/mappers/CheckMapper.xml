@@ -44,7 +44,7 @@
 	<select id="selectDailycheckList" resultType="com.logus.dailycheck.model.DailycheckVO" parameterType="int">
 		<![CDATA[
 		SELECT * FROM LOGUS.DAILYCHECK
-		WHERE dailyroutine_code=#{dailyroutineCode}
+		WHERE dailyroutine_code=#{dailyroutineCode} ORDER BY REGEXP_REPLACE(dailycheck_begintime, '[^0-9]+') asc
 		]]>
 	</select>
 	
