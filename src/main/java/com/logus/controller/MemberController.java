@@ -27,7 +27,7 @@ public class MemberController {
 	
 	@RequestMapping(value="/test/count")
 	public String empCount(Model model) {
-		model.addAttribute("count", memberService.countMember());
+		model.addAttribute("count", memberService.countMember(true));
 		return view_pos + "count";
 	}
 	

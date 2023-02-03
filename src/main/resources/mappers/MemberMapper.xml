@@ -7,10 +7,23 @@
 
 	
 <!-- =======================================================회원 총 인원=============================================================== -->
-	<select id="countMember" resultType="int">
+	<select id="countMember" parameterType="boolean" resultType="int">
 		<![CDATA[
 			SELECT COUNT(*) FROM LOGUS.MEMBER
 		]]>
+		<if test="isExit != null">
+			<![CDATA[
+ 				WHERE member_outdate IS
+ 			]]>
+			<choose>
+				<when test="isExit == true">
+					<![CDATA[NULL]]>
+				</when>
+				<otherwise>
+					<![CDATA[NOT NULL]]>
+				</otherwise>
+			</choose>
+		</if>
 	</select>
 	
 	<select id="countMemberId" parameterType="String" resultType="int">
@@ -32,26 +45,19 @@
 			SELECT * FROM LOGUS.MEMBER WHERE member_id = #{memberId}
 		]]>
 	</select>
+	
+	<select id="selectMemberInfo2" resultType="com.logus.member.model.MemberVO" parameterType="string">
+		<![CDATA[
+			SELECT * FROM LOGUS.MEMBER WHERE member_nickname = #{memberNickname, jdbcType=VARCHAR}
+		]]>
+	</select>
 <!-- ====================================================================================================================== -->
 
 <!-- ======================================================탈퇴여부================================================================ -->	
 	<select id="selectMemberList" resultType="com.logus.member.model.MemberVO" parameterType="boolean">
 		<![CDATA[
-			SELECT * FROM LOGUS.MEMBER
+			SELECT * FROM logus.member ORDER BY member_outdate DESC, member_indate DESC
 		]]>
-		<if test="isExit != null">
-			<![CDATA[
-				WHERE member_outdate IS
-			]]>
-			<choose>
-				<when test="isExit == true">
-					<![CDATA[NULL]]>
-				</when>
-				<otherwise>
-					<![CDATA[NOT NULL]]>
-				</otherwise>
-			</choose>
-		</if>
 	</select>
 <!-- ====================================================================================================================== -->
 

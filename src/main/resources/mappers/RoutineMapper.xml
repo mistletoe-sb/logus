@@ -6,10 +6,15 @@
 <!-- daily -->
 
 	<insert id="insertDailyroutine" parameterType="com.logus.dailyroutine.model.DailyroutineVO">
+	<selectKey keyProperty="dailyroutineCode" resultType="int" order="BEFORE">
 		<![CDATA[
-			INSERT INTO LOGUS.DAILYROUTINE
-			VALUES(DAILYROUTINE_CODE_SEQ.nextval, #{dailyroutineCode}, #{memberNickname}, #{dailyroutineWeekopt},
-			#{dailyroutineTitle}, #{dailyroutineActive})
+			select DAILYROUTINE_CODE_SEQ.nextval from dual
+		]]>
+	</selectKey>
+		<![CDATA[
+			INSERT INTO LOGUS.DAILYROUTINE (DAILYROUTINE_CODE, MEMBER_NICKNAME, DAILYROUTINE_WEEKOPT, DAILYROUTINE_TITLE, DAILYROUTINE_ACTIVE, DAILYROUTINE_SHARED)
+			VALUES(#{dailyroutineCode}, #{memberNickname}, #{dailyroutineWeekopt},
+			#{dailyroutineTitle}, #{dailyroutineActive}, 0)
 		]]>
 	</insert>
 
@@ -17,7 +22,7 @@
 	<![CDATA[
 	UPDATE LOGUS.DAILYROUTINE 
 	SET dailyroutine_active=0
-	WHERE dailyroutine_active=1
+	WHERE dailyroutine_active=1 and member_nickname=#{memberNickname} AND dailyroutine_weekopt=#{dailyroutineWeekopt}
 	]]>
 	</update>
 
@@ -26,8 +31,7 @@
 		UPDATE LOGUS.DAILYROUTINE 
 		SET member_nickname=#{memberNickname}, dailyroutine_weekopt=#{dailyroutineWeekopt},
 		dailyroutine_title=#{dailyroutineTitle}, dailyroutine_active=#{dailyroutineActive}
-		WHERE dailyroutine_code=(select dailyroutine_code from logus.dailyroutine 
-		where dailyroutine_weekopt=#{dailyroutineWeekopt} and dailyroutine_active=#{dailyroutineActive})
+		WHERE dailyroutine_code=#{dailyroutineCode}
 		]]>
 	</update>
 	
@@ -45,10 +49,17 @@
 		]]>
 	</select>
 	
-	<select id="selectDailyroutineList" resultType="com.logus.dailyroutine.model.DailyroutineVO" parameterType="string">
+	<select id="selectDailyroutineActive" resultType="com.logus.dailyroutine.model.DailyroutineVO">
 		<![CDATA[
 		SELECT * FROM LOGUS.DAILYROUTINE
-		WHERE member_nickname=#{memberNickname}
+		WHERE DAILYROUTINE_ACTIVE=1 AND MEMBER_NICKNAME=#{memberNickname} AND DAILYROUTINE_WEEKOPT=#{dailyroutineWeekopt}
+		]]>
+	</select>
+	
+	<select id="selectDailyroutineList" resultType="com.logus.dailyroutine.model.DailyroutineVO">
+		<![CDATA[
+		SELECT * FROM LOGUS.DAILYROUTINE
+		WHERE member_nickname=#{memberNickname} AND dailyroutine_weekopt=#{dailyroutineWeekopt}
 		]]>
 	</select>
 	
@@ -56,7 +67,15 @@
 		<![CDATA[
 		SELECT * FROM LOGUS.DAILYROUTINE
 		]]>
-		WHERE 
+		<!--like.... 일단 if. 옵션 숫자 몇번이 내용, 작성자 등등인지~-->
+	</select>
+	
+	<select id="updateRoutineShared" parameterType="int">
+		<![CDATA[
+		UPDATE LOGUS.DAILYROUTINE 
+		SET DAILYROUTINE_SHARED=(DAILYROUTINE_SHARED + 1)
+		WHERE dailyroutine_code=#{dailyroutineCode}
+		]]>
 		<!--like.... 일단 if. 옵션 숫자 몇번이 내용, 작성자 등등인지~-->
 	</select>
 </mapper>

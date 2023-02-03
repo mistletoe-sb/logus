@@ -31,7 +31,7 @@
 		<beans:property name="maxUploadSize" value="50000000"/>
 		<!-- 업로드 크기 제한 50MB -->
 	</beans:bean>
-	
+
 	<!-- jackson message converter 등록(html, json converting) -->
 	<beans:bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
 		<beans:property name="messageConverters">
@@ -47,4 +47,5 @@
 			</beans:list>
 		</beans:property>
 	</beans:bean>
+
 </beans:beans>
