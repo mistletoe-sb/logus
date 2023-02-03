@@ -39,8 +39,9 @@ public class DailystoryService implements IDailystoryService {
 	@Transactional
 	// 일일 스토리 작성
 	public void insertDailystory(DailystoryVO vo, List<TagVO> tags) {
-		int selectKey = dailystoryDAO.insertDailystory(vo);	// 일일 스토리 추가(insert)
-		if(selectKey == 0) {
+		int check = dailystoryDAO.insertDailystory(vo);		// 일일 스토리 추가(insert)
+		int selectKey = vo.getDailystoryCode();				// select key 참조(insert할 때 사용된 dailystory code)
+		if(check != 1) {
 			logger.debug("^ daily story insert failed.");	// insert된 일일 스토리가 1개가 아니면 예외 발생
 		}
 		tagService.insertTags(tags, selectKey);				// 태그 추가(insert)
@@ -61,7 +62,7 @@ public class DailystoryService implements IDailystoryService {
 	@Override
 	@Transactional
 	// 일일 스토리 수정
-	public void updateDailystory(DailystoryVO vo, TagVO[] tags) {
+	public void updateDailystory(DailystoryVO vo, List<TagVO> tags) {
 		int check = dailystoryDAO.updateDailystory(vo);		// 일일 스토리 수정(update)
 		if(check != 1) {
 			logger.debug("^ daily story update failed.");	// update된 일일 스토리가 1개가 아니면 예외 발생

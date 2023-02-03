@@ -15,10 +15,9 @@
 		<p>${dsVO.dailystoryContent}</p>
 		<br>
 		<img src="${root}/resources/images/${dsVO.dailystoryImage}" alt="${dsVO.dailystoryImage}">
-		<input type="text" name="dailystoryImage">
 		<div>
 			<c:forEach var="tg" items="${tagList}">
-				<button style="display: inline-block">${tg}</button>
+				<button style="display: inline-block">${tg.tagName}</button>
 			</c:forEach>
 		</div>
 		<br><br>

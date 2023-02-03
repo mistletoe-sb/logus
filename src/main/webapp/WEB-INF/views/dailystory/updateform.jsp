@@ -22,7 +22,9 @@
 			<input type="reset" value="취소" onclick="history.back()">
 			
 			<input type="hidden" name="dailystoryCode" value="${dsVO.dailystoryCode}">
-			<input type="hidden" name="tagCodes">
+			<c:forEach var="tg" items="${tagList}">
+				<input type="hidden" name="tagCodes" value="${tg.tagCode}">
+			</c:forEach>
 		</form>
 	</body>
 </html>

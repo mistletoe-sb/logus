@@ -74,13 +74,14 @@ public class DailystoryController {
 		model.addAttribute("dsVO", vo);
 		model.addAttribute("tagList", tagList);
 		model.addAttribute("tags", tags);
-		return "dailystory/updateform";												// 스토리 수정 view로 이동
+		return "dailystory/updateform";		// 스토리 수정 view로 이동
 	}
 	
 	@PostMapping(value="/{memberNickname}/library/story/update")
 	// 일일 스토리 수정
-	public String updateDailystory(DailystoryVO vo) {
-		dailystoryService.updateDailystory(vo, null);			// DB update
+	public String updateDailystory(DailystoryVO vo, @RequestParam("tagNames") String tagNames) {
+		dailystoryService.updateDailystory(vo, 
+				tagService.makeTagList(tagNames, TagCategory.DAILY_STORY, vo.getDailystoryCode()));	// DB update
 		return "redirect:/" + RedirEncoder.encode(vo.getMemberNickname()) + "/library/story/" + vo.getDailystoryCode();		// 해당 스토리 상세 보기로 redirect
 	}
 

@@ -39,12 +39,12 @@ public class TagService implements ITagService {
 	@Override
 	@Transactional
 	// 태그 수정(게시물 수정 시 작동)
-	public void updateTags(TagVO[] tags) {
+	public void updateTags(List<TagVO> tags) {
 		int check = 0;
 		for(TagVO item : tags) {
 			check += tagDAO.updateTag(item);	// 태그 수정(update 반복)
 		}
-		if(check != tags.length) {
+		if(check != tags.size()) {
 			logger.debug("^ daily story tag update failed.");	// update된 태그 수가 일치하지 않는 경우 예외 발생
 		}
 	}
