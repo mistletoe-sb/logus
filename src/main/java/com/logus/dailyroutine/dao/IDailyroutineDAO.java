@@ -14,7 +14,7 @@ public interface IDailyroutineDAO {
 	
 	public DailyroutineVO selectDailyroutineInfo(int dailyroutineCode);		//루틴 화면 출력
 	public DailyroutineVO selectDailyroutineActive(@Param("memberNickname") String memberNickname, 
-			@Param("dailyroutineWeekopt") int dailyroutineWeekopt);	//서재에서 메인에 둘 루틴 출력
+			@Param("dailyroutineWeekopt") int dailyroutineWeekopt);	//메인 일정 출력
 	public List<DailyroutineVO> selectDailyroutineList(@Param("memberNickname") String memberNickname, //루틴 리스트 출력
 			@Param("dailyroutineWeekopt") int dailyroutineWeekopt);
 	public List<DailyroutineVO> findDailyroutineList(@Param("option") String option, @Param("search") String search);

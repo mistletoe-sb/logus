@@ -23,8 +23,8 @@
 							 alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
 						Logus
 				    </a>
-				    <button type="button" class="btn btn-primary">내서재<br>바로가기</button>
-				  	<button type="button" class="btn btn-info">오늘의 출석체크</button>
+				    <button type="button" class="btn btn-primary" onclick="location.href='<c:url value='/library'/>'">내서재<br>바로가기</button>
+				  	<button type="button" class="btn btn-info" onclick="location.href='<c:url value='/achieve'/>'">오늘의 출석체크</button>
 				  	<p>${message}</p>
 				</div>
 				<div>

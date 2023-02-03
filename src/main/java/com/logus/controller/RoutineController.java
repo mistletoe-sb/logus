@@ -37,10 +37,9 @@ public class RoutineController {
 	
 	//루틴 리스트에도 매핑 부분에 session 넣어야 함->session 받으면 필요 없음 path~
 	@GetMapping(value="/routinelist")	//루틴 목록-화면용
-	public String selectDailyroutineList(@PathVariable(value="membernickname", required=false) String memberNickname, Model model) {
-		
-		memberNickname="회원닉네임테스트01";		//session받기
-		
+	public String selectDailyroutineList(HttpSession session, Model model) {
+		String memberNickname= (String) session.getAttribute("memberNickname");
+				
 		List<DailyroutineVO> routinelist1= DailyroutineService.selectDailyroutineList(memberNickname, 1);	//평일 리스트
 		List<DailyroutineVO> routinelist2= DailyroutineService.selectDailyroutineList(memberNickname, 2);	//주말 리스트
 		
@@ -48,7 +47,7 @@ public class RoutineController {
 		model.addAttribute("routinelist2", routinelist2);
 		return view_ref+"routinelist";	
 	}
-	//href="" post get 
+
 	@GetMapping(value="/routine/{dailyroutineCode}")	//루틴 내용-화면용
 	public String selectDailyroutineInfo(@PathVariable(value="dailyroutineCode", required=false) int dailyroutineCode, Model model) {
 		

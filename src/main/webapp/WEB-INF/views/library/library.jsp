@@ -68,52 +68,32 @@ myModal.addEventListener('shown.bs.modal', () => {
   <div class="offcanvas-body">
     <p>Try scrolling the rest of the page to see this option in action.</p>
     <p>jstl c:if로 세션 감지해서 내서재면 팔로우버튼 아예 없음, 남서재면 팔로우하기&팔로우취소</p>
+    <dl class="row">
+	  <dt class="col-sm-3">닉네임</dt>
+	  	<dd class="col-sm-9">한량한냥</dd>
+	
+	  <dt class="col-sm-3">직업</dt>
+	  	<dd class="col-sm-9"><p>백숩니다</p></dd>
+	
+	  <dt class="col-sm-3">가입일</dt>
+	  	<dd class="col-sm-9">오늘이니?</dd>
+	
+	  <dt class="col-sm-6">일주일 루틴 달성률</dt>
+	    <dd class="col-sm-4">${weekAchieve}%</dd>
+	   
+	  <dt class="col-sm-6">오늘의 루틴 달성률</dt>
+	    <dd class="col-sm-4">${todayAchieve}%</dd>
+	</dl>
     <input type='button' value='팔로우하기' id='followbtn1'/>
 	<input type='button' value='팔로우 취소' id='followbtn2' style="display : none"/>
   </div>
 </div>
 
-<div>
-<div class="d-inline-block">
-<nav class="nav flex-column">
-  <ul class="nav flex-column">
-  <li class="nav-item">
-    <a class="nav-link active" aria-current="page" href="#">닉네임</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#">가입일</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#">생일</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link disabled">직업</a>
-  </li>
-</ul>
-</nav>
-</div>
-<div class="d-inline-block">
-<nav class="nav flex-column">
-  <ul class="nav flex-column">
-  <li class="nav-item">
-    <a class="nav-link active" aria-current="page" href="#">${memberVO.memberNickname}</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#">${memberVO.memberIndate}</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#">${memberVO.memberBirth}</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link disabled">${memberVO.memberJob}</a>
-  </li>
-</ul>
-</nav>
-</div>
-</div>
-
-
-
+<div><ul class="list-inline">
+  <li class="list-inline-item">메인</li>
+  <li class="list-inline-item">평일 메인</li>
+  <li class="list-inline-item">주말 메인</li>
+</ul></div>
   <div>
    <div class="d-inline-block">
 	 <div class="row row-cols-1 row-cols-md-2 g-4">
