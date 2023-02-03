@@ -80,9 +80,10 @@ public class DailystoryController {
 	
 	@PostMapping(value="/{memberNickname}/library/story/update")
 	// 일일 스토리 수정
-	public String updateDailystory(DailystoryVO vo, @RequestParam("tagNames") String tagNames) {
-		dailystoryService.updateDailystory(vo, 
-				tagService.makeTagList(tagNames, TagCategory.DAILY_STORY, vo.getDailystoryCode()));	// DB update
+	public String updateDailystory(DailystoryVO vo, @RequestParam("tagNames") String tagNames, 
+								@RequestParam("tagCodes") List<Integer> tagCodes) {
+		dailystoryService.updateDailystory(vo, tagService.makeTagList(tagNames, TagCategory.DAILY_STORY, 
+																	vo.getDailystoryCode()), tagCodes);								// DB update
 		return "redirect:/" + RedirEncoder.encode(vo.getMemberNickname()) + "/library/story/" + vo.getDailystoryCode();		// 해당 스토리 상세 보기로 redirect
 	}
 

@@ -29,7 +29,7 @@
 	
 	<delete id="deleteTags" parameterType="int">
 		<![CDATA[DELETE LOGUS.TAG WHERE tag_code IN]]>
-		<foreach collection="tagCode" item="code" open="(" separator="," close=")">
+		<foreach collection="tagCodes" item="code" open="(" separator="," close=")">
 			<![CDATA[#{code}]]>
 		</foreach>
 	</delete>

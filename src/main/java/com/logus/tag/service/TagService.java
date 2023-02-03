@@ -1,7 +1,6 @@
 package com.logus.tag.service;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -25,46 +24,89 @@ public class TagService implements ITagService {
 	private ITagDAO tagDAO;		// 태그 DAO 객체
 	
 	@Override
-	@Transactional
 	// 태그 추가(게시물 추가 시 작동)
 	public void insertTags(List<TagVO> tags, int selectKey) {
-		int check = 0;
 		for(TagVO vo : tags) {
 			vo.setDailystoryCode(Integer.toString(selectKey));	// 일일 스토리 코드 세팅
-			check += tagDAO.insertTag(vo);						// 태그 추가(insert 반복)
 		}
-		if(check != tags.size()) {
-			logger.debug("^ daily story tag insert failed.");	// insert된 태그 수가 일치하지 않는 경우 예외 발생
-		}
+		insertTags(tags);	// 태그 추가(insert)
 	}
 
+	@Override
+	@Transactional
+	// 태그 추가(게시물 수정 시 작동)
+	public void insertTags(List<TagVO> tags) {
+		int check = 0;
+		for(TagVO vo : tags) {
+			check += tagDAO.insertTag(vo);			// 태그 추가(insert 반복)
+		}
+		if(check != tags.size()) {
+			logger.debug("^ tag insert failed.");	// insert된 태그 수가 일치하지 않는 경우 예외 발생
+		}
+	}
+	
+	@Override
+	@Transactional
+	// 태그 수정 알고리즘(게시물 수정 시 작동)
+	public void updateTags(List<TagVO> tags, List<Integer> tagCodes) {
+		int tagCount = tags.size();			// 수정된(입력 받은) 태그 수
+		int tagCodeCount = tagCodes.size();	// 기존의 태그 수
+		logger.info("수정된 태그 수 : " + tagCount);
+		logger.info("기존 태그 수 : " + tagCodeCount);
+		// 태그 코드 세팅
+		for(int i = 0; i < tagCodeCount; i++) {
+			if(i < tagCount) {
+				tags.get(i).setTagCode(tagCodes.get(i));
+				logger.info("i번째 : " + tags.get(i).getTagCode());
+			} else {
+				logger.info("index : " + i);
+				break;
+			}
+		}
+		
+		// 태그 수 변화에 따라 실행 알고리즘 변경
+		if(tagCount < tagCodeCount) {		// 수정된 태그 수가 기존 태그 수보다 적으면
+			updateTags(tags.subList(0, tagCount));					// 입력 받은 태그 수정
+			deleteTags(tagCodes.subList(tagCount, tagCodeCount));	// 남은 태그 삭제(delete)
+		} else if(tagCount == tagCodeCount) {	// 수정된 태그 수가 기존 태그 수와 동일하면
+			updateTags(tags);	// 태그 수정(update)			
+		} else {	// 그 외(수정된 태그 수가 기존 태그 수보다 많으면
+			updateTags(tags.subList(0, tagCodeCount));			// 입력 받은 태그 수정
+			insertTags(tags.subList(tagCodeCount, tagCount));	// 남은 태그 추가(insert)
+		}
+	}
+	
 	@Override
 	@Transactional
 	// 태그 수정(게시물 수정 시 작동)
 	public void updateTags(List<TagVO> tags) {
 		int check = 0;
-		for(TagVO item : tags) {
-			check += tagDAO.updateTag(item);	// 태그 수정(update 반복)
+		for(TagVO vo : tags) {
+			check += tagDAO.updateTag(vo);	// 태그 수정(update 반복)
 		}
 		if(check != tags.size()) {
-			logger.debug("^ daily story tag update failed.");	// update된 태그 수가 일치하지 않는 경우 예외 발생
+			logger.debug("^ tag update failed.");	// update된 태그 수가 일치하지 않는 경우 예외 발생
 		}
 	}
 
 	@Override
 	@Transactional
 	// 태그 여러 개 삭제(게시물 수정 시 작동)
-	public void deleteTags(List<Integer> tagCode) {
-		// TODO Auto-generated method stub
-
+	public void deleteTags(List<Integer> tagCodes) {
+		int check = tagDAO.deleteTags(tagCodes);	// 태그 삭제(delete)
+		if(check != tagCodes.size()) {
+			logger.debug("^ tag delete failed.");	// delete된 태그 수가 일치하지 않는 경우 예외 발생
+		}
 	}
 
 	@Override
 	@Transactional
 	// 해당 게시물의 태그 전체 삭제(게시물 삭제 시 작동)
 	public void deleteAllTagInPost(int tagCategory, int foreignKeyCode, int tagCount) {
-		// TODO Auto-generated method stub
-
+		int check = tagDAO.deleteAllTagInPost(tagCategory, foreignKeyCode);	// 해당 게시물의 태그 전체 삭제
+		if(check != tagCount) {
+			logger.debug("^ tag delete failed.");
+		}
 	}
 
 	@Override
@@ -115,7 +157,7 @@ public class TagService implements ITagService {
 	@Override
 	// 화면에 표시될 게시물 목록의 각 태그 목록을 Map 형태로 반환
 	public Map<Integer,List<TagVO>> makeTagListMap(int tagCategory, List<Integer> foreignKeyCode, List<TagVO> tagList) {
-		Map<Integer,List<TagVO>> map = new HashMap<Integer,List<TagVO>>();
+		//Map<Integer,List<TagVO>> map = new HashMap<Integer,List<TagVO>>();
 		return null;
 	}
 }

@@ -10,9 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.logus.dailystory.dao.IDailystoryDAO;
 import com.logus.dailystory.model.DailystoryVO;
-import com.logus.reply.dao.IReplyDAO;
 import com.logus.reply.service.IReplyService;
-import com.logus.tag.dao.ITagDAO;
 import com.logus.tag.model.TagVO;
 import com.logus.tag.service.ITagService;
 import com.logus.util.constant.TagCategory;
@@ -25,11 +23,7 @@ public class DailystoryService implements IDailystoryService {
 	
 	@Autowired
 	private IDailystoryDAO dailystoryDAO;	// 일일 스토리 DAO 객체
-	@Autowired
-	private ITagDAO tagDAO;					// 태그 DAO 객체
-	@Autowired
-	private IReplyDAO replyDAO;				// 댓글 DAO 객체
-	
+
 	@Autowired
 	private IReplyService replyService;		// 댓글 서비스 객체
 	@Autowired
@@ -45,66 +39,30 @@ public class DailystoryService implements IDailystoryService {
 			logger.debug("^ daily story insert failed.");	// insert된 일일 스토리가 1개가 아니면 예외 발생
 		}
 		tagService.insertTags(tags, selectKey);				// 태그 추가(insert)
-		/*
-		int[] checkList = new int[2];	// insert 유효성 확인을 위한 배열
-		checkList[0] = dailystoryDAO.insertDailystory(vo);	// 일일 스토리 추가(insert)
-		for(TagVO item : tags) {
-			checkList[1] += tagDAO.insertTag(item);			// 태그 추가(insert 반복)
-		}
-		if(checkList[0] != 1) {
-			logger.debug("^ daily story insert failed.");			// insert된 일일 스토리가 1개가 아니면 예외 발생
-		} else if(checkList[1] != tags.length) {
-			logger.debug("^ daily story tag insert failed.");		// insert된 태그 수가 일치하지 않는 경우 예외 발생
-		}
-		*/
 	}
 
 	@Override
 	@Transactional
 	// 일일 스토리 수정
-	public void updateDailystory(DailystoryVO vo, List<TagVO> tags) {
+	public void updateDailystory(DailystoryVO vo, List<TagVO> tags, List<Integer> tagCodes) {
 		int check = dailystoryDAO.updateDailystory(vo);		// 일일 스토리 수정(update)
 		if(check != 1) {
 			logger.debug("^ daily story update failed.");	// update된 일일 스토리가 1개가 아니면 예외 발생
 		}
-		tagService.updateTags(tags);						// 태그 수정(update)
-		/*
-		int[] checkList = new int[2];	// update 유효성 확인을 위한 배열
-		checkList[0] = dailystoryDAO.updateDailystory(vo);	// 일일 스토리 수정(update)
-		for(TagVO item : tags) {
-			checkList[1] += tagDAO.updateTag(item);			// 태그 수정(update 반복)
-		}
-		if(checkList[0] != 1) {
-			logger.debug("^ daily story update failed.");			// update된 일일 스토리가 1개가 아니면 예외 발생
-		} else if(checkList[1] != tags.length) {
-			logger.debug("^ daily story tag update failed.");		// update된 태그 수가 일치하지 않는 경우 예외 발생
-		}
-		*/
+		
+		tagService.updateTags(tags, tagCodes);	// 태그 수정(수정 알고리즘 실행)
 	}
 
 	@Override
 	@Transactional
 	// 일일 스토리 삭제
 	public void deleteDailystory(int dailystoryCode, int tagCount, int replyCount) {
-		
+		tagService.deleteAllTagInPost(TagCategory.DAILY_STORY, dailystoryCode, tagCount);	// 해당 스토리의 태그 삭제
 		replyService.deleteAllReplyInDailyStory(dailystoryCode, replyCount);	// 해당 스토리의 댓글 삭제
 		int check = dailystoryDAO.deleteDailystory(dailystoryCode);				// 해당 일일 스토리 삭제(마지막으로 처리)
 		if(check != 1) {
 			logger.debug("^ daily story delete failed.");			// delete된 일일 스토리가 1개가 아니면 예외 발생
 		}
-		/*
-		int[] checkList = new int[3];	// delete 유효성 확인을 위한 배열
-		checkList[0] = tagDAO.deleteAllTagInPost(TagCategory.DAILY_STORY, dailystoryCode);	// 해당 스토리의 태그 삭제
-		checkList[1] = replyDAO.deleteAllReplyInDailyStory(dailystoryCode);					// 해당 스토리의 댓글 삭제
-		checkList[2] = dailystoryDAO.deleteDailystory(dailystoryCode);						// 해당 일일 스토리 삭제(마지막으로 처리)
-		if(checkList[0] != tagCount) {
-			logger.debug("^ daily story tag delete failed.");		// delete된 태그 수가 일치하지 않는 경우 예외 발생
-		} else if(checkList[1] != replyCount) {
-			logger.debug("^ daily story reply delete failed.");		// delete된 댓글 수가 일치하지 않는 경우 예외 발생
-		} else if(checkList[2] != 1) {
-			logger.debug("^ daily story delete failed.");			// delete된 일일 스토리가 1개가 아니면 예외 발생
-		}
-		*/
 	}
 
 	@Override
