@@ -20,11 +20,11 @@
         <form action="http://localhost:8080/logus/manager/updateboard" method="post" enctype="multipart/form-data">
 	        <div class="mb-3">
 	            <label for="exampleFormControlInput1" class="form-label">제목</label>
-	            <input type="text" class="form-control" id="boardTitle" name="boardTitle" value="${boarddetail.boardTitle}">
+	            <input type="text" class="form-control" id="boardTitle" name="boardTitle" value="${boarddetail.boardTitle}" required>
 	        </div>
 	        <div class="mb-3">
 	            <label for="exampleFormControlTextarea1" class="form-label">본문</label>
-	            <textarea class="form-control" id="boardContent" name="boardContent" rows="3">${boarddetail.boardContent}</textarea>
+	            <textarea class="form-control" id="boardContent" name="boardContent" rows="3" required>${boarddetail.boardContent}</textarea>
 	        </div>
             <c:if test="${not empty boarddetail.boardImage}">
                 <div class="listView">

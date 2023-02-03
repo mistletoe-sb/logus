@@ -25,11 +25,11 @@
         <form action="http://localhost:8080/logus/manager/updateqna" method="post">
 	        <div class="mb-3">
 	            <label for="exampleFormControlInput1" class="form-label">제목</label>
-	            <input type="text" class="form-control" id="qnaTitle" name="qnaTitle" value="${qnadetail.qnaTitle}">
+	            <input type="text" class="form-control" id="qnaTitle" name="qnaTitle" value="${qnadetail.qnaTitle}" required>
 	        </div>
 	        <div class="mb-3">
 	            <label for="exampleFormControlTextarea1" class="form-label">본문</label>
-	            <textarea class="form-control" id="qnaContent" name="qnaContent" rows="3">${qnadetail.qnaContent}</textarea>
+	            <textarea class="form-control" id="qnaContent" name="qnaContent" rows="3" required>${qnadetail.qnaContent}</textarea>
 	        </div>
         	<input type="hidden" id="memberNickname" name="memberNickname" value='${sessionScope.memberNickname}'>
         	<input type="hidden" id="qnaCode" name="qnaCode" value='${qnadetail.qnaCode}'>

@@ -9,6 +9,7 @@ import com.logus.member.model.MemberVO;
 public interface IManagerService {
 	int countManager();
 	int countManager(String managerId);
+	int countManagerNickname(String managerNickname);
 	void insertManager(ManagerVO vo);
 	ManagerVO selectManagerInfo(String managerId);
 	ArrayList<MemberVO> selectManagerList();

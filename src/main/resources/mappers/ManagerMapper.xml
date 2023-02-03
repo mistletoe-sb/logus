@@ -18,6 +18,12 @@
 			]]>
 		</if>
 	</select>
+	
+	<select id="countManagerNickname" parameterType="string" resultType="int">
+		<![CDATA[
+			SELECT COUNT(*) FROM logus.manager WHERE manager_nickname = #{managerNickname}
+		]]>
+	</select>
 
 	<select id="selectManagerInfo" parameterType="string" resultType="com.logus.manager.model.ManagerVO">
 		<![CDATA[

@@ -20,11 +20,11 @@
         <form action="http://localhost:8080/logus/manager/insertboard" method="post" enctype="multipart/form-data">
 	        <div class="mb-3">
 	            <label for="exampleFormControlInput1" class="form-label">제목</label>
-	            <input type="text" class="form-control" id="boardTitle" name="boardTitle" placeholder="제목을 입력하세요">
+	            <input type="text" class="form-control" id="boardTitle" name="boardTitle" placeholder="제목을 입력하세요" required>
 	        </div>
 	        <div class="mb-3">
 	            <label for="exampleFormControlTextarea1" class="form-label">본문</label>
-	            <textarea class="form-control" id="boardContent" name="boardContent" rows="3" placeholder="본문을 입력하세요"></textarea>
+	            <textarea class="form-control" id="boardContent" name="boardContent" rows="3" placeholder="본문을 입력하세요" required></textarea>
 	        </div>
         	<div class="mb-3">
 			  <label for="formFile" class="form-label">이미지 파일 업로드</label>

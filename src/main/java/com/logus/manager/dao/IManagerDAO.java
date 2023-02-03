@@ -12,6 +12,7 @@ import com.logus.member.model.MemberVO;
 public interface IManagerDAO {
 	int countManager();
 	int countManager(@Param("managerId") String managerId);
+	int countManagerNickname(@Param("managerNickname") String managerNickname);
 	void insertManager(ManagerVO vo);
 	ManagerVO selectManagerInfo(String managerId);
 	ArrayList<MemberVO> selectManagerList();

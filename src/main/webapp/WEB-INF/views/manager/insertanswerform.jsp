@@ -58,7 +58,7 @@
                                 <form action="http://localhost:8080/logus/manager/insertanswer" method="post">
 							        <div class="mb-3">
 							            <label for="exampleFormControlTextarea1" class="form-label">문의글 답변</label>
-							            <textarea class="form-control" id="answerContent" name="answerContent" rows="3" placeholder="답변을 입력하세요"></textarea>
+							            <textarea class="form-control" id="answerContent" name="answerContent" rows="3" placeholder="답변을 입력하세요" required></textarea>
 							        </div>
 							        <input type="hidden" name="managerNickname" value="${sessionScope.sessionManagerNickname}">
 							        <input type="hidden" name="qnaCode" value="${qnadetail.qnaCode}">

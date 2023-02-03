@@ -59,7 +59,7 @@
                                 <form action="http://localhost:8080/logus/manager/updateanswer" method="post">
 							        <div class="mb-3">
 							            <label for="exampleFormControlTextarea1" class="form-label">문의글 답변</label>
-							            <textarea class="form-control" id="answerContent" name="answerContent" rows="3">${qnadetail.answerContent}</textarea>
+							            <textarea class="form-control" id="answerContent" name="answerContent" rows="3" required>${qnadetail.answerContent}</textarea>
 							        </div>
 							        <input type="hidden" name="managerNickname" value="${sessionScope.sessionManagerNickname}">
 							        <input type="hidden" name="qnaCode" value="${qnadetail.qnaCode}">

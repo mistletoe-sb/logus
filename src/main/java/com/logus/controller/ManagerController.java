@@ -60,6 +60,16 @@ public class ManagerController {
 		
 	}
 	
+	//닉네임 중복체크
+	@PostMapping("/managerNicknameCheck")
+	@ResponseBody
+	public int nicknameCheck(@RequestParam("managerNickname") String managerNickname) {
+		
+		int cnt = managerService.countManagerNickname(managerNickname);
+		return cnt;
+		
+	}
+	
 	@RequestMapping(value="/manager/managerlogin", method=RequestMethod.POST)
 	public String loginManager(@RequestParam(value="managerId", required=true) String managerId, @RequestParam(value="managerPassword", required=true) String managerPassword, Model model, RedirectAttributes redirectAttributes, HttpSession session) {
 

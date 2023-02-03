@@ -25,11 +25,11 @@
         <form action="http://localhost:8080/logus/manager/insertqna" method="post">
 	        <div class="mb-3">
 	            <label for="exampleFormControlInput1" class="form-label">제목</label>
-	            <input type="text" class="form-control" id="qnaTitle" name="qnaTitle" placeholder="제목을 입력하세요">
+	            <input type="text" class="form-control" id="qnaTitle" name="qnaTitle" placeholder="제목을 입력하세요" required>
 	        </div>
 	        <div class="mb-3">
 	            <label for="exampleFormControlTextarea1" class="form-label">본문</label>
-	            <textarea class="form-control" id="qnaContent" name="qnaContent" rows="3" placeholder="본문을 입력하세요"></textarea>
+	            <textarea class="form-control" id="qnaContent" name="qnaContent" rows="3" placeholder="본문을 입력하세요" required></textarea>
 	        </div>
         	<input type="hidden" id="memberNickname" name="memberNickname" value='${sessionScope.memberNickname}'>
 	        <div class="d-grid gap-2 col-1 mx-auto">
