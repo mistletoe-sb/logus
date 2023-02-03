@@ -4,4 +4,6 @@ package com.logus.util.constant;
 public class TagCategory {
 	public static final int DAILY_STORY = 1;	// 일일 스토리
 	public static final int DAILY_ROUTINE = 2;	// 일일 루틴
+	
+	/** 상수 값 변경 시 Mapper.xml도 확인 필요*/
 }

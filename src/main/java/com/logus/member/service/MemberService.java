@@ -17,8 +17,8 @@ public class MemberService implements IMemberService {
 	
 	@Override
 	// 전체 회원 수 반환
-	public int countMember() {
-		return memberDAO.countMember();
+	public int countMember(boolean isExist) {
+		return memberDAO.countMember(isExist);
 	}
 	
 	@Override
@@ -109,6 +109,13 @@ public class MemberService implements IMemberService {
 	// 비밀번호 찾기 서비스
 	public String findPassword(String memberId, String nameAttr, String value) {
 		return memberDAO.findMembers(memberId, nameAttr, value);
+	}
+
+	@Override
+	// 해당 회원 정보 반환
+	public MemberVO selectMemberInfo2(String memberNickname) {
+		
+		return memberDAO.selectMemberInfo2(memberNickname);
 	}
 
 }

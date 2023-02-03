@@ -11,5 +11,6 @@ public interface IReplyService {
 	public abstract void insertReply(ReplyVO vo);		// 댓글 추가
 	public abstract void updateReply(ReplyVO vo);		// 댓글 수정
 	public abstract void deleteReply(int replyCode);	// 댓글 삭제
+	public abstract void deleteAllReplyInDailyStory(int dailystoryCode, int replyCount);	// 해당 게시물의 전체 댓글 삭제
 	public abstract List<ReplyVO> selectReplyList(int dailystoryCode);		// 해당 게시물에 작성된 댓글 목록 조회
 }
