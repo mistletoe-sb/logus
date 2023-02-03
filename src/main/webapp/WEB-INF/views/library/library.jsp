@@ -1,23 +1,22 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../header.jsp" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>서재</title>
-<script type="text/javascript">
-const myModal = document.getElementById('myModal')
-const myInput = document.getElementById('myInput')
-
-myModal.addEventListener('shown.bs.modal', () => {
-  myInput.focus()
-})
-</script>
-<script type="text/javascript">
-
-</script>
-</head>
+	<head>
+		<meta charset="UTF-8">
+		<title>서재</title>
+		<script type="text/javascript">
+			const myModal = document.getElementById('myModal')
+			const myInput = document.getElementById('myInput')
+		
+			myModal.addEventListener('shown.bs.modal', () => {
+		  		myInput.focus()
+			})
+		</script>
+		<script type="text/javascript">
+		
+		</script>
+	</head>
 <body>
 
 <!-- Modal1(평일) -->
@@ -160,6 +159,9 @@ myModal.addEventListener('shown.bs.modal', () => {
 	</div>  
   </div>
   
+ </div>
+ <div>
+ 	<a href="<c:url value='/${sessionScope.memberNickname}/library/main'/>">일일 스토리 보기</a>
  </div>
 </body>
 </html>

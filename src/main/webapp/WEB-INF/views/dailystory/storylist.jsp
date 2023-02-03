@@ -11,7 +11,7 @@
 					<option value="3">내용</option>
 					<option value="4">닉네임</option>
 				</select>
-				<input id="search_txt_in_dailystory" class="form-control me-2" name="searchText"
+				<input id="search_txt_in_dailystory" class="form-control me-2" name="search"
 					   type="search" placeholder="내 스토리 검색하기" aria-label="Search">
 				<input id="search_btn_in_dailystory" class="btn btn-outline-success" type="image"
 					   src="${root}/resources/images/search.png" alt="검색" width="32" height="32">

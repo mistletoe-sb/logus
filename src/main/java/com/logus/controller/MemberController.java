@@ -116,11 +116,12 @@ public class MemberController {
 	@RequestMapping(value="/findId", method=RequestMethod.POST)
 	public String findId(MemberVO vo,  Model model, RedirectAttributes redirectAttributes) {
 		try {
+			/*
 			if(profile.getSize() != 0) {
 				String profileURL = PATH + "\\" + profile.getOriginalFilename();
 				profile.transferTo(new File(profileURL));
 				vo.setMemberProfile(profile.getOriginalFilename());
-			}
+			}*/
 			memberService.findId(vo);
 			redirectAttributes.addFlashAttribute("message", vo.getMemberId()+"님 회원가입이 완료 되었습니다.");
 		}catch(RuntimeException e) {

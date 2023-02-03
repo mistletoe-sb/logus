@@ -38,10 +38,10 @@ public class DailystoryController {
 	private static Logger logger = LoggerFactory.getLogger(DailystoryController.class);	// logger 객체
 	
 	@GetMapping(value="/lib")
-	// 테스트용 서재 메인으로 이동
+	// 서재 메인으로 이동
 	public String libMain(HttpSession session) {
-		session.setAttribute("user", "회원닉네임테스트01");
-		return "redirect:/" + RedirEncoder.encode("회원닉네임테스트01") + "/library/main";
+		//session.setAttribute("user", "회원닉네임테스트01");
+		return "redirect:/library";
 	}
 	
 	@GetMapping(value="/error")
@@ -124,7 +124,7 @@ public class DailystoryController {
 	
 	@GetMapping(value="library/search")
 	// 일일 스토리 검색(myNickname이 있으면 서재 내 검색, 없으면 전체 검색)
-	public String findDailystoryList(@RequestParam(value="option") String option, @RequestParam(value="searchText") String search, 
+	public String findDailystoryList(@RequestParam(value="option") String option, @RequestParam(value="search") String search, 
 							@RequestParam(value="myNickname", required=false, defaultValue="!@#$\r\t\t\n") String myNickname,
 							Model model) {
 		List<DailystoryVO> dsList = new ArrayList<DailystoryVO>();

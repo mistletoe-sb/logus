@@ -269,9 +269,9 @@ public class LibraryController {
 		}
 		
 		@PostMapping(value="/search")	//검색-전송용
-		public String selectSearch(@RequestParam("category") String category, @RequestParam("search") String search) {
+		public String selectSearch(@RequestParam("option") String option, @RequestParam("search") String search) {
 			
-			System.out.println(category);
+			System.out.println(option);
 			System.out.println(search);
 			
 			
