@@ -25,11 +25,11 @@ public class QnaController {
 			String memberNickname = (String)session.getAttribute("memberNickname");
 			if(memberNickname == null) {
 				model.addAttribute("qnacount", qnaService.countQna());
-				model.addAttribute("qnalist", qnaService.selectQnaList(10, 1));
+				model.addAttribute("qnalist", qnaService.selectQnaList(10, nowPage));
 				model.addAttribute("totalPage", qnaService.countTotalPage(10));
 			} else {
 				model.addAttribute("qnacount", qnaService.countQna(memberNickname));
-				model.addAttribute("qnalist", qnaService.selectQnaList(memberNickname, 10, 1));
+				model.addAttribute("qnalist", qnaService.selectQnaList(memberNickname, 10, nowPage));
 				model.addAttribute("totalPage", qnaService.countTotalPage(memberNickname, 10));
 			}
 			model.addAttribute("nowPage", nowPage);
