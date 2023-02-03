@@ -1,3 +1,5 @@
+<%@ include file="../header.jsp" %>
+<%@ include file="managerside.jsp" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
 	isELIgnored="false" %>
@@ -16,6 +18,7 @@
         <h2>로그인 관리자 별명 : ${sessionScope.sessionManagerNickname}</h2>
         <h6>총 관리자 수 ${managercount}명</h6>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+        <fieldset>
         <table class="table">
             <thead>
               <tr>
@@ -36,5 +39,9 @@
             </c:forEach>
             </tbody>
         </table>
+        <button type="button" class="btn btn-primary" onclick="location.href='http://localhost:8080/logus/manager/insertmanagerform'">
+			관리자 등록
+        </button>
+        </fieldset>
     </body>
 </html>

@@ -22,18 +22,35 @@
 	</select>
 	
 	<insert id="insertBoard" parameterType="com.logus.board.model.BoardVO">
-		<![CDATA[
-			INSERT INTO logus.board
-			VALUES(board_code_seq.NEXTVAL, #{boardTitle}, #{boardContent}, #{managerNickname}, #{boardCategory}, SYSDATE)
-		]]>
+		<if test="boardImage != null">
+			<![CDATA[
+				INSERT INTO logus.board
+				VALUES(board_code_seq.NEXTVAL, #{boardTitle}, #{boardContent}, #{managerNickname}, #{boardCategory}, SYSDATE, #{boardImage})
+			]]>
+		</if>
+		<if test="boardImage == null">
+			<![CDATA[
+				INSERT INTO logus.board(board_code, board_title, board_content, manager_nickname, board_category, board_date)
+				VALUES(board_code_seq.NEXTVAL, #{boardTitle}, #{boardContent}, #{managerNickname}, #{boardCategory}, SYSDATE)
+			]]>
+		</if>
 	</insert>
 	
 	<update id="updateBoard" parameterType="com.logus.board.model.BoardVO">
-		<![CDATA[
-			UPDATE logus.board
-			SET board_title = #{boardTitle}, board_content = #{boardContent}
-			WHERE board_code = #{boardCode}
-		]]>
+		<if test="boardImage != null">
+			<![CDATA[
+				UPDATE logus.board
+				SET board_title = #{boardTitle}, board_content = #{boardContent}, board_image = #{boardImage}
+				WHERE board_code = #{boardCode}
+			]]>
+		</if>
+		<if test="boardImage == null">
+			<![CDATA[
+				UPDATE logus.board
+				SET board_title = #{boardTitle}, board_content = #{boardContent}
+				WHERE board_code = #{boardCode}
+			]]>
+		</if>
 	</update>	
 	
 	<delete id="deleteBoard" parameterType="int">

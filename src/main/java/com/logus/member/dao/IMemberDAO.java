@@ -9,7 +9,7 @@ import com.logus.member.model.MemberVO;
 
 // 회원정보 DAO 인터페이스
 public interface IMemberDAO {
-	int countMember();																	// 전체 회원 수 반환
+	int countMember(@Param("isExit")boolean isExit);									// 전체 회원 수 반환
 	int countMemberId(String memberId);	
 	int countMemberNickname(String memberNickname);	
 	int countMember(@Param("nameAttr") String nameAttr, @Param("value") int value);		// 성별 해당하는 회원 수 반환
@@ -21,7 +21,7 @@ public interface IMemberDAO {
 	
 	
 	List<MemberVO> selectMemberList();													// 전체 회원정보 목록 반환
-	List<MemberVO> selectMemberList(boolean isExit);									// 탈퇴 여부에 따라 회원정보 목록 반환(true:탈퇴/false:현재회원)
+	List<MemberVO> selectMemberList(@Param("isExit")boolean isExit);					// 탈퇴 여부에 따라 회원정보 목록 반환(true:탈퇴/false:현재회원)
 	
 	// 해당하는 ID 목록 반환(이메일 or 휴대폰 번호 입력)
 	List<String> findMember(@Param("nameAttr") String nameAttr, @Param("value") String value);
