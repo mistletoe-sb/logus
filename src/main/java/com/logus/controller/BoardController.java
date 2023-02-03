@@ -30,7 +30,7 @@ public class BoardController {
 	@RequestMapping(value="/manager/board")
 	public String getAllBoardList(@RequestParam(value="boardcategory", required=true, defaultValue="1") int boardcategory, @RequestParam(value="nowPage", required=false, defaultValue="1") int nowPage, Model model) {
 		model.addAttribute("boardcount", boardService.countBoard(boardcategory));
-		model.addAttribute("boardlist", boardService.selectBoardList(boardcategory, 10, 1));
+		model.addAttribute("boardlist", boardService.selectBoardList(boardcategory, 10, nowPage));
 		model.addAttribute("totalPage", boardService.countTotalPage(boardcategory, 10));
 		model.addAttribute("nowPage", nowPage);
 		if(boardcategory == 1) {
