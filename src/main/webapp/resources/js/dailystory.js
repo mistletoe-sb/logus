@@ -47,14 +47,15 @@ function updateReply(btn){
 function deleteReply(url){
 	var del_check = confirm('댓글을 삭제하시겠습니까?');	// 확인 창 팝업
 	if(del_check){
-		return location.href=url;	// 확인 버튼 누를 시 해당 url로 이동(댓글 삭제 진행)
+		//return location.href=url;	// 확인 버튼 누를 시 해당 url로 이동(댓글 삭제 진행)
+		location.href=url;	// 확인 버튼 누를 시 해당 url로 이동(댓글 삭제 진행)
 	} else {}
 }
 
 // (document가 준비된 상태이면 스크립트 실행)
 $(document).ready(function () {
-	var hostIdx = location.href.indexOf(location.host) + location.host.length;
-	var contextPath = location.href.substring(hostIdx, location.href.indexOf('/', hostIdx + 1));
+//	var hostIdx = location.href.indexOf(location.host) + location.host.length;
+//	var contextPath = location.href.substring(hostIdx, location.href.indexOf('/', hostIdx + 1));
 	// https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=mk1126sj&logNo=221019411361 참조(contextPath)
 	
 	// 일일 스토리 삭제
@@ -66,7 +67,8 @@ $(document).ready(function () {
 				{tagCount: $('#tagCount').val(), replyCount: $('#replyCount').val()})
 			.done(function(url){
 				alert('스토리가 삭제되었습니다.');
-				location.replace(contextPath + url);	// 확인 버튼 누를 시 서재 메인으로 이동
+				//location.replace(contextPath + url);	// 확인 버튼 누를 시 서재 메인으로 이동
+				location.href='<c:url value=\"' + url + '\"/>';	// 확인 버튼 누를 시 서재 메인으로 이동
 			}).fail(function(){
 				alert('스토리 삭제가 실패하였습니다.');
 			});

@@ -1,6 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="../header.jsp" %>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<!DOCTYPE html>
+<html>
+	<head>
+		<%@ include file="../header.jsp" %>
+	</head>
+	<body>
 		<p>일일 스토리 보기</p>
 		<p>작성자 : ${dsVO.memberNickname}</p>
 		<p><fmt:formatDate value="${dsVO.dailystoryUploaddate}" pattern="yyyy.MM.dd HH:mm"/></p>
@@ -12,7 +19,7 @@
 		<br>
 		<p>${dsVO.dailystoryTitle}</p>
 		<br>
-		<p>${dsVO.dailystoryContent}</p>
+		<p style="white-space: pre-line;">${dsVO.dailystoryContent}</p>
 		<br>
 		<img src="${root}/resources/images/${dsVO.dailystoryImage}" alt="${dsVO.dailystoryImage}">
 		<div>

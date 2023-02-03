@@ -80,14 +80,12 @@ public class DailystoryService implements IDailystoryService {
 	@Override
 	// 옵션(전체, 제목, 내용, 태그)에 따라 검색(전체 사용자 대상 검색)
 	public List<DailystoryVO> findDailystoryList(String option, String search) {
-		// TODO Auto-generated method stub
-		return null;
+		return dailystoryDAO.findInAllDailystoryList(option, search);
 	}
 
 	@Override
-	public List<DailystoryVO> findDailystoryList(String option, String search, String memberNickname) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<DailystoryVO> findDailystoryList(String option, String search, String myNickname) {
+		return dailystoryDAO.findInMyDailystoryList(option, search, myNickname);
 	}
 
 }

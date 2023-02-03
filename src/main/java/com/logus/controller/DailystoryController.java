@@ -1,5 +1,6 @@
 package com.logus.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -119,5 +120,21 @@ public class DailystoryController {
 		model.addAttribute("dsList", dsList);
 		model.addAttribute("rpCount", rpCount);
 		return "dailystory/storylist";		// 스토리 목록 보기 view(서재 메인 페이지)로 이동
+	}
+	
+	@GetMapping(value="library/search")
+	// 일일 스토리 검색(myNickname이 있으면 서재 내 검색, 없으면 전체 검색)
+	public String findDailystoryList(@RequestParam(value="option") String option, @RequestParam(value="searchText") String search, 
+							@RequestParam(value="myNickname", required=false, defaultValue="!@#$\r\t\t\n") String myNickname,
+							Model model) {
+		List<DailystoryVO> dsList = new ArrayList<DailystoryVO>();
+		search = "%" + search + "%";
+		if(myNickname.equals("!@#$\r\t\t\n")) {
+			dsList = dailystoryService.findDailystoryList(option, search);
+		} else {
+			dsList = dailystoryService.findDailystoryList(option, search, myNickname);			
+		}
+		model.addAttribute("dsList", dsList);
+		return "dailystory/storylist";
 	}
 }
