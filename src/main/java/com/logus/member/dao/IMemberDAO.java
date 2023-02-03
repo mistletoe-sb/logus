@@ -17,6 +17,8 @@ public interface IMemberDAO {
 	int countMember(@Param("nameAttr") String nameAttr, @Param("value") Date value);	// 나이 해당하는 회원 수 반환
 	
 	MemberVO selectMemberInfo(String memberId);											// 해당 ID의 회원정보 반환
+	MemberVO selectMemberInfo2(String memberNickname);									// 해당 닉네임의 회원정보 반환
+	
 	
 	List<MemberVO> selectMemberList();													// 전체 회원정보 목록 반환
 	List<MemberVO> selectMemberList(boolean isExit);									// 탈퇴 여부에 따라 회원정보 목록 반환(true:탈퇴/false:현재회원)

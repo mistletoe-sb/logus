@@ -32,6 +32,12 @@
 			SELECT * FROM LOGUS.MEMBER WHERE member_id = #{memberId}
 		]]>
 	</select>
+	
+	<select id="selectMemberInfo2" resultType="com.logus.member.model.MemberVO" parameterType="string">
+		<![CDATA[
+			SELECT * FROM LOGUS.MEMBER WHERE member_nickname = #{memberNickname, jdbcType=VARCHAR}
+		]]>
+	</select>
 <!-- ====================================================================================================================== -->
 
 <!-- ======================================================탈퇴여부================================================================ -->	

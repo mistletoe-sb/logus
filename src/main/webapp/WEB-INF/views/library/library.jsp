@@ -62,21 +62,21 @@ myModal.addEventListener('shown.bs.modal', () => {
 
 <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
   <div class="offcanvas-header">
-    <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">Backdrop with scrolling</h5>
+    <h3 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">서재 정보</h3>
     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
   <div class="offcanvas-body">
-    <p>Try scrolling the rest of the page to see this option in action.</p>
+<!--     <img src="..." class="card-img-top" alt="..."> -->
     <p>jstl c:if로 세션 감지해서 내서재면 팔로우버튼 아예 없음, 남서재면 팔로우하기&팔로우취소</p>
     <dl class="row">
 	  <dt class="col-sm-3">닉네임</dt>
-	  	<dd class="col-sm-9">한량한냥</dd>
+	  	<dd class="col-sm-9">${memberVO.memberNickname}</dd>
 	
 	  <dt class="col-sm-3">직업</dt>
-	  	<dd class="col-sm-9"><p>백숩니다</p></dd>
+	  	<dd class="col-sm-9"><p>${memberVO.memberJob}</p></dd>
 	
 	  <dt class="col-sm-3">가입일</dt>
-	  	<dd class="col-sm-9">오늘이니?</dd>
+	  	<dd class="col-sm-9">${memberVO.memberIndate}</dd>
 	
 	  <dt class="col-sm-6">일주일 루틴 달성률</dt>
 	    <dd class="col-sm-4">${weekAchieve}%</dd>

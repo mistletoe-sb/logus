@@ -96,4 +96,11 @@ public class MemberService implements IMemberService {
 		return memberDAO.findMember(memberId, nameAttr, value);
 	}
 
+	@Override
+	// 해당 회원 정보 반환
+	public MemberVO selectMemberInfo2(String memberNickname) {
+		
+		return memberDAO.selectMemberInfo2(memberNickname);
+	}
+
 }

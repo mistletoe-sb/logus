@@ -13,6 +13,7 @@ public interface IMemberService {
 	void updateMember(MemberVO vo);		// 정보수정 서비스
 	void exitMember(String memberId);	// 회원탈퇴 서비스
 	MemberVO selectMemberInfo(String memberId);	// 해당 회원정보 검색 서비스
+	MemberVO selectMemberInfo2(String memberNickname);	// 해당 회원정보 검색
 	MemberVO loginCheck(String memberId, String memberPassword);	// 로그인 유효성 검사 서비스
 	boolean overlapCheck(String nameAttr, String value);			// 중복 검사 서비스(ID, 닉네임)
 	List<String> findId(String nameAttr, String value);				// ID 찾기 서비스

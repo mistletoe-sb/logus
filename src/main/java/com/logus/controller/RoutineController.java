@@ -94,7 +94,7 @@ public class RoutineController {
 			activeNum=1;	//메인 루틴
 		};
 		
-		String memberNickname="회원닉네임테스트01";	//이후 session으로 대체
+		String memberNickname=(String) session.getAttribute("memberNickname");
 		
 		if(weekNum==1 && activeNum==1) {	//생성한 일정이 평일이며, 메인 루틴일 때
 			DailyroutineService.updateRoutineActive(memberNickname, weekNum);
@@ -200,7 +200,7 @@ public class RoutineController {
 			activeNum=1;	//메인 루틴
 		};
 		
-		String memberNickname="회원닉네임테스트01";	//이후 session으로 대체 
+		String memberNickname=(String) session.getAttribute("memberNickname"); 
 		
 		if(weekNum==1 && activeNum==1) {	//생성한 일정이 평일이며, 메인 루틴일 때
 			DailyroutineService.updateRoutineActive(memberNickname, weekNum);
