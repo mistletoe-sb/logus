@@ -5,11 +5,15 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<!-- CSS -->
+
+		
 		<c:set var="root" value="${pageContext.request.contextPath}"/>
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 		<script src="${root}/resources/js/jquery-3.6.3.min.js"></script>
 		<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+		
 		<meta charset="UTF-8">
 		<title>Log Us</title>
 	</head>
@@ -34,7 +38,7 @@
 						</c:when>
 						<c:otherwise>
 							<li><a>${sessionScope.memberId}(${sessionScope.memberNickname})님 환영합니다.</a></li>
-							<button type="button" class="btn btn-secondary">마이페이지</button>
+							<button type="button" class="btn btn-secondary" onclick="location.href='<c:url value='/mypage'/>'">마이페이지</button>
 							<button type="button" class="btn btn-secondary" onclick="location.href='<c:url value='/logout'/>'">로그아웃</button>
 						</c:otherwise>
 					</c:choose>

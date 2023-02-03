@@ -36,7 +36,7 @@ public class MemberService implements IMemberService {
 	@Override
 	// 회원탈퇴 서비스
 	public void exitMember(String memberId) {
-		memberDAO.updateMember(memberId);
+		memberDAO.outMember(memberId);
 	}
 
 	@Override
@@ -81,26 +81,34 @@ public class MemberService implements IMemberService {
 		return false;
 	}
 	
+	@Override
 	public int ckeckId(String id) {
 		int result = memberDAO.countMemberId(id);
 		return result;
 	}
 	
+	@Override
 	public int ckeckNickname(String nickname) {
 		int result = memberDAO.countMemberNickname(nickname);
+		return result;
+	}
+	
+	@Override
+	public int ckeckPhone(String phone) {
+		int result = memberDAO.countMemberPhone(phone);
 		return result;
 	}
 
 	@Override
 	// ID 찾기 서비스
-	public List<String> findId(String nameAttr, String value) {
-		return memberDAO.findMember(nameAttr, value);
+	public List<String> findId(MemberVO vo) {
+		return memberDAO.findMember(vo);
 	}
 
 	@Override
 	// 비밀번호 찾기 서비스
 	public String findPassword(String memberId, String nameAttr, String value) {
-		return memberDAO.findMember(memberId, nameAttr, value);
+		return memberDAO.findMembers(memberId, nameAttr, value);
 	}
 
 }
