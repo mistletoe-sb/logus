@@ -1,0 +1,28 @@
+
+.id_ok, .nickname_ok{
+	color:#008000;
+	display: none;
+}
+
+.id_already, .nickname_already{
+	color:#6A82FB; 
+	display: none;
+	}
+.container{
+	width : 800px;
+	margin : 20px auto;
+	background-color: #f7f7f7;	
+}
+.title{
+	margin : 40px auto;
+	text-align : center;
+}
+.title2{
+	margin : 40px auto;
+}
+			
+#container{
+	width : 800px;
+	margin : 20px auto;
+	background-color: #f7f7f7;
+}

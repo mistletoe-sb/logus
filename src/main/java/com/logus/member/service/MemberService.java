@@ -36,7 +36,7 @@ public class MemberService implements IMemberService {
 	@Override
 	// 회원탈퇴 서비스
 	public void exitMember(String memberId) {
-		memberDAO.updateMember(memberId);
+		memberDAO.outMember(memberId);
 	}
 
 	@Override
@@ -45,21 +45,28 @@ public class MemberService implements IMemberService {
 		return memberDAO.selectMemberInfo(memberId);
 	}
 
+//	@Override
+//	// 로그인 유효성 검사 서비스
+//	public int loginCheck(String memberId, String memberPassword) {
+//		MemberVO vo = selectMemberInfo(memberId);	// 입력한 ID와 일치하는 회원정보 검색
+//		if(vo == null) {
+//			// 존재하지 않는 ID입니다. >> 예외처리
+//		} else {
+//			if(memberPassword.equals(vo.getMemberPassword())) {
+//				return 0;
+//			} else {
+//				return 1;
+//				// 비밀번호가 일치하지 않습니다. >> 예외처리
+//			}
+//		}
+//		return 2;
+//	}
+	
 	@Override
 	// 로그인 유효성 검사 서비스
 	public MemberVO loginCheck(String memberId, String memberPassword) {
 		MemberVO vo = selectMemberInfo(memberId);	// 입력한 ID와 일치하는 회원정보 검색
-		if(vo == null) {
-			// 존재하지 않는 ID입니다. >> 예외처리
-		} else {
-			if(memberPassword.equals(vo.getMemberPassword())) {
-				return vo;
-			} else {
-				
-				// 비밀번호가 일치하지 않습니다. >> 예외처리
-			}
-		}
-		return null;
+		return vo;
 	}
 
 	@Override
@@ -74,26 +81,34 @@ public class MemberService implements IMemberService {
 		return false;
 	}
 	
+	@Override
 	public int ckeckId(String id) {
 		int result = memberDAO.countMemberId(id);
 		return result;
 	}
 	
+	@Override
 	public int ckeckNickname(String nickname) {
 		int result = memberDAO.countMemberNickname(nickname);
+		return result;
+	}
+	
+	@Override
+	public int ckeckPhone(String phone) {
+		int result = memberDAO.countMemberPhone(phone);
 		return result;
 	}
 
 	@Override
 	// ID 찾기 서비스
-	public List<String> findId(String nameAttr, String value) {
-		return memberDAO.findMember(nameAttr, value);
+	public List<String> findId(MemberVO vo) {
+		return memberDAO.findMember(vo);
 	}
 
 	@Override
 	// 비밀번호 찾기 서비스
 	public String findPassword(String memberId, String nameAttr, String value) {
-		return memberDAO.findMember(memberId, nameAttr, value);
+		return memberDAO.findMembers(memberId, nameAttr, value);
 	}
 
 	@Override

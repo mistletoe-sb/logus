@@ -37,15 +37,30 @@
 			SELECT COUNT(*) FROM LOGUS.MEMBER WHERE member_nickname = #{memberNickname}
 		]]>
 	</select>
+	
+	<select id="countMemberPhone" parameterType="String" resultType="int">
+		<![CDATA[
+			SELECT COUNT(*) FROM LOGUS.MEMBER WHERE member_phone = #{memberPhone}
+		]]>
+	</select>
 <!-- ====================================================================================================================== -->
 
 <!-- ========================================================회원 정보============================================================== -->	
-	<select id="selectMemberInfo" resultType="com.logus.member.model.MemberVO" parameterType="string">
+	<select id="selectMemberInfo" resultType="com.logus.member.model.MemberVO" parameterType="com.logus.member.model.MemberVO">
 		<![CDATA[
 			SELECT * FROM LOGUS.MEMBER WHERE member_id = #{memberId}
 		]]>
 	</select>
 	
+	<select id="selectMemberId" resultType="com.logus.member.model.MemberVO" parameterType="string">
+		<![CDATA[
+			SELECT * 
+			FROM LOGUS.MEMBER 
+			WHERE 
+			member_name = #{memberName} and member_birth= #{memberBirth} and member_phone= #{memberPhone}
+    ]]>
+  </select>
+
 	<select id="selectMemberInfo2" resultType="com.logus.member.model.MemberVO" parameterType="string">
 		<![CDATA[
 			SELECT * FROM LOGUS.MEMBER WHERE member_nickname = #{memberNickname, jdbcType=VARCHAR}
@@ -114,7 +129,7 @@
 <!-- ====================================================================================================================== -->
 	
 <!-- ==========================================================회원 탈퇴============================================================ -->
-	<update id="outMember" parameterType="com.logus.member.model.MemberVO">
+	<update id="outMember" parameterType="string">
 		<![CDATA[
 			UPDATE
 				LOGUS.MEMBER
