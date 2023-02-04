@@ -14,7 +14,7 @@
 				<input id="search_txt_in_dailystory" class="form-control me-2" name="search"
 					   type="search" placeholder="내 스토리 검색하기" aria-label="Search">
 				<input id="search_btn_in_dailystory" class="btn btn-outline-success" type="image"
-					   src="${root}/resources/images/search.png" alt="검색" width="32" height="32">
+					   src="<c:url value='/resources/images/search.png'/>" alt="검색" width="32" height="32">
 				<input type="hidden" name="myNickname" value="${sessionScope.memberNickname}">
 			</form>
 		</div>

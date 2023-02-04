@@ -57,9 +57,7 @@ public class TagService implements ITagService {
 		for(int i = 0; i < tagCodeCount; i++) {
 			if(i < tagCount) {
 				tags.get(i).setTagCode(tagCodes.get(i));
-				logger.info("i번째 : " + tags.get(i).getTagCode());
 			} else {
-				logger.info("index : " + i);
 				break;
 			}
 		}
@@ -78,7 +76,7 @@ public class TagService implements ITagService {
 	
 	@Override
 	@Transactional
-	// 태그 수정(게시물 수정 시 작동)
+	// 태그 수정
 	public void updateTags(List<TagVO> tags) {
 		int check = 0;
 		for(TagVO vo : tags) {

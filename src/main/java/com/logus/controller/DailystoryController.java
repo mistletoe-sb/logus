@@ -91,13 +91,13 @@ public class DailystoryController {
 	@PostMapping(value="/{memberNickname}/library/story/{dailystoryCode}/delete")
 	@ResponseBody
 	// 일일 스토리 삭제
-	public String deletePostDailystory(@PathVariable String memberNickname, @PathVariable int dailystoryCode, 
+	public String deleteDailystory(@PathVariable String memberNickname, @PathVariable int dailystoryCode, 
 									int tagCount, int replyCount) {
 		dailystoryService.deleteDailystory(dailystoryCode, tagCount, replyCount);	// 해당 스토리 삭제
-		return "/" + memberNickname + "/library/main";			// 삭제 후 AJax로 닉네임 리턴
+		return memberNickname;														// 삭제 후 AJax로 닉네임 리턴
 	}
 
-	@GetMapping(value="{memberNickname}/library/story/{dailystoryCode}")
+	@GetMapping(value="/{memberNickname}/library/story/{dailystoryCode}")
 	// 일일 스토리 상세 내용 조회
 	public String selectDailystoryInfo(@PathVariable int dailystoryCode, Model model) {
 		DailystoryVO vo = dailystoryService.selectDailystoryInfo(dailystoryCode);					// 해당 스토리 상세 내용 조회
@@ -110,7 +110,7 @@ public class DailystoryController {
 		return "dailystory/storydetail";	// 스토리 상세 보기 view로 이동
 	}
 
-	@GetMapping(value="{memberNickname}/library/main")
+	@GetMapping(value="/{memberNickname}/library/main")
 	// 일일 스토리 목록 조회(내 서재 메인)
 	public String selectDailystoryList(@PathVariable String memberNickname, Model model) {
 		List<DailystoryVO> dsList = dailystoryService.selectDailystoryList(memberNickname);	// 해당 닉네임의 일일 스토리 목록 조회
@@ -122,7 +122,7 @@ public class DailystoryController {
 		return "dailystory/storylist";		// 스토리 목록 보기 view(서재 메인 페이지)로 이동
 	}
 	
-	@GetMapping(value="library/search")
+	@GetMapping(value="/library/search")
 	// 일일 스토리 검색(myNickname이 있으면 서재 내 검색, 없으면 전체 검색)
 	public String findDailystoryList(@RequestParam(value="option") String option, @RequestParam(value="search") String search, 
 							@RequestParam(value="myNickname", required=false, defaultValue="!@#$\r\t\t\n") String myNickname,

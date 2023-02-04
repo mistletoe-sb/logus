@@ -14,7 +14,8 @@
 		<br>
 		<c:if test="${dsVO.memberNickname == sessionScope.memberNickname}">
 			<button onclick='location.href="<c:url value='/${sessionScope.memberNickname}/library/story/${dsVO.dailystoryCode}/update'/>"'>수정</button>
-			<button id="ds_del_btn">삭제</button>
+			<button id="ds_del_btn" onclick="deleteStory('<c:url 
+					value="/${sessionScope.memberNickname}/library/main"/>')">삭제</button>
 		</c:if>
 		<br>
 		<p>${dsVO.dailystoryTitle}</p>
