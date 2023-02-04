@@ -1,6 +1,7 @@
 package com.logus.tag.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -154,8 +155,35 @@ public class TagService implements ITagService {
 	
 	@Override
 	// 화면에 표시될 게시물 목록의 각 태그 목록을 Map 형태로 반환
-	public Map<Integer,List<TagVO>> makeTagListMap(int tagCategory, List<Integer> foreignKeyCode, List<TagVO> tagList) {
-		//Map<Integer,List<TagVO>> map = new HashMap<Integer,List<TagVO>>();
-		return null;
+	public Map<Integer,List<TagVO>> makeTagListMap(int tagCategory, List<Integer> foreignKeyCode) {
+		Map<Integer,List<TagVO>> map = new HashMap<Integer,List<TagVO>>();
+		List<TagVO> tagList = tagDAO.selectAllTagList(tagCategory, foreignKeyCode);		// select 태그 목록
+		
+		int index = 0;	// 검토할 태그 목록 인덱스
+		
+		// select한 태그 목록에서 code와 동일한 FK값을 갖는 태그 목록을 추출
+		for(Integer code : foreignKeyCode) {
+			List<TagVO> tempList = new ArrayList<TagVO>();
+			for(int i = index; i < tagList.size(); i++) {
+				boolean isEqual = false;
+				// 카테고리에 따라 참조할 필드 변경
+				switch (tagCategory) {
+					case TagCategory.DAILY_STORY:
+						isEqual = (code == Integer.parseInt(tagList.get(index).getDailystoryCode()));
+						break;
+					case TagCategory.DAILY_ROUTINE:
+						isEqual = (code == Integer.parseInt(tagList.get(index).getDailyroutineCode()));
+						break;
+				}
+				if(isEqual) {
+					tempList.add(tagList.get(index));
+					index++;
+				} else {
+					break;
+				}
+			}
+			map.put(code, tempList);
+		}
+		return map;
 	}
 }

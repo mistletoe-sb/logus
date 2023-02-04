@@ -78,7 +78,7 @@
 					OR member_nickname LIKE #{search})
 				]]>
 			</otherwise>
-		</choose>
+			</choose>
 		</where>
 		<![CDATA[ORDER BY dailystory_code DESC]]>
 	</select>
