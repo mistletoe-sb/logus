@@ -25,7 +25,7 @@
 	<delete id="deleteDailycheck" parameterType="com.logus.dailycheck.model.DailycheckVO">
 		<![CDATA[
 		DELETE LOGUS.DAILYCHECK
-		WHERE dailycheck_code =#{dailyroutineCode} and dailycheck_code NOT IN 
+		WHERE dailyroutine_code =#{dailyroutineCode} and dailycheck_code NOT IN 
 		]]>
 		<foreach  item="item" index="index" collection="voList" open="(" close=")" separator=",">
 		 	<![CDATA[

@@ -17,19 +17,26 @@ import com.logus.dailycheck.model.DailycheckVO;
 import com.logus.dailycheck.service.IDailycheckService;
 import com.logus.dailyroutine.model.DailyroutineVO;
 import com.logus.dailyroutine.service.IDailyroutineService;
+import com.logus.tag.model.TagVO;
+import com.logus.tag.service.ITagService;
+import com.logus.util.constant.TagCategory;
 
 @Controller
 public class RoutineController {
 	@Autowired
-	private IDailyroutineService DailyroutineService;	
+	private IDailyroutineService DailyroutineService;	// 일정 객체
 	@Autowired
-	private IDailycheckService DailycheckService;
+	private IDailycheckService DailycheckService;		// 일정 상세 객체
+	@Autowired
+	private ITagService tagService;								// 태그 서비스 객체
 	
 	private String view_ref ="routine/";	//뷰 위치
 	
 	DailyroutineVO dailyroutineVO = new DailyroutineVO();	//루틴 정보 VO 객체 생성
 	
 	DailycheckVO dailycheckVO = new DailycheckVO();			//루틴 상세 VO 객체 생성
+	
+	TagVO tagVO = new TagVO();
 	
 	//RequestMapping 대신 Get/Post Mapping 사용
 	//select 등 페이지에 보여줄 때는 GET
@@ -43,6 +50,9 @@ public class RoutineController {
 		List<DailyroutineVO> routinelist1= DailyroutineService.selectDailyroutineList(memberNickname, 1);	//평일 리스트
 		List<DailyroutineVO> routinelist2= DailyroutineService.selectDailyroutineList(memberNickname, 2);	//주말 리스트
 		
+		//List<TagVO> taglist1;
+		//List<TagVO> taglist2;
+		
 		model.addAttribute("routinelist1", routinelist1);
 		model.addAttribute("routinelist2", routinelist2);
 		return view_ref+"routinelist";	
@@ -53,6 +63,9 @@ public class RoutineController {
 		
 		DailyroutineVO routine= DailyroutineService.selectDailyroutineInfo(dailyroutineCode);	//루틴 정보
 		List<DailycheckVO> checklist =DailycheckService.selectDailycheckList(dailyroutineCode);	//루틴 상세 정보
+		
+		List<TagVO>	taglist = tagService.selectTagList(TagCategory.DAILY_ROUTINE, dailyroutineCode);
+	
 		String weekopt;
 		
 		//dailyroutine weekopt 1 =>평일 , 2 => 주말
@@ -65,6 +78,7 @@ public class RoutineController {
 		
 		model.addAttribute("routine", routine);
 		model.addAttribute("checklist", checklist);
+		model.addAttribute("taglist", taglist);
 		model.addAttribute("weekopt", weekopt);
 		
 		return view_ref+"routine";
@@ -78,8 +92,8 @@ public class RoutineController {
 	@PostMapping(value="/newroutine")	//새 루틴 추가-전송용
 	public String insertDailyroutine2(HttpSession session, @RequestParam("active") String active, @RequestParam("week") String week, 
 			@RequestParam("title") String title,  @RequestParam("begin") String[] begin, @RequestParam("end") String[] end, 
-			@RequestParam("content") String[] content) {
-		
+			@RequestParam("content") String[] content, @RequestParam("tagNames") String tagNames) {
+			
 		int weekNum;	//평일&주말 검증
 		if(week.equals("평일")) {
 			weekNum=1;	//평일
@@ -125,6 +139,9 @@ public class RoutineController {
 			DailycheckService.insertDailycheck(dailycheckVO);
 		}
 		
+			List<TagVO> taglist= tagService.makeTagList(tagNames, TagCategory.DAILY_ROUTINE, dailyroutineVO.getDailyroutineCode());
+			tagService.insertTags(taglist);	//태그 insert
+		
 		return "redirect:/routinelist";
 	}
 	
@@ -141,9 +158,20 @@ public class RoutineController {
 				} else {
 					weekopt="주말";
 				}
-		
+				List<TagVO>	taglist=null;
+				
+				try {
+					taglist = tagService.selectTagList(TagCategory.DAILY_ROUTINE, dailyroutineCode);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				
+				String tags = tagService.makeTagString(taglist);
+				
 		model.addAttribute("routine", routine);
 		model.addAttribute("checklist", checklist);
+		model.addAttribute("tags", tags);
+		model.addAttribute("taglist", taglist);
 		model.addAttribute("weekopt", weekopt);
 		model.addAttribute("dailyroutineCode", dailyroutineCode);
 		
@@ -154,17 +182,19 @@ public class RoutineController {
 	public String updateDailyroutine2(HttpSession session, @RequestParam("active") String active, @RequestParam("week") String week, 
 			@RequestParam("title") String title,  @RequestParam("begin") String[] begin, @RequestParam("end") String[] end, 
 			@RequestParam("content") String[] content, @RequestParam("dailyroutineCode") int dailyroutineCode, 
-			@RequestParam("dailycheckCode") int[] dailycheckCode) {
-		
+			@RequestParam("dailycheckCode") int[] dailycheckCode,  @RequestParam(value="tagNames", required=false) String tagNames , 
+			@RequestParam(value="tagCodes", required=false) List<Integer> tagCodes) {
+			
 		int checklength=content.length;	//실제 들어온 일정 수 : content[]
 		int	updatelength=dailycheckCode.length;	//DB 업데이트 필요한 일정 수 : dailycheckCode[]  
-	
+
 				//순서 1. 삭제된 기존 일정(업데이트가 필요없는 행)을 찾아서 delete
 				List<DailycheckVO> deletecheck = new ArrayList<DailycheckVO>();	//VO 타입 리스트 생성
 				for(int d = 0; d<updatelength; d++) {
-					dailycheckVO.setDailycheckCode(dailycheckCode[d]);
-					
-					deletecheck.add(dailycheckVO);
+					System.out.println("들어온 컨트롤러 체크코드"+dailycheckCode[d]);
+					DailycheckVO dailycheckvo =new DailycheckVO();
+					dailycheckvo.setDailycheckCode(dailycheckCode[d]);
+					deletecheck.add(dailycheckvo);
 				}
 				DailycheckService.deleteDailycheck(deletecheck, dailyroutineCode);	//들어온 checkcode에 포함되지 않은, 기존 DB 행 삭제  
 				
@@ -215,6 +245,19 @@ public class RoutineController {
 		dailyroutineVO.setDailyroutineWeekopt(weekNum);		//평일or주말 여부
 		dailyroutineVO.setDailyroutineTitle(title);			//루틴 타이틀
 		
+		List<TagVO>	taglist=null;
+		try {
+			taglist = tagService.makeTagList(tagNames, TagCategory.DAILY_ROUTINE, dailyroutineCode);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	
+		try {
+			tagService.updateTags(taglist ,tagCodes);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 		DailyroutineService.updateDailyroutine(dailyroutineVO);
 		
 		return "redirect:/routinelist";
@@ -223,10 +266,11 @@ public class RoutineController {
 	//post매핑 시 에러, 정상적으로 @PathVariable로 값을 가져옴 delete 메서드만 실행하면 됨
 	@GetMapping(value="/routinedelete/{dailyroutineCode}")	//루틴 수정-삭제-전송용(수정, 삭제 동시에)
 	public String deleteDailyroutine(@PathVariable(value="dailyroutineCode", required=false) int dailyroutineCode) {
-		System.out.println("실행했다 삭제  =>"+dailyroutineCode);
 		
 		DailycheckService.deleteDailycheckAll(dailyroutineCode);
+		tagService.deleteAllTagInPost(TagCategory.DAILY_ROUTINE, dailyroutineCode, 0);
 		DailyroutineService.deleteDailyroutine(dailyroutineCode);
+		
 		return "redirect:/routinelist";
 	}
 }

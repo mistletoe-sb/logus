@@ -1,5 +1,6 @@
 <%@ include file="../header.jsp" %>
 <%@ page contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -15,8 +16,8 @@
 			<ul class="list-group">
 		  <li class="list-group-item d-flex justify-content-between align-items-start">
 		    <div class="ms-2 me-auto">
+		    <c:if test="${routinelist1.dailyroutineActive eq 1}"><span class="badge text-bg-success">메인</span></c:if>
 		      <div class="fw-bold">${routinelist1.dailyroutineTitle }</div>
-		      여기는 태그 위치
 		    </div>
 		    <span class="badge bg-primary rounded-pill"></span>
 		    <a href="routine/${routinelist1.dailyroutineCode}" class="btn btn-primary active" aria-current="page">확인</a>
@@ -30,8 +31,8 @@
 			<ul class="list-group">
 		  <li class="list-group-item d-flex justify-content-between align-items-start">
 		    <div class="ms-2 me-auto">
+		    <c:if test="${routinelist2.dailyroutineActive eq 1}"><span class="badge text-bg-success">메인</span></c:if>
 		      <div class="fw-bold">${routinelist2.dailyroutineTitle }</div>
-		      여기는 태그 위치
 		    </div>
 		    <span class="badge bg-primary rounded-pill"></span>
 		    <a href="routine/${routinelist2.dailyroutineCode}" class="btn btn-primary active" aria-current="page">확인</a>

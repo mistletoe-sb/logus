@@ -172,9 +172,6 @@ public class LibraryController {
 			
 			memberVO = MemberService.selectMemberInfo2(memberNickname);
 			
-			System.out.println(memberVO.getMemberNickname());
-			System.out.println(sessionUser);
-			
 			model.addAttribute("memberVO", memberVO);
 			model.addAttribute("sessionUser", sessionUser);
 			
@@ -202,8 +199,6 @@ public class LibraryController {
 			dailyroutineVO.setDailyroutineActive(0);
 			
 			DailyroutineService.insertDailyroutine(dailyroutineVO);
-			
-			System.out.println(dailyroutineVO.getDailyroutineCode());
 			
 			List<DailycheckVO> checklist = DailycheckService.selectDailycheckList(dailyroutineCode);
 			

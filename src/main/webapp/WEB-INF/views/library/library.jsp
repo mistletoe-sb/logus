@@ -184,7 +184,7 @@ function followBtn2() {
 	  <c:when test="${empty routine1}"><div class="col">
 	    <div class="card">
 	      <div class="card-body">
-	      <h3 class="card-title">평일 루틴</h3>
+	      <h3 class="card-title"><span class="badge bg-secondary">평일</span></h3>
 	        <h5 class="card-text">현재 등록된 루틴이 없습니다</h5>
 	      </div>
 	    </div>
@@ -193,7 +193,7 @@ function followBtn2() {
 		  <div class="col">
 		    <div class="card">
 		      <div class="card-body">
-		      <h3 class="card-title">평일 루틴</h3>
+		      <h3 class="card-title"><span class="badge bg-secondary">평일</span></h3>
 		        <h5 class="card-text">${routine1.dailyroutineTitle}</h5>
 		        <p class="card-text">태그 위치입니다</p>
 		      	<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal1">확인</button>
@@ -207,7 +207,7 @@ function followBtn2() {
 	  <c:when test="${empty routine2}"><div class="col">
 	    <div class="card">
 	      <div class="card-body">
-	      <h3 class="card-title">주말 루틴</h3>
+	      <h3 class="card-title"><span class="badge bg-secondary">주말</span></h3>
 	        <h5 class="card-text">현재 등록된 루틴이 없습니다</h5>
 	        <p class="card-text"></p>
 	      </div>
@@ -217,7 +217,7 @@ function followBtn2() {
 	  <div class="col">
 	    <div class="card">
 	      <div class="card-body">
-	      <h3 class="card-title">주말 루틴</h3>
+	      <h3 class="card-title"><span class="badge bg-secondary">주말</span></h3>
 	        <h5 class="card-text">${routine2.dailyroutineTitle}</h5>
 	        <p class="card-text">태그 위치 입니다</p>
 	      	<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal2">확인</button>
