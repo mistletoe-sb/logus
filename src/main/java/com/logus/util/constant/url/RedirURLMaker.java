@@ -1,14 +1,9 @@
 package com.logus.util.constant.url;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.logus.util.redirectencoder.RedirEncoder;
 
 // redirect용 URL 생성 메서드를 제공하는 클래스
 public class RedirURLMaker {
-	private static Logger logger = LoggerFactory.getLogger(RedirURLMaker.class);
-	
 	private static final String REDIR = "redirect:";			// redirect 키워드
 	
 	public static final String REDIR_INDEX_URL = REDIR + "/";	// 인덱스 페이지 redirect URL
@@ -28,8 +23,7 @@ public class RedirURLMaker {
 	// 일일 스토리 목록 보기 URL(닉네임에 따라 해당 사용자의 스토리 목록으로 이동)
 	public static String makeRedirURLStoryList(String memberNickname) {
 		StringBuffer str = new StringBuffer(REDIR);
-		str = str.append(DailystoryURL.LIST_URL).replace(str.indexOf("{"), str.indexOf("}") + 1, memberNickname);
-		logger.info(str.toString());
+		str = str.append(DailystoryURL.LIST_URL).replace(str.indexOf("{") + 1, str.indexOf("}"), memberNickname);
 		return RedirEncoder.encode(str.toString());
 	}
 }
