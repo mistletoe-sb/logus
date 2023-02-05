@@ -14,12 +14,16 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.logus.manager.model.ManagerVO;
 import com.logus.manager.service.IManagerService;
+import com.logus.member.service.IMemberService;
 
 @Controller
 public class ManagerController {
 	
 	@Autowired
 	IManagerService managerService;
+	
+	@Autowired
+	private IMemberService memberService;
 	
 	@RequestMapping(value="/manager/managerlist")
 	public String getAllManagerList(Model model, HttpSession session) {
@@ -56,6 +60,7 @@ public class ManagerController {
 	public int idCheck(@RequestParam("managerId") String managerId) {
 		
 		int cnt = managerService.countManager(managerId);
+		cnt += memberService.ckeckId(managerId);
 		return cnt;
 		
 	}
@@ -66,6 +71,7 @@ public class ManagerController {
 	public int nicknameCheck(@RequestParam("managerNickname") String managerNickname) {
 		
 		int cnt = managerService.countManagerNickname(managerNickname);
+		cnt += memberService.ckeckNickname(managerNickname);
 		return cnt;
 		
 	}
@@ -88,7 +94,7 @@ public class ManagerController {
 				redirectAttributes.addFlashAttribute("message", "존재하지 않는 관리자입니다.");
 				System.out.println("존재하지 않는 관리자입니다." + managerId);
 				return "redirect:/manager/managerloginform";
-			} else if (!managerPassword.equalsIgnoreCase(vo.getManagerPassword())) {	// 관리자ID는 DB에 존재하지만 비밀번호가 불일치할 경우
+			} else if (!managerPassword.equals(vo.getManagerPassword())) {	// 관리자ID는 DB에 존재하지만 비밀번호가 불일치할 경우
 				// (확인용) 비밀번호 불일치할 경우 메시지 출력
 				redirectAttributes.addFlashAttribute("message", "비밀번호가 맞지 않습니다.");
 				System.out.println("비밀번호가 맞지 않습니다." + managerPassword + vo.getManagerPassword());
