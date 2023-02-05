@@ -15,10 +15,15 @@ public class DailyroutineService implements IDailyroutineService {
 	private IDailyroutineDAO dailyroutinedao;
 	
 	@Override
-	public void insertDailyroutine(DailyroutineVO vo) {
-		 dailyroutinedao.insertDailyroutine(vo);
+	public int insertDailyroutine(DailyroutineVO vo) {
+		 return dailyroutinedao.insertDailyroutine(vo);
 	}
-
+	
+	@Override
+	public int updateRoutineActive(String memberNickname, int dailyroutineWeekopt) {
+		return dailyroutinedao.updateRoutineActive(memberNickname, dailyroutineWeekopt);
+	}
+	
 	@Override
 	public int updateDailyroutine(DailyroutineVO vo) {
 		return dailyroutinedao.updateDailyroutine(vo);
@@ -33,10 +38,16 @@ public class DailyroutineService implements IDailyroutineService {
 	public DailyroutineVO selectDailyroutineInfo(int dailyroutineCode) {
 		return dailyroutinedao.selectDailyroutineInfo(dailyroutineCode);
 	}
-
+	
 	@Override
-	public List<DailyroutineVO> selectDailyroutineList(String memberNickname) {
-		return dailyroutinedao.selectDailyroutineList(memberNickname);
+	public DailyroutineVO selectDailyroutineActive(String memberNickname, int dailyroutineWeekopt) {
+		
+		return dailyroutinedao.selectDailyroutineActive(memberNickname, dailyroutineWeekopt);
+	}
+	
+	@Override
+	public List<DailyroutineVO> selectDailyroutineList(String memberNickname, int dailyroutineWeekopt) {
+		return dailyroutinedao.selectDailyroutineList(memberNickname, dailyroutineWeekopt);
 	}
 
 	@Override
@@ -44,4 +55,9 @@ public class DailyroutineService implements IDailyroutineService {
 		return dailyroutinedao.findDailyroutineList(option, search);
 	}
 
+	@Override
+	public void updateRoutineShared(int dailyroutineCode) {
+		
+		dailyroutinedao.updateRoutineShared(dailyroutineCode);
+	}
 }

@@ -1,21 +1,32 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="../header.jsp" %>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<!DOCTYPE html>
+<html>
+	<head>
+		<%@ include file="../header.jsp" %>
+	</head>
+	<body>
 		<p>일일 스토리 보기</p>
 		<p>작성자 : ${dsVO.memberNickname}</p>
 		<p><fmt:formatDate value="${dsVO.dailystoryUploaddate}" pattern="yyyy.MM.dd HH:mm"/></p>
 		<br>
-		<c:if test="${dsVO.memberNickname == sessionScope.user}">
-			<a href="<c:url value='/${sessionScope.user}/library/story/${dsVO.dailystoryCode}/update'/>">수정</a>
-			<a href="<c:url value='/${sessionScope.user}/library/story/${dsVO.dailystoryCode}/delete'/>">삭제</a>
+		<c:if test="${dsVO.memberNickname == sessionScope.memberNickname}">
+			<button onclick='location.href="<c:url value='/${sessionScope.memberNickname}/library/story/${dsVO.dailystoryCode}/update'/>"'>수정</button>
+			<button id="ds_del_btn">삭제</button>
 		</c:if>
 		<br>
 		<p>${dsVO.dailystoryTitle}</p>
 		<br>
-		<p>${dsVO.dailystoryContent}</p>
+		<p style="white-space: pre-line;">${dsVO.dailystoryContent}</p>
 		<br>
 		<img src="${root}/resources/images/${dsVO.dailystoryImage}" alt="${dsVO.dailystoryImage}">
-		<input type="text" name="dailystoryImage">
+		<div>
+			<c:forEach var="tg" items="${tagList}">
+				<button style="display: inline-block">${tg.tagName}</button>
+			</c:forEach>
+		</div>
 		<br><br>
 		<table>
 		<c:choose>
@@ -24,16 +35,30 @@
 			</c:when>
 			<c:otherwise>
 				<c:forEach var="rp" items="${rpList}">
-					<tr>
+					<tr class="reply_tr">
 						<td>${rp.memberNickname}</td>
-						<td>${rp.replyContent}</td>
+						<td class="reply_before_upd">
+							${rp.replyContent}
+						</td>
 						<td>		
 							<fmt:formatDate value="${rp.replyDate}" pattern="yyyy.MM.dd HH:mm"/>
 						</td>
-						<td>
-							<c:if test="${rp.memberNickname == sessionScope.user}">
-								<a href="<c:url value='/reply/update/${rp.replyCode}'/>">수정</a>
-								<a href="<c:url value='/reply/delete/${rp.replyCode}'/>">삭제</a>
+						<td class="reply_upd">
+							<c:if test="${rp.memberNickname == sessionScope.memberNickname}">
+								<div class="reply_div">
+									<p class="reply_p" onclick="updateReply(this)">수정</p>
+									<p class="reply_p" onclick="return deleteReply('<c:url 
+									value="/${dsVO.memberNickname}/${dsVO.dailystoryCode}/reply/delete/${rp.replyCode}"/>')">삭제</p>
+								</div>
+								<div class="form_reply_upd" hidden="true">
+									<form action="<c:url value='/${dsVO.memberNickname}/${dsVO.dailystoryCode}/reply/update/${rp.replyCode}'/>"
+									  	  method="post">
+								    	<textarea name="replyContent" cols="200" rows="5">${rp.replyContent}</textarea>
+								    	<input type="hidden" name="memberNickname" value="${sessionScope.memberNickname}">
+								    	<input type="submit" value="작성">
+								    	<input type="reset" class="reply_upd_reset_btn" value="취소" onclick="updateReply(this)">
+									</form>
+								</div>
 							</c:if>
 						</td>
 					</tr>
@@ -41,15 +66,19 @@
 			</c:otherwise>
 		</c:choose>
 		</table>
-		<details>
-		    <summary>댓글 작성</summary>
-		    <form action="<c:url value='/reply/insert'/>" method="post">
-		    	<textarea name="replyContent" cols="200" rows="5"></textarea>
-		    	<input type="hidden" name="memberNickname" value="${sessionScope.user}">
-		    	<input type="hidden" name="dailystoryCode" value="${dsVO.dailystoryCode}">
-		    </form>
-		</details>
+		<button id="reply_ins_btn" onclick="insertReply(this)">댓글 작성</button>
+		<div id="form_reply_ins" hidden="true">
+			<form action="<c:url value='/${dsVO.memberNickname}/reply/insert'/>" method="post">
+			    	<textarea name="replyContent" cols="200" rows="5"></textarea>
+			    	<input type="hidden" name="memberNickname" value="${sessionScope.memberNickname}">
+			    	<input type="hidden" id="dsCode_forD" name="dailystoryCode" value="${dsVO.dailystoryCode}">
+			    	<input type="submit" value="작성">
+			    	<input type="reset" id="reply_ins_reset_btn" value="취소" onclick="insertReply(this)">
+			</form>
+		</div>
 		<br>
 		<a href="<c:url value='/${dsVO.memberNickname}/library/main'/>">목록보기</a>
+		<input type="hidden" id="tagCount" value="${fn:length(tagList)}">
+		<input type="hidden" id="replyCount" value="${fn:length(rpList)}">
 	</body>
 </html>

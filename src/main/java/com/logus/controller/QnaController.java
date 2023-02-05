@@ -20,33 +20,49 @@ public class QnaController {
 	IQnaService qnaService;
 	
 	@RequestMapping(value="/manager/qna")
-	public String getAllQnaList(Model model, HttpSession session) {
-		String memberNickname = (String)session.getAttribute("memberNickname");
-		if(memberNickname == null) {
-			model.addAttribute("qnacount", qnaService.countQna());
-			model.addAttribute("qnalist", qnaService.selectQnaList());
+	public String getAllQnaList(@RequestParam(value="nowPage", required=false, defaultValue="1") int nowPage, Model model, HttpSession session) {
+		if(session.getAttribute("sessionManagerId") != null || session.getAttribute("memberNickname") != null) {
+			String memberNickname = (String)session.getAttribute("memberNickname");
+			if(memberNickname == null) {
+				model.addAttribute("qnacount", qnaService.countQna());
+				model.addAttribute("qnalist", qnaService.selectQnaList(10, nowPage));
+				model.addAttribute("totalPage", qnaService.countTotalPage(10));
+			} else {
+				model.addAttribute("qnacount", qnaService.countQna(memberNickname));
+				model.addAttribute("qnalist", qnaService.selectQnaList(memberNickname, 10, nowPage));
+				model.addAttribute("totalPage", qnaService.countTotalPage(memberNickname, 10));
+			}
+			model.addAttribute("nowPage", nowPage);
+			
+			return "manager/qna";
 		} else {
-			model.addAttribute("qnacount", qnaService.countQna(memberNickname));
-			model.addAttribute("qnalist", qnaService.selectQnaList(memberNickname));
+			return "manager/accessrestriction_manager";
 		}
-		return "manager/qna";
 	}
 	
 	@RequestMapping(value="/manager/qnadetail")
-	public String getQnaDetail(@RequestParam(value="qnaCode", required=true) int qnaCode, Model model) {
-		model.addAttribute("qnadetail", qnaService.selectQnaInfo(qnaCode));
-		return "manager/qnadetail";
+	public String getQnaDetail(@RequestParam(value="qnaCode", required=true) int qnaCode, Model model, HttpSession session) {
+		if(session.getAttribute("sessionManagerId") != null || qnaService.selectQnaInfo(qnaCode).getMemberNickname().equals((String)session.getAttribute("memberNickname"))) {
+			model.addAttribute("qnadetail", qnaService.selectQnaInfo(qnaCode));
+			return "manager/qnadetail";
+		} else {
+			return "manager/accessrestriction_manager";
+		}
 	}
 	
 	@RequestMapping(value="/manager/insertqnaform", method=RequestMethod.GET)
-	public String insertQnaForm(Model model, RedirectAttributes redirectAttributes) {
-		return "manager/insertqnaform";
+	public String insertQnaForm(Model model, RedirectAttributes redirectAttributes, HttpSession session) {
+		if(session.getAttribute("memberNickname") != null) {
+			return "manager/insertqnaform";
+		} else {
+			return "manager/accessrestriction_manager";
+		}
 	}
 	
 	@RequestMapping(value="/manager/insertqna", method=RequestMethod.POST)
 	public String insertQna(QnaVO qnavo, RedirectAttributes redirectAttributes) {
 		try {
-			System.out.println("insertqna VO프린트" + qnavo + qnavo.getQnaTitle() + qnavo.getQnaContent() + qnavo.getMemberNickname());
+//			System.out.println("insertqna VO프린트" + qnavo + qnavo.getQnaTitle() + qnavo.getQnaContent() + qnavo.getMemberNickname());
 			qnaService.insertQna(qnavo);
 //			redirectAttributes.addFlashAttribute("message", boardvo.getBoardCode() + "번 글이 등록되었습니다.");
 		} catch(Exception e) {
@@ -57,9 +73,13 @@ public class QnaController {
 	}
 	
 	@RequestMapping(value="/manager/updateqnaform", method=RequestMethod.GET)
-	public String updatetQnaForm(@RequestParam(value="qnaCode", required=true, defaultValue="1") int qnaCode, Model model) {
-		model.addAttribute("qnadetail", qnaService.selectQnaInfo(qnaCode));
-		return "manager/updateqnaform";
+	public String updatetQnaForm(@RequestParam(value="qnaCode", required=true, defaultValue="1") int qnaCode, Model model, HttpSession session) {
+		if(qnaService.selectQnaInfo(qnaCode).getMemberNickname().equals((String)session.getAttribute("memberNickname"))) {
+			model.addAttribute("qnadetail", qnaService.selectQnaInfo(qnaCode));
+			return "manager/updateqnaform";
+		} else {
+			return "manager/accessrestriction_manager";
+		}
 	}
 	
 	@RequestMapping(value="/manager/updateqna", method=RequestMethod.POST)
@@ -70,15 +90,23 @@ public class QnaController {
 	}
 	
 	@RequestMapping(value="/manager/deleteqna", method=RequestMethod.GET)
-	public String deleteQna(@RequestParam(value="qnaCode", required=true, defaultValue="1") int qnaCode, Model model, RedirectAttributes redirectAttributes) {
-		qnaService.deleteQna(qnaCode);
-		return "redirect:/manager/qna";
+	public String deleteQna(@RequestParam(value="qnaCode", required=true, defaultValue="1") int qnaCode, Model model, RedirectAttributes redirectAttributes, HttpSession session) {
+		if(qnaService.selectQnaInfo(qnaCode).getMemberNickname().equals((String)session.getAttribute("memberNickname"))) {
+			qnaService.deleteQna(qnaCode);
+			return "redirect:/manager/qna";
+		} else {
+			return "manager/accessrestriction_manager";
+		}
 	}
 	
 	@RequestMapping(value="/manager/insertanswerform", method=RequestMethod.GET)
-	public String insertAnswerForm(@RequestParam(value="qnaCode", required=true, defaultValue="1") int qnaCode, Model model) {
-		model.addAttribute("qnadetail", qnaService.selectQnaInfo(qnaCode));
-		return "manager/insertanswerform";
+	public String insertAnswerForm(@RequestParam(value="qnaCode", required=true, defaultValue="1") int qnaCode, Model model, HttpSession session) {
+		if(session.getAttribute("sessionManagerId") != null) {
+			model.addAttribute("qnadetail", qnaService.selectQnaInfo(qnaCode));
+			return "manager/insertanswerform";
+		} else {
+			return "manager/accessrestriction_manager";
+		}
 	}
 	
 	@RequestMapping(value="/manager/insertanswer", method=RequestMethod.POST)
@@ -88,9 +116,13 @@ public class QnaController {
 	}
 	
 	@RequestMapping(value="/manager/updateanswerform", method=RequestMethod.GET)
-	public String updateAnswerForm(@RequestParam(value="qnaCode", required=true, defaultValue="1") int qnaCode, Model model, RedirectAttributes redirectAttributes) {
-		model.addAttribute("qnadetail", qnaService.selectQnaInfo(qnaCode));
-		return "manager/updateanswerform";
+	public String updateAnswerForm(@RequestParam(value="qnaCode", required=true, defaultValue="1") int qnaCode, Model model, RedirectAttributes redirectAttributes, HttpSession session) {
+		if(session.getAttribute("sessionManagerId") != null) {
+			model.addAttribute("qnadetail", qnaService.selectQnaInfo(qnaCode));
+			return "manager/updateanswerform";
+		} else {
+			return "manager/accessrestriction_manager";
+		}
 	}
 	
 	@RequestMapping(value="/manager/updateanswer", method=RequestMethod.POST)
@@ -100,8 +132,12 @@ public class QnaController {
 	}
 	
 	@RequestMapping(value="/manager/deleteanswer", method=RequestMethod.GET)
-	public String deleteAnswer(@RequestParam(value="qnaCode", required=true, defaultValue="1") int qnaCode, Model model, RedirectAttributes redirectAttributes) {
-		qnaService.deleteAnswer(qnaService.selectQnaInfo(qnaCode));
-		return "redirect:/manager/qnadetail?qnaCode=" + qnaCode;
+	public String deleteAnswer(@RequestParam(value="qnaCode", required=true, defaultValue="1") int qnaCode, Model model, RedirectAttributes redirectAttributes, HttpSession session) {
+		if(session.getAttribute("sessionManagerId") != null) {
+			qnaService.deleteAnswer(qnaService.selectQnaInfo(qnaCode));
+			return "redirect:/manager/qnadetail?qnaCode=" + qnaCode;
+		} else {
+			return "manager/accessrestriction_manager";
+		}
 	}
 }

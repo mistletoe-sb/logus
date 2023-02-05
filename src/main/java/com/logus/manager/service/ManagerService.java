@@ -31,6 +31,11 @@ public class ManagerService implements IManagerService {
 	}
 	
 	@Override
+	public int countManagerNickname(String managerNickname) {
+		return managerDAO.countManagerNickname(managerNickname);
+	}
+	
+	@Override
 	public void insertManager(ManagerVO vo) {
 		managerDAO.insertManager(vo);
 	}
@@ -59,7 +64,5 @@ public class ManagerService implements IManagerService {
 	public List<MemberVO> selectMemberList() {
 		return memberDAO.selectMemberList();
 	}
-
-
 
 }

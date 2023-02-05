@@ -24,7 +24,7 @@
 			]]>
 		</if>
 		<![CDATA[
-			ORDER BY answer_date DESC, qna_date DESC
+			ORDER BY answer_date DESC, qna_date DESC, qna_code DESC
 		]]>
 	</select>
 

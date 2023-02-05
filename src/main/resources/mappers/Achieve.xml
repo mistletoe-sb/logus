@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- mapper의 namespace와 Interface 경로 동일하게 설정 >> mapper 후보로 등록 -->
+<mapper namespace="com.logus.achieve.dao.IAchieveDAO">
+
+	<insert id="insertAchieve" parameterType="com.logus.achieve.model.AchieveVO">
+		<![CDATA[
+		INSERT INTO LOGUS.ACHIEVE (ACHIEVE_CODE, MEMBER_NICKNAME, ACHIEVE_RATE, ACHIEVE_DATE)
+		VALUES(ACHIEVE_CODE_SEQ.nextval, #{memberNickname}, #{achieveRate}, #{achieveDate})
+		]]>
+	</insert>
+	
+	<select id="selectAchieve" resultType="int" parameterType="string">
+		<![CDATA[
+		SELECT COUNT(*) FROM LOGUS.ACHIEVE WHERE MEMBER_NICKNAME = #{memberNickname} AND ACHIEVE_DATE = #{today}
+		]]>
+	</select>
+	
+	<select id="selectAchieveToday" parameterType="string" resultType="int">
+		<![CDATA[
+		SELECT sum(achieve_rate) FROM LOGUS.ACHIEVE WHERE MEMBER_NICKNAME = #{memberNickname} AND ACHIEVE_DATE =TO_CHAR(SYSDATE,'YYYYMMDD')
+		]]>
+	</select>
+	
+	<select id="selectAchieveWeek" parameterType="string" resultType="int">
+		<![CDATA[
+		SELECT (sum(achieve_rate)/7) FROM achieve WHERE MEMBER_NICKNAME=#{memberNickname} and ACHIEVE_DATE >= TO_CHAR(SYSDATE-7,'YYYYMMDD')
+		]]>
+	</select>
+</mapper>
