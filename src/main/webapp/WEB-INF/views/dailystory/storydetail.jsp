@@ -1,13 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 	<head>
-		<%@ include file="../header.jsp" %>
+		<%@ include file="../include.jsp" %>
 	</head>
 	<body>
+		<%@ include file="../header_body.jsp" %>
 		<p>일일 스토리 보기</p>
 		<p>작성자 : ${dsVO.memberNickname}</p>
 		<p><fmt:formatDate value="${dsVO.dailystoryUploaddate}" pattern="yyyy.MM.dd HH:mm"/></p>

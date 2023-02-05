@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="../header.jsp" %>
-
+<!DOCTYPE html>
+<html>
+	<head>
+		<%@ include file="../include.jsp" %>
+	</head>
+	<body>
+		<%@ include file="../header_body.jsp" %>
 		<p>일일 스토리 수정 폼</p>
 		<br>
 		<form action="<c:url value='/${sessionScope.memberNickname}/library/story/update'/>" method="post" enctype="multipart/form-data">

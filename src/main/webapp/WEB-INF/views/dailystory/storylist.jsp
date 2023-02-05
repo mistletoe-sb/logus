@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="../header.jsp" %>
-
+<!DOCTYPE html>
+<html>
+	<head>
+		<%@ include file="../include.jsp" %>
+	</head>
+	<body>
+		<%@ include file="../header_body.jsp" %>
 		<p>일일 스토리 리스트 출력 화면(서재 메인 페이지)</p>
 		<div id="search_in_dailystory">
 			<form method="get" action="<c:url value='/library/search'/>">
