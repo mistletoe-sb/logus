@@ -11,6 +11,10 @@
 		<form action="<c:url value='/login'/>" method="post">
 			<label>ID</label><br>
 			<input type="text" name="memberId" id="memberId" value= "${memberId}"  maxlength="20" placeholder="아이디를 입력 해주세요." required>
+			
+			<label>IDCheck</label><br>
+			<input type="text" name="memberIdCheck" id="memberId" value= "${memberIdCheck}"  maxlength="20" placeholder="중복체크" required>
+			
 			<label>Password</label><br>
 			<input type="password" name="memberPassword" id="memberPassword" value="${memberPassword}" maxlength="16" placeholder="비밀번호를 입력 해주세요." required>
 <br>

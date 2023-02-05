@@ -36,6 +36,7 @@
 							<li><a>${sessionScope.memberId}(${sessionScope.memberNickname})님 환영합니다.</a></li>
 							<button type="button" class="btn btn-secondary">마이페이지</button>
 							<button type="button" class="btn btn-secondary" onclick="location.href='<c:url value='/logout'/>'">로그아웃</button>
+							<button type="button" class="btn btn-secondary" onclick="location.href='<c:url value='/followList'/>'">팔로우</button>
 						</c:otherwise>
 					</c:choose>
 				</div>
