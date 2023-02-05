@@ -60,7 +60,7 @@
 				</div>
 			</form>
 			
-			<form action="<c:url value='/memberLogin'/>" method="post" class="form-floating">
+			<form action="<c:url value='findId'/>" method="post" class="form-floating">
 				<!-- Button trigger modal -->
 				<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
 				Launch static backdrop modal
@@ -81,7 +81,7 @@
 							</div>
 							<div class="input-group mb-3">
 								<span class="input-group-text" id="inputGroup-sizing-default">생년월일</span>
-								<input type="date" name=memberBirth id="memberBirth" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+								<input type="date" name="memberBirth" id="memberBirth" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
 							</div>
 							<div class="input-group mb-3">
 								<input type="hidden" name = hiddenPhone id=hiddenPhone value="false">
@@ -90,7 +90,7 @@
 						 	</div>	
 						</div>
 					      	<div class="modal-footer">
-					      		<button type="button" class="btn btn-primary">확인</button>
+					      		<button type="submit" class="btn btn-primary">확인</button>
 					        	<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
 					      	</div>
 					  	</div>
@@ -121,12 +121,7 @@
 
 	}
 	
-	const myModal = document.getElementById('myModal')
-	const myInput = document.getElementById('myInput')
 
-	myModal.addEventListener('shown.bs.modal', () => {
-	  myInput.focus()
-	})
 	
 
 			

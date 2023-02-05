@@ -1,6 +1,7 @@
 package com.logus.controller;
 
 import java.io.File;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -115,14 +116,17 @@ public class MemberController {
 	
 	@RequestMapping(value="/findId", method=RequestMethod.POST)
 	public String findId(MemberVO vo,  Model model, RedirectAttributes redirectAttributes) {
+		System.out.println(vo.getMemberName());
 		try {
-			if(profile.getSize() != 0) {
-				String profileURL = PATH + "\\" + profile.getOriginalFilename();
-				profile.transferTo(new File(profileURL));
-				vo.setMemberProfile(profile.getOriginalFilename());
+			System.out.println("!!!!!!!!!!!"+vo);
+			List<MemberVO> list= memberService.findId(vo);
+			
+			for(int i=0; i<list.size(); i++) {
+		 System.out.println("아이디는 ?? "+String.valueOf(list.get(i).getMemberId()));
 			}
-			memberService.findId(vo);
-			redirectAttributes.addFlashAttribute("message", vo.getMemberId()+"님 회원가입이 완료 되었습니다.");
+			
+			redirectAttributes.addFlashAttribute("message", String.valueOf(list.get(0).getMemberId())+"님 아이디 입니다.");
+			
 		}catch(RuntimeException e) {
 			redirectAttributes.addFlashAttribute("message", e.getMessage());
 		} catch (Exception e) {

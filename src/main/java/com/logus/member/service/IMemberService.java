@@ -16,6 +16,6 @@ public interface IMemberService {
 	MemberVO selectMemberInfo(String memberId);	// 해당 회원정보 검색 서비스
 	MemberVO loginCheck(String memberId, String memberPassword);	// 로그인 유효성 검사 서비스
 	boolean overlapCheck(String nameAttr, String value);			// 중복 검사 서비스(ID, 닉네임)
-	List<String> findId(MemberVO vo);				// ID 찾기 서비스
+	List<MemberVO> findId(MemberVO vo);				// ID 찾기 서비스
 	String findPassword(String memberId, String nameAttr, String value);	// 비밀번호 찾기 서비스
 }

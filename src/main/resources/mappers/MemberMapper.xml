@@ -39,7 +39,7 @@
 		]]>
 	</select>
 	
-	<select id="selectMemberId" resultType="com.logus.member.model.MemberVO" parameterType="string">
+	<select id="findMember" resultType="com.logus.member.model.MemberVO" parameterType="com.logus.member.model.MemberVO">
 		<![CDATA[
 			SELECT * 
 			FROM LOGUS.MEMBER 

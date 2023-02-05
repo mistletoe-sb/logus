@@ -23,7 +23,7 @@ public interface IMemberDAO {
 	List<MemberVO> selectMemberList(boolean isExit);									// 탈퇴 여부에 따라 회원정보 목록 반환(true:탈퇴/false:현재회원)
 	
 	// 해당하는 ID 목록 반환(이메일 or 휴대폰 번호 입력)
-	List<String> findMember(MemberVO vo);
+	List<MemberVO> findMember(MemberVO vo);
 	
 	// 해당하는 ID 반환(ID + 이메일 or 휴대폰 번호 입력)
 	String findMembers(String memberName, String memberEmail, String memberPhone);
