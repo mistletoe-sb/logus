@@ -142,7 +142,7 @@ public class ManagerController {
 	@RequestMapping(value="/manager/insertmanager", method=RequestMethod.POST)
 	public String insertManager(ManagerVO vo, RedirectAttributes redirectAttributes) {
 		managerService.insertManager(vo);
-		return "redirect:/manager/managerloginform";
+		return "redirect:/manager/managerlist";
 	}
 	
 	@RequestMapping(value="/manager/deletemanager")
