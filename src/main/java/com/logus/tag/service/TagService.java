@@ -115,7 +115,7 @@ public class TagService implements ITagService {
 	}
 	
 	@Override
-	// 문자열 형태로 나열된 태그들을 분리하여 TagVO 리스트로 반환하는 메서드(게시물 추가 시 입력받은 태그를 DB에 insert하기 위해 작동)
+	// 문자열 형태로 나열된 태그들을 분리하여 TagVO 리스트로 반환하는 메서드(게시물 추가 시 입력받은 태그를 DB에 insert하기 위해 사용)
 	public List<TagVO> makeTagList(String tags, int tagCategory, int foreignKeyCode){
 		String[] splitTags = tags.split(" ");			// 태그가 나열된 문자열 split
 		
@@ -140,7 +140,7 @@ public class TagService implements ITagService {
 	}
 	
 	@Override
-	// DB에서 select한 TagVO 리스트를 하나의 문자열 형태로 만들어 반환하는 메서드(게시물 수정 시 분리된 태그들을 하나의 입력 폼에 표시하기 위해 작동)
+	// DB에서 select한 TagVO 리스트를 하나의 문자열 형태로 만들어 반환하는 메서드(게시물 수정 시 분리된 태그들을 하나의 입력 폼에 표시하기 위해 사용)
 	public String makeTagString(List<TagVO> vo) {
 		String tags = "";
 		for(TagVO tag : vo) {
@@ -154,7 +154,7 @@ public class TagService implements ITagService {
 	}
 	
 	@Override
-	// 화면에 표시될 게시물 목록의 각 태그 목록을 Map 형태로 반환
+	// 화면에 표시될 게시물 목록의 각 태그 목록을 Map 형태로 반환(게시물 목록 표시할 때 각 게시물의 태그도 같이 표시하기 위해 사용)
 	public Map<Integer,List<TagVO>> makeTagListMap(int tagCategory, List<Integer> foreignKeyCode) {
 		Map<Integer,List<TagVO>> map = new HashMap<Integer,List<TagVO>>();
 		List<TagVO> tagList = tagDAO.selectAllTagList(tagCategory, foreignKeyCode);		// select 태그 목록

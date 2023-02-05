@@ -2,6 +2,7 @@ package com.logus.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -114,11 +115,18 @@ public class DailystoryController {
 	// 일일 스토리 목록 조회(내 서재 메인)
 	public String selectDailystoryList(@PathVariable String memberNickname, Model model) {
 		List<DailystoryVO> dsList = dailystoryService.selectDailystoryList(memberNickname);	// 해당 닉네임의 일일 스토리 목록 조회
+		// select한 일일 스토리 코드 목록 생성
+		List<Integer> codeList = new ArrayList<Integer>();
+		for(DailystoryVO vo : dsList) {
+			codeList.add(vo.getDailystoryCode());
+		}
 		List<Integer> rpCount = replyService.countReplyDailystoryList(memberNickname);		// 각 스토리별 댓글 수 조회
+		Map<Integer, List<TagVO>> tagList = tagService.makeTagListMap(TagCategory.DAILY_STORY, codeList);
 		// 모델에 조회한 데이터 저장
 		model.addAttribute("memberNickname", memberNickname);
 		model.addAttribute("dsList", dsList);
 		model.addAttribute("rpCount", rpCount);
+		model.addAttribute("tagList", tagList);
 		return "dailystory/storylist";		// 스토리 목록 보기 view(서재 메인 페이지)로 이동
 	}
 	
