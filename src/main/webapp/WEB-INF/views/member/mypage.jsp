@@ -71,6 +71,10 @@
             $('#contents').html(data);
         });
     }
+    
+    
+    
+    
  
 </script>
     

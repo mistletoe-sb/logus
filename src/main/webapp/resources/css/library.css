@@ -1,0 +1,22 @@
+.card {
+	width: 18rem;
+	cursor: pointer;
+}
+
+.reply_p {
+	cursor: pointer;
+	display: inline-block;
+}
+
+#search_in_dailystory {
+	width: 350px;
+	height: 50px;
+}
+
+#search_in_dailystory input {
+	display: inline-block;
+}
+
+#search_txt_in_dailystory {
+	width: 250px !important;
+}

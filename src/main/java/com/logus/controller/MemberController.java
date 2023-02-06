@@ -1,6 +1,8 @@
 package com.logus.controller;
 
 import java.io.File;
+import java.security.SecureRandom;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -25,6 +27,28 @@ import com.logus.member.service.MemberService;
 // 회원정보 서비스 컨트롤러 클래스
 public class MemberController {
 	
+	   public String getRamdomPassword(int size) {
+	        char[] charSet = new char[] {
+	                '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+	                'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
+	                'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
+	                '!', '@', '#', '$', '%', '^', '&' };
+
+	        StringBuffer sb = new StringBuffer();
+	        SecureRandom sr = new SecureRandom();
+	        sr.setSeed(new Date().getTime());
+
+	        int idx = 0;
+	        int len = charSet.length;
+	        for (int i=0; i<size; i++) {
+	            // idx = (int) (len * Math.random());
+	            idx = sr.nextInt(len);    // 강력한 난수를 발생시키기 위해 SecureRandom을 사용한다.
+	            sb.append(charSet[idx]);
+	        }
+
+	        return sb.toString();
+	    }
+	
 	private static final String PATH = "C:\\project_labs\\spring_workspace\\logus\\src\\main\\webapp\\resources\\images\\member";
 	
 	@Autowired
@@ -34,7 +58,7 @@ public class MemberController {
 	
 	@RequestMapping(value="/test/count")
 	public String empCount(Model model) {
-		model.addAttribute("count", memberService.countMember());
+		model.addAttribute("count", memberService.countMember(true));
 		return view_pos + "count";
 	}
 	
@@ -114,27 +138,83 @@ public class MemberController {
 		}
 	}
 	
-	@RequestMapping(value="/findId", method=RequestMethod.POST)
-	public String findId(MemberVO vo,  Model model, RedirectAttributes redirectAttributes) {
+	@RequestMapping(value = "/findId", method = RequestMethod.POST)
+	public String findId(MemberVO vo, Model model, RedirectAttributes redirectAttributes) {
 		System.out.println(vo.getMemberName());
+
 		try {
-			System.out.println("!!!!!!!!!!!"+vo);
-			List<MemberVO> list= memberService.findId(vo);
 			
-			for(int i=0; i<list.size(); i++) {
-		 System.out.println("아이디는 ?? "+String.valueOf(list.get(i).getMemberId()));
+			System.out.println("!!!!!!!!!!!" + vo);
+			List<MemberVO> list = null;
+			String findId = null;
+			MemberVO MemberInfo = null;
+			Date outMember = null;
+
+			if (vo.getMemberId() == null) {
+				
+
+				try {
+					list = memberService.findId(vo);
+					findId = String.valueOf(list.get(0).getMemberId());
+					MemberInfo = memberService.selectMemberInfo(String.valueOf(list.get(0).getMemberId()));
+					outMember = MemberInfo.getMemberOutdate();
+				} catch (RuntimeException e) {
+					System.out.println("리스트 널포인터 에러");
+				}
+
+				for (int i = 0; i < list.size(); i++) {
+					System.out.println("아이디 찾기 아이디는 ?? " + String.valueOf(list.get(i).getMemberId()));
+				}
+				if (findId == null) {
+					redirectAttributes.addFlashAttribute("message", "조회가 되지 않는 정보입니다. 다시 확인 해주세요.");
+				} else {
+					if (outMember == null) {
+						redirectAttributes.addFlashAttribute("message",
+								String.valueOf(list.get(0).getMemberId()) + "님 아이디 입니다.");
+					} else {
+						redirectAttributes.addFlashAttribute("message", "탈퇴한 계정입니다. 관리자에게 문의 바랍니다.");
+					}
+
+				}
+
+			} else {
+
+				try {
+					list = memberService.findId(vo);
+					findId = String.valueOf(list.get(0).getMemberId());
+					MemberInfo = memberService.selectMemberInfo(String.valueOf(list.get(0).getMemberId()));
+					outMember = MemberInfo.getMemberOutdate();
+				} catch (RuntimeException e) {
+					System.out.println("리스트 널포인터 에러");
+				}
+
+				for (int i = 0; i < list.size(); i++) {
+					System.out.println("비밀번호 찾기 아이디는 ?? " + String.valueOf(list.get(i).getMemberId()));
+				}
+				if (findId == null) {
+					redirectAttributes.addFlashAttribute("message", "조회가 되지 않는 정보입니다. 다시 확인 해주세요.");
+				} else {
+					if (outMember == null) {
+						String newPassword = getRamdomPassword(12);
+						vo.setMemberPassword(newPassword);
+						memberService.updatePassword(vo);
+						redirectAttributes.addFlashAttribute("message", "임시 비밀번호 발급 : " + newPassword);
+					} else {
+						redirectAttributes.addFlashAttribute("message", "탈퇴한 계정입니다. 관리자에게 문의 바랍니다.");
+					}
+
+				}
+				
 			}
-			
-			redirectAttributes.addFlashAttribute("message", String.valueOf(list.get(0).getMemberId())+"님 아이디 입니다.");
-			
-		}catch(RuntimeException e) {
-			redirectAttributes.addFlashAttribute("message", e.getMessage());
+
+		} catch (RuntimeException e) {
+			redirectAttributes.addFlashAttribute("message", "런타임 에러");
 		} catch (Exception e) {
-			redirectAttributes.addFlashAttribute("message", e.getMessage());
+			redirectAttributes.addFlashAttribute("message", "그냥 에러");
 		}
-		return "redirect:"+  "loginform";
+		return "redirect:" + "loginform";
 	}
-	
+
 	@RequestMapping(value="/logout", method=RequestMethod.GET)
 	public String memberLogout(HttpSession session, HttpServletRequest request) {
 		session.invalidate();
@@ -215,3 +295,4 @@ public class MemberController {
 	}
 
 }
+
