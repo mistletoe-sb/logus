@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="header.jsp" %>
-
+<!DOCTYPE html>
+<html>
+	<head>
+		<%@ include file="include.jsp" %>
+	</head>
+	<body>
+		<%@ include file="header_body.jsp" %>
 		<div>
 			<h1>
 				Log Us에 오신 것을 환영합니다!

@@ -1,5 +1,6 @@
 package com.logus.dailystory.service;
 
+import java.io.File;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -56,12 +57,17 @@ public class DailystoryService implements IDailystoryService {
 	@Override
 	@Transactional
 	// 일일 스토리 삭제
-	public void deleteDailystory(int dailystoryCode, int tagCount, int replyCount) {
+	public void deleteDailystory(int dailystoryCode, int tagCount, int replyCount, File file) {
 		tagService.deleteAllTagInPost(TagCategory.DAILY_STORY, dailystoryCode, tagCount);	// 해당 스토리의 태그 삭제
 		replyService.deleteAllReplyInDailyStory(dailystoryCode, replyCount);	// 해당 스토리의 댓글 삭제
-		int check = dailystoryDAO.deleteDailystory(dailystoryCode);				// 해당 일일 스토리 삭제(마지막으로 처리)
+		int check = dailystoryDAO.deleteDailystory(dailystoryCode);				// 해당 일일 스토리 삭제
 		if(check != 1) {
 			logger.debug("^ daily story delete failed.");			// delete된 일일 스토리가 1개가 아니면 예외 발생
+		}
+		if(file != null) {			// 삭제할 파일이 존재할 경우
+			if(!file.delete()) {
+				logger.debug("^ daily story file delete failed.");	// 파일 삭제 실패 시 예외 발생
+			}
 		}
 	}
 

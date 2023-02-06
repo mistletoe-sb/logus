@@ -1,6 +1,7 @@
 package com.logus.tag.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -57,9 +58,7 @@ public class TagService implements ITagService {
 		for(int i = 0; i < tagCodeCount; i++) {
 			if(i < tagCount) {
 				tags.get(i).setTagCode(tagCodes.get(i));
-				logger.info("i번째 : " + tags.get(i).getTagCode());
 			} else {
-				logger.info("index : " + i);
 				break;
 			}
 		}
@@ -78,7 +77,7 @@ public class TagService implements ITagService {
 	
 	@Override
 	@Transactional
-	// 태그 수정(게시물 수정 시 작동)
+	// 태그 수정
 	public void updateTags(List<TagVO> tags) {
 		int check = 0;
 		for(TagVO vo : tags) {
@@ -116,7 +115,7 @@ public class TagService implements ITagService {
 	}
 	
 	@Override
-	// 문자열 형태로 나열된 태그들을 분리하여 TagVO 리스트로 반환하는 메서드(게시물 추가 시 입력받은 태그를 DB에 insert하기 위해 작동)
+	// 문자열 형태로 나열된 태그들을 분리하여 TagVO 리스트로 반환하는 메서드(게시물 추가 시 입력받은 태그를 DB에 insert하기 위해 사용)
 	public List<TagVO> makeTagList(String tags, int tagCategory, int foreignKeyCode){
 		String[] splitTags = tags.split(" ");			// 태그가 나열된 문자열 split
 		
@@ -141,7 +140,7 @@ public class TagService implements ITagService {
 	}
 	
 	@Override
-	// DB에서 select한 TagVO 리스트를 하나의 문자열 형태로 만들어 반환하는 메서드(게시물 수정 시 분리된 태그들을 하나의 입력 폼에 표시하기 위해 작동)
+	// DB에서 select한 TagVO 리스트를 하나의 문자열 형태로 만들어 반환하는 메서드(게시물 수정 시 분리된 태그들을 하나의 입력 폼에 표시하기 위해 사용)
 	public String makeTagString(List<TagVO> vo) {
 		String tags = "";
 		for(TagVO tag : vo) {
@@ -155,9 +154,36 @@ public class TagService implements ITagService {
 	}
 	
 	@Override
-	// 화면에 표시될 게시물 목록의 각 태그 목록을 Map 형태로 반환
-	public Map<Integer,List<TagVO>> makeTagListMap(int tagCategory, List<Integer> foreignKeyCode, List<TagVO> tagList) {
-		//Map<Integer,List<TagVO>> map = new HashMap<Integer,List<TagVO>>();
-		return null;
+	// 화면에 표시될 게시물 목록의 각 태그 목록을 Map 형태로 반환(게시물 목록 표시할 때 각 게시물의 태그도 같이 표시하기 위해 사용)
+	public Map<Integer,List<TagVO>> makeTagListMap(int tagCategory, List<Integer> foreignKeyCode) {
+		Map<Integer,List<TagVO>> map = new HashMap<Integer,List<TagVO>>();
+		List<TagVO> tagList = tagDAO.selectAllTagList(tagCategory, foreignKeyCode);		// select 태그 목록
+		
+		int index = 0;	// 검토할 태그 목록 인덱스
+		
+		// select한 태그 목록에서 code와 동일한 FK값을 갖는 태그 목록을 추출
+		for(Integer code : foreignKeyCode) {
+			List<TagVO> tempList = new ArrayList<TagVO>();
+			for(int i = index; i < tagList.size(); i++) {
+				boolean isEqual = false;
+				// 카테고리에 따라 참조할 필드 변경
+				switch (tagCategory) {
+					case TagCategory.DAILY_STORY:
+						isEqual = (code == Integer.parseInt(tagList.get(index).getDailystoryCode()));
+						break;
+					case TagCategory.DAILY_ROUTINE:
+						isEqual = (code == Integer.parseInt(tagList.get(index).getDailyroutineCode()));
+						break;
+				}
+				if(isEqual) {
+					tempList.add(tagList.get(index));
+					index++;
+				} else {
+					break;
+				}
+			}
+			map.put(code, tempList);
+		}
+		return map;
 	}
 }

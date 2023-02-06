@@ -1,27 +1,35 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 	<head>
-		<%@ include file="../header.jsp" %>
+		<%@ include file="../include.jsp" %>
 	</head>
 	<body>
+		<%@ include file="../header_body.jsp" %>
 		<p>일일 스토리 보기</p>
 		<p>작성자 : ${dsVO.memberNickname}</p>
 		<p><fmt:formatDate value="${dsVO.dailystoryUploaddate}" pattern="yyyy.MM.dd HH:mm"/></p>
 		<br>
 		<c:if test="${dsVO.memberNickname == sessionScope.memberNickname}">
 			<button onclick='location.href="<c:url value='/${sessionScope.memberNickname}/library/story/${dsVO.dailystoryCode}/update'/>"'>수정</button>
-			<button id="ds_del_btn">삭제</button>
+			<button id="ds_del_btn" onclick="deleteStory('<c:url 
+					value="/${sessionScope.memberNickname}/library/main"/>')">삭제</button>
 		</c:if>
 		<br>
 		<p>${dsVO.dailystoryTitle}</p>
 		<br>
 		<p style="white-space: pre-line;">${dsVO.dailystoryContent}</p>
 		<br>
-		<img src="${root}/resources/images/${dsVO.dailystoryImage}" alt="${dsVO.dailystoryImage}">
+		<c:choose>
+			<c:when test='${(dsVO.dailystoryImage != null) && (dsVO.dailystoryImage != "")}'>
+				<img id="thumbnail_img" src="<c:url value='/resources/images/dailystory/${dsVO.dailystoryImage}'/>" alt="${dsVO.dailystoryImage}"
+					 width="200" height="200">				  	
+			</c:when>
+			<c:otherwise>
+				<img id="thumbnail_img" src="<c:url value='/resources/images/preview_image.jpg'/>" alt="preview_thumbnail_img"
+					 width="200" height="200">				  	
+			</c:otherwise>
+		</c:choose>
 		<div>
 			<c:forEach var="tg" items="${tagList}">
 				<button style="display: inline-block">${tg.tagName}</button>

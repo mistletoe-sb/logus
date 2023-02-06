@@ -31,12 +31,12 @@
 
 	</script>
 	<head>
-		<c:set var="root" value="${pageContext.request.contextPath}"/>
+		<%-- <c:set var="root" value="${pageContext.request.contextPath}"/> --%>
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
-		<link rel="stylesheet" href="${root}/resources/css/library.css">
+		<link rel="stylesheet" href="<c:url value='/resources/css/library.css'/>">
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-		<script src="${root}/resources/js/jquery-3.6.3.min.js"></script>
-		<script src="${root}/resources/js/dailystory.js"></script>
+		<script src="<c:url value='/resources/js/jquery-3.6.3.min.js'/>"></script>
+		<script src="<c:url value='/resources/js/dailystory.js'/>"></script>
 		<meta charset="UTF-8">
 		<title>Log Us</title>
 	</head>
@@ -45,7 +45,7 @@
 			<nav class="navbar bg-light">
 				<div class="container-fluid">
 					<a class="navbar-brand" href="#">
-						<img src="${root}/resources/images/logo.png" 
+						<img src="<c:url value='/resources/images/logo.png'/>" 
 							 alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
 						Logus
 				  </a>
@@ -72,8 +72,9 @@
 						</c:otherwise>
 					</c:choose>
 				</div>
+<%-- 					<form id="search" name="searchform" class="d-flex" role="search" action="<c:url value='/search'/>" method="post"> --%>
 				<div class="container-fluid">
-					<form id="search" name="searchform" class="d-flex" role="search" action="<c:url value='/search'/>" method="post">
+					<form id="search" name="searchform" class="d-flex" role="search" action="<c:url value='/library/search'/>" method="get">
 						<select class="form-select" aria-label="Default select example" name="option">
 							<option value="0" selected>전체</option>
 							<option value="1">태그</option>
