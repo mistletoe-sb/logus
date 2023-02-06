@@ -75,19 +75,8 @@
 	</body>
 	
 	<script type="text/javascript">
-	var alert_message = $('#message').val();
-	if(alert_message != ""){
-		alert(alert_message);
-	}
+
 	
-	function memberDelete(){
-		
-		var pw =  $('#memberPassword').val();
-		
-		if (pw == ""){
-			alert("비밀번호를 입력하세요");
-		}
-	}
 
 	</script>
 </html>

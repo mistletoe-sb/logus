@@ -25,13 +25,14 @@ public interface IMemberDAO {
 	List<MemberVO> selectMemberList(@Param("isExit")boolean isExit);					// 탈퇴 여부에 따라 회원정보 목록 반환(true:탈퇴/false:현재회원)
 	
 	// 해당하는 ID 목록 반환(이메일 or 휴대폰 번호 입력)
-	List<String> findMember(MemberVO vo);
+	List<MemberVO> findMember(MemberVO vo);
 	
 	// 해당하는 ID 반환(ID + 이메일 or 휴대폰 번호 입력)
 	String findMembers(String memberName, String memberEmail, String memberPhone);
 	
 	int insertMember(MemberVO vo);														// 회원정보 insert
 	int updateMember(MemberVO vo);														// 회원정보 update
+	int updatePassword(MemberVO vo);
 	int outMember(String memberId);													// 해당 ID의 탈퇴일 update
 	int deleteMember(String memberId);													// 해당 ID의 회원정보 delete	
 }	

@@ -32,6 +32,12 @@ public class MemberService implements IMemberService {
 	public void updateMember(MemberVO vo) {
 		memberDAO.updateMember(vo);
 	}
+	
+	@Override
+	// 정보수정 서비스
+	public void updatePassword(MemberVO vo) {
+		memberDAO.updatePassword(vo);
+	}
 
 	@Override
 	// 회원탈퇴 서비스
@@ -101,7 +107,8 @@ public class MemberService implements IMemberService {
 
 	@Override
 	// ID 찾기 서비스
-	public List<String> findId(MemberVO vo) {
+	public List<MemberVO> findId(MemberVO vo) {
+		System.out.println("서비스는 실행");
 		return memberDAO.findMember(vo);
 	}
 

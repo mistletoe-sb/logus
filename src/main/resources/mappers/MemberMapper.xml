@@ -52,7 +52,7 @@
 		]]>
 	</select>
 	
-	<select id="selectMemberId" resultType="com.logus.member.model.MemberVO" parameterType="string">
+	<select id="findMember" resultType="com.logus.member.model.MemberVO" parameterType="com.logus.member.model.MemberVO">
 		<![CDATA[
 			SELECT * 
 			FROM LOGUS.MEMBER 
@@ -124,6 +124,17 @@
 				MEMBER_PROFILE = #{memberProfile}
 			WHERE
 				MEMBER_ID = #{memberId}
+		]]>
+	</update>
+	
+		<update id="updatePassword" parameterType="com.logus.member.model.MemberVO">
+		<![CDATA[
+			UPDATE
+				LOGUS.MEMBER
+			SET
+				MEMBER_PASSWORD = #{memberPassword}
+			WHERE
+				MEMBER_ID = #{memberId} and member_name = #{memberName} and member_birth= #{memberBirth} and member_phone= #{memberPhone}
 		]]>
 	</update>
 <!-- ====================================================================================================================== -->
