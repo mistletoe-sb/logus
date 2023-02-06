@@ -58,7 +58,7 @@ function deleteStory(url){
 	if(del_check){
 		// ajax로 댓글 수, 태그 수 넘김 + 스토리 삭제 진행
 		$.post($('#dsCode_forD').val() + '/delete', 
-			{tagCount: $('#tagCount').val(), replyCount: $('#replyCount').val()})
+			{tagCount: $('#tagCount').val(), replyCount: $('#replyCount').val(), dailystoryImage: $('#thumbnail_img').attr('src')})
 		.done(function(){
 			alert('스토리가 삭제되었습니다.');
 			//location.replace(contextPath + url);	// 확인 버튼 누를 시 서재 메인으로 이동
@@ -68,4 +68,15 @@ function deleteStory(url){
 			alert('스토리 삭제에 실패하였습니다.');
 		});
 	} else {}
+}
+
+// 이미지 미리보기(글 작성, 수정 시)
+function setPreview(event){
+	var reader = new FileReader();
+	
+	reader.onload = function(event){
+		$('#preview_thumbnail_img').attr("src", event.target.result);
+	};
+	
+	reader.readAsDataURL(event.target.files[0]);
 }

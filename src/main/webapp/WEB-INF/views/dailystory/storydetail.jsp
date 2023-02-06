@@ -20,7 +20,8 @@
 		<br>
 		<p style="white-space: pre-line;">${dsVO.dailystoryContent}</p>
 		<br>
-		<img src="${root}/resources/images/${dsVO.dailystoryImage}" alt="${dsVO.dailystoryImage}">
+		<img id="thumbnail_img" src="<c:url value='/resources/images/dailystory/${dsVO.dailystoryImage}'/>" alt="${dsVO.dailystoryImage}"
+			 width="200" height="200">
 		<div>
 			<c:forEach var="tg" items="${tagList}">
 				<button style="display: inline-block">${tg.tagName}</button>

@@ -33,10 +33,10 @@
 					 onclick="location.href='<c:url value="/${ds.memberNickname}/library/story/${ds.dailystoryCode}"/>'">
 					<c:choose>
 						<c:when test='${(ds.dailystoryImage != null) && (ds.dailystoryImage != "")}'>
-							<img src="<c:url value='resources/images/default_thumbnail.jpg'/>" class="card-img-top" alt="기본 썸네일">				  	
+							<img src="<c:url value='/resources/images/dailystory/${ds.dailystoryImage}'/>" class="card-img-top" alt="${ds.dailystoryImage}">				  	
 						</c:when>
 						<c:otherwise>
-							<img src="<c:url value=''/>" class="card-img-top" alt="${ds.dailystoryImage}">				  	
+							<img src="<c:url value='/resources/images/default_thumbnail.jpg'/>" class="card-img-top" alt="기본 썸네일">				  	
 						</c:otherwise>
 					</c:choose>
 					<div class="card-body">
@@ -44,13 +44,12 @@
 						<p class="card-text" style="white-space: pre-line;">${ds.dailystoryContent}<br>
 						<fmt:formatDate value="${dsVO.dailystoryUploaddate}" pattern="yyyy.MM.dd HH:mm"/></p>
 					    <div>
-					    	<c:set var="key" value="${ds.dailystoryCode}"/>
-				    		<c:forEach var="tg" items="${tagList.key}" varStatus="i">
+							<c:forEach var="tg" items="${tagList[ds.dailystoryCode]}" varStatus="i">
 								<c:choose>
-									<c:when test="${i < 5}">
+									<c:when test="${i.index < 5}">
 										<button style="display: inline-block">${tg.tagName}</button>
 									</c:when>
-									<c:when test="${i == 5}">...</c:when>
+									<c:when test="${i.index == 5}">...</c:when>
 								</c:choose>
 							</c:forEach>
 						</div>

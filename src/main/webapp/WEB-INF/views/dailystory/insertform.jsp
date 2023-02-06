@@ -16,7 +16,9 @@
 			<textarea name="dailystoryContent" cols="50" rows="10"></textarea>
 			<br>
 			<label>썸네일 </label>
-			<input type="text" name="dailystoryImage">
+			<input type="file" name="thumbnail" onchange="setPreview(event)"><br>
+			<img id="preview_thumbnail_img" src="<c:url value='/resources/images/preview_image.png'/>" alt="preview_thumbnail_img"
+				 width="200" height="200">
 			<br>
 			<label>태그 </label>
 			<input type="text" id="tags" name="tagNames" size="100" onkeydown="splitTag(event)">

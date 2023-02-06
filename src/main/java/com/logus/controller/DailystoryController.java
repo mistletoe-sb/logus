@@ -1,5 +1,6 @@
 package com.logus.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.logus.dailystory.model.DailystoryVO;
 import com.logus.dailystory.service.IDailystoryService;
@@ -24,17 +26,20 @@ import com.logus.reply.service.IReplyService;
 import com.logus.tag.model.TagVO;
 import com.logus.tag.service.ITagService;
 import com.logus.util.constant.TagCategory;
+import com.logus.util.filemanager.FileManager;
 import com.logus.util.redirectencoder.RedirEncoder;
 
 @Controller
 // 일일 스토리 서비스 제어하는 컨트롤러 클래스
 public class DailystoryController {
 	@Autowired
-	IDailystoryService dailystoryService;	// 일일 스토리 서비스 객체
+	private IDailystoryService dailystoryService;	// 일일 스토리 서비스 객체
 	@Autowired
-	IReplyService replyService;				// 댓글 서비스 객체
+	private IReplyService replyService;				// 댓글 서비스 객체
 	@Autowired
-	ITagService tagService;					// 태그 서비스 객체
+	private ITagService tagService;					// 태그 서비스 객체
+	
+	private FileManager fm = new FileManager();		// 파일 관리 클래스 객체 생성
 	
 	private static Logger logger = LoggerFactory.getLogger(DailystoryController.class);	// logger 객체
 	
@@ -60,7 +65,14 @@ public class DailystoryController {
 	
 	@PostMapping(value="/{memberNickname}/library/story/insert")
 	// 일일 스토리 작성
-	public String insertDailystory(DailystoryVO vo, @RequestParam("tagNames") String tagNames, HttpSession session) {
+	public String insertDailystory(DailystoryVO vo, @RequestParam("tagNames") String tagNames,
+								@RequestParam("thumbnail") MultipartFile thumbnail, HttpSession session) {
+		try{
+			String fileName = fm.uploadFile("dailystory", thumbnail, session);
+			vo.setDailystoryImage(fileName);
+		} catch (IOException e) {
+			logger.info("^ dailystory file upload failed");
+		}
 		vo.setMemberNickname((String)session.getAttribute("memberNickname"));	// 세션으로부터 받은 닉네임 정보로 저장
 		dailystoryService.insertDailystory(vo, 
 				tagService.makeTagList(tagNames, TagCategory.DAILY_STORY, vo.getDailystoryCode()));	// DB insert
@@ -93,8 +105,10 @@ public class DailystoryController {
 	@ResponseBody
 	// 일일 스토리 삭제
 	public String deleteDailystory(@PathVariable String memberNickname, @PathVariable int dailystoryCode, 
-									int tagCount, int replyCount) {
-		dailystoryService.deleteDailystory(dailystoryCode, tagCount, replyCount);	// 해당 스토리 삭제
+									int tagCount, int replyCount, String dailystoryImage, HttpSession session) {
+		logger.info(dailystoryImage);
+//		dailystoryService.deleteDailystory(dailystoryCode, tagCount, replyCount);	// 해당 스토리 삭제
+//		fm.deleteFile("dailystory", dailystoryImage, session);						// 실제 파일 삭제
 		return memberNickname;														// 삭제 후 AJax로 닉네임 리턴
 	}
 
