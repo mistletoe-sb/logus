@@ -195,7 +195,14 @@ function followBtn2() {
 		      <div class="card-body">
 		      <h3 class="card-title"><span class="badge bg-secondary">평일</span></h3>
 		        <h5 class="card-text">${routine1.dailyroutineTitle}</h5>
-		        <p class="card-text">태그 위치입니다</p>
+		         <div>
+
+				        <c:forEach var="tg" items="${tag1}">
+				        	<c:if test="${not empty tg.tagName}">
+								<button style="display: inline-block">${tg.tagName}</button>
+							</c:if>
+						</c:forEach>
+				 </div>
 		      	<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal1">확인</button>
 		      </div>
 		    </div>
@@ -218,9 +225,15 @@ function followBtn2() {
 	    <div class="card">
 	      <div class="card-body">
 	      <h3 class="card-title"><span class="badge bg-secondary">주말</span></h3>
-	        <h5 class="card-text">${routine2.dailyroutineTitle}</h5>
-	        <p class="card-text">태그 위치 입니다</p>
-	      	<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal2">확인</button>
+		      	<h5 class="card-text">${routine2.dailyroutineTitle}</h5>
+		      	<div>
+			        <c:forEach var="tg" items="${tag2}">
+						<c:if test="${not empty tg.tagName}">
+							<button style="display: inline-block">${tg.tagName}</button>
+						</c:if>
+					</c:forEach>
+				</div>
+	      	<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal2" style="display:block">확인</button>
 	      </div>
 	    </div>
 	  </div>

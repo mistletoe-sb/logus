@@ -7,6 +7,19 @@
 		<title>검색</title>
 	</head>
 	<body>
-		<h1>hello search</h1>
+	<div class="row row-cols-1 row-cols-md-4 g-4">
+	<c:forEach items="${searchroutine}" var="searchroutine" varStatus="status">
+		  <div class="col">
+		    <div class="card">
+			    <div class="card-header bg-transparent border-success">Header</div>
+			      <div class="card-body">
+			        <h5 class="card-title">${searchroutine.dailyroutineTitle}</h5>
+			        <p class="card-text">ㄷㄷ</p>
+			    </div>
+		      <div class="card-footer bg-transparent border-success">Footer</div>
+		    </div>
+		  </div>
+  		</c:forEach>
+  		</div>
 	</body>
 </html>

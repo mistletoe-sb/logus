@@ -146,10 +146,14 @@ public class TagService implements ITagService {
 		String tags = "";
 		for(TagVO tag : vo) {
 			String temp = tag.getTagName();
-			if(temp.charAt(0) != '#') {
-				temp = "#" + temp;		// 첫번째 위치가 #이 아니면 # 추가
+			try {
+				if(temp.charAt(0) != '#') {
+					temp = "#" + temp;		// 첫번째 위치가 #이 아니면 # 추가
+				}
+				tags += (temp + " ");		// 문자열 붙이기(공백으로 구분)
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-			tags += (temp + " ");		// 문자열 붙이기(공백으로 구분)
 		}
 		return tags;	// 생성한 문자열 반환
 	}

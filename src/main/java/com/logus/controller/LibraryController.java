@@ -22,6 +22,9 @@ import com.logus.member.model.MemberVO;
 import com.logus.member.service.IMemberService;
 import com.logus.routineshare.model.RoutineshareVO;
 import com.logus.routineshare.service.IRoutineshareService;
+import com.logus.tag.model.TagVO;
+import com.logus.tag.service.ITagService;
+import com.logus.util.constant.TagCategory;
 import com.logus.util.redirectencoder.RedirEncoder;
 
 
@@ -36,7 +39,9 @@ public class LibraryController {
 	@Autowired
 	private IAchieveService achieveService;	//달성율 정보
 	@Autowired
-	private IRoutineshareService routineshareService;
+	private IRoutineshareService routineshareService;	//루틴 공유 정보 객체
+	@Autowired
+	private ITagService tagService;						// 태그 서비스 객체
 	
 	private String view_ref ="library/";	//뷰 위치
 	
@@ -49,6 +54,8 @@ public class LibraryController {
 	MemberVO memberVO = new MemberVO();						//멤버 VO 객체 생성
 	
 	RoutineshareVO routineshareVO = new RoutineshareVO();	//공유 VO 객체 생성
+	
+	TagVO tagVO = new TagVO();
 		
 	//내 서재용은 세션만 받고, 남 서재용은 Pathvariable로 받아서 매핑 구분하면 되겠음->@GetMapping(value="/library/{memberNickname}")
 	@GetMapping(value="/library")	//내 서재 내용-화면용
@@ -58,21 +65,28 @@ public class LibraryController {
 		
 		DailyroutineVO routine1 = null; 
 		DailyroutineVO routine2 = null; 
+		List<TagVO> tag1 = null;
+		List<TagVO> tag2 = null;
 		
 		try {
 			routine1 = DailyroutineService.selectDailyroutineActive(memberNickname, 1);	//평일 메인 루틴
+			tag1 = tagService.selectTagList(TagCategory.DAILY_ROUTINE, routine1.getDailyroutineCode());	//평일 메인 태그
 		} catch (Exception e) {
 			e.printStackTrace();
 		}	
 		
 		try {
 			routine2 = DailyroutineService.selectDailyroutineActive(memberNickname, 2);	//주말 메인 루틴
+			tag2 = tagService.selectTagList(TagCategory.DAILY_ROUTINE, routine2.getDailyroutineCode());	//주말 메인 태그
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
 		model.addAttribute("routine1", routine1);
 		model.addAttribute("routine2", routine2);
+		
+		model.addAttribute("tag1", tag1);	
+		model.addAttribute("tag2", tag2);
 		
 		List<DailycheckVO> checklist1 = null;
 		List<DailycheckVO> checklist2 = null;
@@ -257,19 +271,12 @@ public class LibraryController {
 			return "redirect:/"+"library/"+RedirEncoder.encode(memberNickname);
 		}
 		
-		@PostMapping(value="/sharecheck")	//공유 수 증가시키기 전, 기존에 공유받았던 사람인지 검증 ajax 
-		public String routineshareCheck() {
-			
-			return view_ref+"search";
-		}
-		
 		@PostMapping(value="/search")	//검색-전송용
-		public String selectSearch(@RequestParam("option") String option, @RequestParam("search") String search) {
+		public String selectSearch(@RequestParam("option") String option, @RequestParam("search") String search, Model model) {
 			
-			System.out.println(option);
-			System.out.println(search);
+			List<DailyroutineVO> searchroutine = DailyroutineService.findDailyroutineList(option, search);
 			
-			
+			model.addAttribute("searchroutine", searchroutine);
 			
 			return view_ref+"search";
 		}

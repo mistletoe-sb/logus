@@ -28,7 +28,7 @@ public class RoutineController {
 	@Autowired
 	private IDailycheckService DailycheckService;		// 일정 상세 객체
 	@Autowired
-	private ITagService tagService;								// 태그 서비스 객체
+	private ITagService tagService;						// 태그 서비스 객체
 	
 	private String view_ref ="routine/";	//뷰 위치
 	

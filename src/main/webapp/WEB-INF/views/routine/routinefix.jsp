@@ -83,14 +83,14 @@
 				<c:forEach items="${checklist}" var="checklist" varStatus="status">
 					<div id="t${status.index}">
 						<div class="p-3 bg-info bg-opacity-10 border border-info border-start-0 rounded-end">
-							<p>시작 시간 : <input type="time" name="begin" required value="${checklist.dailycheckBegintime}">
-							&nbsp;&nbsp;&nbsp;종료 시간 : <input type="time" name="end" required value="${checklist.dailycheckEndtime}"></p>
+							<p>시작 시간 : <input type="time" name="begin" required value="${checklist.dailycheckBegintime}"></p>
+							<input type="hidden" name="dailycheckCode" value="${checklist.dailycheckCode}"/>
+							<p>종료 시간 : <input type="time" name="end" required value="${checklist.dailycheckEndtime}"></p>
 								<div class="form-floating">
 									  <textarea class="form-control" placeholder="Leave a comment here" 
 									  id="floatingTextarea2" name="content" required >${checklist.dailycheckContent}</textarea>
 									  <label for="floatingTextarea">일정 내용을 작성해주세요</label>
 								</div>
-								<input type="hidden" name="dailycheckCode" value="${checklist.dailycheckCode}"/>
 							</div>
 						</div>				
 						<input type="hidden" name="checkindex" value="${status.index}" <c:if test="${status.last}">id="index"</c:if>></input>	
@@ -106,7 +106,6 @@
 				<input  type="hidden" id="dailyroutineCode" name="dailyroutineCode" value="${dailyroutineCode}"></input>
 					<c:forEach var="tg" items="${taglist}">
 						<input type="hidden" name="tagCodes" value="${tg.tagCode}">
-						<h5>${tg.tagCode}</h5>
 					</c:forEach>
 				</form>
 	</body>
