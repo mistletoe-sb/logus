@@ -80,7 +80,7 @@ public class DailystoryController {
 		vo.setMemberNickname((String)session.getAttribute("memberNickname"));	// 세션으로부터 받은 닉네임 정보로 저장
 		dailystoryService.insertDailystory(vo, 
 				tagService.makeTagList(tagNames, TagCategory.DAILY_STORY, vo.getDailystoryCode()));	// DB insert
-		return "redirect:/" + RedirEncoder.encode(vo.getMemberNickname()) + "/library/main";		// 서재 메인페이지로 redirect
+		return "redirect:/" + RedirEncoder.encode(vo.getMemberNickname()) + "/library/dailystorylist";		// 일일 스토리 목록 페이지로 redirect
 	}
 
 	@GetMapping(value="/{memberNickname}/library/story/{dailystoryCode}/update")
@@ -102,6 +102,7 @@ public class DailystoryController {
 								@RequestParam("thumbnail") MultipartFile thumbnail, HttpSession session) {
 		try{
 			String beforeThumbnail = vo.getDailystoryImage();
+			logger.info(beforeThumbnail);
 			// 기존에 썸네일이 있었을 경우
 			if(beforeThumbnail != null) {
 				if(thumbnail != null) {					
@@ -114,7 +115,9 @@ public class DailystoryController {
 				}
 			} else {	// 기존에 썸네일이 없었던 경우
 				String fileName = fm.uploadFile(serviceName, thumbnail, session);
+				logger.info(fileName);
 				vo.setDailystoryImage(fileName);
+				logger.info(vo.getDailystoryImage());
 			}
 		} catch (IOException e) {
 			logger.info("^ dailystory file update failed");
@@ -150,7 +153,7 @@ public class DailystoryController {
 		return "dailystory/storydetail";	// 스토리 상세 보기 view로 이동
 	}
 
-	@GetMapping(value="/{memberNickname}/library/main")
+	@GetMapping(value="/{memberNickname}/library/dailystorylist")
 	// 일일 스토리 목록 조회(내 서재 메인)
 	public String selectDailystoryList(@PathVariable String memberNickname, Model model) {
 		List<DailystoryVO> dsList = dailystoryService.selectDailystoryList(memberNickname);	// 해당 닉네임의 일일 스토리 목록 조회
