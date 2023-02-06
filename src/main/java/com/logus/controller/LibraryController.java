@@ -273,8 +273,13 @@ public class LibraryController {
 		
 		@PostMapping(value="/search")	//검색-전송용
 		public String selectSearch(@RequestParam("option") String option, @RequestParam("search") String search, Model model) {
+			List<DailyroutineVO> searchroutine=null;
 			
-			List<DailyroutineVO> searchroutine = DailyroutineService.findDailyroutineList(option, search);
+			try {	
+				searchroutine = DailyroutineService.findDailyroutineList(option, search);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}	
 			
 			model.addAttribute("searchroutine", searchroutine);
 			

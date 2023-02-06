@@ -11,10 +11,10 @@
 	<c:forEach items="${searchroutine}" var="searchroutine" varStatus="status">
 		  <div class="col">
 		    <div class="card">
-			    <div class="card-header bg-transparent border-success">Header</div>
+			    <div class="card-header bg-transparent border-success">${searchroutine.dailyroutineTitle}</div>
 			      <div class="card-body">
-			        <h5 class="card-title">${searchroutine.dailyroutineTitle}</h5>
-			        <p class="card-text">ㄷㄷ</p>
+<!-- 			        <h5 class="card-title"></h5> -->
+			        <p class="card-text"></p>
 			    </div>
 		      <div class="card-footer bg-transparent border-success">Footer</div>
 		    </div>
