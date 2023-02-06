@@ -191,7 +191,10 @@ function followBtn2() {
 		  <div class="col">
 		    <div class="card">
 		      <div class="card-body">
-		      <h3 class="card-title"><span class="badge bg-secondary">평일</span></h3>
+		      <h3 class="card-title">
+		      	<span class="badge bg-secondary">평일</span>
+		      	<button type="button" class="btn btn-outline-primary btn-sm" disabled>공유된 횟수: ${routine1.dailyroutineShared }</button>
+		      </h3>
 		        <h5 class="card-text text-truncate">${routine1.dailyroutineTitle}</h5>
 		         <div>
 
@@ -222,8 +225,12 @@ function followBtn2() {
 	  <div class="col">
 	    <div class="card">
 	      <div class="card-body">
-	      <h3 class="card-title"><span class="badge bg-secondary">주말</span></h3>
-		      	<h5 class="card-text text-truncate">${routine2.dailyroutineTitle}</h5>
+	      <h3 class="card-title">
+	      <span class="badge bg-secondary">주말</span>
+	      <button type="button" class="btn btn-outline-primary btn-sm" disabled>공유된 횟수: ${routine2.dailyroutineShared }</button>
+	      </h3>
+		      	<h5 class="card-text text-truncate">${routine2.dailyroutineTitle}
+		      	</h5>
 		      	<div>
 			        <c:forEach var="tg" items="${tag2}">
 						<c:if test="${not empty tg.tagName}">
@@ -237,10 +244,8 @@ function followBtn2() {
 	  </div>
 	  </c:otherwise>
 	</c:choose>
-	
 	</div>  
   </div>
-  
  </div>
  <div>
  	<a href="<c:url value='/${sessionScope.memberNickname}/library/main'/>">일일 스토리 보기</a>

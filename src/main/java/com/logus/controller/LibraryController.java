@@ -275,10 +275,7 @@ public class LibraryController {
 		
 		@PostMapping(value="/search")	//검색-전송용
 		public String selectSearch(@RequestParam("option") String option, @RequestParam("search") String search, Model model) {
-			
-			System.out.println(option);
-			System.out.println(search);
-			
+				
 			List<DailyroutineVO> searchroutine=null;
 			List<Integer> codeList = new ArrayList<Integer>();
 			Map<Integer, List<TagVO>> tagList = null;
