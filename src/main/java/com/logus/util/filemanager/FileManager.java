@@ -7,8 +7,10 @@ import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
+@Component
 // 파일 업로드, 다운로드, 삭제 기능 제공
 public class FileManager {
 	private static Logger logger = LoggerFactory.getLogger(FileManager.class);
@@ -25,23 +27,19 @@ public class FileManager {
 
 			// 파일 형식(확장자) 획득
 			String[] originalFilename = file.getOriginalFilename().split("\\.");
-			
 			String fileType = originalFilename[originalFilename.length - 1];
 			// 파일명 생성
 			fileId = t + "_" + r + "." + fileType;
-			// contextPath 획득
-			String path = session.getServletContext().getRealPath("/");
 			// 파일 저장
-			file.transferTo(new File(path + "resources\\images\\" + serviceName + "\\" + fileId));
+			file.transferTo(getFile(serviceName, fileId, session));
 		}
 		return fileId;
 	}
 	
-	// 파일 삭제 기능
-	public boolean deleteFile(String serviceName, String fileName, HttpSession session) {
-//		String filePath = session.getServletContext().getRealPath("/") + "resources\\images\\" + serviceName + "\\" + fileName;
-//		logger.info(filePath);
-//		File file = new File(filePath);
-		return false;//file.delete();
+	// 파일 객체 반환
+	public File getFile(String serviceName, String fileName, HttpSession session) {
+		String filePath = session.getServletContext().getRealPath("/") + "resources\\images\\" + serviceName + "\\" + fileName;
+		logger.info(filePath);
+		return new File(filePath);
 	}
 }

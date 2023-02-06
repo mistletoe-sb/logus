@@ -18,7 +18,18 @@
 			<textarea name="dailystoryContent" cols="50" rows="10">${dsVO.dailystoryContent}</textarea>
 			<br>
 			<label>썸네일 </label>
-			<input type="text" name="dailystoryImage" value="${dsVO.dailystoryImage}">
+			<input type="file" name="thumbnail" onchange="setPreview(event)"><br>
+			<c:choose>
+				<c:when test='${(dsVO.dailystoryImage != null) && (dsVO.dailystoryImage != "")}'>
+					<img id="preview_thumbnail_img" src="<c:url value='/resources/images/dailystory/${dsVO.dailystoryImage}'/>" alt="${dsVO.dailystoryImage}"
+						 width="200" height="200">				  	
+				</c:when>
+				<c:otherwise>
+					<img id="preview_thumbnail_img" src="<c:url value='/resources/images/preview_image.jpg'/>" alt="preview_thumbnail_img"
+						 width="200" height="200">				  	
+				</c:otherwise>
+			</c:choose>
+			<input type="hidden" name="dailystoryImage" value="${dsVO.dailystoryImage}">
 			<br>
 			<label>태그 </label>
 			<input type="text" id="tags" name="tagNames" value="${tags}" size="100" onkeydown="splitTag(event)">

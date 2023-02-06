@@ -20,8 +20,16 @@
 		<br>
 		<p style="white-space: pre-line;">${dsVO.dailystoryContent}</p>
 		<br>
-		<img id="thumbnail_img" src="<c:url value='/resources/images/dailystory/${dsVO.dailystoryImage}'/>" alt="${dsVO.dailystoryImage}"
-			 width="200" height="200">
+		<c:choose>
+			<c:when test='${(dsVO.dailystoryImage != null) && (dsVO.dailystoryImage != "")}'>
+				<img id="thumbnail_img" src="<c:url value='/resources/images/dailystory/${dsVO.dailystoryImage}'/>" alt="${dsVO.dailystoryImage}"
+					 width="200" height="200">				  	
+			</c:when>
+			<c:otherwise>
+				<img id="thumbnail_img" src="<c:url value='/resources/images/preview_image.jpg'/>" alt="preview_thumbnail_img"
+					 width="200" height="200">				  	
+			</c:otherwise>
+		</c:choose>
 		<div>
 			<c:forEach var="tg" items="${tagList}">
 				<button style="display: inline-block">${tg.tagName}</button>

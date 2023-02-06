@@ -58,7 +58,7 @@ function deleteStory(url){
 	if(del_check){
 		// ajax로 댓글 수, 태그 수 넘김 + 스토리 삭제 진행
 		$.post($('#dsCode_forD').val() + '/delete', 
-			{tagCount: $('#tagCount').val(), replyCount: $('#replyCount').val(), dailystoryImage: $('#thumbnail_img').attr('src')})
+			{tagCount: $('#tagCount').val(), replyCount: $('#replyCount').val(), dailystoryImage: $('#thumbnail_img').attr('alt')})
 		.done(function(){
 			alert('스토리가 삭제되었습니다.');
 			//location.replace(contextPath + url);	// 확인 버튼 누를 시 서재 메인으로 이동

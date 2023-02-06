@@ -1,5 +1,6 @@
 package com.logus.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,9 +40,12 @@ public class DailystoryController {
 	@Autowired
 	private ITagService tagService;					// 태그 서비스 객체
 	
-	private FileManager fm = new FileManager();		// 파일 관리 클래스 객체 생성
+	@Autowired
+	private FileManager fm;							// 파일 관리 클래스 객체
 	
 	private static Logger logger = LoggerFactory.getLogger(DailystoryController.class);	// logger 객체
+	
+	private String serviceName = "dailystory";		// 서비스 이름(이미지 저장 폴더명)
 	
 	@GetMapping(value="/lib")
 	// 서재 메인으로 이동
@@ -68,7 +72,7 @@ public class DailystoryController {
 	public String insertDailystory(DailystoryVO vo, @RequestParam("tagNames") String tagNames,
 								@RequestParam("thumbnail") MultipartFile thumbnail, HttpSession session) {
 		try{
-			String fileName = fm.uploadFile("dailystory", thumbnail, session);
+			String fileName = fm.uploadFile(serviceName, thumbnail, session);
 			vo.setDailystoryImage(fileName);
 		} catch (IOException e) {
 			logger.info("^ dailystory file upload failed");
@@ -94,8 +98,27 @@ public class DailystoryController {
 	
 	@PostMapping(value="/{memberNickname}/library/story/update")
 	// 일일 스토리 수정
-	public String updateDailystory(DailystoryVO vo, @RequestParam("tagNames") String tagNames, 
-								@RequestParam("tagCodes") List<Integer> tagCodes) {
+	public String updateDailystory(DailystoryVO vo, @RequestParam("tagNames") String tagNames, @RequestParam("tagCodes") List<Integer> tagCodes, 
+								@RequestParam("thumbnail") MultipartFile thumbnail, HttpSession session) {
+		try{
+			String beforeThumbnail = vo.getDailystoryImage();
+			// 기존에 썸네일이 있었을 경우
+			if(beforeThumbnail != null) {
+				if(thumbnail != null) {					
+					if(fm.getFile(serviceName, beforeThumbnail, session).delete()) {
+						String fileName = fm.uploadFile(serviceName, thumbnail, session);
+						vo.setDailystoryImage(fileName);				
+					} else {
+						logger.info("^ dailystory update file change failed");
+					}				
+				}
+			} else {	// 기존에 썸네일이 없었던 경우
+				String fileName = fm.uploadFile(serviceName, thumbnail, session);
+				vo.setDailystoryImage(fileName);
+			}
+		} catch (IOException e) {
+			logger.info("^ dailystory file update failed");
+		}
 		dailystoryService.updateDailystory(vo, tagService.makeTagList(tagNames, TagCategory.DAILY_STORY, 
 																	vo.getDailystoryCode()), tagCodes);						// DB update
 		return "redirect:/" + RedirEncoder.encode(vo.getMemberNickname()) + "/library/story/" + vo.getDailystoryCode();		// 해당 스토리 상세 보기로 redirect
@@ -106,10 +129,12 @@ public class DailystoryController {
 	// 일일 스토리 삭제
 	public String deleteDailystory(@PathVariable String memberNickname, @PathVariable int dailystoryCode, 
 									int tagCount, int replyCount, String dailystoryImage, HttpSession session) {
-		logger.info(dailystoryImage);
-//		dailystoryService.deleteDailystory(dailystoryCode, tagCount, replyCount);	// 해당 스토리 삭제
-//		fm.deleteFile("dailystory", dailystoryImage, session);						// 실제 파일 삭제
-		return memberNickname;														// 삭제 후 AJax로 닉네임 리턴
+		File file = null;
+		if(!dailystoryImage.equals("preview_thumbnail_img")) {			// 기본 이미지가 아닌 경우(사용자가 올린 썸네일이 있는 경우)
+			file = fm.getFile(serviceName, dailystoryImage, session);	// 파일 객체 참조
+		}
+		dailystoryService.deleteDailystory(dailystoryCode, tagCount, replyCount, file);		// 해당 스토리 삭제
+		return memberNickname;																// 삭제 후 AJax로 닉네임 리턴
 	}
 
 	@GetMapping(value="/{memberNickname}/library/story/{dailystoryCode}")
