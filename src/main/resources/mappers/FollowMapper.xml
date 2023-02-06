@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- mapper의 namespace와 Interface 경로 동일하게 설정 >> mapper 후보로 등록 -->
+<mapper namespace="com.logus.follow.dao.IFollowDAO">
+
+	<select id="countFollowing" resultType="int" parameterType="string">
+		<![CDATA[
+			SELECT COUNT(*) FROM LOGUS.FOLLOW WHERE member_id = #{memberId}
+		]]>
+	</select>
+	
+	
+	<select id="selectFollowList" resultType="com.logus.follow.model.FollowVO" parameterType="String">
+			<!-- 메소드명과 같게 -->
+		<![CDATA[
+			select * from follow where member_id= #{memberId}
+		]]>
+	</select>
+	
+
+	
+	<insert id="insertFollow" parameterType="com.logus.follow.model.FollowVO">
+		<![CDATA[
+			INSERT INTO follow
+			(follow_code, member_id, following_member_id)
+			VALUES
+			(follow_code_seq.NEXTVAL, #{memberId}, #{followingMemberId})
+		]]>
+	</insert>
+	
+	
+	
+	<delete id="deleteFollow" parameterType="int">
+		<![CDATA[
+			delete follow where FOLLOW_CODE= #{followcode}
+		]]>
+	</delete>
+	
+	
+<!-- 
+	<update id="updateFollow" parameterType="int">
+		<![CDATA[
+			update follow set 
+			follow_code= #{followCode} 
+			where follow_code=#{followCode}
+		]]>
+	</update>
+	
+	
+	
+	<select id="countFollower" resultType="int" parameterType="String">
+		<![CDATA[
+			select following_member_id from follow where member_id=	#{memberId}
+		]]>
+	</select>
+	
+		
+	<select id="selectFollow" resultType="int" parameterType="int"> 
+		<![CDATA[
+			select count(member_id) from follow where following_member_id= #{followingMemberId}
+		]]>
+	</select>
+	
+-->	
+	
+</mapper>

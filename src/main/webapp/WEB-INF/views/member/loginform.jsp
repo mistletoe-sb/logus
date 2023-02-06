@@ -186,8 +186,6 @@
 			
 			
 		</div>
-		
-		
 	</body>
 	<script type="text/javascript">
 	var alert_message = $('#message').val();
