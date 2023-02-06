@@ -1,5 +1,6 @@
 package com.logus.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -10,67 +11,105 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.logus.follow.model.FollowVO;
 import com.logus.follow.service.IFollowService;
+import com.logus.member.model.MemberVO;
+import com.logus.member.service.IMemberService;
 
 //팔로우 서비스 제어하는 컨트롤러 클래스
-@Controller
+// : 뷰에 어떻게 보내주고 버튼을 누르던지 어떤 액션이 있을때 어떻게 동작할지 정해줌
+@Controller		//컨트롤러 bean으로 등록
 public class FollowController {
 	
 	@Autowired
-	IFollowService followService;		//팔로우 서비스 객체
+	private IFollowService followService;		//팔로우 서비스 객체
+	@Autowired	
+	private IMemberService	memberService;	//멤버 정보
+	
+	private static final String PATH = "C:\\project_labs\\spring_workspace\\logus\\src\\main\\webapp\\resources\\images\\member";
+	
 	private String view_pos = "member/";
 	
-	private static Logger logger = LoggerFactory.getLogger(DailystoryController.class);	// logger 객체
+	//private static Logger logger = LoggerFactory.getLogger(DailystoryController.class);	// logger 객체
 	
-	@RequestMapping(value="/followList", method=RequestMethod.GET )		//jsp에서 버튼을 눌럿을때 연결해주는 주소 
+	@RequestMapping(value="/followList", method=RequestMethod.GET )		//url 과 method 매핑->jsp에서 버튼을 눌럿을때 연결해주는 주소 
+	//팔로우 목록 반환
 	public String followList(HttpSession session, Model model) {		//세션에 있는 팔로우 리스트를 
-		String memberId = session.getAttribute("memberId").toString();		//팔로우서비스 안에 셀렉트팔로우리스트를 memberid에 저장 
-		List<FollowVO> followList = followService.selectFollowList(memberId);
-		System.out.println(followList.size());		//팔로우 리스트를 출력하라(출력 테스트용)
+		String memberId = session.getAttribute("memberId").toString();		//세션에 저장되어있는 회원아이디를 'memberid'에 저장 
+
+		List<FollowVO> followList = null;
+		List<MemberVO> followImg = new ArrayList<MemberVO>();
+
+		try {
+			followList = followService.selectFollowList(memberId);
+			
+			for(int i=0; i<followList.size(); i++) {
+				System.out.println("팔로우 리스트는? "+followList.get(i).getFollowingMemberId());
+			MemberVO vo = memberService.selectMemberInfo(followList.get(i).getFollowingMemberId());
+			System.out.println(vo);
+			followImg.add(vo);
+			System.out.println("리스트는 "+followImg);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 		model.addAttribute("followList", followList);		//팔로우리스트를 "팔로우리스트"라고 이름 지정 addAttribute 를 사용하면 jsp에서 사용할 수 있음
-		return view_pos +  "followForm";		//팔로우폼으로 이동하라
+							//"	변수명 "	,    값
+		model.addAttribute("filePath", PATH + "\\");
+		model.addAttribute("followImg", followImg);
+		//model.addAttribute("selectMemberInfo", vo);
+		
+		return view_pos +  "followForm";		//return은 main.jsp로 포워드 -> 팔로우폼으로 이동하라
+							//출력 페이지로 넘김
 	}
 	
 
-	@GetMapping(value="/followinsert2")		//jsp에서 버튼을 눌렀을때 연결해주는 주소 
-	//팔로우 추가 작성
-	public String followInsert2(HttpSession session, Model model) {
-		System.out.println("버튼 컨트롤러 실행됨");
-		//String memberId = session.getAttribute("memberId").toString();
-		//insert
+	@PostMapping(value="/followinsert")		//jsp에서 버튼을 눌렀을때 연결해주는 주소 팔로우 추가 작성 
+	
+	public String followInsert(HttpSession session, Model model, @RequestParam("followingMemberId") String followingMemberId, RedirectAttributes redirectAttributes) {
 		
-		followService.insertFollow(null);
-		return view_pos +  "followForm";		
-	}
-
-	@PostMapping(value="/followinsert")		//jsp에서 버튼을 눌렀을때 연결해주는 주소 
-	//팔로우 추가 작성
-	public String followInsert(HttpSession session, Model model, @RequestParam("followingMemberId") String followingMemberId) {
 		
+		int ckeckId = memberService.ckeckId(followingMemberId);
 		String memberId = session.getAttribute("memberId").toString();
 		System.out.println(memberId);
 		System.out.println(followingMemberId);
 		System.out.println("버튼 컨트롤러 실행됨");
-
-//---------------------------------------------------------------------------------------
-		
-		//followCode code = new followCode();
-		//memberId memberid = new memberid();
-		//followingMemberId following = new followingMemberId();
 		
 		FollowVO vo = new FollowVO();
-		vo.setMemberId(memberId);
-		vo.setFollowingMemberId(followingMemberId);
 		
-		followService.insertFollow(vo);
+		if(ckeckId == 0){	//존재 하지 않는 아이디	
+			redirectAttributes.addFlashAttribute("message", "존재하지 않는 아이디 입니다.");
+			return "redirect:/"+ "followList";
+		}else {//아이디 있음
+			redirectAttributes.addFlashAttribute("message", followingMemberId + "님. 팔로우 추가!");
+			vo.setMemberId(memberId);
+			vo.setFollowingMemberId(followingMemberId);
+			
+			followService.insertFollow(vo);
+			return "redirect:/"+ "followList";	
+		}
+			
 		
-		
-		return view_pos +  "followForm";		
 	}
+	
+	
+	@RequestMapping(value="/deleteFollow/{followCode}", method=RequestMethod.GET)
+	//팔로우 취소 작성
+	public String followDelete(@PathVariable("followCode") int followCode) {	
+		
+		System.out.println("삭제코드는? "+followCode);	
+		
+		followService.deleteFollow(followCode);		//팔로우 서비스에 있는 취소 
+		return "redirect:/"+ "followList";				//팔로우 폼으로 돌아가서 보여주기
+	}
+	
+	
 }

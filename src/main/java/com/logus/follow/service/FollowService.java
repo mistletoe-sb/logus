@@ -32,7 +32,7 @@ public class FollowService implements IFollowService {
 	
 	}
 	@Override
-//팔로우한 목록 반환
+	//팔로우한 목록 반환
 	public List<FollowVO> selectFollowList(String memberId) {		
 		return followDAO.selectFollowList(memberId);
 	}
@@ -48,7 +48,7 @@ public class FollowService implements IFollowService {
 	public int deleteFollow(int followCode) {
 		return followDAO.deleteFollow(followCode);
 	}
-
+/* 사용하지 않는
 	@Override
 	//팔로우 수정
 	public int upDateFollow(FollowVO vo) {
@@ -66,5 +66,5 @@ public class FollowService implements IFollowService {
 	public FollowVO selectFollow(int followCode) {
 		return null;
 	}
-	
+*/	
 }

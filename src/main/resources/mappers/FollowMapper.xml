@@ -12,8 +12,9 @@
 	
 	
 	<select id="selectFollowList" resultType="com.logus.follow.model.FollowVO" parameterType="String">
+			<!-- 메소드명과 같게 -->
 		<![CDATA[
-			select following_member_id from follow where member_id= #{memberId}
+			select * from follow where member_id= #{memberId}
 		]]>
 	</select>
 	
@@ -32,12 +33,12 @@
 	
 	<delete id="deleteFollow" parameterType="int">
 		<![CDATA[
-			delete follow where followCode= #{followcode}
+			delete follow where FOLLOW_CODE= #{followcode}
 		]]>
 	</delete>
 	
 	
-	
+<!-- 
 	<update id="updateFollow" parameterType="int">
 		<![CDATA[
 			update follow set 
@@ -61,6 +62,6 @@
 		]]>
 	</select>
 	
-	
+-->	
 	
 </mapper>

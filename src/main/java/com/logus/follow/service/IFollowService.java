@@ -14,8 +14,9 @@ public interface IFollowService {
 	public abstract int deleteFollow(int followCode);	//팔로우 삭제
 
 	
-//-------------------------------------------------------------------------------------사용하지 않는 서비스 
+/*-------------------------------------------------------------------------------------사용하지 않는 서비스 
 	public abstract int upDateFollow(FollowVO vo);		//팔로우 수정
 	public abstract int countFollower(String memberId);		//사용자를 팔로우한 개수 반환
 	public abstract FollowVO selectFollow(int followCode);		//팔로우 하나의 데이터 조회
+*/
 }
