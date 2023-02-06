@@ -65,9 +65,37 @@
 	
 	<select id="findDailyroutineList" resultType="com.logus.dailyroutine.model.DailyroutineVO" parameterType="string">
 		<![CDATA[
-		SELECT * FROM LOGUS.DAILYROUTINE
+			SELECT DISTINCT DAILYROUTINE_CODE, MEMBER_NICKNAME, DAILYROUTINE_WEEKOPT,
+			DAILYROUTINE_TITLE, DAILYROUTINE_ACTIVE, DAILYROUTINE_SHARED
+			FROM LOGUS.V_DAILYROUTINE_SEARCH
 		]]>
-		<!--like.... 일단 if. 옵션 숫자 몇번이 내용, 작성자 등등인지~-->
+		<where>
+		<![CDATA[DAILYROUTINE_ACTIVE=1]]>
+			<choose>
+			<when test="option == 1">
+				<![CDATA[AND tag_name LIKE '%' || #{search} || '%']]>
+			</when>
+			<when test="option == 2">
+				<![CDATA[AND DAILYROUTINE_TITLE LIKE '%' || #{search} || '%']]>
+			</when>
+			<when test="option == 3">
+				<![CDATA[AND DAILYCHECK_CONTENT LIKE '%' || #{search} || '%']]>
+			</when>
+			<when test="option == 4">
+				<![CDATA[AND member_nickname LIKE '%' || #{search} || '%']]>
+			</when>
+			<otherwise>
+				<![CDATA[
+					AND
+					(tag_name LIKE '%' || #{search} || '%'
+					OR DAILYROUTINE_TITLE LIKE '%' || #{search} || '%'
+					OR DAILYCHECK_CONTENT LIKE '%' || #{search} || '%'
+					OR member_nickname LIKE '%' || #{search} || '%')
+				]]>
+			</otherwise>
+		</choose>
+		</where>
+		<![CDATA[ORDER BY DAILYROUTINE_CODE DESC]]>
 	</select>
 	
 	<select id="updateRoutineShared" parameterType="int">

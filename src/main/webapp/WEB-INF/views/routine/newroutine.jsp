@@ -57,6 +57,9 @@
 		<body>
 		<form id="routinenew" name="routineform" action="<c:url value='/newroutine'/>" method="post">
 		<div class="p-3 bg-info bg-opacity-10 border border-dark border-start-0 rounded-end">
+			<label>태그 등록</label>
+				<input type="text" id="tags" name="tagNames" size="100" onkeydown="splitTag(event)">
+				<br>
 			<select class="form-select" aria-label="Default select example" name="active">
 				  <option selected >일반 일정으로 등록</option>
 				  <option >메인 일정으로 등록</option>

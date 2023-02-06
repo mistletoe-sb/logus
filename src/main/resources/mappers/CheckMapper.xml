@@ -25,7 +25,7 @@
 	<delete id="deleteDailycheck" parameterType="com.logus.dailycheck.model.DailycheckVO">
 		<![CDATA[
 		DELETE LOGUS.DAILYCHECK
-		WHERE dailycheck_code =#{dailyroutineCode} and dailycheck_code NOT IN 
+		WHERE dailyroutine_code =#{dailyroutineCode} and dailycheck_code NOT IN 
 		]]>
 		<foreach  item="item" index="index" collection="voList" open="(" close=")" separator=",">
 		 	<![CDATA[
@@ -44,7 +44,7 @@
 	<select id="selectDailycheckList" resultType="com.logus.dailycheck.model.DailycheckVO" parameterType="int">
 		<![CDATA[
 		SELECT * FROM LOGUS.DAILYCHECK
-		WHERE dailyroutine_code=#{dailyroutineCode}
+		WHERE dailyroutine_code=#{dailyroutineCode} ORDER BY REGEXP_REPLACE(dailycheck_begintime, '[^0-9]+') asc
 		]]>
 	</select>
 	

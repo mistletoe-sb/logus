@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -48,8 +47,6 @@ public class AchieveController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}	
-		
-		System.out.println(today);
 		
 		DailyroutineVO routine = null;
 		
@@ -93,15 +90,13 @@ public class AchieveController {
 		}
 		rate = num/achieverate.length;	
 		
-		System.out.println(rate+"% 입니다");
-		
 		achieveVO.setMemberNickname(memberNickname);
 		achieveVO.setAchieveRate(rate);
 		achieveVO.setAchieveDate(today);
 		
 		achieveService.insertAchieve(achieveVO);
 		
-		return "redirect:/routinelist";
+		return "redirect:/library";
 	}
 	
 	@PostMapping(value="/achieve/check")	//금일 출석 여부 확인용
@@ -109,7 +104,6 @@ public class AchieveController {
 	public int checkAchieve(HttpSession session, @RequestParam("today") String today) {
 		String memberNickname=(String) session.getAttribute("memberNickname");	
 		int result = achieveService.selectAchieve(memberNickname, today);	//1 반환 시 이미 출석 완료, 0 반환시 출석 진행
-		System.out.println(result+"입니다");
 		return result;
 	};
 	

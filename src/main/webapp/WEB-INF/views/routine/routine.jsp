@@ -9,6 +9,9 @@
 	</head>
 	<body>
 		<h1><span class="badge bg-primary">${weekopt}</span>&nbsp;&nbsp;&nbsp;${routine.dailyroutineTitle}</h1>
+		<h3><span class="badge bg-primary">태그</span>&nbsp;&nbsp;&nbsp;
+		<c:forEach items="${taglist}" var="taglist" varStatus="status">
+		${taglist.tagName}</c:forEach></h3>
 			<table class="table">
 		  <thead>
 		    <tr>
