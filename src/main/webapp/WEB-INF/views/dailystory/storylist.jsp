@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="../header.jsp" %>
-
+<!DOCTYPE html>
+<html>
+	<head>
+		<%@ include file="../include.jsp" %>
+	</head>
+	<body>
+		<%@ include file="../header_body.jsp" %>
 		<p>일일 스토리 리스트 출력 화면(서재 메인 페이지)</p>
 		<div id="search_in_dailystory">
 			<form method="get" action="<c:url value='/library/search'/>">
@@ -14,7 +19,7 @@
 				<input id="search_txt_in_dailystory" class="form-control me-2" name="search"
 					   type="search" placeholder="내 스토리 검색하기" aria-label="Search">
 				<input id="search_btn_in_dailystory" class="btn btn-outline-success" type="image"
-					   src="${root}/resources/images/search.png" alt="검색" width="32" height="32">
+					   src="<c:url value='/resources/images/search.png'/>" alt="검색" width="32" height="32">
 				<input type="hidden" name="myNickname" value="${sessionScope.memberNickname}">
 			</form>
 		</div>
@@ -26,24 +31,29 @@
 			<c:forEach var="ds" items="${dsList}" varStatus="stat">
 				<div class="card" style="display: inline-block"
 					 onclick="location.href='<c:url value="/${ds.memberNickname}/library/story/${ds.dailystoryCode}"/>'">
-				  <c:if test='${(ds.dailystoryImage != null) && (ds.dailystoryImage != "")}'>
-				  	<img src="default.jpg" class="card-img-top" alt="${ds.dailystoryImage}">
-				  </c:if>
-				  <div class="card-body">
-				    <h5 class="card-title">${ds.dailystoryTitle}</h5>		<p>댓글 : ${rpCount[stat.index]}</p>
-				    <p class="card-text" style="white-space: pre-line;">${ds.dailystoryContent}<br>
-				    <fmt:formatDate value="${dsVO.dailystoryUploaddate}" pattern="yyyy.MM.dd HH:mm"/></p>
-				    <%-- <div>
-						<c:forEach var="tg" items="${tagList}" varStatus="i">
-							<c:choose>
-								<c:when test="${i < 5}">
-									<button style="display: inline-block">${tg.tagName}</button>
-								</c:when>
-								<c:when test="${i == 5}">...</c:when>
-							</c:choose>
-						</c:forEach>
-					</div> --%>
-				  </div>
+					<c:choose>
+						<c:when test='${(ds.dailystoryImage != null) && (ds.dailystoryImage != "")}'>
+							<img src="<c:url value='/resources/images/dailystory/${ds.dailystoryImage}'/>" class="card-img-top" alt="${ds.dailystoryImage}">				  	
+						</c:when>
+						<c:otherwise>
+							<img src="<c:url value='/resources/images/default_thumbnail.jpg'/>" class="card-img-top" alt="기본 썸네일">				  	
+						</c:otherwise>
+					</c:choose>
+					<div class="card-body">
+						<h5 class="card-title">${ds.dailystoryTitle}</h5>		<p>댓글 : ${rpCount[stat.index]}</p>
+						<p class="card-text" style="white-space: pre-line;">${ds.dailystoryContent}<br>
+						<fmt:formatDate value="${dsVO.dailystoryUploaddate}" pattern="yyyy.MM.dd HH:mm"/></p>
+					    <div>
+							<c:forEach var="tg" items="${tagList[ds.dailystoryCode]}" varStatus="i">
+								<c:choose>
+									<c:when test="${i.index < 5}">
+										<button style="display: inline-block">${tg.tagName}</button>
+									</c:when>
+									<c:when test="${i.index == 5}">...</c:when>
+								</c:choose>
+							</c:forEach>
+						</div>
+					</div>
 				</div>
 			</c:forEach>
 		</div>

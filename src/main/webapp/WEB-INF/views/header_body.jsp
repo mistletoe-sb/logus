@@ -3,18 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
-<html>
-	<head>
-		<%-- <c:set var="root" value="${pageContext.request.contextPath}"/> --%>
-		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
-		<link rel="stylesheet" href="<c:url value='/resources/css/library.css'/>">
-		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-		<script src="<c:url value='/resources/js/jquery-3.6.3.min.js'/>"></script>
-		<script src="<c:url value='/resources/js/dailystory.js'/>"></script>
-		<meta charset="UTF-8">
-		<title>Log Us</title>
-	</head>
-	<body>
+
 		<div>
 			<nav class="navbar bg-light">
 				<div class="container-fluid">
@@ -36,7 +25,7 @@
 							<button type="button" class="btn btn-secondary" onclick="location.href='<c:url value='/mypage'/>'">마이페이지</button>
 							<button type="button" class="btn btn-secondary" onclick="location.href='<c:url value='/logout'/>'">로그아웃</button>
 							<button type="button" class="btn btn-primary" onclick="location.href='<c:url value='/library'/>'">내서재<br>바로가기</button>
-				  	  <button type="button" class="btn btn-info" onclick="location.href='<c:url value='/achieve'/>'">오늘의 출석체크</button>
+							<button type="button" class="btn btn-info" onclick="location.href='<c:url value='/achieve'/>'">오늘의 출석체크</button>
 						</c:otherwise>
 					</c:choose>
 				</div>
