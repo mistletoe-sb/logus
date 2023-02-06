@@ -42,7 +42,7 @@
 				</div>
 <%-- 					<form id="search" name="searchform" class="d-flex" role="search" action="<c:url value='/search'/>" method="post"> --%>
 				<div class="container-fluid">
-					<form id="search" name="searchform" class="d-flex" role="search" action="<c:url value='/library/search'/>" method="get">
+					<form id="search" name="searchform" class="d-flex" role="search" action="<c:url value='/search'/>" method="post">
 						<select class="form-select" aria-label="Default select example" name="option">
 							<option value="0" selected>전체</option>
 							<option value="1">태그</option>

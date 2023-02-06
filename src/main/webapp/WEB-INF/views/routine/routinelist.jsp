@@ -18,6 +18,7 @@
 		    <div class="ms-2 me-auto">
 		    <c:if test="${routinelist1.dailyroutineActive eq 1}"><span class="badge text-bg-success">메인</span></c:if>
 		      <div class="fw-bold">${routinelist1.dailyroutineTitle }</div>
+		      <div><button type="button" class="btn btn-outline-primary btn-sm" disabled>공유된 횟수: ${routinelist1.dailyroutineShared }</button></div>
 		    </div>
 		    <span class="badge bg-primary rounded-pill"></span>
 		    <a href="routine/${routinelist1.dailyroutineCode}" class="btn btn-primary active" aria-current="page">확인</a>
@@ -33,6 +34,7 @@
 		    <div class="ms-2 me-auto">
 		    <c:if test="${routinelist2.dailyroutineActive eq 1}"><span class="badge text-bg-success">메인</span></c:if>
 		      <div class="fw-bold">${routinelist2.dailyroutineTitle }</div>
+		      <div><button type="button" class="btn btn-outline-primary btn-sm" disabled>공유된 횟수: ${routinelist2.dailyroutineShared }</button></div>
 		    </div>
 		    <span class="badge bg-primary rounded-pill"></span>
 		    <a href="routine/${routinelist2.dailyroutineCode}" class="btn btn-primary active" aria-current="page">확인</a>

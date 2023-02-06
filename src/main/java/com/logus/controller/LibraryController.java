@@ -3,7 +3,9 @@ package com.logus.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 import org.springframework.ui.Model;
@@ -18,6 +20,7 @@ import com.logus.dailycheck.model.DailycheckVO;
 import com.logus.dailycheck.service.IDailycheckService;
 import com.logus.dailyroutine.model.DailyroutineVO;
 import com.logus.dailyroutine.service.IDailyroutineService;
+import com.logus.dailystory.model.DailystoryVO;
 import com.logus.member.model.MemberVO;
 import com.logus.member.service.IMemberService;
 import com.logus.routineshare.model.RoutineshareVO;
@@ -184,8 +187,7 @@ public class LibraryController {
 			model.addAttribute("todayAchieve", todayAchieve);
 			model.addAttribute("weekAchieve", weekAchieve);
 			
-			memberVO = MemberService.selectMemberInfo2(memberNickname);
-			
+			memberVO = MemberService.selectMemberInfo2(memberNickname);			
 			model.addAttribute("memberVO", memberVO);
 			model.addAttribute("sessionUser", sessionUser);
 			
@@ -273,16 +275,26 @@ public class LibraryController {
 		
 		@PostMapping(value="/search")	//검색-전송용
 		public String selectSearch(@RequestParam("option") String option, @RequestParam("search") String search, Model model) {
+			
+			System.out.println(option);
+			System.out.println(search);
+			
 			List<DailyroutineVO> searchroutine=null;
+			List<Integer> codeList = new ArrayList<Integer>();
+			Map<Integer, List<TagVO>> tagList = null;
 			
 			try {	
 				searchroutine = DailyroutineService.findDailyroutineList(option, search);
+				for(DailyroutineVO vo : searchroutine) {
+					codeList.add(vo.getDailyroutineCode());
+				}
+				tagList = tagService.makeTagListMap(TagCategory.DAILY_ROUTINE, codeList);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}	
 			
 			model.addAttribute("searchroutine", searchroutine);
-			
+			model.addAttribute("tagList", tagList);
 			return view_ref+"search";
 		}
 		

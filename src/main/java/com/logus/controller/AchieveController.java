@@ -101,7 +101,7 @@ public class AchieveController {
 		
 		achieveService.insertAchieve(achieveVO);
 		
-		return "redirect:/routinelist";
+		return "redirect:/library";
 	}
 	
 	@PostMapping(value="/achieve/check")	//금일 출석 여부 확인용

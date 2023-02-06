@@ -148,8 +148,7 @@ function followBtn2() {
     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
   <div class="offcanvas-body">
-<!--     <img src="..." class="card-img-top" alt="..."> -->
-    <p>111</p>
+       <img alt="등록된 사진이 없습니다" id="preview-image" src="${root}/logus/resources/images/member/${memberVO.memberProfile}" >
     <dl class="row">
 	  <dt class="col-sm-3">닉네임</dt>
 	  	<dd class="col-sm-9">${memberVO.memberNickname}</dd>
@@ -179,7 +178,6 @@ function followBtn2() {
   <div>
    <div class="d-inline-block">
 	 <div class="row row-cols-1 row-cols-md-2 g-4">
-	  
 	  <c:choose>
 	  <c:when test="${empty routine1}"><div class="col">
 	    <div class="card">
@@ -194,7 +192,7 @@ function followBtn2() {
 		    <div class="card">
 		      <div class="card-body">
 		      <h3 class="card-title"><span class="badge bg-secondary">평일</span></h3>
-		        <h5 class="card-text">${routine1.dailyroutineTitle}</h5>
+		        <h5 class="card-text text-truncate">${routine1.dailyroutineTitle}</h5>
 		         <div>
 
 				        <c:forEach var="tg" items="${tag1}">
@@ -225,7 +223,7 @@ function followBtn2() {
 	    <div class="card">
 	      <div class="card-body">
 	      <h3 class="card-title"><span class="badge bg-secondary">주말</span></h3>
-		      	<h5 class="card-text">${routine2.dailyroutineTitle}</h5>
+		      	<h5 class="card-text text-truncate">${routine2.dailyroutineTitle}</h5>
 		      	<div>
 			        <c:forEach var="tg" items="${tag2}">
 						<c:if test="${not empty tg.tagName}">

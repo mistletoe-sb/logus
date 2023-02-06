@@ -47,11 +47,21 @@ public class RoutineController {
 	public String selectDailyroutineList(HttpSession session, Model model) {
 		String memberNickname= (String) session.getAttribute("memberNickname");
 				
-		List<DailyroutineVO> routinelist1= DailyroutineService.selectDailyroutineList(memberNickname, 1);	//평일 리스트
-		List<DailyroutineVO> routinelist2= DailyroutineService.selectDailyroutineList(memberNickname, 2);	//주말 리스트
+		List<DailyroutineVO> routinelist1 = null;	//평일 리스트
+		List<DailyroutineVO> routinelist2 = null;	//주말 리스트
 		
-		//List<TagVO> taglist1;
-		//List<TagVO> taglist2;
+		try {
+			routinelist1= DailyroutineService.selectDailyroutineList(memberNickname, 1);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		try {
+			routinelist2= DailyroutineService.selectDailyroutineList(memberNickname, 2);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
 		
 		model.addAttribute("routinelist1", routinelist1);
 		model.addAttribute("routinelist2", routinelist2);
