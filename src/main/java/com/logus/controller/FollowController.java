@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.logus.follow.model.FollowVO;
@@ -51,11 +52,8 @@ public class FollowController {
 			followList = followService.selectFollowList(memberId);
 			
 			for(int i=0; i<followList.size(); i++) {
-				System.out.println("팔로우 리스트는? "+followList.get(i).getFollowingMemberId());
 			MemberVO vo = memberService.selectMemberInfo(followList.get(i).getFollowingMemberId());
-			System.out.println(vo);
 			followImg.add(vo);
-			System.out.println("리스트는 "+followImg);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -65,7 +63,6 @@ public class FollowController {
 							//"	변수명 "	,    값
 		model.addAttribute("filePath", PATH + "\\");
 		model.addAttribute("followImg", followImg);
-		//model.addAttribute("selectMemberInfo", vo);
 		
 		return view_pos +  "followForm";		//return은 main.jsp로 포워드 -> 팔로우폼으로 이동하라
 							//출력 페이지로 넘김
@@ -73,30 +70,45 @@ public class FollowController {
 	
 
 	@PostMapping(value="/followinsert")		//jsp에서 버튼을 눌렀을때 연결해주는 주소 팔로우 추가 작성 
-	
 	public String followInsert(HttpSession session, Model model, @RequestParam("followingMemberId") String followingMemberId, RedirectAttributes redirectAttributes) {
 		
-		
-		int ckeckId = memberService.ckeckId(followingMemberId);
 		String memberId = session.getAttribute("memberId").toString();
-		System.out.println(memberId);
-		System.out.println(followingMemberId);
-		System.out.println("버튼 컨트롤러 실행됨");
 		
-		FollowVO vo = new FollowVO();
+		try {
+			List<FollowVO> followList= followService.selectFollowList(memberId);
+			for(int i=0; i<followList.size(); i++) {
+				
+				if(followList.get(i).getFollowingMemberId().equals(followingMemberId)) {
+					redirectAttributes.addFlashAttribute("message", "이미 팔로우한 사람입니다.");
+					return "redirect:/"+ "followList";
+				} 
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
-		if(ckeckId == 0){	//존재 하지 않는 아이디	
-			redirectAttributes.addFlashAttribute("message", "존재하지 않는 아이디 입니다.");
-			return "redirect:/"+ "followList";
-		}else {//아이디 있음
-			redirectAttributes.addFlashAttribute("message", followingMemberId + "님. 팔로우 추가!");
+			FollowVO vo = new FollowVO();
+	
 			vo.setMemberId(memberId);
 			vo.setFollowingMemberId(followingMemberId);
 			
 			followService.insertFollow(vo);
-			return "redirect:/"+ "followList";	
-		}
-			
+
+		redirectAttributes.addFlashAttribute("message", "팔로우에 추가했습니다.");
+		
+		return "redirect:/"+ "followList";	
+	}
+	
+	@PostMapping(value="/followinsert/check")		//jsp에서 버튼을 눌렀을때 연결해주는 주소 팔로우 추가 작성 
+	@ResponseBody
+	public int followcheck(@RequestParam("followId") String followId) {
+		
+		MemberVO vo = memberService.selectMemberInfo(followId);
+		int result = 0;		
+		if(vo!=null) {
+			result=1;
+		} 
+		return result;
 		
 	}
 	
@@ -104,9 +116,7 @@ public class FollowController {
 	@RequestMapping(value="/deleteFollow/{followCode}", method=RequestMethod.GET)
 	//팔로우 취소 작성
 	public String followDelete(@PathVariable("followCode") int followCode) {	
-		
-		System.out.println("삭제코드는? "+followCode);	
-		
+	
 		followService.deleteFollow(followCode);		//팔로우 서비스에 있는 취소 
 		return "redirect:/"+ "followList";				//팔로우 폼으로 돌아가서 보여주기
 	}
