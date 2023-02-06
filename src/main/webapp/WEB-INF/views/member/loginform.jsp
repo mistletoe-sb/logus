@@ -27,35 +27,43 @@
 				<div class="title">
 					<h1>Longin</h1>
 				</div>
-				<div class="title2">
-					<div>
-						<div class="form-floating mb-3">
-							<input type="text" name="memberId" id="memberId" class="form-control" id="floatingInput" placeholder="name@example.com" required>
-							<label for="floatingInput">ID</label>
-						</div>
-						<div class="form-floating">
-							<input type="password" name="memberPassword" id="memberPassword" class="form-control" id="floatingPassword" placeholder="Password" required>
-							<label for="floatingPassword">Password</label>
-						</div>
-					</div>
-					<div>
+				<div>
+					<div class="title2">
 						<div>
-							<input type="hidden" name="message" id="message" value="${message}">
+							<div class="form-floating mb-3">
+								<input type="text" name="memberId" id="memberId" class="form-control" id="floatingInput" placeholder="name@example.com" required>
+								<label for="floatingInput">ID</label>
+							</div>
+							<div class="form-floating">
+								<input type="password" name="memberPassword" id="memberPassword" class="form-control" id="floatingPassword" placeholder="Password" required>
+								<label for="floatingPassword">Password</label>
+							</div>
+						</div>
+						<div>
+							<div>
+								<input type="hidden" name="message" id="message" value="${message}">
+							</div>
 						</div>
 					</div>
 				</div>
 				<div>
-					<div class="d-grid gap-2 d-md-block">
-						<!-- Button trigger modal -->
-						<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-							아이디 찾기
-						</button>
-						<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop2">
-							비밀번호 변경
-						</button>
-						<button class="btn btn-primary" type="submit" onclick="memberLogin()">Longin</button>
-						<button class="btn btn-primary" type="reset" onclick="location.href='<c:url value='index'/>'">Home</button>
-						<button class="btn btn-primary" type="reset" onclick="location.href='<c:url value='/insertform'/>'">Sign Up</button>
+					<div>
+						<div class="d-grid gap-2 d-md-block">
+							<button class="btn btn-primary" type="submit" onclick="memberLogin()">Longin</button>
+							<button class="btn btn-primary" type="reset" onclick="location.href='<c:url value='index'/>'">Home</button>
+							<button class="btn btn-primary" type="reset" onclick="location.href='<c:url value='/insertform'/>'">Sign Up</button>
+							
+						</div>
+						<br>
+						<div class="d-grid gap-2 d-md-block">
+							<!-- Button trigger modal -->
+							<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+								아이디 찾기
+							</button>
+							<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop2">
+								비밀번호 변경
+							</button>
+						</div>
 					</div>
 				</div>
 			</form>

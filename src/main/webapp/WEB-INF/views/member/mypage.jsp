@@ -37,10 +37,8 @@
 	     	
 	     		<div class="d-grid gap-2 d-md-flex justify-content-md-end">
 		     		<div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-						<input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" onclick="acyncMovePage('./mypage')" checked>
-						<label class="btn btn-outline-primary" for="btnradio1">Follow</label>
-						
-						<input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off" onclick="acyncMovePage('./updateMemberForm')">
+
+						<input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off" onclick="acyncMovePage('./updateMemberForm')" checked>
 						<label class="btn btn-outline-primary" for="btnradio2">Edit Profile</label>
 						
 						<input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off" onclick="acyncMovePage('./deleteMemberForm')">

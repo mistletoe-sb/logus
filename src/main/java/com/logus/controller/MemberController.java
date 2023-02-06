@@ -106,7 +106,22 @@ public class MemberController {
 			return "index";	
 		} else {
 			redirectAttributes.addFlashAttribute("message", "비밀번호를 다시 확인하세요.");
-			return "redirect:/"+  "mypage";
+			return "redirect:/"+  "deleteMemberForm";
+			// 비밀번호가 일치하지 않습니다. >> 예외처리
+		}
+	}
+	
+	@RequestMapping(value="/findPassword", method=RequestMethod.POST)
+	public String findPassword(HttpSession session, String memberPassword, RedirectAttributes redirectAttributes) {
+		
+		String memberId = session.getAttribute("memberId").toString();
+		MemberVO vo = memberService.loginCheck(memberId, memberPassword);
+		if(memberPassword.equals(vo.getMemberPassword())) {
+			redirectAttributes.addFlashAttribute("message_ok","확인 되었습니다.");
+			return "redirect:/"+  "mypage";	
+		} else {
+			redirectAttributes.addFlashAttribute("message_ok", "비밀번호를 다시 확인하세요.");
+			return "redirect:/"+  "index";
 			// 비밀번호가 일치하지 않습니다. >> 예외처리
 		}
 	}
