@@ -47,20 +47,6 @@ public class DailystoryController {
 	
 	private String serviceName = "dailystory";		// 서비스 이름(이미지 저장 폴더명)
 	
-	@GetMapping(value="/lib")
-	// 서재 메인으로 이동
-	public String libMain(HttpSession session) {
-		//session.setAttribute("user", "회원닉네임테스트01");
-		return "redirect:/library";
-	}
-	
-	@GetMapping(value="/error")
-	// 에러(404, 500) 시 index 페이지로 redirect
-	public String errorLog() {
-		logger.debug("error");
-		return "redirect:/";
-	}
-	
 	@GetMapping(value="/{memberNickname}/library/story/insert")
 	// 일일 스토리 작성 폼으로 이동
 	public String insertDailystory() {
