@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-	<html>
+<html>
 	<head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -29,9 +29,5 @@
 		  <li class="list-group-item"><a href="http://localhost:8080/logus/manager/managerlogout">관리자 로그아웃</a></li>
 		</ul>
 		관리자 ${sessionScope.sessionManagerNickname}님 로그인 중
-<!-- 		<ul>		 -->
-<!-- 			<li></li> -->
-<!-- 		</ul> -->
-		
 	</body>
 </html>

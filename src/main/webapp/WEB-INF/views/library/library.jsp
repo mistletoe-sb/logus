@@ -3,19 +3,6 @@
 <html>
 	<head>
 		<%@ include file="../include.jsp" %>
-		<style type="text/css">
-			.align_container{
-				text-align: center;
-			}
-		
-			.tag_block{
-				color: white !important;
-				background-color: #0d81fde0 !important;
-				border-color: #0d81fde0 !important;
-				border-width: 0.5px !important;
-				border-radius: 0.5rem !important;
-			}
-		</style>		
 	</head>
 	<body>
 		<%@ include file="../header_body.jsp" %>

@@ -6,8 +6,6 @@
 	</head>
 	<body>
 		<%@ include file="../header_body.jsp" %>
-		<p>일일 스토리 수정 폼</p>
-		<br>
 		<form action="<c:url value='/${sessionScope.memberNickname}/library/story/update'/>" method="post" enctype="multipart/form-data">
 			<p>작성자 : ${dsVO.memberNickname}</p>
 			<p><fmt:formatDate value="${dsVO.dailystoryUploaddate}" pattern="yyyy.MM.dd HH:mm"/></p>
