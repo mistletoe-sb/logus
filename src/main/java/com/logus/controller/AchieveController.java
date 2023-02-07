@@ -18,6 +18,7 @@ import com.logus.dailycheck.model.DailycheckVO;
 import com.logus.dailycheck.service.IDailycheckService;
 import com.logus.dailyroutine.model.DailyroutineVO;
 import com.logus.dailyroutine.service.IDailyroutineService;
+import com.logus.util.redirectencoder.RedirEncoder;
 
 @Controller
 public class AchieveController {
@@ -74,7 +75,7 @@ public class AchieveController {
 		
 		model.addAttribute("routine", routine);
 		model.addAttribute("checklist", checklist);
-		
+		model.addAttribute("today", today);
 		return view_ref+"achieve";	
 	}
 	
@@ -96,7 +97,7 @@ public class AchieveController {
 		
 		achieveService.insertAchieve(achieveVO);
 		
-		return "redirect:/library";
+		return "redirect:/" + RedirEncoder.encode(memberNickname) + "/library";
 	}
 	
 	@PostMapping(value="/achieve/check")	//금일 출석 여부 확인용

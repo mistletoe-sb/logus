@@ -4,58 +4,23 @@
 <!DOCTYPE html>
 <html>
 	<head>
+	<%@ include file="../include.jsp" %>
 		<meta charset="UTF-8">
 		<title>출석체크</title>
-		<script type="text/javascript">
-		var today;
-		 $(function(){
-		var date = new Date();
-	    var year = date.getFullYear();
-	    var month = ("0" + (1 + date.getMonth())).slice(-2);
-	    var day = ("0" + date.getDate()).slice(-2);
-	    
-	  	$('#today').val(year+month+day);
-	  	//ajax로 해당 날짜에 이미 출석했는지 확인하고 버튼 비활성화
-	});
-		 
-		  	function on_submit_check(){
-		  		today =$('#today').val();
-		  		var result2 =false;
-		  		var i=parseInt($("#index").val());
-		  		var j=0;
- 					
-		  		 $.ajax({
-		 			url : './achieve/check', //Controller에서 요청 받을 주소
-		 			type : 'post', //POST 방식으로 전달
-		 			async:false,
-		 			data : {today : today},
-		 			success: function(result){ //데이터 주고받기 성공했을 경우 실행할 결과
-		 				console.log(result);
-		 				if(result==0){
-		 			    		alert("출석체크가 완료되었습니다.");
-		 			    		result2 =true;
-		 			    	} else {
-			 			    		alert("오늘은 이미 출석체크를 하셨습니다.");
-			 			    		result2=false;
-		 			    		  }
-		 						}
-		 					});
-		  		 		console.log(result2);
-		 			return result2;
-			 }
-		</script>
-		
 	</head>
 	<body>
-	<h1>${routine.dailyroutineTitle}</h1>
+	<h2><span class="badge bg-secondary bg-lg" id="todayachieve"></span></h2>
+	<h1 class="d-flex flex-wrap justify-content-center"><span class="badge bg-primary bg-lg">${today}요일</span></h1>
+<%-- 	<h2 class="d-flex flex-wrap justify-content-center">${routine.dailyroutineTitle}</h2> --%>
 <%--&nbsp; (table-sm 넣으면 테이블 패딩 줄어듬->작아짐) --%>
+		<div class="d-grid gap-2 col-7 mx-auto">
 			<form id="achieve" name="achieveform" action="<c:url value='/achieve/save'/>" method="post" onsubmit="return on_submit_check();">
 			<c:choose>
 			<c:when test="${not empty routine}">
 			<input type="hidden" name="today" id="today">
-			<table class="table table-bordered table-group-divider">
+			<table class="table table-bordered table-group-divider bg-success bg-opacity-10 ">
 		  <thead>
-		    <tr>
+		    <tr class="">
 		      <th scope="col">시간</th>
 		      <th scope="col">일정 내용</th>
 		      <th scope="col">달성율</th>
@@ -64,9 +29,9 @@
 		  <tbody>
 		  <c:forEach items="${checklist}" var="checklist" varStatus="status">
 		    <tr>
-		      <td>${checklist.dailycheckBegintime} ~ ${checklist.dailycheckEndtime}</td>
-		      <td>${checklist.dailycheckContent}</td>
-		      <td id="rate${status.index}">
+		      <td class="text-danger bg-opacity-10 bg-info ">${checklist.dailycheckBegintime} ~ ${checklist.dailycheckEndtime}</td>
+		      <td class="bg-opacity-10 bg-info">${checklist.dailycheckContent}</td>
+		      <td class="bg-opacity-10 bg-info" id="rate${status.index}">
 			      <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="achieverate">
 					  <option value="0" selected>0%</option>
 					  <option value="10">10%</option>
@@ -87,7 +52,7 @@
 		 </tbody>
 		</table>
 				<div class="d-grid gap-2 col-6 mx-auto">
-					<input class="btn btn-primary" type="submit" value="출석 완료하기" id="submit">
+					<input class="btn btn-primary" type="submit" value="출석 완료하기" id="submitachieve">
 				</div>
 			</c:when>
 			<c:otherwise>
@@ -95,5 +60,6 @@
 		 	</c:otherwise>
 		</c:choose>
 		 </form>
+		 </div>
 	</body>
 </html>
