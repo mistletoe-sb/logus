@@ -6,18 +6,22 @@
 <meta charset="UTF-8">
 <title>서재</title>
 <script type="text/javascript">
-const myModal = document.getElementById('myModal')
-const myInput = document.getElementById('myInput')
-
-myModal.addEventListener('shown.bs.modal', () => {
-  myInput.focus()
-})
-</script>
-<script type="text/javascript">
+//팔로우 취소
 function followBtn1() {
-	  
 	  const btn1 = document.getElementById('followbtn1');
 	  const btn2 = document.getElementById('followbtn2');
+	  followId =$('#followinId').val();
+		console.log(followId)
+		
+	  $.ajax({
+			url : './followdl', //Controller에서 요청 받을 주소
+			type : 'post', //POST 방식으로 전달
+			async:false,
+			data : {followId : followId},
+			success: function(result){ //데이터 주고받기 성공했을 경우 실행할 결과
+				console.log("삭제 성공");
+				 }
+			});
 	  
 	  // btn 숨기기 (display: none)
 	  if(btn1.style.display !== 'none') {
@@ -31,11 +35,22 @@ function followBtn1() {
 	  }
 	  
 	}
-	
+//팔로우 하기
 function followBtn2() {
-	  
-	  const btn1 = document.getElementById('followbtn1');
-	  const btn2 = document.getElementById('followbtn2');
+	const btn1 = document.getElementById('followbtn1');
+	const btn2 = document.getElementById('followbtn2');
+	followId =$('#followinId').val();
+		console.log(followId)
+
+		 $.ajax({
+			url : './followin', //Controller에서 요청 받을 주소
+			type : 'post', //POST 방식으로 전달
+			async:false,
+			data : {followId : followId},
+			success: function(result){ //데이터 주고받기 성공했을 경우 실행할 결과
+				console.log("팔로우 성공");
+				 }
+			});
 	  
 	  // btn 숨기기 (display: none)
 	  if(btn2.style.display !== 'none') {
@@ -47,7 +62,6 @@ function followBtn2() {
 		btn1.style.display = 'none';
 	    btn2.style.display = 'block';
 	  }
-	  
 	}
 </script>
 </head>
@@ -168,8 +182,18 @@ function followBtn2() {
 	<c:choose>
 	  <c:when test="${memberVO.memberNickname eq sessionUser || not empty memberVO.memberOutdate}"></c:when>
 		  <c:otherwise>
-		    <input type='button' value='팔로우하기' id='followbtn1' class="btn btn-danger"  onclick="followBtn2()"/>
-			<input type='button' value='팔로우 취소' id='followbtn2' class="btn btn-danger" onclick="followBtn1()" style="display : none"/>
+			<c:choose>
+				<c:when test="${following eq 0}">
+			      <input type="hidden" value="${memberVO.memberId}" id="followinId" name="followingMemberId">
+			      <input type='button' value='팔로우하기' id='followbtn1' class="btn btn-danger"  onclick="followBtn2()"/>
+				  <input type='button' value='팔로우 취소' id='followbtn2' class="btn btn-danger" onclick="followBtn1()" style="display:none;"/>
+			    </c:when>
+				<c:otherwise>
+				  <input type="hidden" value="${memberVO.memberId}" id="followinId" name="followingMemberId">
+			      <input type='button' value='팔로우하기' id='followbtn1' class="btn btn-danger"  onclick="followBtn2()" style="display:none;"/>	      
+				  <input type='button' value='팔로우 취소' id='followbtn2' class="btn btn-danger" onclick="followBtn1()"/>
+				</c:otherwise>  
+			</c:choose>
 		  </c:otherwise>
 	</c:choose>
   </div>

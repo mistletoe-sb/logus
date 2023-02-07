@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.logus.achieve.model.AchieveVO;
 import com.logus.achieve.service.IAchieveService;
@@ -21,6 +23,8 @@ import com.logus.dailycheck.service.IDailycheckService;
 import com.logus.dailyroutine.model.DailyroutineVO;
 import com.logus.dailyroutine.service.IDailyroutineService;
 import com.logus.dailystory.model.DailystoryVO;
+import com.logus.follow.model.FollowVO;
+import com.logus.follow.service.IFollowService;
 import com.logus.member.model.MemberVO;
 import com.logus.member.service.IMemberService;
 import com.logus.routineshare.model.RoutineshareVO;
@@ -45,6 +49,8 @@ public class LibraryController {
 	private IRoutineshareService routineshareService;	//루틴 공유 정보 객체
 	@Autowired
 	private ITagService tagService;						// 태그 서비스 객체
+	@Autowired
+	private IFollowService followService;		//팔로우 서비스 객체
 	
 	private String view_ref ="library/";	//뷰 위치
 	
@@ -191,6 +197,25 @@ public class LibraryController {
 			model.addAttribute("memberVO", memberVO);
 			model.addAttribute("sessionUser", sessionUser);
 			
+			//팔로우
+			String memberId=(String) session.getAttribute("memberId");
+			
+			//FollowVO vo = new FollowVO();
+			List<FollowVO> followList = null;
+			int following = 0;
+			
+			try {
+				followList = followService.selectFollowList(memberId);
+				for(int i=0; i<followList.size(); i++) {
+					if(followList.get(i).getFollowingMemberId().equals(memberVO.getMemberId())) {
+						following=1;
+					} 
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			model.addAttribute("following", following);
+				
 			return view_ref+"library";
 		}
 	
@@ -300,5 +325,37 @@ public class LibraryController {
 			return view_ref+"search";
 		}
 		
+		@ResponseBody
+		@PostMapping(value="/library/followin")	//서재 팔로우
+		public String insertFollow(HttpSession session, @RequestParam("followId") String followingMemberId) {
+		
+			String memberId = session.getAttribute("memberId").toString();
+			FollowVO vo = new FollowVO();
+			
+			vo.setMemberId(memberId);
+			vo.setFollowingMemberId(followingMemberId);
+			followService.insertFollow(vo);
+			
+			String result ="성공";
+			return result;
+		}
+		
+		@ResponseBody
+		@PostMapping(value="/library/followdl")	//서재 팔로우 삭제
+		public String deleteFollow(HttpSession session, @RequestParam("followId") String followingMemberId) {
+			
+			String memberId = session.getAttribute("memberId").toString();
+			int followCode=0;
+	
+				List<FollowVO> followList= followService.selectFollowList(memberId);
+				for(int i=0; i<followList.size(); i++) {
+					if(followList.get(i).getFollowingMemberId().equals(followingMemberId)) {
+						followCode = followList.get(i).getFollowCode(); } 
+					} 
+				followService.deleteFollow(followCode);
+				
+				String result ="성공";
+				return result;
+		}
 		
 }
