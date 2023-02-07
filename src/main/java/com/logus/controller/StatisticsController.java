@@ -247,7 +247,7 @@ public class StatisticsController {
 		ajaxArryCols.add(ajaxObjCols1);
 		ajaxArryCols.add(ajaxObjCols2);
 				 
-		for (int i=1; i<(maplist.size() < 10 ? maplist.size() : 10) ; i++){        //JSONArray의 size만큼 돌면서 형식을 만듭니다.
+		for (int i=0; i<(maplist.size() < 10 ? maplist.size() : 10) ; i++){        //JSONArray의 size만큼 돌면서 형식을 만듭니다.
 		    JSONObject legend = new JSONObject();
 		    legend.put("v", maplist.get(i).get("routineTitle"));
 		    legend.put("f", null);
