@@ -55,7 +55,7 @@
                                 <div class="listView">
                                     <div class="viewTxt">${qnadetail.qnaContent}</div>
                                 </div>
-                                <form action="http://localhost:8080/logus/manager/insertanswer" method="post">
+                                <form action="<c:url value='/manager/insertanswer'/>" method="post">
 							        <fieldset>
 							        <div class="mb-3">
 							            <label for="exampleFormControlTextarea1" class="form-label">문의글 답변</label>

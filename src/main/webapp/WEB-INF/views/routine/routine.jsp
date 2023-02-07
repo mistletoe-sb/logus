@@ -1,13 +1,11 @@
-<%@ include file="../header.jsp" %>
 <%@ page contentType="text/html; charset=UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="UTF-8">
-		<title>루틴</title>
+		<%@ include file="../include.jsp" %>
 	</head>
 	<body>
+		<%@ include file="../header_body.jsp" %>
 		<h1><span class="badge bg-primary">${weekopt}</span>&nbsp;&nbsp;&nbsp;${routine.dailyroutineTitle}</h1>
 		<h3><span class="badge bg-primary">태그</span>&nbsp;&nbsp;&nbsp;
 		<c:forEach items="${taglist}" var="taglist" varStatus="status">

@@ -1,4 +1,3 @@
-<%@ include file="../header.jsp" %>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
@@ -9,6 +8,7 @@
 		<title>출석체크</title>
 	</head>
 	<body>
+	<%@ include file="../header_body.jsp" %>
 	<h2><span class="badge bg-secondary bg-lg" id="todayachieve"></span></h2>
 	<h1 class="d-flex flex-wrap justify-content-center"><span class="badge bg-primary bg-lg">${today}요일</span></h1>
 <%-- 	<h2 class="d-flex flex-wrap justify-content-center">${routine.dailyroutineTitle}</h2> --%>
@@ -20,7 +20,7 @@
 			<input type="hidden" name="today" id="today">
 			<table class="table table-bordered table-group-divider bg-success bg-opacity-10 ">
 		  <thead>
-		    <tr class="">
+		    <tr>
 		      <th scope="col">시간</th>
 		      <th scope="col">일정 내용</th>
 		      <th scope="col">달성율</th>

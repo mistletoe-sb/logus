@@ -1,15 +1,13 @@
 <%@page isELIgnored="false" %>
-<%@ include file="../header.jsp" %>
 <%@ page contentType="text/html; charset=UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 	<head>
-	<script src="<c:url value='/resources/js/routinefix.js'/>"></script>
-		<meta charset="UTF-8">
-		<title>루틴 수정</title>
+		<%@ include file="../include.jsp" %>
+		<script src="<c:url value='/resources/js/routinefix.js'/>"></script>
 	</head>
 	<body>
+		<%@ include file="../header_body.jsp" %>
 		<form id="routineupdate" name="routineform" action="<c:url value='/routinefix'/>" method="post">
 		<div class="p-3 bg-info bg-opacity-10 border border-dark border-start-0 rounded-end">
 			<label>태그 등록</label>

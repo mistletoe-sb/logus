@@ -6,32 +6,32 @@
 		<header>
 			<nav class="navbar bg-light">
 			
-			<a class="navbar-brand" 
-						<c:choose>
-						<c:when test="${empty sessionScope.memberNickname}">
-							href="<c:url value='/'/>"
-						</c:when>
-						<c:otherwise>
-							href="<c:url value='/${sessionScope.memberNickname}/library'/>"
-						</c:otherwise>
-						</c:choose>
-					>
-						<img src="<c:url value='/resources/images/logo.png'/>" 
-							 alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
-						Logus
-					</a>
+				<a class="navbar-brand" 
+					<c:choose>
+					<c:when test="${empty sessionScope.memberNickname}">
+						href="<c:url value='/'/>"
+					</c:when>
+					<c:otherwise>
+						href="<c:url value='/${sessionScope.memberNickname}/library'/>"
+					</c:otherwise>
+					</c:choose>
+				>
+					<img src="<c:url value='/resources/images/logo.png'/>" 
+						 alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+					Logus
+				</a>
 
-					<form id="search" name="searchform" class="d-flex" role="search" action="<c:url value='/search'/>" method="get">
-						<select class="form-select" aria-label="Default select example" name="option">
-							<option value="0" selected>전체</option>
-							<option value="1">태그</option>
-							<option value="2">제목</option>
-							<option value="3">내용</option>
-							<option value="4">닉네임</option>
-						</select>
-				    	<input id="searchtext" class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search">
-				    	<button id="searchbutton" class="btn btn-outline-success" type="submit" value="Submit" id="submit">search</button>
-					</form>
+				<form id="search" name="searchform" class="d-flex" role="search" action="<c:url value='/search'/>" method="get">
+					<select class="form-select" aria-label="Default select example" name="option">
+						<option value="0" selected>전체</option>
+						<option value="1">태그</option>
+						<option value="2">제목</option>
+						<option value="3">내용</option>
+						<option value="4">닉네임</option>
+					</select>
+			    	<input id="searchtext" class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search">
+			    	<button id="searchbutton" class="btn btn-outline-success" type="submit" value="Submit" id="submit">search</button>
+				</form>
 
 				<div>
 					<c:choose>

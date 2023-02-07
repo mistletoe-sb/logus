@@ -1,10 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" isErrorPage="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%-- <%
-	//request.setCharacterEncoding("utf-8");
-	request.setAttribute("status", response.getStatus());
-	//response.setStatus(200);
-%> --%>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -12,18 +7,6 @@
 		<title>요청하신 작업이 정상처리되지 않았습니다...</title>
 	</head>
 	<body>
-		<%-- <p>
-		${url}<br>
-		확인<br>
-		${status}<br>
-		${exception.message}<br>
-		</p>
-		<!--
-			Failed URL: ${url}
-			Exception:  ${exception.message}
-			<c:forEach items="${exception.stackTrace}" var="ste">    ${ste} 
-			</c:forEach>
-		--> --%>
 		<script>
 			var msg = '요청하신 작업이 정상적으로 처리되지 않았습니다.\n' 
 					+ '이용에 불편을 드려 대단히 죄송합니다.\n'
