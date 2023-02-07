@@ -201,8 +201,8 @@
 	  </div>
 	 </div>
 	 <div>
-	 	<a href="<c:url value='/${sessionScope.memberNickname}/library/dailystorylist'/>">일일 스토리 보기</a>
-	 	<button type="button" class="btn btn-outline-secondary" onclick="location.href='<c:url value='/routinelist'/>'">일일 스토리 더보기</button>
+	 	<button type="button" class="btn btn-outline-secondary" onclick=
+	 			"location.href='<c:url value="/${sessionScope.memberNickname}/library/dailystorylist"/>'">일일 스토리 더보기</button>
 	 </div>
 	</body>
 </html>

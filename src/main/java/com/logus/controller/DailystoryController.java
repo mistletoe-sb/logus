@@ -102,22 +102,19 @@ public class DailystoryController {
 								@RequestParam("thumbnail") MultipartFile thumbnail, HttpSession session) {
 		try{
 			String beforeThumbnail = vo.getDailystoryImage();
-			logger.info(beforeThumbnail);
 			// 기존에 썸네일이 있었을 경우
-			if(beforeThumbnail != null) {
-				if(thumbnail != null) {					
+			if(beforeThumbnail != null && !beforeThumbnail.equals("")) {
+				if(thumbnail != null && thumbnail.getSize() != 0) {					
 					if(fm.getFile(serviceName, beforeThumbnail, session).delete()) {
-						String fileName = fm.uploadFile(serviceName, thumbnail, session);
-						vo.setDailystoryImage(fileName);				
 					} else {
 						logger.info("^ dailystory update file change failed");
 					}				
+					String fileName = fm.uploadFile(serviceName, thumbnail, session);
+					vo.setDailystoryImage(fileName);
 				}
-			} else {	// 기존에 썸네일이 없었던 경우
+			} else {
 				String fileName = fm.uploadFile(serviceName, thumbnail, session);
-				logger.info(fileName);
 				vo.setDailystoryImage(fileName);
-				logger.info(vo.getDailystoryImage());
 			}
 		} catch (IOException e) {
 			logger.info("^ dailystory file update failed");
