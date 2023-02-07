@@ -85,7 +85,6 @@
 			</form>
 		</div>
 		<br>
-		<a href="<c:url value='/${dsVO.memberNickname}/library/dailystorylist'/>">목록보기</a>
 		<input type="hidden" id="tagCount" value="${fn:length(tagList)}">
 		<input type="hidden" id="replyCount" value="${fn:length(rpList)}">
 	</body>

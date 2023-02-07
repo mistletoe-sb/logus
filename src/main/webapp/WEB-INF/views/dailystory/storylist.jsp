@@ -40,7 +40,8 @@
 						</c:otherwise>
 					</c:choose>
 					<div class="card-body">
-						<h5 class="card-title">${ds.dailystoryTitle}</h5>		<p>댓글 : ${rpCount[stat.index]}</p>
+						<h5 class="card-title">${ds.dailystoryTitle}</h5>
+						<button type="button" class="btn btn-outline-primary btn-sm" style="display: inline-block" disabled>댓글 : ${rpCount[stat.index]}</button>
 						<p class="card-text" style="white-space: pre-line;">${ds.dailystoryContent}<br>
 						<fmt:formatDate value="${dsVO.dailystoryUploaddate}" pattern="yyyy.MM.dd HH:mm"/></p>
 					    <div>
