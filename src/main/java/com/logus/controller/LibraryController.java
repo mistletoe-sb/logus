@@ -172,8 +172,13 @@ public class LibraryController {
 		Map<Integer, List<TagVO>> tagList = tagService.makeTagListMap(TagCategory.DAILY_STORY, codeList);
 		// 모델에 조회한 데이터 저장
 		model.addAttribute("memberNickname", memberNickname);
-		model.addAttribute("dsList", dsList.subList(0, 5));
-		model.addAttribute("rpCount", rpCount.subList(0, 5));
+		if(dsList.size() > 5) {			
+			model.addAttribute("dsList", dsList.subList(0, 5));
+			model.addAttribute("rpCount", rpCount.subList(0, 5));
+		} else {
+			model.addAttribute("dsList", dsList);
+			model.addAttribute("rpCount", rpCount);			
+		}
 		model.addAttribute("tagList", tagList);
 		
 		return view_ref+"library";
