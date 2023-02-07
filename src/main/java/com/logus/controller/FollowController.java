@@ -112,7 +112,6 @@ public class FollowController {
 		
 	}
 	
-	
 	@RequestMapping(value="/deleteFollow/{followCode}", method=RequestMethod.GET)
 	//팔로우 취소 작성
 	public String followDelete(@PathVariable("followCode") int followCode) {	
