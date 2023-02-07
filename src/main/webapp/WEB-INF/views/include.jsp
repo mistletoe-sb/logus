@@ -14,3 +14,13 @@
 <script src="<c:url value='/resources/js/library.js'/>"></script>
 <meta charset="UTF-8">
 <title>Log Us</title>
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="<c:url value='/resources/css/bootstrap.css'/>">
+<script src="<c:url value='/resources/js/achieve.js'/>"></script>
