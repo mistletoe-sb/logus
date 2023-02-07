@@ -11,5 +11,6 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="<c:url value='/resources/js/jquery-3.6.3.min.js'/>"></script>
 <script src="<c:url value='/resources/js/dailystory.js'/>"></script>
+<script src="<c:url value='/resources/js/library.js'/>"></script>
 <meta charset="UTF-8">
 <title>Log Us</title>

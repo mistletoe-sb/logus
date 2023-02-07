@@ -48,7 +48,6 @@ function deleteReply(url){
 	var del_check = confirm('댓글을 삭제하시겠습니까?');	// 확인 창 팝업
 	if(del_check){
 		location.replace(url);	// 확인 버튼 누를 시 해당 url로 이동(댓글 삭제 진행)
-		//location.href=url;	// 확인 버튼 누를 시 해당 url로 이동(댓글 삭제 진행)
 	} else {}
 }
 
@@ -61,9 +60,7 @@ function deleteStory(url){
 			{tagCount: $('#tagCount').val(), replyCount: $('#replyCount').val(), dailystoryImage: $('#thumbnail_img').attr('alt')})
 		.done(function(){
 			alert('스토리가 삭제되었습니다.');
-			//location.replace(contextPath + url);	// 확인 버튼 누를 시 서재 메인으로 이동
 			location.replace(url);					// 확인 버튼 누를 시 서재 메인으로 이동
-			//location.href='<c:url value=\"' + url + '\"/>';	// 확인 버튼 누를 시 서재 메인으로 이동
 		}).fail(function(){
 			alert('스토리 삭제에 실패하였습니다.');
 		});

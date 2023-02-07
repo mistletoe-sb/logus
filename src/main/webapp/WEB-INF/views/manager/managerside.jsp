@@ -28,5 +28,10 @@
 		  </c:if>
 		  <li class="list-group-item"><a href="http://localhost:8080/logus/manager/managerlogout">관리자 로그아웃</a></li>
 		</ul>
+		관리자 ${sessionScope.sessionManagerNickname}님 로그인 중
+<!-- 		<ul>		 -->
+<!-- 			<li></li> -->
+<!-- 		</ul> -->
+		
 	</body>
 </html>

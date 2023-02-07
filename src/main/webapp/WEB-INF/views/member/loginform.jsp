@@ -1,11 +1,8 @@
-<%@ include file="../header.jsp" %>
-<%@ page contentType="text/html; charset=UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="UTF-8">
-		<title>Log Us</title>
+		<%@ include file="../include.jsp" %>
  		<style type="text/css">
 			#container{
 				width : 800px;
@@ -22,10 +19,11 @@
 		</style>
 	</head>
 	<body>
+		<%@ include file="../header_body.jsp" %>
 		<div class="border border-success p-2 mb-2" id="container" >
 			<form action="<c:url value='/memberLogin'/>" method="post" class="form-floating">
 				<div class="title">
-					<h1>Longin</h1>
+					<h1>Login</h1>
 				</div>
 				<div>
 					<div class="title2">
@@ -49,9 +47,9 @@
 				<div>
 					<div>
 						<div class="d-grid gap-2 d-md-block">
-							<button class="btn btn-primary" type="submit" onclick="memberLogin()">Longin</button>
-							<button class="btn btn-primary" type="reset" onclick="location.href='<c:url value='index'/>'">Home</button>
-							<button class="btn btn-primary" type="reset" onclick="location.href='<c:url value='/insertform'/>'">Sign Up</button>
+							<button class="btn btn-primary" type="submit" onclick="memberLogin()">로그인</button>
+							<button class="btn btn-primary" type="reset" onclick="location.href='<c:url value='index'/>'">홈화면</button>
+							<button class="btn btn-primary" type="reset" onclick="location.href='<c:url value='/insertform'/>'">회원가입</button>
 							
 						</div>
 						<br>

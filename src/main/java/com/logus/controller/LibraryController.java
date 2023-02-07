@@ -66,78 +66,64 @@ public class LibraryController {
 	
 	TagVO tagVO = new TagVO();
 		
-	//내 서재용은 세션만 받고, 남 서재용은 Pathvariable로 받아서 매핑 구분하면 되겠음->@GetMapping(value="/library/{memberNickname}")
-	@GetMapping(value="/library")	//내 서재 내용-화면용
-	public String selectLibrary(HttpSession session, Model model) {
-		
-		String memberNickname=(String) session.getAttribute("memberNickname");		//session받기
-		
-		DailyroutineVO routine1 = null; 
-		DailyroutineVO routine2 = null; 
-		List<TagVO> tag1 = null;
-		List<TagVO> tag2 = null;
-		
-		try {
-			routine1 = DailyroutineService.selectDailyroutineActive(memberNickname, 1);	//평일 메인 루틴
-			tag1 = tagService.selectTagList(TagCategory.DAILY_ROUTINE, routine1.getDailyroutineCode());	//평일 메인 태그
-		} catch (Exception e) {
-			e.printStackTrace();
-		}	
-		
-		try {
-			routine2 = DailyroutineService.selectDailyroutineActive(memberNickname, 2);	//주말 메인 루틴
-			tag2 = tagService.selectTagList(TagCategory.DAILY_ROUTINE, routine2.getDailyroutineCode());	//주말 메인 태그
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		model.addAttribute("routine1", routine1);
-		model.addAttribute("routine2", routine2);
-		
-		model.addAttribute("tag1", tag1);	
-		model.addAttribute("tag2", tag2);
-		
-		List<DailycheckVO> checklist1 = null;
-		List<DailycheckVO> checklist2 = null;
-		try {	
-			checklist1 = DailycheckService.selectDailycheckList(routine1.getDailyroutineCode());	//루틴 상세 정보(평일)
-		} catch (Exception e) {
-			e.printStackTrace();
-		}	
-		try {	
-			checklist2 = DailycheckService.selectDailycheckList(routine2.getDailyroutineCode());	//루틴 상세 정보(주말)
-		}	catch (Exception e) {e.printStackTrace();
-		}
-		
-		model.addAttribute("checklist1", checklist1);
-		model.addAttribute("checklist2", checklist2);
-		
-		int todayAchieve =0; 
-		try {	
-			todayAchieve = achieveService.selectAchieveToday(memberNickname);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}	
-		
-		int weekAchieve	=0; 
-		try {	
-			weekAchieve = achieveService.selectAchieveWeek(memberNickname);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}	
-		
-		model.addAttribute("todayAchieve", todayAchieve);
-		model.addAttribute("weekAchieve", weekAchieve);
-		
-		memberVO = MemberService.selectMemberInfo2(memberNickname);
-		model.addAttribute("memberVO", memberVO);
-		model.addAttribute("sessionUser", memberNickname);
-		
-		return view_ref+"library";
-	}
+	/*
+	 * //내 서재용은 세션만 받고, 남 서재용은 Pathvariable로 받아서 매핑 구분하면
+	 * 되겠음->@GetMapping(value="/library/{memberNickname}")
+	 * 
+	 * @GetMapping(value="/library") //내 서재 내용-화면용 public String
+	 * selectLibrary(HttpSession session, Model model) {
+	 * 
+	 * String memberNickname=(String) session.getAttribute("memberNickname");
+	 * //session받기
+	 * 
+	 * DailyroutineVO routine1 = null; DailyroutineVO routine2 = null; List<TagVO>
+	 * tag1 = null; List<TagVO> tag2 = null;
+	 * 
+	 * try { routine1 = DailyroutineService.selectDailyroutineActive(memberNickname,
+	 * 1); //평일 메인 루틴 tag1 = tagService.selectTagList(TagCategory.DAILY_ROUTINE,
+	 * routine1.getDailyroutineCode()); //평일 메인 태그 } catch (Exception e) {
+	 * e.printStackTrace(); }
+	 * 
+	 * try { routine2 = DailyroutineService.selectDailyroutineActive(memberNickname,
+	 * 2); //주말 메인 루틴 tag2 = tagService.selectTagList(TagCategory.DAILY_ROUTINE,
+	 * routine2.getDailyroutineCode()); //주말 메인 태그 } catch (Exception e) {
+	 * e.printStackTrace(); }
+	 * 
+	 * model.addAttribute("routine1", routine1); model.addAttribute("routine2",
+	 * routine2);
+	 * 
+	 * model.addAttribute("tag1", tag1); model.addAttribute("tag2", tag2);
+	 * 
+	 * List<DailycheckVO> checklist1 = null; List<DailycheckVO> checklist2 = null;
+	 * try { checklist1 =
+	 * DailycheckService.selectDailycheckList(routine1.getDailyroutineCode()); //루틴
+	 * 상세 정보(평일) } catch (Exception e) { e.printStackTrace(); } try { checklist2 =
+	 * DailycheckService.selectDailycheckList(routine2.getDailyroutineCode()); //루틴
+	 * 상세 정보(주말) } catch (Exception e) {e.printStackTrace(); }
+	 * 
+	 * model.addAttribute("checklist1", checklist1);
+	 * model.addAttribute("checklist2", checklist2);
+	 * 
+	 * int todayAchieve =0; try { todayAchieve =
+	 * achieveService.selectAchieveToday(memberNickname); } catch (Exception e) {
+	 * e.printStackTrace(); }
+	 * 
+	 * int weekAchieve =0; try { weekAchieve =
+	 * achieveService.selectAchieveWeek(memberNickname); } catch (Exception e) {
+	 * e.printStackTrace(); }
+	 * 
+	 * model.addAttribute("todayAchieve", todayAchieve);
+	 * model.addAttribute("weekAchieve", weekAchieve);
+	 * 
+	 * memberVO = MemberService.selectMemberInfo2(memberNickname);
+	 * model.addAttribute("memberVO", memberVO); model.addAttribute("sessionUser",
+	 * memberNickname);
+	 * 
+	 * return view_ref+"library"; }
+	 */
 	
 	//내 서재용은 세션만 받고, 남 서재용은 Pathvariable로 받아서 매핑 구분하면 되겠음->@GetMapping(value="/library/{memberNickname}")
-		@GetMapping(value="/library/{memberNickname}")	//남서재 내용-화면용
+		@GetMapping(value="/{memberNickname}/library")	//남서재 내용-화면용
 		public String selectUserLibrary(@PathVariable(value="memberNickname") String memberNickname, HttpSession session, Model model) {
 			
 			String sessionUser= (String) session.getAttribute("memberNickname");	//jsp <c:if>를 위한 세션 전달용
@@ -256,7 +242,7 @@ public class LibraryController {
 				DailycheckService.insertDailycheck(dailycheckVO);
 			}
 			
-			return "redirect:/"+"library/"+RedirEncoder.encode(memberNickname);
+			return "redirect:/" + RedirEncoder.encode(memberNickname) + "/library";
 		}
 		
 		@PostMapping(value="/routineshare2")	//공유받기2 버튼-전송용
@@ -295,10 +281,10 @@ public class LibraryController {
 				dailycheckVO.setDailycheckContent(content);
 				DailycheckService.insertDailycheck(dailycheckVO);
 			}
-			return "redirect:/"+"library/"+RedirEncoder.encode(memberNickname);
+			return "redirect:/" + RedirEncoder.encode(memberNickname) + "/library";
 		}
 		
-		@PostMapping(value="/search")	//검색-전송용
+		@GetMapping(value="/search")	//검색-전송용
 		public String selectSearch(@RequestParam("option") String option, @RequestParam("search") String search, Model model) {
 				
 			List<DailyroutineVO> searchroutine=null;
@@ -357,5 +343,4 @@ public class LibraryController {
 				String result ="성공";
 				return result;
 		}
-		
 }

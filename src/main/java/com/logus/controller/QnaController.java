@@ -36,7 +36,7 @@ public class QnaController {
 			
 			return "manager/qna";
 		} else {
-			return "manager/accessrestriction_manager";
+			return "manager/accessrestriction_member";
 		}
 	}
 	
@@ -46,7 +46,7 @@ public class QnaController {
 			model.addAttribute("qnadetail", qnaService.selectQnaInfo(qnaCode));
 			return "manager/qnadetail";
 		} else {
-			return "manager/accessrestriction_manager";
+			return "manager/accessrestriction_member";
 		}
 	}
 	
@@ -55,7 +55,7 @@ public class QnaController {
 		if(session.getAttribute("memberNickname") != null) {
 			return "manager/insertqnaform";
 		} else {
-			return "manager/accessrestriction_manager";
+			return "manager/accessrestriction_member";
 		}
 	}
 	
@@ -78,7 +78,7 @@ public class QnaController {
 			model.addAttribute("qnadetail", qnaService.selectQnaInfo(qnaCode));
 			return "manager/updateqnaform";
 		} else {
-			return "manager/accessrestriction_manager";
+			return "manager/accessrestriction_member";
 		}
 	}
 	
@@ -95,7 +95,7 @@ public class QnaController {
 			qnaService.deleteQna(qnaCode);
 			return "redirect:/manager/qna";
 		} else {
-			return "manager/accessrestriction_manager";
+			return "manager/accessrestriction_member";
 		}
 	}
 	

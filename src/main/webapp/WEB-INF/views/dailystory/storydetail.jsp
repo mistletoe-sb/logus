@@ -13,7 +13,7 @@
 		<c:if test="${dsVO.memberNickname == sessionScope.memberNickname}">
 			<button onclick='location.href="<c:url value='/${sessionScope.memberNickname}/library/story/${dsVO.dailystoryCode}/update'/>"'>수정</button>
 			<button id="ds_del_btn" onclick="deleteStory('<c:url 
-					value="/${sessionScope.memberNickname}/library/main"/>')">삭제</button>
+					value="/${sessionScope.memberNickname}/library/dailystorylist"/>')">삭제</button>
 		</c:if>
 		<br>
 		<p>${dsVO.dailystoryTitle}</p>
@@ -26,7 +26,7 @@
 					 width="200" height="200">				  	
 			</c:when>
 			<c:otherwise>
-				<img id="thumbnail_img" src="<c:url value='/resources/images/preview_image.jpg'/>" alt="preview_thumbnail_img"
+				<img id="thumbnail_img" src="<c:url value='/resources/images/preview_image.png'/>" alt="preview_thumbnail_img"
 					 width="200" height="200">				  	
 			</c:otherwise>
 		</c:choose>
@@ -85,7 +85,7 @@
 			</form>
 		</div>
 		<br>
-		<a href="<c:url value='/${dsVO.memberNickname}/library/main'/>">목록보기</a>
+		<a href="<c:url value='/${dsVO.memberNickname}/library/dailystorylist'/>">목록보기</a>
 		<input type="hidden" id="tagCount" value="${fn:length(tagList)}">
 		<input type="hidden" id="replyCount" value="${fn:length(rpList)}">
 	</body>

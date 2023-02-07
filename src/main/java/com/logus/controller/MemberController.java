@@ -22,6 +22,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.logus.member.model.MemberVO;
 import com.logus.member.service.IMemberService;
 import com.logus.member.service.MemberService;
+import com.logus.util.redirectencoder.RedirEncoder;
 
 @Controller
 // 회원정보 서비스 컨트롤러 클래스
@@ -140,7 +141,7 @@ public class MemberController {
 				redirectAttributes.addFlashAttribute("message", vo.getMemberId()+"님 로그인에 성공 했습니다.");
 				session.setAttribute("memberId", memberId);
 				session.setAttribute("memberNickname", vo.getMemberNickname());
-				return "redirect:/"+"index";	
+				return "redirect:/" + RedirEncoder.encode(vo.getMemberNickname()) + "/library";	
 				} else {
 					redirectAttributes.addFlashAttribute("message", "탈퇴한 아이디 입니다.");
 					return "redirect:/"+  "loginform";
