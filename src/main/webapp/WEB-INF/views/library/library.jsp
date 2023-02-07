@@ -121,10 +121,21 @@
 		<c:choose>
 		  <c:when test="${memberVO.memberNickname eq sessionUser || not empty memberVO.memberOutdate}"></c:when>
 			  <c:otherwise>
-			    <input type='button' value='팔로우하기' id='followbtn1' class="btn btn-danger"  onclick="followBtn2()"/>
-				<input type='button' value='팔로우 취소' id='followbtn2' class="btn btn-danger" onclick="followBtn1()" style="display : none"/>
-			  </c:otherwise>
-		</c:choose>
+			    <c:choose>
+				<c:when test="${following eq 0}">
+			      <input type="hidden" value="${memberVO.memberId}" id="followinId" name="followingMemberId">
+			      <input type='button' value='팔로우하기' id='followbtn1' class="btn btn-danger"  onclick="followBtn2()"/>
+				  <input type='button' value='팔로우 취소' id='followbtn2' class="btn btn-danger" onclick="followBtn1()" style="display:none;"/>
+			    </c:when>
+				<c:otherwise>
+				  <input type="hidden" value="${memberVO.memberId}" id="followinId" name="followingMemberId">
+			      <input type='button' value='팔로우하기' id='followbtn1' class="btn btn-danger"  onclick="followBtn2()" style="display:none;"/>	      
+				  <input type='button' value='팔로우 취소' id='followbtn2' class="btn btn-danger" onclick="followBtn1()"/>
+				</c:otherwise>  
+			</c:choose>
+		  </c:otherwise>
+	</c:choose>
+    
 	  </div>
 	</div>
 	
