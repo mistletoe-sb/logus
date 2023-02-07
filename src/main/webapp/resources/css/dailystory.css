@@ -1,0 +1,40 @@
+#search_in_dailystory {
+	margin-left: 20px;
+	width: 450px;
+}
+
+#search_btn_in_dailystory {
+	width: 200px;
+}
+
+.btn_form_dailystory_div {
+	text-align: center;
+}
+
+#preview_thumbnail_img {
+	margin-top: 5px;
+	margin-bottom: 10px;
+}
+
+.tb_dailystory {
+	width: 50%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.border_dailystory_form_div {
+	width: 100%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-top-color: #0d6efd;
+    border-bottom-color: #0d6efd;
+    border-width: 1.5px;
+    border-top-style: solid;
+    border-bottom-style: solid;
+}
+
+.sub_title_dailystory {
+	text-align: left;
+	margin-top: 20px;
+	margin-left: 25%;
+}
