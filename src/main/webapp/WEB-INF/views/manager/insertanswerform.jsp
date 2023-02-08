@@ -7,17 +7,32 @@
 <!doctype html>
 <html lang="ko">
     <head>
+   	 <style type="text/css">
+         .container{
+            width : 1200px;
+            margin : 20px auto;
+            background-color: #f7f7f7;
+         }
+         .title{
+            margin : 40px auto;
+            text-align : center;
+         }
+         .title2{
+            margin : 40px auto;
+            text-align : right;
+         }
+      	</style>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Q&A 답변 등록</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     </head>
     <body>
-        <h1>Q&A 답변 등록</h1>
-        <h2>로그인 관리자 별명 : ${sessionScope.sessionManagerNickname}</h2>
+    <div class="container">
+        <h1 class="title">Q&A 답변 등록</h1>
+        <h4 class="title2">${sessionScope.sessionManagerNickname}</h4>
 	    <div class="inner">
 	        <div class="contents" id="bodyWrap">
-	            <h3 class="title">Q&A</h3>
 	            <div class="subContents" id="contentBody">
 	                <div class="body" id="bodyCon">
 	                    <!-- 여기서부터 콘텐츠 s -->
@@ -76,6 +91,6 @@
 	            </div>
 	        </div>
 	    </div>
-
+</div>
     </body>
 </html>

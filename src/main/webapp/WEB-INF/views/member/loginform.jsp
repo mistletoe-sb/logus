@@ -6,37 +6,39 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Log Us</title>
+ 		
  		<style type="text/css">
-			#container{
-				width : 800px;
-				margin : 20px auto;
-				background-color: #f7f7f7;
-			}
-			.title{
-				margin : 40px auto;
-				text-align : center;
-			}
-			.title2{
-				margin : 40px auto;
-			}
-		</style>
+         #container{
+            width : 800px;
+            margin : 20px auto;
+            background-color: #f7f7f7;
+         }
+         .title{
+            margin : 40px auto;
+            text-align : center;
+         }
+         .title2{
+            margin : 40px auto;
+         }
+      </style>
+	
 	</head>
 	<body>
 		<div class="border border-success p-2 mb-2" id="container" >
 			<form action="<c:url value='/memberLogin'/>" method="post" class="form-floating">
 				<div class="title">
-					<h1>Longin</h1>
+					<h1>로그인</h1>
 				</div>
 				<div>
 					<div class="title2">
 						<div>
 							<div class="form-floating mb-3">
 								<input type="text" name="memberId" id="memberId" class="form-control" id="floatingInput" placeholder="name@example.com" required>
-								<label for="floatingInput">ID</label>
+								<label for="floatingInput">아이디</label>
 							</div>
 							<div class="form-floating">
 								<input type="password" name="memberPassword" id="memberPassword" class="form-control" id="floatingPassword" placeholder="Password" required>
-								<label for="floatingPassword">Password</label>
+								<label for="floatingPassword">비밀번호</label>
 							</div>
 						</div>
 						<div>
@@ -49,10 +51,10 @@
 				<div>
 					<div>
 						<div class="d-grid gap-2 d-md-block">
-							<button class="btn btn-primary" type="submit" onclick="memberLogin()">Longin</button>
-							<button class="btn btn-primary" type="reset" onclick="location.href='<c:url value='index'/>'">Home</button>
-							<button class="btn btn-primary" type="reset" onclick="location.href='<c:url value='/insertform'/>'">Sign Up</button>
-							
+							<div class="d-grid gap-2 d-md-block"  >
+								<button class="btn btn-primary" type="submit" onclick="memberLogin()">로그인</button>
+								<button class="btn btn-primary" type="reset" onclick="location.href='<c:url value='/insertform'/>'">회원가입</button>
+								<button class="btn btn-primary" type="reset" onclick="location.href='<c:url value='index'/>'">Home</button>
 						</div>
 						<br>
 						<div class="d-grid gap-2 d-md-block">
@@ -65,6 +67,7 @@
 							</button>
 						</div>
 					</div>
+				</div>
 				</div>
 			</form>
 			

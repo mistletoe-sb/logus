@@ -18,15 +18,17 @@
 	</head>
 	<body>
 		<ul class="list-group">
-		  <li class="list-group-item"><a href="http://localhost:8080/logus/manager/statistics">통계</a></li>
-		  <li class="list-group-item"><a href="http://localhost:8080/logus/manager/board?boardcategory=1">공지사항</a></li>
-		  <li class="list-group-item"><a href="http://localhost:8080/logus/manager/board?boardcategory=2">월간 리포트</a></li>
-		  <li class="list-group-item"><a href="http://localhost:8080/logus/manager/qna">Q&A</a></li>
-		  <li class="list-group-item"><a href="http://localhost:8080/logus/manager/memberlist">회원 관리</a></li>
+		  
+		  
+		  <li class="list-group-item list-group-item-warning""><a href="http://localhost:8080/logus/manager/board?boardcategory=1">공지사항</a></li>
+		  <li class="list-group-item list-group-item-warning""><a href="http://localhost:8080/logus/manager/qna">Q&A</a></li>
+		  <li class="list-group-item list-group-item-warning""><a href="http://localhost:8080/logus/manager/statistics">통계</a></li>
+		  <li class="list-group-item list-group-item-warning""><a href="http://localhost:8080/logus/manager/board?boardcategory=2">월간 리포트</a></li>	
+		  <li class="list-group-item list-group-item-warning""><a href="http://localhost:8080/logus/manager/memberlist">회원 관리</a></li>
 		  <c:if test="${sessionScope.sessionManagerLevel == 0}">
-		  	<li class="list-group-item"><a href="http://localhost:8080/logus/manager/managerlist">관리자 관리(마스터)</a></li>
+		  	<li class="list-group-item list-group-item-warning""><a href="http://localhost:8080/logus/manager/managerlist">관리자 관리(마스터)</a></li>
 		  </c:if>
-		  <li class="list-group-item"><a href="http://localhost:8080/logus/manager/managerlogout">관리자 로그아웃</a></li>
+		  <li class="list-group-item list-group-item-warning""><a href="http://localhost:8080/logus/manager/managerlogout">관리자 로그아웃</a></li>
 		</ul>
 	</body>
 </html>

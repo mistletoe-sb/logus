@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 //팔로우 VO 클래스
+
 public class FollowVO {
 	private int followCode;					//팔로우 번호
 	private String memberId;			//팔로우 한 아이디	
