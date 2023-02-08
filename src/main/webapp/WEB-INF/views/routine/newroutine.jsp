@@ -1,15 +1,15 @@
-<%@ include file="../header.jsp" %>
 <%@ page contentType="text/html; charset=UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
 <html>
 	<head>
-	<script src="<c:url value='/resources/js/newroutine.js'/>"></script>
+		<%@ include file="../include.jsp" %>
+		<script src="<c:url value='/resources/js/newroutine.js'/>"></script>
 		<meta charset="UTF-8">
 		<title>새 루틴</title>
 	</head>
-		<body>
+	<body>
+		<%@ include file="../header_body.jsp" %>
 		<form id="routinenew" name="routineform" action="<c:url value='/newroutine'/>" method="post">
 		<div class="p-3 bg-info bg-opacity-10 border border-dark border-start-0 rounded-end">
 			<label>태그 등록</label>

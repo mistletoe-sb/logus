@@ -4,22 +4,13 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>페이지를 찾을 수 없습니다...</title>
+		<title>요청하신 작업이 정상처리되지 않았습니다...</title>
 	</head>
 	<body>
-		<p>
-		
-		
-		</p>
-		<!--
-			Failed URL: ${url}
-			Exception:  ${exception.message}
-			<c:forEach items="${exception.stackTrace}" var="ste">    ${ste} 
-			</c:forEach>
-		-->
 		<script>
-			var msg = '요청하신 페이지는 존재하지 않거나,\n' 
-					+ '주소가 변경 또는 삭제되어 이용이 불가합니다.\n\n'
+			var msg = '요청하신 작업이 정상적으로 처리되지 않았습니다.\n' 
+					+ '이용에 불편을 드려 대단히 죄송합니다.\n'
+					+ '동일한 문제가 지속적으로 발생할 경우 고객센터로 문의 바랍니다.\n\n'
 					+ '\'확인\'버튼을 누를 시 메인 페이지로 돌아갑니다.';
 			alert(msg);
 		</script>

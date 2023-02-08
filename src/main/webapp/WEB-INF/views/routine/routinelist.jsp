@@ -1,13 +1,11 @@
-<%@ include file="../header.jsp" %>
 <%@ page contentType="text/html; charset=UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="UTF-8">
-		<title>루틴 리스트</title>
+		<%@ include file="../include.jsp" %>
 	</head>
 	<body>
+		<%@ include file="../header_body.jsp" %>
 		<div class="d-grid gap-2 col-6 mx-auto">
 			<button type="button" class="btn btn-primary btn-lg" onclick="location.href='newroutine'">+새 루틴 추가하기</button>
 			</div>

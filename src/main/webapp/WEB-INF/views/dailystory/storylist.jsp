@@ -6,10 +6,9 @@
 	</head>
 	<body>
 		<%@ include file="../header_body.jsp" %>
-		<p>일일 스토리 리스트 출력 화면(서재 메인 페이지)</p>
-		<div id="search_in_dailystory">
-			<form method="get" action="<c:url value='/library/search'/>">
-				<select name="option">
+		<div id="search_in_dailystory" class="container-fluid">
+			<form id="search" name="searchform" class="d-flex" role="search" method="get" action="<c:url value='/library/search'/>">
+				<select class="form-select" aria-label="Default select example" name="option">
 					<option value="0" selected>전체</option>
 					<option value="1">태그</option>
 					<option value="2">제목</option>
@@ -18,8 +17,7 @@
 				</select>
 				<input id="search_txt_in_dailystory" class="form-control me-2" name="search"
 					   type="search" placeholder="내 스토리 검색하기" aria-label="Search">
-				<input id="search_btn_in_dailystory" class="btn btn-outline-success" type="image"
-					   src="<c:url value='/resources/images/search.png'/>" alt="검색" width="32" height="32">
+				<button id="search_btn_in_dailystory" class="btn btn-outline-success" type="submit">검색</button>
 				<input type="hidden" name="myNickname" value="${sessionScope.memberNickname}">
 			</form>
 		</div>

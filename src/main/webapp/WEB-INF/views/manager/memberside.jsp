@@ -18,9 +18,9 @@
 	</head>
 	<body>
 		<ul class="list-group">
-		  <li class="list-group-item"><a href="http://localhost:8080/logus/manager/board?boardcategory=1">공지사항</a></li>
-		  <li class="list-group-item"><a href="http://localhost:8080/logus/manager/board?boardcategory=2">월간 리포트</a></li>
-		  <li class="list-group-item"><a href="http://localhost:8080/logus/manager/qna">Q&A</a></li>
+		  <li class="list-group-item"><a href="<c:url value='/manager/board?boardcategory=1'/>">공지사항</a></li>
+		  <li class="list-group-item"><a href="<c:url value='/manager/board?boardcategory=2'/>">월간 리포트</a></li>
+		  <li class="list-group-item"><a href="<c:url value='/manager/qna'/>">Q&A</a></li>
 		</ul>
 	</body>
 </html>

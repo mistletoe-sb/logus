@@ -10,18 +10,18 @@
 <!--         <meta name="viewport" content="width=device-width, initial-scale=1"> -->
         <title>Q&A 질문 수정</title>
 <!--         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous"> -->
-		<%@ include file="../header.jsp" %>
+    </head>
+    <body>
 		<%
 			if(session.getAttribute("memberNickname") != null) {
 				%>
+				<%@ include file="../header_body.jsp" %>
 				<%@ include file="memberside.jsp" %>
 				<%
 			}
 		%>
-    </head>
-    <body>
         <h1>Q&A 질문 수정</h1>
-        <form action="http://localhost:8080/logus/manager/updateqna" method="post">
+        <form action="<c:url value='/manager/updateqna'/>" method="post">
         	<fieldset>
 	        <div class="mb-3">
 	            <label for="exampleFormControlInput1" class="form-label">제목</label>

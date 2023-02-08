@@ -10,10 +10,12 @@
 <!--         <meta name="viewport" content="width=device-width, initial-scale=1"> -->
         <title>리포트 글보기</title>
 <!--         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous"> -->
-		<%@ include file="../header.jsp" %>
+    </head>
+    <body>
 		<%
 			if(session.getAttribute("sessionManagerNickname") != null) {
 				%>
+				<%@ include file="../header.jsp" %>
 				<%@ include file="managerside.jsp" %>
 				<%
 			}
@@ -21,12 +23,11 @@
 		<%
 			if(session.getAttribute("memberNickname") != null) {
 				%>
+				<%@ include file="../header_body.jsp" %>
 				<%@ include file="memberside.jsp" %>
 				<%
 			}
 		%>
-    </head>
-    <body>
 <%--         <h2>로그인 관리자 별명 : ${sessionScope.sessionManagerNickname}</h2> --%>
 
 	    <div class="inner">
@@ -39,7 +40,7 @@
 	                        <div class="bottomListBox">
 	                            <div class="tableWrap">
 	                                <table>
-	                                    <caption>자유게시판 뷰 페이지로 제목, 질문자, 등록일로 구성</caption>
+	                                    <%-- <caption>자유게시판 뷰 페이지로 제목, 질문자, 등록일로 구성</caption> --%>
 	                                    <colgroup>
 	                                        <col style="width:16%;"/>
 	                                        <col style="width:48%;"/>
@@ -80,10 +81,10 @@
 	                            <div class="btnListGo">
 	                                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
 	                                	<c:if test="${not empty sessionScope.sessionManagerNickname}">
-		                                    <button class="btn btn-primary me-md-2" type="button" onclick="location.href='http://localhost:8080/logus/manager/updateboardform?boardCategory=${boarddetail.boardCategory}&boardCode=${boarddetail.boardCode}'">수정하기</button>
-		                                    <button class="btn btn-primary" type="button" onclick="location.href='http://localhost:8080/logus/manager/deleteboard?boardCategory=${boarddetail.boardCategory}&boardCode=${boarddetail.boardCode}'">삭제하기</button>
+		                                    <button class="btn btn-primary me-md-2" type="button" onclick="location.href='<c:url value="/manager/updateboardform?boardCategory=${boarddetail.boardCategory}&boardCode=${boarddetail.boardCode}"/>'">수정하기</button>
+		                                    <button class="btn btn-primary" type="button" onclick="location.href='<c:url value="/manager/deleteboard?boardCategory=${boarddetail.boardCategory}&boardCode=${boarddetail.boardCode}"/>'">삭제하기</button>
 										</c:if>
-	                                    <button class="btn btn-primary" type="button" onclick="location.href='http://localhost:8080/logus/manager/board?boardcategory=${boarddetail.boardCategory}'">목록으로</button>
+	                                    <button class="btn btn-primary" type="button" onclick="location.href='<c:url value="/manager/board?boardcategory=${boarddetail.boardCategory}"/>'">목록으로</button>
 	                                  </div>
 	                            </div>
 	                        </div>
