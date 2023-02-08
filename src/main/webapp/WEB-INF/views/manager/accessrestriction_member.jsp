@@ -6,6 +6,6 @@
 		<title>Log Us</title>
 	</head>
 	<body>
-		총관리자 전용 페이지입니다.
+		페이지 접근 권한이 없습니다.
 	</body>
 </html>

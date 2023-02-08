@@ -1,18 +1,3 @@
-<%@ include file="../header.jsp" %>
-<%
-	if(session.getAttribute("sessionManagerNickname") != null) {
-		%>
-		<%@ include file="managerside.jsp" %>
-		<%
-	}
-%>
-<%
-	if(session.getAttribute("memberNickname") != null) {
-		%>
-		<%@ include file="memberside.jsp" %>
-		<%
-	}
-%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     isELIgnored="false" %>
@@ -44,8 +29,23 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     </head>
     <body>
-    <div class="container">
-        
+    <%
+			if(session.getAttribute("sessionManagerNickname") != null) {
+				%>
+				<%@ include file="../header.jsp" %>
+				<%@ include file="managerside.jsp" %>
+				<%
+			}
+		%>
+		<%
+			if(session.getAttribute("memberNickname") != null) {
+				%>
+				<%@ include file="../header_body.jsp" %>
+				<%@ include file="memberside.jsp" %>
+				<%
+			}
+		%>
+    <div class="container">  
         <h1 class="title">Q&A</h1>
       <!--  <h6>총 Q&A 글 수 ${qnacount}개</h6> -->
       <!--  <h2>로그인 관리자 별명 : ${sessionScope.sessionManagerNickname}</h2> -->
@@ -57,7 +57,7 @@
         <table class="table">
             <thead>
               <tr>
-                <th scope="col">번호</th>
+<!--                 <th scope="col">번호</th> -->
                 <th scope="col">제목</th>
                 <th scope="col">작성일</th>
                 <th scope="col">처리상황</th>
@@ -86,7 +86,6 @@
           <div class="d-grid gap-2 col-2 mx-auto">
 	          <nav aria-label="Page navigation example">
 				  <ul class="pagination">
-				  	
 				  	<c:if test="${nowPage!=1}">						
 						<li class="page-item"><a class="page-link" href="<c:url value="http://localhost:8080/logus/manager/qna?nowPage=1" /> ">🞀🞀</a></li>
 						<li class="page-item"><a class="page-link" href="<c:url value="http://localhost:8080/logus/manager/qna?nowPage=${nowPage - 1}" /> ">◀</a></li>
@@ -95,10 +94,10 @@
 					<c:forEach var="i" begin="${nowPage > 5 ? nowPage - 4 : 1}" end="${(nowPage > 5 ? nowPage + 4 : 10) > totalPage ? totalPage : (nowPage > 5 ? nowPage + 4 : 10)}">
 						<c:choose>
 							<c:when test="${nowPage==i}">
-								<li class="page-item active"><a class="page-link" href="<c:url value="http://localhost:8080/logus/manager/qna?nowPage=${i}" /> ">${i}</a></li>
+								<li class="page-item active"><a class="page-link" href="<c:url value='/manager/qna?nowPage=${i}' /> ">${i}</a></li>
 							</c:when>
 							<c:otherwise>
-								<li class="page-item"><a class="page-link" href="<c:url value="http://localhost:8080/logus/manager/qna?nowPage=${i}" /> ">${i}</a></li>
+								<li class="page-item"><a class="page-link" href="<c:url value='/manager/qna?nowPage=${i}' /> ">${i}</a></li>
 							</c:otherwise>
 						</c:choose>
 					</c:forEach>
@@ -117,7 +116,7 @@
 			</div>
 	      <c:if test="${not empty sessionScope.memberNickname}">
 	          <div class="d-grid gap-2 col-2 mx-auto">
-	            <button type="button" class="btn btn-primary" onclick="location.href='http://localhost:8080/logus/manager/insertqnaform'">Q&A 작성하기</button>
+	            <button type="button" class="btn btn-primary" onclick="location.href='<c:url value="/manager/insertqnaform"/>'">Q&A 작성하기</button>
 	        </div>
         </c:if>
 		</fieldset>

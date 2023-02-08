@@ -1,5 +1,3 @@
-<%@ include file="../header.jsp" %>
-<%@ include file="managerside.jsp" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
 	isELIgnored="false" %>
@@ -23,12 +21,10 @@
             text-align : right;
          }
       	</style>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>관리자 관리</title>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     </head>
     <body>
+    <%@ include file="../header.jsp" %>
+		<%@ include file="managerside.jsp" %>
     <div class="container">
         <h1 class="title">관리자 관리</h1>
         <h4 class="title2">${sessionScope.sessionManagerNickname}</h4>
@@ -48,14 +44,14 @@
               <tr>
                 <th scope="col">${manager.managerId}</th>
                 <th scope="col">${manager.managerNickname}</th>
-                <th scope="col"><button type="button" class="btn btn-primary" onclick="location.href='http://localhost:8080/logus/manager/deletemanager?managerId=${manager.managerId}'">
+                <th scope="col"><button type="button" class="btn btn-primary" onclick="location.href='<c:url value="/manager/deletemanager?managerId=${manager.managerId}"/>'">
 				삭제
                 </button></th>
               </tr>
             </c:forEach>
             </tbody>
         </table>
-        <button type="button" class="btn btn-primary" onclick="location.href='http://localhost:8080/logus/manager/insertmanagerform'">
+        <button type="button" class="btn btn-primary" onclick="location.href='<c:url value="/manager/insertmanagerform"/>'">
 			관리자 등록
         </button>
         </fieldset>

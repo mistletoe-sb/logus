@@ -1,5 +1,3 @@
-<%@ include file="../header.jsp" %>
-<%@ include file="managerside.jsp" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     isELIgnored="false" %>
@@ -8,12 +6,8 @@
 <!doctype html>
 <html lang="ko">
     <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>회원관리</title>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-   
-   <style type="text/css">
+        <style type="text/css">
          .container{
             width : 1400px;
             margin : 20px auto;
@@ -28,7 +22,8 @@
             text-align : right;
          }
       	</style>
-   
+   <%@ include file="../header.jsp" %>
+		<%@ include file="managerside.jsp" %>
     </head>
     <body>
     <div class="container">
@@ -63,7 +58,16 @@
 	                <th scope="col">${member.memberEmail}</th>
 	                <th scope="col">${member.memberPhone}</th>
 	                <th scope="col">${member.memberBirth}</th>
-	                <th scope="col">${member.memberSex}</th>
+	                <th scope="col">
+	                	<c:choose>
+	                		<c:when test="${member.memberSex == 1}">
+	                			남
+	                		</c:when>
+	                		<c:otherwise>
+	                			여
+	                		</c:otherwise>
+	                	</c:choose>
+	                </th>
 	                <th scope="col">${member.memberJob}</th>
 	                <th scope="col">${member.memberOutdate}</th>
 	              </tr>

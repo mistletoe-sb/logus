@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-	<html>
+<html>
 	<head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -18,8 +18,6 @@
 	</head>
 	<body>
 		<ul class="list-group">
-		  
-		  
 		  <li class="list-group-item list-group-item-warning""><a href="http://localhost:8080/logus/manager/board?boardcategory=1">공지사항</a></li>
 		  <li class="list-group-item list-group-item-warning""><a href="http://localhost:8080/logus/manager/qna">Q&A</a></li>
 		  <li class="list-group-item list-group-item-warning""><a href="http://localhost:8080/logus/manager/statistics">통계</a></li>
@@ -30,5 +28,6 @@
 		  </c:if>
 		  <li class="list-group-item list-group-item-warning""><a href="http://localhost:8080/logus/manager/managerlogout">관리자 로그아웃</a></li>
 		</ul>
+		관리자 ${sessionScope.sessionManagerNickname}님 로그인 중
 	</body>
 </html>

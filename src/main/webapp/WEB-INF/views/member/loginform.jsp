@@ -1,12 +1,8 @@
-<%@ include file="../header.jsp" %>
-<%@ page contentType="text/html; charset=UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="UTF-8">
-		<title>Log Us</title>
- 		
+		<%@ include file="../include.jsp" %>
  		<style type="text/css">
          #container{
             width : 800px;
@@ -21,9 +17,9 @@
             margin : 40px auto;
          }
       </style>
-	
 	</head>
 	<body>
+		<%@ include file="../header_body.jsp" %>
 		<div class="border border-success p-2 mb-2" id="container" >
 			<form action="<c:url value='/memberLogin'/>" method="post" class="form-floating">
 				<div class="title">
@@ -51,7 +47,6 @@
 				<div>
 					<div>
 						<div class="d-grid gap-2 d-md-block">
-							<div class="d-grid gap-2 d-md-block"  >
 								<button class="btn btn-primary" type="submit" onclick="memberLogin()">로그인</button>
 								<button class="btn btn-primary" type="reset" onclick="location.href='<c:url value='/insertform'/>'">회원가입</button>
 								<button class="btn btn-primary" type="reset" onclick="location.href='<c:url value='index'/>'">Home</button>

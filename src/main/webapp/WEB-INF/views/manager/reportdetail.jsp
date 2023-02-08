@@ -1,18 +1,3 @@
-<%@ include file="../header.jsp" %>
-<%
-	if(session.getAttribute("sessionManagerNickname") != null) {
-		%>
-		<%@ include file="managerside.jsp" %>
-		<%
-	}
-%>
-<%
-	if(session.getAttribute("memberNickname") != null) {
-		%>
-		<%@ include file="memberside.jsp" %>
-		<%
-	}
-%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     isELIgnored="false" %>
@@ -36,12 +21,24 @@
             text-align : right;
          }
       </style>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>리포트 글보기</title>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-    </head>
+      </head>
     <body>
+    <%
+			if(session.getAttribute("sessionManagerNickname") != null) {
+				%>
+				<%@ include file="../header.jsp" %>
+				<%@ include file="managerside.jsp" %>
+				<%
+			}
+		%>
+		<%
+			if(session.getAttribute("memberNickname") != null) {
+				%>
+				<%@ include file="../header_body.jsp" %>
+				<%@ include file="memberside.jsp" %>
+				<%
+			}
+		%>
     	<div class ="container">
 
 	    <div class="inner">
@@ -82,24 +79,23 @@
 				                        <c:if test="${not empty boarddetail.boardImage}">
 				                            <div class="listView">
 				                                <div class="viewImg">
-													<img src="${pageContext.request.contextPath}/resources/images/manager/${boarddetail.boardImage}" width="200" height="200" class="img-fluid"/>
+													<img src="<c:url value='/resources/images/manager/${boarddetail.boardImage}'/>" width="200" height="200" class="img-fluid"/>
 												</div>
-				                            </div>
-				                        </c:if>
-                                	</td>
-                                </tr>
-                    </table>
-                </div><!--//tableWrap -->
-
-                <div class="btnListGo">
-                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                    	<c:if test="${not empty sessionScope.sessionManagerNickname}">
-                            <button class="btn btn-primary me-md-2" type="button" onclick="location.href='http://localhost:8080/logus/manager/updateboardform?boardCategory=${boarddetail.boardCategory}&boardCode=${boarddetail.boardCode}'">수정하기</button>
-                            <button class="btn btn-primary" type="button" onclick="location.href='http://localhost:8080/logus/manager/deleteboard?boardCategory=${boarddetail.boardCategory}&boardCode=${boarddetail.boardCode}'">삭제하기</button>
-						</c:if>
-                        <button class="btn btn-primary" type="button" onclick="location.href='http://localhost:8080/logus/manager/board?boardcategory=${boarddetail.boardCategory}'">목록으로</button>
-                      </div>
-
+		                                    </div>
+	                                    </c:if>
+	                            <div class="btnListGo">
+	                                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+	                                	<c:if test="${not empty sessionScope.sessionManagerNickname}">
+		                                    <button class="btn btn-primary me-md-2" type="button" onclick="location.href='<c:url value="/manager/updateboardform?boardCategory=${boarddetail.boardCategory}&boardCode=${boarddetail.boardCode}"/>'">수정하기</button>
+		                                    <button class="btn btn-primary" type="button" onclick="location.href='<c:url value="/manager/deleteboard?boardCategory=${boarddetail.boardCategory}&boardCode=${boarddetail.boardCode}"/>'">삭제하기</button>
+										</c:if>
+	                                    <button class="btn btn-primary" type="button" onclick="location.href='<c:url value="/manager/board?boardcategory=${boarddetail.boardCategory}"/>'">목록으로</button>
+	                                  </div>
+	                            </div>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
 	        </div>
 	    </div>
 	</div>

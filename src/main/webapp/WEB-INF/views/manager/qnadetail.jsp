@@ -1,18 +1,3 @@
-<%@ include file="../header.jsp" %>
-<%
-	if(session.getAttribute("sessionManagerNickname") != null) {
-		%>
-		<%@ include file="managerside.jsp" %>
-		<%
-	}
-%>
-<%
-	if(session.getAttribute("memberNickname") != null) {
-		%>
-		<%@ include file="memberside.jsp" %>
-		<%
-	}
-%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     isELIgnored="false" %>
@@ -42,12 +27,26 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     </head>
     <body>
+    <%
+			if(session.getAttribute("sessionManagerNickname") != null) {
+				%>
+				<%@ include file="../header.jsp" %>
+				<%@ include file="managerside.jsp" %>
+				<%
+			}
+		%>
+		<%
+			if(session.getAttribute("memberNickname") != null) {
+				%>
+				<%@ include file="../header_body.jsp" %>
+				<%@ include file="memberside.jsp" %>
+				<%
+			}
+		%>
     <div>
-        
 
 	    <div id="container" class="inner">
 	        <div class="contents" id="bodyWrap">
-	        
 	            <h1 class="title">Q&A</h1>
 	            <h4 class="title2">${sessionScope.sessionManagerNickname}</h4>
 
@@ -95,34 +94,34 @@
                             
                 </table>
             </div><!--//tableWrap -->
-
-            <div class="btnListGo">
-				<div class="d-grid gap-2 d-md-flex justify-content-md-end">
-            		<button class="btn btn-primary" type="button" onclick="location.href='http://localhost:8080/logus/manager/qna'">목록으로</button>
-
-            	
-            	<c:set var="writer_nickname" value="${qnadetail.memberNickname}"></c:set>
-            	<c:if test="${sessionScope.memberNickname == writer_nickname && empty qnadetail.answerContent}">
-                  <!--   <div class="d-grid gap-2 d-md-flex justify-content-md-end"> -->
-                        <button class="btn btn-primary me-md-2" type="button" onclick="location.href='http://localhost:8080/logus/manager/updateqnaform?qnaCode=${qnadetail.qnaCode}'">문의글 수정하기</button>
-                        <button class="btn btn-primary" type="button" onclick="location.href='http://localhost:8080/logus/manager/deleteqna?qnaCode=${qnadetail.qnaCode}'">문의글 삭제하기</button>
-                   <!--  </div> -->
-                </c:if>
-                <c:if test="${not empty sessionScope.sessionManagerNickname}">
-                    <!-- <div class="d-grid gap-2 d-md-flex justify-content-md-end"> -->
-                    	<c:choose>
-                        	<c:when test="${empty qnadetail.answerContent}">
-                            	<button class="btn btn-primary me-md-2" type="button" onclick="location.href='<c:url value="/manager/insertanswerform?qnaCode=${qnadetail.qnaCode}"/>'">문의답변 등록하기</button>
-                            </c:when>
-                            <c:otherwise>
-                            	<button class="btn btn-primary me-md-2" type="button" onclick="location.href='http://localhost:8080/logus/manager/updateanswerform?qnaCode=${qnadetail.qnaCode}'">문의답변 수정하기</button>
-                            	<button class="btn btn-primary" type="button" onclick="location.href='http://localhost:8080/logus/manager/deleteanswer?qnaCode=${qnadetail.qnaCode}'">문의답변 삭제하기</button>
-                            </c:otherwise>
-                        </c:choose>
-                   <!--  </div> -->
-                </c:if>
-                 </div>
-
+	                            <div class="btnListGo">
+	                            	<button class="btn btn-primary" type="button" onclick="location.href='<c:url value="/manager/qna"/>'">목록으로</button>
+	                            	
+	                            	<c:set var="writer_nickname" value="${qnadetail.memberNickname}"></c:set>
+	                            	<c:if test="${sessionScope.memberNickname == writer_nickname && empty qnadetail.answerContent}">
+		                                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+		                                    <button class="btn btn-primary me-md-2" type="button" onclick="location.href='<c:url value="/manager/updateqnaform?qnaCode=${qnadetail.qnaCode}"/>'">문의글 수정하기</button>
+		                                    <button class="btn btn-primary" type="button" onclick="location.href='<c:url value="/manager/deleteqna?qnaCode=${qnadetail.qnaCode}"/>'">문의글 삭제하기</button>
+		                                </div>
+	                                </c:if>
+	                                <c:if test="${not empty sessionScope.sessionManagerNickname}">
+		                                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+		                                	<c:choose>
+			                                	<c:when test="${empty qnadetail.answerContent}">
+			                                    	<button class="btn btn-primary me-md-2" type="button" onclick="location.href='<c:url value="/manager/insertanswerform?qnaCode=${qnadetail.qnaCode}"/>'">문의답변 등록하기</button>
+			                                    </c:when>
+			                                    <c:otherwise>
+			                                    	<button class="btn btn-primary me-md-2" type="button" onclick="location.href='<c:url value="/manager/updateanswerform?qnaCode=${qnadetail.qnaCode}"/>'">문의답변 수정하기</button>
+			                                    	<button class="btn btn-primary" type="button" onclick="location.href='<c:url value="/manager/deleteanswer?qnaCode=${qnadetail.qnaCode}"/>'">문의답변 삭제하기</button>
+			                                    </c:otherwise>
+		                                    </c:choose>
+		                                </div>
+	                                </c:if>
+	                            </div>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
 	        </div>
 	    </div>
 	    </div>
