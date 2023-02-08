@@ -16,6 +16,10 @@
 	margin-bottom: 10px;
 }
 
+#thumbnail_img {
+	margin-bottom: 12px;
+}
+
 .tb_dailystory {
 	width: 50%;
 	margin-left: auto;
@@ -37,4 +41,15 @@
 	text-align: left;
 	margin-top: 20px;
 	margin-left: 25%;
+}
+
+.img_box_class {
+	aspect-ratio: 16/9;
+	overflow: hidden;
+	margin-bottom: 12px;
+}
+
+.img_box_class>img {
+	width: 100%;
+	object-fit: cover;
 }

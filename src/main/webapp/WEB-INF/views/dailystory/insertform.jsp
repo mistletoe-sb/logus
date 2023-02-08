@@ -35,7 +35,7 @@
 						<td>
 							<input type="file" name="thumbnail" class="form-control" onchange="setPreview(event)">
 							<img id="preview_thumbnail_img" src="<c:url value='/resources/images/preview_image.png'/>" alt="preview_thumbnail_img"
-								 width="240" height="160">
+								 width="240" height="180">
 						</td>
 					</tr>
 					<tr>

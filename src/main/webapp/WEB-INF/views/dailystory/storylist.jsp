@@ -46,7 +46,7 @@
 							<c:forEach var="tg" items="${tagList[ds.dailystoryCode]}" varStatus="i">
 								<c:choose>
 									<c:when test="${i.index < 5}">
-										<button style="display: inline-block">${tg.tagName}</button>
+										<button class="tag_block" style="display: inline-block">${tg.tagName}</button>
 									</c:when>
 									<c:when test="${i.index == 5}">...</c:when>
 								</c:choose>

@@ -6,33 +6,59 @@
 	</head>
 	<body>
 		<%@ include file="../header_body.jsp" %>
-		<p>작성자 : ${dsVO.memberNickname}</p>
-		<p><fmt:formatDate value="${dsVO.dailystoryUploaddate}" pattern="yyyy.MM.dd HH:mm"/></p>
+		<div class="sub_title_dailystory">
+			<p style="display: inline-block; margin: 0px 48% 12px 0px;">작성자 : ${dsVO.memberNickname}</p>
+			<p style="display: inline-block; margin: 0px 2% 12px 0px;"><fmt:formatDate value="${dsVO.dailystoryUploaddate}" pattern="yyyy.MM.dd HH:mm"/></p>
+			<c:if test="${dsVO.memberNickname == sessionScope.memberNickname}">
+				<button class="btn btn-primary" onclick='location.href="<c:url 
+						value='/${sessionScope.memberNickname}/library/story/${dsVO.dailystoryCode}/update'/>"'>수정</button>
+				<button id="ds_del_btn" class="btn btn-primary" onclick="deleteStory('<c:url 
+						value="/${sessionScope.memberNickname}/library/dailystorylist"/>')">삭제</button>
+			</c:if>
+		</div>
+		<div class="border_dailystory_form_div">
+			<div>
+				<table class="tb_dailystory">
+					<tr>
+						<td>
+							<div class="img_box_class">
+								<c:choose>
+									<c:when test='${(dsVO.dailystoryImage != null) && (dsVO.dailystoryImage != "")}'>
+										<img id="thumbnail_img" src="<c:url 
+											 value='/resources/images/dailystory/${dsVO.dailystoryImage}'/>" alt="${dsVO.dailystoryImage}">				  	
+									</c:when>
+									<c:otherwise>
+										<img id="thumbnail_img" src="<c:url 
+											 value='/resources/images/preview_image.png'/>" alt="preview_thumbnail_img">				  	
+									</c:otherwise>
+								</c:choose>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td><h2>${dsVO.dailystoryTitle}</h2></td>
+					</tr>
+					<tr>
+						<td><p style="white-space: pre-line;">${dsVO.dailystoryContent}</p></td>
+					</tr>
+					<tr>
+						<td>
+							<c:forEach var="tg" items="${tagList}">
+								<button class="tag_block" style="display: inline-block">${tg.tagName}</button>
+							</c:forEach>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		
+		
 		<br>
-		<c:if test="${dsVO.memberNickname == sessionScope.memberNickname}">
-			<button onclick='location.href="<c:url value='/${sessionScope.memberNickname}/library/story/${dsVO.dailystoryCode}/update'/>"'>수정</button>
-			<button id="ds_del_btn" onclick="deleteStory('<c:url 
-					value="/${sessionScope.memberNickname}/library/dailystorylist"/>')">삭제</button>
-		</c:if>
 		<br>
-		<p>${dsVO.dailystoryTitle}</p>
 		<br>
-		<p style="white-space: pre-line;">${dsVO.dailystoryContent}</p>
-		<br>
-		<c:choose>
-			<c:when test='${(dsVO.dailystoryImage != null) && (dsVO.dailystoryImage != "")}'>
-				<img id="thumbnail_img" src="<c:url value='/resources/images/dailystory/${dsVO.dailystoryImage}'/>" alt="${dsVO.dailystoryImage}"
-					 width="200" height="200">				  	
-			</c:when>
-			<c:otherwise>
-				<img id="thumbnail_img" src="<c:url value='/resources/images/preview_image.png'/>" alt="preview_thumbnail_img"
-					 width="200" height="200">				  	
-			</c:otherwise>
-		</c:choose>
+		
 		<div>
-			<c:forEach var="tg" items="${tagList}">
-				<button style="display: inline-block">${tg.tagName}</button>
-			</c:forEach>
+			
 		</div>
 		<br><br>
 		<table>
@@ -73,14 +99,14 @@
 			</c:otherwise>
 		</c:choose>
 		</table>
-		<button id="reply_ins_btn" onclick="insertReply(this)">댓글 작성</button>
+		<button id="reply_ins_btn" class="btn btn-primary" onclick="insertReply(this)">댓글 작성</button>
 		<div id="form_reply_ins" hidden="true">
 			<form action="<c:url value='/${dsVO.memberNickname}/reply/insert'/>" method="post">
 			    	<textarea name="replyContent" cols="200" rows="5"></textarea>
 			    	<input type="hidden" name="memberNickname" value="${sessionScope.memberNickname}">
 			    	<input type="hidden" id="dsCode_forD" name="dailystoryCode" value="${dsVO.dailystoryCode}">
-			    	<input type="submit" value="작성">
-			    	<input type="reset" id="reply_ins_reset_btn" value="취소" onclick="insertReply(this)">
+			    	<input type="submit" class="btn btn-primary" value="작성">
+			    	<input type="reset" id="reply_ins_reset_btn" class="btn btn-primary" value="취소" onclick="insertReply(this)">
 			</form>
 		</div>
 		<br>
