@@ -33,14 +33,14 @@
               <tr>
                 <th scope="col">${manager.managerId}</th>
                 <th scope="col">${manager.managerNickname}</th>
-                <th scope="col"><button type="button" class="btn btn-primary" onclick="location.href='http://localhost:8080/logus/manager/deletemanager?managerId=${manager.managerId}'">
+                <th scope="col"><button type="button" class="btn btn-primary" onclick="location.href='<c:url value="/manager/deletemanager?managerId=${manager.managerId}"/>'">
 				삭제
                 </button></th>
               </tr>
             </c:forEach>
             </tbody>
         </table>
-        <button type="button" class="btn btn-primary" onclick="location.href='http://localhost:8080/logus/manager/insertmanagerform'">
+        <button type="button" class="btn btn-primary" onclick="location.href='<c:url value="/manager/insertmanagerform"/>'">
 			관리자 등록
         </button>
         </fieldset>
