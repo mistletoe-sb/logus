@@ -13,7 +13,6 @@ function followBtn1() {
 	const btn1 = document.getElementById('followbtn1');
 	const btn2 = document.getElementById('followbtn2');
 	followId = $('#followinId').val();
-	console.log(followId);
 	
 	$.ajax({
 		url : 'library/followdl', //Controller에서 요청 받을 주소
@@ -42,7 +41,6 @@ function followBtn2() {
 	const btn1 = document.getElementById('followbtn1');
 	const btn2 = document.getElementById('followbtn2');
 	followId =$('#followinId').val();
-	console.log(followId);
 
 	$.ajax({
 		url : 'library/followin', //Controller에서 요청 받을 주소

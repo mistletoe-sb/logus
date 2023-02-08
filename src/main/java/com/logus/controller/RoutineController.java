@@ -17,6 +17,7 @@ import com.logus.dailycheck.model.DailycheckVO;
 import com.logus.dailycheck.service.IDailycheckService;
 import com.logus.dailyroutine.model.DailyroutineVO;
 import com.logus.dailyroutine.service.IDailyroutineService;
+import com.logus.routineshare.service.IRoutineshareService;
 import com.logus.tag.model.TagVO;
 import com.logus.tag.service.ITagService;
 import com.logus.util.constant.TagCategory;
@@ -29,6 +30,8 @@ public class RoutineController {
 	private IDailycheckService DailycheckService;		// 일정 상세 객체
 	@Autowired
 	private ITagService tagService;						// 태그 서비스 객체
+	@Autowired
+	private IRoutineshareService routineshareService;	//루틴 공유수 객체
 	
 	private String view_ref ="routine/";	//뷰 위치
 	
@@ -279,6 +282,7 @@ public class RoutineController {
 		
 		DailycheckService.deleteDailycheckAll(dailyroutineCode);
 		tagService.deleteAllTagInPost(TagCategory.DAILY_ROUTINE, dailyroutineCode, 0);
+		routineshareService.deleteRoutineshare(dailyroutineCode);
 		DailyroutineService.deleteDailyroutine(dailyroutineCode);
 		
 		return "redirect:/routinelist";

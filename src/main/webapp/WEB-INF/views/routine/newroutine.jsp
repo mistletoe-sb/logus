@@ -25,11 +25,11 @@
 			<button type="button" class="btn btn-outline-primary btn-sm" disabled>태그를 등록해주세요</button>
 				<input type="text" id="tags" name="tagNames" size="100" onkeydown="splitTag(event)">
 				<br>
-			<select class="form-select" aria-label="Default select example" name="active" style="width: 380px;">
+			<select class="form-select" aria-label="Default select example" name="active">
 				  <option selected >일반 일정으로 등록</option>
 				  <option >메인 일정으로 등록</option>
 			</select>
-			<select class="form-select" aria-label="Default select example" name="week" style="width: 380px;margin-left: 13px;">
+			<select class="form-select" aria-label="Default select example" name="week">
 				  <option selected>평일</option>
 				  <option >주말</option>
 			</select>
