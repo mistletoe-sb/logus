@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.logus.achieve.model.AchieveVO;
 import com.logus.achieve.service.IAchieveService;
@@ -282,6 +281,21 @@ public class LibraryController {
 		
 		model.addAttribute("searchroutine", searchroutine);
 		model.addAttribute("tagList", tagList);
+		
+		search = "%" + search + "%";
+		List<DailystoryVO> dsList = dailystoryService.findDailystoryList(option, search);	// 해당 키워드의 일일 스토리 목록 조회
+		// select한 일일 스토리 코드 목록 생성
+		List<Integer> storyCodeList = new ArrayList<Integer>();
+		for(DailystoryVO vo : dsList) {
+			storyCodeList.add(vo.getDailystoryCode());
+		}
+		List<Integer> rpCount = replyService.countReplyEach(storyCodeList);		// 각 스토리별 댓글 수 조회
+		Map<Integer, List<TagVO>> storyTagList = tagService.makeTagListMap(TagCategory.DAILY_STORY, storyCodeList);
+		// 모델에 조회한 데이터 저장
+		model.addAttribute("dsList", dsList);
+		model.addAttribute("rpCount", rpCount);			
+		model.addAttribute("storyTagList", storyTagList);
+		
 		return view_ref+"search";
 	}
 	
@@ -320,8 +334,9 @@ public class LibraryController {
 	
 	@GetMapping(value="/error")
 	// 에러(404, 500) 시 index 페이지로 redirect
-	public String errorLog() {
+	public String errorLog(HttpSession session) {
 		logger.debug("error");
-		return "redirect:/";
+		String memberNickname = (String) session.getAttribute("memberNickname");
+		return "redirect:/" + RedirEncoder.encode(memberNickname) + "/library";
 	}
 }

@@ -16,8 +16,29 @@ th {
 }
 
 .card {
+	width: 18rem;		
+}
+
+.card-body { 
+	height: 116px; 
+} 
+
+.card-text {
+	height: 100px;
+}
+
+.dailystory_card_container {
 	width: 18rem;
 	cursor: pointer;
+	margin-bottom: 10px;
+}
+
+.dailystory_card_container .card-body {
+	height: 220px !important;			
+}
+
+.dailystory_card_container .card-text {
+	height: 50px !important;				
 }
 
 .reply_p {
@@ -27,7 +48,9 @@ th {
 
 #search_in_dailystory {
 	width: 350px;
-	height: 50px;
+	margin-right: 50px;
+	position: relative;
+	float: right;
 }
 
 #search_in_dailystory input {
@@ -47,18 +70,48 @@ th {
 }
 
 .align_container{
-	text-align: center;
+	width: 90%;
+	margin: 30px auto 30px auto;
 }
 
-.tag_block{
+.tag_block {
 	color: white !important;
 	background-color: #0d81fde0 !important;
 	border-color: #0d81fde0 !important;
 	border-width: 0px !important;
 	border-radius: 0.5rem !important;
 	padding: 3px 8px 3px 8px;
+	margin-bottom: 2px;
 }
 
-.container{
+.container {
 	margin-bottom: 20px !important;
+}
+
+.container_box_custom {
+	width: 90%;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 20px;
+}
+
+.top_btn_container_box_custom {
+	margin-top: 20px;
+	margin-bottom: 20px;
+	vertical-align: middle;
+}
+
+#dailyroutine_card_container_box {
+	margin-bottom: 5px;
+}
+
+#align_container_routine {
+	margin-left: auto;
+	margin-right: auto;
+	width: 624px;
+}
+
+#mylib_info_btn {
+	width: 90%;
+	margin: 20px auto 0px auto;
 }

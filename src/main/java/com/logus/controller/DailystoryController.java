@@ -167,7 +167,21 @@ public class DailystoryController {
 		} else {
 			dsList = dailystoryService.findDailystoryList(option, search, myNickname);			
 		}
+		// select한 일일 스토리 코드 목록 생성
+		List<Integer> codeList = new ArrayList<Integer>();
+		for(DailystoryVO vo : dsList) {
+			codeList.add(vo.getDailystoryCode());
+			logger.info("코드:" + vo.getDailystoryCode());
+		}
+		List<Integer> rpCount = replyService.countReplyEach(codeList);		// 각 스토리별 댓글 수 조회
+		for(Integer i : rpCount) {
+			logger.info("댓글 수:" + i);
+		}
+		Map<Integer, List<TagVO>> tagList = tagService.makeTagListMap(TagCategory.DAILY_STORY, codeList);
+		// 모델에 조회한 데이터 저장
 		model.addAttribute("dsList", dsList);
+		model.addAttribute("rpCount", rpCount);			
+		model.addAttribute("tagList", tagList);
 		return "dailystory/storylist";
 	}
 }
