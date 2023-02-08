@@ -52,47 +52,49 @@
 			</div>
 		 	<div>
 		 		<c:forEach var="ds" items="${dsList}" varStatus="stat">
-					<div class="dailystory_card_container" style="display: inline-block"
-						 onclick="location.href='<c:url value="/${ds.memberNickname}/library/story/${ds.dailystoryCode}"/>'">
+					<div class="dailystory_card_container" style="display: inline-block">
 						<div class="card">
-							<div class="ratio ratio-16x9">
-								<c:choose>
-									<c:when test='${(ds.dailystoryImage != null) && (ds.dailystoryImage != "")}'>
-										<img src="<c:url value='/resources/images/dailystory/${ds.dailystoryImage}'/>" class="card-img-top" alt="${ds.dailystoryImage}">				  	
-									</c:when>
-									<c:otherwise>
-										<img src="<c:url value='/resources/images/default_thumbnail.jpg'/>" class="card-img-top" alt="기본 썸네일">				  	
-									</c:otherwise>
-								</c:choose>
-							</div>
-							<div class="card-body">
-								<h5 class="card-title">${ds.dailystoryTitle}</h5>
-								<button type="button" class="btn btn-outline-primary btn-sm" style="display: inline-block" disabled>댓글 : ${rpCount[stat.index]}</button>
-								<p class="card-text" style="white-space: pre-line;">
-									<span class="d-inline-block text-truncate" style="max-width: 90%;">
-										${ds.dailystoryContent}<br>
-									</span>
-									<%-- <fmt:formatDate value="${ds.dailystoryUploaddate}" pattern="yyyy.MM.dd HH:mm"/> --%>
-								</p>
-							    <div>
-									<c:forEach var="tg" items="${storyTagList[ds.dailystoryCode]}" varStatus="i">
-										<c:choose>
-											<c:when test="${i.index < 5}">
-												<button class="tag_block" style="display: inline-block">${tg.tagName}</button>
-											</c:when>
-											<c:when test="${i.index == 5}">...</c:when>
-										</c:choose>
-									</c:forEach>
+							<div onclick="location.href='<c:url value="/${ds.memberNickname}/library/story/${ds.dailystoryCode}"/>'">
+								<div class="ratio ratio-16x9">
+									<c:choose>
+										<c:when test='${(ds.dailystoryImage != null) && (ds.dailystoryImage != "")}'>
+											<img src="<c:url value='/resources/images/dailystory/${ds.dailystoryImage}'/>" class="card-img-top" alt="${ds.dailystoryImage}">				  	
+										</c:when>
+										<c:otherwise>
+											<img src="<c:url value='/resources/images/default_thumbnail.jpg'/>" class="card-img-top" alt="기본 썸네일">				  	
+										</c:otherwise>
+									</c:choose>
+								</div>
+								<div class="card-body">
+									<h5 class="card-title">${ds.dailystoryTitle}</h5>
+									<button type="button" class="btn btn-outline-primary btn-sm" style="display: inline-block" disabled>댓글 : ${rpCount[stat.index]}</button>
+									<p class="card-text" style="white-space: pre-line;">
+										<span class="d-inline-block text-truncate" style="max-width: 90%;">
+											${ds.dailystoryContent}<br>
+										</span>
+										<%-- <fmt:formatDate value="${ds.dailystoryUploaddate}" pattern="yyyy.MM.dd HH:mm"/> --%>
+									</p>
+								    <div>
+										<c:forEach var="tg" items="${storyTagList[ds.dailystoryCode]}" varStatus="i">
+											<c:choose>
+												<c:when test="${i.index < 5}">
+													<button class="tag_block" style="display: inline-block">${tg.tagName}</button>
+												</c:when>
+												<c:when test="${i.index == 5}">...</c:when>
+											</c:choose>
+										</c:forEach>
+									</div>
 								</div>
 							</div>
+							<div class="card-footer bg-transparent border-success">
+						    	<div class="d-grid gap-2 col-7 mx-auto">
+						     		<button class="btn btn-primary" type="button" onclick="location.href='<c:url value="/${ds.memberNickname}/library"/>'">서재 방문하기</button>
+						    	</div>
+					    	</div>
 						</div>
 					</div>
 				</c:forEach>
 		 	</div>
-			<div>
-				<button type="button" class="btn btn-outline-secondary" onclick=
-						"location.href='<c:url value="/${sessionScope.memberNickname}/library/dailystorylist"/>'">일일 스토리 더보기</button>
-			</div>
 		</div>
 	</body>
 </html>

@@ -30,15 +30,15 @@ th {
 .dailystory_card_container {
 	width: 18rem;
 	cursor: pointer;
-	margin-bottom: 5px;
+	margin-bottom: 10px;
 }
 
 .dailystory_card_container .card-body {
-	height: 250px !important;			
+	height: 220px !important;			
 }
 
 .dailystory_card_container .card-text {
-	height: 70px !important;				
+	height: 50px !important;				
 }
 
 .reply_p {

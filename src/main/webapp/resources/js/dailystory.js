@@ -36,7 +36,9 @@ function updateReply(btn){
 		$(btn).parents('.reply_div').nextAll('.form_reply_upd').attr("hidden", false);	// 폼 표시
 		$(btn).parents('.reply_upd').prevAll('.reply_before_upd').attr("hidden", true);	// 텍스트(기존 댓글) 숨기기
 		$(btn).parents('.reply_div').attr("hidden", true);								// 버튼 숨기기
+		$('#reply_ins_btn').attr("hidden", true);										// 댓글 작성 버튼 숨기기
 	} else if(btn.className == 'reply_upd_reset_btn'){	// 현재 요소가 '취소' 버튼인 경우
+		$('#reply_ins_btn').attr("hidden", false);										// 댓글 작성 버튼 표시
 		$(btn).parents('.form_reply_upd').prevAll('.reply_div').attr("hidden", false);	// 버튼 표시
 		$(btn).parents('.reply_upd').prevAll('.reply_before_upd').attr("hidden", false);// 텍스트(기존 댓글) 표시
 		$(btn).parents('.form_reply_upd').attr("hidden", true);							// 폼 숨기기

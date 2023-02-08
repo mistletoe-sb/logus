@@ -298,8 +298,15 @@
 				</c:forEach>
 		 	</div>
 			<div>
-				<button type="button" class="btn btn-outline-secondary" onclick=
-						"location.href='<c:url value="/${sessionScope.memberNickname}/library/dailystorylist"/>'">일일 스토리 더보기</button>
+				<c:choose>
+					<c:when test="${not empty dsList[0]}">				
+						<button type="button" class="btn btn-outline-secondary" onclick=
+								"location.href='<c:url value="/${dsList[0].memberNickname}/library/dailystorylist"/>'">일일 스토리 더보기</button>
+					</c:when>
+					<c:otherwise>
+						<h5>작성된 일일 스토리가 없습니다.</h5>
+					</c:otherwise>
+				</c:choose>
 			</div>
 		</div>
 	</body>

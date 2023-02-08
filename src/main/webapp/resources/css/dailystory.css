@@ -53,3 +53,24 @@
 	width: 100%;
 	object-fit: cover;
 }
+
+#rep_container_div {
+	width: 50%;
+	margin: 0px auto 30px auto; 
+}
+
+.rep_textarea {
+	width: 100% !important;
+	height: 100px !important;
+}
+
+#rep_table {
+	width: 100%;
+	margin-bottom: 20px;
+}
+
+#rep_table tr, #rep_table td {
+	border-top: 1px solid gray;
+	border-bottom: 1px solid gray;
+	padding: 5px 0px 5px 3px;
+}

@@ -8,27 +8,27 @@
 		<%@ include file="../header_body.jsp" %>
 		<div class="container_box_custom">
 			<div class="top_btn_container_box_custom">
-				<div style="display: inline-block;">
-					<c:if test="${memberNickname == sessionScope.memberNickname}">
-						<button type="button" class="btn btn-outline-primary" onclick=
-								"location.href='<c:url value="/${sessionScope.memberNickname}/library/story/insert"/>'">일일 스토리 작성</button>
-					</c:if>
-				</div>
-				<div id="search_in_dailystory" class="container-fluid">
-					<form id="search" name="searchform" class="d-flex" role="search" method="get" action="<c:url value='/library/search'/>">
-						<select class="form-select" aria-label="Default select example" name="option">
-							<option value="0" selected>전체</option>
-							<option value="1">태그</option>
-							<option value="2">제목</option>
-							<option value="3">내용</option>
-							<option value="4">닉네임</option>
-						</select>
-						<input id="search_txt_in_dailystory" class="form-control me-2" name="search"
-							   type="search" placeholder="내 스토리 검색하기" aria-label="Search">
-						<button id="search_btn_in_dailystory" class="btn btn-outline-success" type="submit">검색</button>
-						<input type="hidden" name="myNickname" value="${sessionScope.memberNickname}">
-					</form>
-				</div>
+				<c:if test="${memberNickname == sessionScope.memberNickname}">
+					<div style="display: inline-block;">
+							<button type="button" class="btn btn-outline-primary" onclick=
+									"location.href='<c:url value="/${sessionScope.memberNickname}/library/story/insert"/>'">일일 스토리 작성</button>
+					</div>
+					<div id="search_in_dailystory" class="container-fluid">
+						<form id="search" name="searchform" class="d-flex" role="search" method="get" action="<c:url value='/library/search'/>">
+							<select class="form-select" aria-label="Default select example" name="option">
+								<option value="0" selected>전체</option>
+								<option value="1">태그</option>
+								<option value="2">제목</option>
+								<option value="3">내용</option>
+								<option value="4">닉네임</option>
+							</select>
+							<input id="search_txt_in_dailystory" class="form-control me-2" name="search"
+								   type="search" placeholder="내 스토리 검색하기" aria-label="Search">
+							<button id="search_btn_in_dailystory" class="btn btn-outline-success" type="submit">검색</button>
+							<input type="hidden" name="myNickname" value="${sessionScope.memberNickname}">
+						</form>
+					</div>
+				</c:if>
 			</div>
 			<div>
 				<c:forEach var="ds" items="${dsList}" varStatus="stat">
