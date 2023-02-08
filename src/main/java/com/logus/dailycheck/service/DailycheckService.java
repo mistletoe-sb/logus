@@ -27,8 +27,6 @@ public class DailycheckService implements IDailycheckService {
 
 	@Override
 	public int deleteDailycheck(List<DailycheckVO> voList , int dailyroutineCode) {
-		System.out.println("서비스 VO"+voList);
-		System.out.println("서비스 루틴코드"+dailyroutineCode);
 		return dailycheckdao.deleteDailycheck(voList, dailyroutineCode);
 	}
 

@@ -96,13 +96,14 @@ public class AchieveController {
 		achieveVO.setAchieveDate(today);
 		
 		achieveService.insertAchieve(achieveVO);
-		
+		System.out.println("달성률 vo "+achieveVO);
 		return "redirect:/" + RedirEncoder.encode(memberNickname) + "/library";
 	}
 	
 	@PostMapping(value="/achieve/check")	//금일 출석 여부 확인용
 	@ResponseBody
 	public int checkAchieve(HttpSession session, @RequestParam("today") String today) {
+		System.out.println("오늘 날짜? "+today);
 		String memberNickname=(String) session.getAttribute("memberNickname");	
 		int result = achieveService.selectAchieve(memberNickname, today);	//1 반환 시 이미 출석 완료, 0 반환시 출석 진행
 		return result;

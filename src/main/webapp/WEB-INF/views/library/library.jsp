@@ -99,11 +99,13 @@
 		</div>
 		<div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
 			<div class="offcanvas-header">
-				<h3 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">서재 정보</h3>
+				<div class="d-grid gap-2 col-6 mx-auto">
+					<h2 class="offcanvas-title" id="offcanvasWithBothOptionsLabel" style="text-align: center;"><span class="badge bg-success bg-opacity-50">서재 정보</span></h2>
+				</div>
 				<button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
 			</div>
 			<div class="offcanvas-body">
-				<img alt="등록된 사진이 없습니다" id="preview-image" src="${root}/logus/resources/images/member/${memberVO.memberProfile}" >
+				<img alt="등록된 사진이 없습니다" id="preview-image" src="${root}/logus/resources/images/member/${memberVO.memberProfile}" style="height: 300px;width:350px;object-fit: cover;">
 				<dl class="row">
 					<dt class="col-sm-3">닉네임</dt>
 					<dd class="col-sm-9">${memberVO.memberNickname}</dd>
@@ -123,6 +125,7 @@
 				<c:choose>
 					<c:when test="${memberVO.memberNickname eq sessionUser || not empty memberVO.memberOutdate}"></c:when>
 					<c:otherwise>
+					<div class="d-grid gap-2 col-6 mx-auto">
 						<c:choose>
 							<c:when test="${following eq 0}">
 								<input type="hidden" value="${memberVO.memberId}" id="followinId" name="followingMemberId">
@@ -135,6 +138,7 @@
 								<input type='button' value='팔로우 취소' id='followbtn2' class="btn btn-danger" onclick="followBtn1()"/>
 							</c:otherwise>
 						</c:choose>
+						</div>
 					</c:otherwise>
 				</c:choose>
 			</div>
