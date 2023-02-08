@@ -1,14 +1,17 @@
 var today;
-		 $(function(){
+window.onload = function(){
+	//실행될 코드
+
 		var date = new Date();
 	    var year = date.getFullYear();
 	    var month = ("0" + (1 + date.getMonth())).slice(-2);
 	    var day = ("0" + date.getDate()).slice(-2);
 	    
 	  	$('#today').val(year+month+day);
+	  	console.log(year+month+day);
 	  	$('#todayachieve').html(year+'년&nbsp;'+month+'월&nbsp;'+day+'일&nbsp;출석체크입니다');
 	  	//ajax로 해당 날짜에 이미 출석했는지 확인하고 버튼 비활성화
-	});
+	}
 		 
 		  	function on_submit_check(){
 		  		today =$('#today').val();

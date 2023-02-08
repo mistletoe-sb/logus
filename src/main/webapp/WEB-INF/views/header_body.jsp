@@ -3,8 +3,20 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
+<head>
+<style>
+ #headercolor {
+ 	background-color: rgb(232, 247, 252);
+ }
+ .navbar-brand{
+	padding: 0px 0px 0px 30px;
+ }
+
+ 
+</style>
+</head>
 		<header>
-			<nav class="navbar bg-light">
+			<nav id="headercolor" class="navbar">
 			
 				<a class="navbar-brand" 
 					<c:choose>
@@ -22,7 +34,7 @@
 				</a>
 
 				<form id="search" name="searchform" class="d-flex" role="search" action="<c:url value='/search'/>" method="get">
-					<select class="form-select" aria-label="Default select example" name="option">
+					<select class="form-select" id="selectsearch" aria-label="Default select example" name="option">
 						<option value="0" selected>전체</option>
 						<option value="1">태그</option>
 						<option value="2">제목</option>
@@ -37,7 +49,7 @@
 					<c:choose>
 					  	<c:when test="${empty sessionScope.memberNickname}">
 							<button type="button" class="btn btn-outline-dark" onclick="location.href='<c:url value='/loginform'/>'">로그인</button>
-							<button type="button" class="btn btn-outline-dark"onclick="location.href='<c:url value='/insertform'/>'">회원가입</button>
+							<button type="button" class="btn btn-outline-dark" onclick="location.href='<c:url value='/insertform'/>'">회원가입</button>
 						</c:when>
 						<c:otherwise>
 							<c:if test="${not empty message}">

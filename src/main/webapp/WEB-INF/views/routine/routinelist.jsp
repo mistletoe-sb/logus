@@ -3,12 +3,17 @@
 <html>
 	<head>
 		<%@ include file="../include.jsp" %>
+		<style>
+		ul li {background-color: rgb(235, 245, 245) !important;
+		}
+		</style>
 	</head>
 	<body>
 		<%@ include file="../header_body.jsp" %>
 		<div class="d-grid gap-2 col-6 mx-auto">
 			<button type="button" class="btn btn-primary btn-lg" onclick="location.href='newroutine'">+새 루틴 추가하기</button>
 			</div>
+			
 			<h3><span class="badge bg-dark">평일</span></h3>
 			<c:forEach items="${routinelist1}" var="routinelist1" varStatus="status">
 			<ul class="list-group">

@@ -6,16 +6,27 @@
 <!doctype html>
 <html lang="ko">
     <head>
-<!--         <meta charset="utf-8"> -->
-<!--         <meta name="viewport" content="width=device-width, initial-scale=1"> -->
-        <title>Q&A 답변 수정</title>
-<!--         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous"> -->
-		<%@ include file="../header.jsp" %>
-		<%@ include file="managerside.jsp" %>
+    	<style type="text/css">
+         .container{
+            width : 1200px;
+            margin : 20px auto;
+            background-color: #f7f7f7;
+         }
+         .title{
+            margin : 40px auto;
+            text-align : center;
+         }
+         .title2{
+            margin : 40px auto;
+            text-align : right;
+         }
+      	</style>
     </head>
     <body>
+		<%@ include file="../header.jsp" %>
+		<%@ include file="managerside.jsp" %>
+        <div class="container">
         <h1>Q&A 답변 수정</h1>
-<%--         <h2>로그인 관리자 별명 : ${sessionScope.sessionManagerNickname}</h2> --%>
 	    <div class="inner">
 	        <div class="contents" id="bodyWrap">
 	            <h3 class="title">Q&A</h3>
@@ -26,7 +37,6 @@
 	                        <div class="bottomListBox">
 	                            <div class="tableWrap">
 	                                <table>
-	                                    <caption>자유게시판 뷰 페이지로 제목, 질문자, 등록일로 구성</caption>
 	                                    <colgroup>
 	                                        <col style="width:16%;"/>
 	                                        <col style="width:48%;"/>
@@ -53,9 +63,11 @@
                                         </tr>
 	                                </table>
 	                            </div><!--//tableWrap -->
+                                <br>
                                 <div class="listView">
                                     <div class="viewTxt">${qnadetail.qnaContent}</div>
                                 </div>
+                                <br>
                                 <form action="<c:url value='/manager/updateanswer'/>" method="post">
                                 	<fieldset>
 							        <div class="mb-3">
@@ -67,7 +79,6 @@
 						        
 		                            <div class="btnListGo">
 		                            	<input class="btn btn-primary me-md-2" type="submit" value="문의답변 수정하기">
-<%-- 				                        <button class="btn btn-primary" type="button" onclick="location.href='http://localhost:8080/logus/manager/deleteanswerform?qnaCode=${qnadetail.qnaCode}'">문의답변 삭제하기</button> --%>
 		                            </div>
 		                            </fieldset>
 	                            </form>
@@ -76,6 +87,7 @@
 	                </div>
 	            </div>
 	        </div>
+	    </div>
 	    </div>
     </body>
 </html>

@@ -16,7 +16,7 @@ function followBtn1() {
 	console.log(followId);
 	
 	$.ajax({
-		url : './followdl', //Controller에서 요청 받을 주소
+		url : 'library/followdl', //Controller에서 요청 받을 주소
 		type : 'post', //POST 방식으로 전달
 		async : false,
 		data : {followId : followId},
@@ -45,7 +45,7 @@ function followBtn2() {
 	console.log(followId);
 
 	$.ajax({
-		url : './followin', //Controller에서 요청 받을 주소
+		url : 'library/followin', //Controller에서 요청 받을 주소
 		type : 'post', //POST 방식으로 전달
 		async : false,
 		data : {followId : followId},

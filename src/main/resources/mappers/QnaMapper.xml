@@ -74,7 +74,7 @@
 	<update id="deleteAnswer" parameterType="com.logus.qna.model.QnaVO">
 		<![CDATA[
 			UPDATE logus.qna
-			SET answer_content = null
+			SET answer_content = null, answer_date = null, manager_nickname = null
 			WHERE qna_code = #{qnaCode}
 		]]>
 	</update>

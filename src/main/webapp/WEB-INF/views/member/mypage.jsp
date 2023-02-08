@@ -1,10 +1,9 @@
-<%@ include file="../header.jsp" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
+<%@ include file="../include.jsp" %>
 	<style type="text/css">
 		.sideber{
 			width : 300px;
@@ -26,9 +25,9 @@
 		}
 		
 	</style>
-	<title>Insert title here</title>
 </head>
     <body>
+    <%@ include file="../header_body.jsp" %>
     	<div class="container">
 	    	<div class="title">
 	    		<h1>My Page</h1>
@@ -39,10 +38,10 @@
 		     		<div class="btn-group" role="group" aria-label="Basic radio toggle button group">
 
 						<input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off" onclick="acyncMovePage('./updateMemberForm')" checked>
-						<label class="btn btn-outline-primary" for="btnradio2">Edit Profile</label>
+						<label class="btn btn-outline-primary" for="btnradio2">회원 수정</label>
 						
 						<input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off" onclick="acyncMovePage('./deleteMemberForm')">
-						<label class="btn btn-outline-primary" for="btnradio3">Secession</label>
+						<label class="btn btn-outline-primary" for="btnradio3">탈퇴하기</label>
 					</div>
 		     	</div>
 		     	<div id=contents></div>
@@ -70,10 +69,6 @@
         });
     }
     
-    
-    
-    
- 
 </script>
     
 </html>
