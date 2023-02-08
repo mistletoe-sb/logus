@@ -5,7 +5,7 @@ var i =0;	//i는 한 루틴에서 최대로 가능한 시간대별 일정 수
             if(i<=5){	//0은 기본으로 존재해서 i+2개 일정이 생성한도(5개 기준 7개) 
             i += 1;
             newE.id="t"+i
-            newE.innerHTML = "<div class='p-3 bg-info bg-opacity-10 border border-info border-start-0 rounded-end'><p>시작 시간 : <input type='time' name='begin' required>&nbsp;&nbsp;&nbsp;종료 시간 : <input type='time' name='end' required></p><div class='form-floating'><textarea class='form-control' placeholder='Leave a comment here' id='floatingTextarea' name='content' required></textarea><label for='floatingTextarea'>일정 내용을 작성해주세요</label></div></div>";
+            newE.innerHTML = "<div class='p-3 bg-info bg-opacity-10 border border-info rounded'><p>시작 시간 : <input type='time' name='begin' required></p><p>종료 시간 : <input type='time' name='end' required></p><div class='form-floating'><textarea class='form-control' placeholder='Leave a comment here' id='floatingTextarea' name='content' required></textarea><label for='floatingTextarea'>일정 내용을 작성해주세요</label></div></div>";
             routine.appendChild(newE);
             } else if (i >5){
             	alert("일정 생성 한도입니다");

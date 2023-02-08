@@ -1,11 +1,12 @@
 @charset "UTF-8";
 
-.form-select, #searchtext ,#searchbutton {
+#selectsearch, #searchtext ,#searchbutton {
 	margin-top: 10px;
     margin-bottom: 10px;	
 }
-.form-select{
+#selectsearch {
 			width: 100px;	
+			height:38px;
 }
 
 

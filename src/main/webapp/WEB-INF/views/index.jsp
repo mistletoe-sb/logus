@@ -3,11 +3,15 @@
 <html>
 	<head>
 		<%@ include file="include.jsp" %>
-		<style>
-/* 		body {background-image: url(/logus/resources/images/snowmain.jpg); */
+		<style>  
 /* 		background-repeat: no-repeat;  */
 /* 		background-size: auto; */
-/* 		background-position: 100px 200px 200px 100px; */
+/* 		background-position: 100px 200px 200px 100px; 
+		background-image: url(/logus/resources/images/backsky.jpg);
+*/
+body { 
+	background-color: rgb(247, 245, 242);
+	} 
 		.card-group {
 			margin: 30px 100px 30px 100px;
 		}

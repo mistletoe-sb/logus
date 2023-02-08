@@ -286,7 +286,7 @@ public class LibraryController {
 	}
 	
 	@ResponseBody
-	@PostMapping(value="/library/followin")	//서재 팔로우
+	@PostMapping(value="{memberNickname}/library/followin")	//서재 팔로우
 	public String insertFollow(HttpSession session, @RequestParam("followId") String followingMemberId) {
 	
 		String memberId = session.getAttribute("memberId").toString();
@@ -301,7 +301,7 @@ public class LibraryController {
 	}
 	
 	@ResponseBody
-	@PostMapping(value="/library/followdl")	//서재 팔로우 삭제
+	@PostMapping(value="{memberNickname}/library/followdl")	//서재 팔로우 삭제
 	public String deleteFollow(HttpSession session, @RequestParam("followId") String followingMemberId) {
 		
 		String memberId = session.getAttribute("memberId").toString();

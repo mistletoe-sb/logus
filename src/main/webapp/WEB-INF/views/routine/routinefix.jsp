@@ -5,12 +5,21 @@
 	<head>
 		<%@ include file="../include.jsp" %>
 		<script src="<c:url value='/resources/js/routinefix.js'/>"></script>
+		<style>
+	.form-select{ 
+		display: inline-block;
+		} 
+	p {
+	display: inline-block
+	}
+		</style>
 	</head>
 	<body>
 		<%@ include file="../header_body.jsp" %>
+		<div class="d-grid gap-2 col-7 mx-auto border-info " style="margin-top: 20px;">
 		<form id="routineupdate" name="routineform" action="<c:url value='/routinefix'/>" method="post">
-		<div class="p-3 bg-info bg-opacity-10 border border-dark border-start-0 rounded-end">
-			<label>태그 등록</label>
+		<div class="p-3 bg-info bg-opacity-10 border border-dark rounded">
+		<button type="button" class="btn btn-outline-primary btn-sm" disabled>태그를 등록해주세요</button>
 				<input type="text" id="tags" name="tagNames" size="100" onkeydown="splitTag(event)"
 				value="${tags}">
 				<br>
@@ -27,10 +36,10 @@
 					  <label for="floatingTextarea">일정 제목을 작성해주세요</label>
 				</div>
 		</div>
-				<div id="routine">
+				<div id="routine" style="margin-top: 20px;">
 				<c:forEach items="${checklist}" var="checklist" varStatus="status">
 					<div id="t${status.index}">
-						<div class="p-3 bg-info bg-opacity-10 border border-info border-start-0 rounded-end">
+						<div class="p-3 bg-info bg-opacity-10 border border-info rounded">
 							<p>시작 시간 : <input type="time" name="begin" required value="${checklist.dailycheckBegintime}"></p>
 							<input type="hidden" name="dailycheckCode" value="${checklist.dailycheckCode}"/>
 							<p>종료 시간 : <input type="time" name="end" required value="${checklist.dailycheckEndtime}"></p>
@@ -56,5 +65,6 @@
 						<input type="hidden" name="tagCodes" value="${tg.tagCode}">
 					</c:forEach>
 				</form>
+				</div>
 	</body>
 </html>

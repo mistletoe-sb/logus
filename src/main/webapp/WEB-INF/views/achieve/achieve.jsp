@@ -10,10 +10,8 @@
 	</head>
 	<body>
 	<%@ include file="../header_body.jsp" %>
-	<h2><span class="badge bg-secondary bg-lg" id="todayachieve"></span></h2>
-	<h1 class="d-flex flex-wrap justify-content-center"><span class="badge bg-primary bg-lg">${today}요일</span></h1>
-<%-- 	<h2 class="d-flex flex-wrap justify-content-center">${routine.dailyroutineTitle}</h2> --%>
-<%--&nbsp; (table-sm 넣으면 테이블 패딩 줄어듬->작아짐) --%>
+	<h1 class="d-flex flex-wrap justify-content-center"><span class="badge bg-primary bg-lg" style="margin-top: 20px;">${today}요일</span></h1>
+	<h2 class="d-flex flex-wrap justify-content-center"><span class="badge bg-secondary bg-lg"  id="todayachieve"></span></h2>
 		<div class="d-grid gap-2 col-7 mx-auto">
 			<form id="achieve" name="achieveform" action="<c:url value='/achieve/save'/>" method="post" onsubmit="return on_submit_check();">
 			<c:choose>
@@ -29,10 +27,10 @@
 		  </thead>
 		  <tbody>
 		  <c:forEach items="${checklist}" var="checklist" varStatus="status">
-		    <tr>
-		      <td class="text-danger bg-opacity-10 bg-info ">${checklist.dailycheckBegintime} ~ ${checklist.dailycheckEndtime}</td>
-		      <td class="bg-opacity-10 bg-info">${checklist.dailycheckContent}</td>
-		      <td class="bg-opacity-10 bg-info" id="rate${status.index}">
+		    <tr id="achievetrcolor">
+		      <td>${checklist.dailycheckBegintime} ~ ${checklist.dailycheckEndtime}</td>
+		      <td >${checklist.dailycheckContent}</td>
+		      <td id="rate${status.index}">
 			      <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="achieverate">
 					  <option value="0" selected>0%</option>
 					  <option value="10">10%</option>
@@ -57,7 +55,7 @@
 				</div>
 			</c:when>
 			<c:otherwise>
-				<h2>현재 등록된 루틴이 없습니다</h2>
+			<button type="button" class="btn btn-outline-secondary btn-lg d-grid gap-2 col-6 mx-auto" disabled>현재 등록된 루틴이 없습니다</button>
 		 	</c:otherwise>
 		</c:choose>
 		 </form>

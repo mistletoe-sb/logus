@@ -6,11 +6,12 @@
 <head>
 <style>
  #headercolor {
- background-color: rgb(232, 247, 252);
+ 	background-color: rgb(232, 247, 252);
  }
-/*  .navbar-brand{ */
- 
-/*  } */
+ .navbar-brand{
+	padding: 0px 0px 0px 30px;
+ }
+
  
 </style>
 </head>
@@ -33,7 +34,7 @@
 				</a>
 
 				<form id="search" name="searchform" class="d-flex" role="search" action="<c:url value='/search'/>" method="get">
-					<select class="form-select" aria-label="Default select example" name="option">
+					<select class="form-select" id="selectsearch" aria-label="Default select example" name="option">
 						<option value="0" selected>전체</option>
 						<option value="1">태그</option>
 						<option value="2">제목</option>
