@@ -177,11 +177,11 @@ public class DailystoryController {
 		for(Integer i : rpCount) {
 			logger.info("댓글 수:" + i);
 		}
-		Map<Integer, List<TagVO>> TagList = tagService.makeTagListMap(TagCategory.DAILY_STORY, codeList);
+		Map<Integer, List<TagVO>> tagList = tagService.makeTagListMap(TagCategory.DAILY_STORY, codeList);
 		// 모델에 조회한 데이터 저장
 		model.addAttribute("dsList", dsList);
 		model.addAttribute("rpCount", rpCount);			
-		model.addAttribute("TagList", TagList);
+		model.addAttribute("tagList", tagList);
 		return "dailystory/storylist";
 	}
 }
