@@ -91,11 +91,8 @@
 		</div>
 	
 		<!--오프캔버스(서재 정보 사이드 바)-->
-		<div>
+		<div id="mylib_info_btn">
 			<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">서재 정보 보기</button>
-			<c:if test="${memberVO.memberNickname eq sessionUser}">
-				<button type="button" class="btn btn-outline-secondary" onclick="location.href='<c:url value='/routinelist'/>'">루틴 리스트 더보기</button>
-			</c:if>
 		</div>
 		<div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
 			<div class="offcanvas-header">
@@ -145,115 +142,156 @@
 		</div>
 
 		<div class="align_container">
-			<div class="d-inline-block">
-				<div class="row row-cols-1 row-cols-md-2 g-4">
-					<c:choose>
-						<c:when test="${empty routine1}">
-							<div class="col">
-								<div class="card">
-									<div class="card-body">
-										<h3 class="card-title">
-											<span class="badge bg-secondary">평일</span>
-										</h3>
-										<h5 class="card-text">현재 등록된 루틴이 없습니다</h5>
-									</div>
-								</div>
-							</div>
-						</c:when>
-						<c:otherwise>
-							<div class="col">
-								<div class="card">
-									<div class="card-body">
-										<h3 class="card-title">
-											<span class="badge bg-secondary">평일</span>
-											<button type="button" class="btn btn-outline-primary btn-sm" disabled>공유된 횟수: ${routine1.dailyroutineShared}</button>
-										</h3>
-										<h5 class="card-text text-truncate">${routine1.dailyroutineTitle}</h5>
-										<div>
-											<c:forEach var="tg" items="${tag1}">
-												<c:if test="${not empty tg.tagName}">
-													<button class="tag_block" style="display: inline-block">${tg.tagName}</button>
-												</c:if>
-											</c:forEach>
+			<div id="align_container_routine">
+				<div id="dailyroutine_card_container_box" class="d-inline-block">
+					<div class="row row-cols-1 row-cols-md-2 g-4">
+						<c:choose>
+							<c:when test="${empty routine1}">
+								<div class="col">
+									<div class="card">
+										<div class="card-body">
+											<h3 class="card-title">
+												<span class="badge bg-secondary">평일</span>
+											</h3>
+											<h5 class="card-text">현재 등록된 루틴이 없습니다</h5>
 										</div>
-										<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal1">확인</button>
 									</div>
 								</div>
-							</div>
-						</c:otherwise>
-					</c:choose>
-					<c:choose>
-						<c:when test="${empty routine2}">
-							<div class="col">
-								<div class="card">
-									<div class="card-body">
-										<h3 class="card-title">
-											<span class="badge bg-secondary">주말</span>
-										</h3>
-										<h5 class="card-text">현재 등록된 루틴이 없습니다</h5>
-										<p class="card-text"></p>
-									</div>
-								</div>
-							</div>
-						</c:when>
-						<c:otherwise>
-							<div class="col">
-								<div class="card">
-									<div class="card-body">
-										<h3 class="card-title">
-											<span class="badge bg-secondary">주말</span>
-											<button type="button" class="btn btn-outline-primary btn-sm" disabled>공유된 횟수: ${routine2.dailyroutineShared }</button>
-										</h3>
-										<h5 class="card-text text-truncate">${routine2.dailyroutineTitle}</h5>
-										<div>
-											<c:forEach var="tg" items="${tag2}">
-												<c:if test="${not empty tg.tagName}">
-													<button class="tag_block" style="display: inline-block">${tg.tagName}</button>
-												</c:if>
-											</c:forEach>
+							</c:when>
+							<c:otherwise>
+								<div class="col">
+									<div class="card">
+										<div class="card-header bg-transparent border-success text-truncate">
+											<h3 class="card-title">
+												<span class="badge bg-secondary">평일</span>
+												<button type="button" class="btn btn-outline-primary btn-sm" disabled>공유된 횟수: ${routine1.dailyroutineShared}</button>
+											</h3>
+											${routine1.dailyroutineTitle}
 										</div>
-										<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal2" style="display:block">확인</button>
+										<div class="card-body">
+											<div class="card-text">
+												<c:forEach var="tg" items="${tag1}" varStatus="i">
+													<c:choose>
+														<c:when test="${not empty tg.tagName}">
+															<c:choose>
+																<c:when test="${i.index < 5}">
+																	<button class="tag_block" style="display: inline-block">${tg.tagName}</button>
+																</c:when>
+																<c:when test="${i.index == 5}">...</c:when>
+															</c:choose>
+														</c:when>
+														<c:otherwise>
+														<h5 class="row justify-content-center">등록된 태그가 없습니다</h5>
+														</c:otherwise>
+													</c:choose>
+												</c:forEach>
+											</div>
+										</div>
+										<div class="card-footer bg-transparent border-success">
+			      							<div class="d-grid gap-2 col-7 mx-auto">
+												<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal1">확인</button>
+											</div>
+										</div>
 									</div>
 								</div>
-							</div>
-						</c:otherwise>
-					</c:choose>
-				</div>  
+							</c:otherwise>
+						</c:choose>
+						<c:choose>
+							<c:when test="${empty routine2}">
+								<div class="col">
+									<div class="card">
+										<div class="card-body">
+											<h3 class="card-title">
+												<span class="badge bg-secondary">주말</span>
+											</h3>
+											<h5 class="card-text">현재 등록된 루틴이 없습니다</h5>
+											<p class="card-text"></p>
+										</div>
+									</div>
+								</div>
+							</c:when>
+							<c:otherwise>
+								<div class="col">
+									<div class="card">
+										<div class="card-header bg-transparent border-success text-truncate">
+											<h3 class="card-title">
+												<span class="badge bg-secondary">주말</span>
+												<button type="button" class="btn btn-outline-primary btn-sm" disabled>공유된 횟수: ${routine2.dailyroutineShared }</button>
+											</h3>
+											${routine2.dailyroutineTitle}
+										</div>
+										<div class="card-body">
+											<div class="card-text">
+												<c:forEach var="tg" items="${tag2}" varStatus="i">
+													<c:choose>
+														<c:when test="${not empty tg.tagName}">
+															<c:choose>
+																<c:when test="${i.index < 5}">
+																	<button class="tag_block" style="display: inline-block">${tg.tagName}</button>
+																</c:when>
+																<c:when test="${i.index == 5}">...</c:when>
+															</c:choose>
+														</c:when>
+														<c:otherwise>
+														<h5 class="row justify-content-center">등록된 태그가 없습니다</h5>
+														</c:otherwise>
+													</c:choose>
+												</c:forEach>
+											</div>
+										</div>
+										<div class="card-footer bg-transparent border-success">
+			      							<div class="d-grid gap-2 col-7 mx-auto">
+												<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal2" style="display:block">확인</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</c:otherwise>
+						</c:choose>
+					</div>  
+				</div>
+				<div>
+					<c:if test="${memberVO.memberNickname eq sessionUser}">
+						<button type="button" class="btn btn-outline-secondary" onclick="location.href='<c:url value='/routinelist'/>'">루틴 리스트 더보기</button>
+					</c:if>
+				</div>
 			</div>
 		</div>
 		<div class="align_container">
 		 	<div>
 		 		<c:forEach var="ds" items="${dsList}" varStatus="stat">
-					<div class="card" style="display: inline-block"
+					<div class="dailystory_card_container" style="display: inline-block"
 						 onclick="location.href='<c:url value="/${ds.memberNickname}/library/story/${ds.dailystoryCode}"/>'">
-						<div class="ratio ratio-16x9">
-							<c:choose>
-								<c:when test='${(ds.dailystoryImage != null) && (ds.dailystoryImage != "")}'>
-									<img src="<c:url value='/resources/images/dailystory/${ds.dailystoryImage}'/>" class="card-img-top" alt="${ds.dailystoryImage}">				  	
-								</c:when>
-								<c:otherwise>
-									<img src="<c:url value='/resources/images/default_thumbnail.jpg'/>" class="card-img-top" alt="기본 썸네일">				  	
-								</c:otherwise>
-							</c:choose>
-						</div>
-						<div class="card-body">
-							<h5 class="card-title">${ds.dailystoryTitle}</h5>
-							<button type="button" class="btn btn-outline-primary btn-sm" style="display: inline-block" disabled>댓글 : ${rpCount[stat.index]}</button>
-							<p class="card-text" style="white-space: pre-line;">
-								<span class="d-inline-block text-truncate" style="max-width: 90%;">
-									${ds.dailystoryContent}<br>
-								</span>
-								<fmt:formatDate value="${dsVO.dailystoryUploaddate}" pattern="yyyy.MM.dd HH:mm"/>
-							</p>
-						    <div>
-								<c:forEach var="tg" items="${tagList[ds.dailystoryCode]}" varStatus="i">
-									<c:choose>
-										<c:when test="${i.index < 5}">
-											<button class="tag_block" style="display: inline-block">${tg.tagName}</button>
-										</c:when>
-										<c:when test="${i.index == 5}">...</c:when>
-									</c:choose>
-								</c:forEach>
+						<div class="card">
+							<div class="ratio ratio-16x9">
+								<c:choose>
+									<c:when test='${(ds.dailystoryImage != null) && (ds.dailystoryImage != "")}'>
+										<img src="<c:url value='/resources/images/dailystory/${ds.dailystoryImage}'/>" class="card-img-top" alt="${ds.dailystoryImage}">				  	
+									</c:when>
+									<c:otherwise>
+										<img src="<c:url value='/resources/images/default_thumbnail.jpg'/>" class="card-img-top" alt="기본 썸네일">				  	
+									</c:otherwise>
+								</c:choose>
+							</div>
+							<div class="card-body">
+								<h5 class="card-title">${ds.dailystoryTitle}</h5>
+								<button type="button" class="btn btn-outline-primary btn-sm" style="display: inline-block" disabled>댓글 : ${rpCount[stat.index]}</button>
+								<p class="card-text" style="white-space: pre-line;">
+									<span class="d-inline-block text-truncate" style="max-width: 90%;">
+										${ds.dailystoryContent}<br>
+									</span>
+									<%-- <fmt:formatDate value="${ds.dailystoryUploaddate}" pattern="yyyy.MM.dd HH:mm"/> --%>
+								</p>
+							    <div>
+									<c:forEach var="tg" items="${tagList[ds.dailystoryCode]}" varStatus="i">
+										<c:choose>
+											<c:when test="${i.index < 5}">
+												<button class="tag_block" style="display: inline-block">${tg.tagName}</button>
+											</c:when>
+											<c:when test="${i.index == 5}">...</c:when>
+										</c:choose>
+									</c:forEach>
+								</div>
 							</div>
 						</div>
 					</div>

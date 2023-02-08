@@ -9,6 +9,22 @@
 		]]>
 	</select>
 	
+	<select id="countReplyEach" resultType="int" parameterType="int">
+		<![CDATA[
+			SELECT COUNT(rp.reply_code) FROM LOGUS.DAILYSTORY ds
+			LEFT OUTER JOIN LOGUS.REPLY rp
+			ON ds.dailystory_code = rp.dailystory_code
+			GROUP BY ds.dailystory_code
+			HAVING ds.dailystory_code IN
+		]]>
+		<foreach collection="dailystoryCode" item="code" open="(" separator="," close=")">
+			<![CDATA[#{code}]]>
+		</foreach>
+		<![CDATA[
+			ORDER BY ds.dailystory_code DESC
+		]]>
+	</select>
+	
 	<select id="countReplyDailystoryList" resultType="int" parameterType="string">
 		<![CDATA[
 			SELECT COUNT(rp.reply_code) FROM LOGUS.DAILYSTORY ds

@@ -27,6 +27,16 @@ public class ReplyService implements IReplyService {
 	}
 
 	@Override
+	// 게시글 목록의 각 댓글 수 반환
+	public List<Integer> countReplyEach(List<Integer> dailystoryCode) {
+		if(dailystoryCode.size() != 0) {
+			return replyDAO.countReplyEach(dailystoryCode);
+		} else {
+			return null;
+		}
+	}
+	
+	@Override
 	// 해당 회원이 작성한 게시글의 댓글 수 목록 반환
 	public List<Integer> countReplyDailystoryList(String memberNickname) {
 		return replyDAO.countReplyDailystoryList(memberNickname);	// select
