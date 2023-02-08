@@ -1,10 +1,9 @@
-<%@ include file="../header.jsp" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
+<%@ include file="../include.jsp" %>
 	<style type="text/css">
 		.sideber{
 			width : 300px;
@@ -26,9 +25,9 @@
 		}
 		
 	</style>
-	<title>Insert title here</title>
 </head>
     <body>
+    <%@ include file="../header_body.jsp" %>
     	<div class="container">
 	    	<div class="title">
 	    		<h1>My Page</h1>
@@ -70,10 +69,6 @@
         });
     }
     
-    
-    
-    
- 
 </script>
     
 </html>

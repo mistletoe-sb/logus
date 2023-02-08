@@ -1,0 +1,12 @@
+textarea {
+	resize: none !important;
+	height: 300px;
+}
+
+textarea::placeholder {
+	font-style: italic;
+}
+
+input::placeholder {
+	font-style: italic;			
+}

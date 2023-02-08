@@ -13,14 +13,15 @@
 		<style type="text/css">
 			ul {
 				float:left;
+				width:151px;
 			}
 		</style>
 	</head>
 	<body>
 		<ul class="list-group">
-		  <li class="list-group-item"><a href="<c:url value='/manager/board?boardcategory=1'/>">공지사항</a></li>
-		  <li class="list-group-item"><a href="<c:url value='/manager/board?boardcategory=2'/>">월간 리포트</a></li>
-		  <li class="list-group-item"><a href="<c:url value='/manager/qna'/>">Q&A</a></li>
+		  <li class="list-group-item list-group-item-warning"><a href="<c:url value='/manager/board?boardcategory=1'/>">공지사항</a></li>
+		  <li class="list-group-item list-group-item-warning"><a href="<c:url value='/manager/board?boardcategory=2'/>">월간 리포트</a></li>
+		  <li class="list-group-item list-group-item-warning"><a href="<c:url value='/manager/qna'/>">Q&A</a></li>
 		</ul>
 	</body>
 </html>

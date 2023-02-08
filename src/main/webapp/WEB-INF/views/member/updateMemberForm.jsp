@@ -4,11 +4,6 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		
-		<meta charset="UTF-8">
-		<title>Log Us</title>
-
-	
 		<style>
 			.id_ok, .nickname_ok{
 				color:#008000;
@@ -35,11 +30,10 @@
 				background-color: #f7f7f7;	
 			}
 		</style>
-	
 	</head>
-
 	<body>
-		<div class="container">
+		<!-- <div id="contents" class="container"> -->
+		<div id="contents">
   <div class="title">
     <h1>Edit Profile</h1>
   </div>
@@ -75,8 +69,6 @@
           <span id="passwordReConfirm"></span>
         </div>
       </div>
-      
-      
       <div>
         <div class="input-group mb-3">
           <span class="input-group-text" id="inputGroup-sizing-default">Name</span>
@@ -111,7 +103,6 @@
           <span id="sexConfirm"></span>
         </div>
       </div>
-        
         <div>
           <div class="input-group mb-3">
           <span class="input-group-text" id="inputGroup-sizing-default">Phone</span>
@@ -132,21 +123,15 @@
           <span id="emailConfirm"></span>
         </div>
       </div>
-  
     </fieldset>
-    
-    
-    
     <fieldset>
       <legend>프로필</legend>
-      
       <div>
         <div class="input-group mb-3">
           <input type="hidden" name = hiddenNickname id=hiddenNickname value="false">
           <span class="input-group-text" id="inputGroup-sizing-default">닉네임</span>
           <input type="text" name="memberNickname" id="memberNickname" value="${selectMemberInfo.memberNickname}"  oninput = "checkNickname()" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" disabled  required>
         </div>
-        
         <div>
           <span id="nicknameConfirm"></span>
           <span class="nickname_ok">사용 가능한 닉네임 입니다.</span>
@@ -182,6 +167,7 @@
 </div>
 	</body>
 	<script type="text/javascript">
+	//alert('테스트');
 		document.addEventListener("DOMContentLoaded", function() {
 			var checkPassword = function(str) {
 				var re = /^(?=.*\d)(?=.*[a-z])(?=.[A-Z]).{8,16}$/;
@@ -400,13 +386,12 @@
 				}
 			});
 		};
-	});
-		
-		 // 정보 저장 및 입력 확인 함수
- 		 function updateMember() {
+	
+		// 정보 저장 및 입력 확인 함수
+		 function updateMember() {
 			
- 			var id = $('#memberId');
- 			var hiddenId = $('#hiddenId')
+			var id = $('#memberId');
+			var hiddenId = $('#hiddenId')
 			var pw1 = $('#memberPassword');
 			var pw2 = $('#memberPasswordRe');
 			var nickname = $('#memberNickname');
@@ -427,7 +412,6 @@
 		 	}
 		}; 
 		
-		
 		function readImage(input) {
 		    // 인풋 태그에 파일이 있는 경우
 		    if(input.files && input.files[0]) {
@@ -447,7 +431,10 @@
 		const inputImage = document.getElementById("memberProfile")
 		inputImage.addEventListener("change", e => {
 		    readImage(e.target)
-		})
+		});
+	});
+		
+		 
 		
 	</script>
 

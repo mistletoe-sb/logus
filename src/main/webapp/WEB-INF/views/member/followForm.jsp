@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="../header.jsp" %>
 <html lang="ko">
     <head>
+	<%@ include file="../include.jsp" %>
     <style>
     .container{
 				width : 1200px;
@@ -14,10 +14,13 @@
             text-align : center;
          }
     #preview-image {
-		  width: 300px;
 		  height: 400px;
 		  object-fit: cover;
 		}
+	#btn_follow_custom {
+		padding: 3px 12px 3px 12px;
+		margin-bottom: 4px;
+	}
     </style>
     
     <script type="text/javascript">
@@ -57,6 +60,7 @@
 </script>
     </head>
 <body>
+<%@ include file="../header_body.jsp" %>
 <div class="container">
 	<h1 class="title">팔로우 리스트</h1>
 		<form action='<c:url value="/followinsert"/>' method="post" onsubmit="return on_submit_ck();">	
@@ -65,7 +69,7 @@
     		<div class="col-sm-10">
      	 		<label for="staticEmail">팔로우 추가</label>
     			<input type="text" id="followId" name="followingMemberId">
-     	 		<button type="submit">팔로우</button> <!-- 버튼 타입은 submit이어야함 -->
+     	 		<button type="submit" id="btn_follow_custom" class="btn btn-primary">팔로우</button> <!-- 버튼 타입은 submit이어야함 -->
   			</div>
     		</div>
 			<div class="/followList" >
@@ -77,23 +81,18 @@
 			<c:forEach var="List" items="${followList}" varStatus="stat" >	
 				  <div class="col">
 				    <div class="card">
-				    	 <img class="card-img-top" alt="..." id="preview-image" class="rounded-4" src="<c:url value='/resources/images/member/${followImg[stat.index].memberProfile}'/>">
+				    	 <img class="card-img-top" alt="no image" id="preview-image" class="rounded-4" src="<c:url value='/resources/images/member/${followImg[stat.index].memberProfile}'/>">
 				      <div class="card-body">
 				        <h5 class="card-title">${followImg[stat.index].memberNickname}(${List.followingMemberId})</h5>			       
-				         <a href="<c:url value='/library/${followImg[stat.index].memberNickname}'/>" class="btn btn-success">서재 가기</a>
-				      	 <a href="<c:url value="/deleteFollow/${List.followCode}"/>" class="btn btn-primary">팔로우취소</a>
+				         <a href="<c:url value='/${followImg[stat.index].memberNickname}/library'/>" class="btn btn-success">서재 가기</a>
+				      	 <a href="<c:url value='/deleteFollow/${List.followCode}'/>" class="btn btn-primary">팔로우취소</a>
 				      </div>
 				    </div>
 				  </div>
 			</c:forEach>
 		</div>
 		</div>
-		
-
   		</div>
 	</body>
-	
-
-	
 </html>
 

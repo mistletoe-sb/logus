@@ -63,7 +63,6 @@
 						</div>
 					</div>
 				</div>
-				</div>
 			</form>
 			
 			<form action="<c:url value='findId'/>" method="post" class="form-floating">
@@ -115,10 +114,7 @@
 					</div>
 				</div>
 			</form>
-			
-			
-			
-			
+
 			<form action="<c:url value='findId'/>" method="post" class="form-floating">
 				<!-- Button trigger modal -->
 				
@@ -178,11 +174,6 @@
 					</div>
 				</div>
 			</form>
-			
-			
-			
-			
-			
 		</div>
 	</body>
 	<script type="text/javascript">
@@ -204,7 +195,6 @@
 		}
 
 	}
-	
 
 	var name = document.querySelector("#memberName");
 	var nameConfirm = document.querySelector("#nameConfirm");
@@ -245,9 +235,6 @@
 				}
 			}
 	
-	
-	
-	
 	var id2 = document.querySelector("#memberId2");
 	var idConfirm2 = document.querySelector("#idConfirm2");
 	  
@@ -259,7 +246,6 @@
 		}
 	}
 
-	
 	var name2 = document.querySelector("#memberName2");
 	var nameConfirm2 = document.querySelector("#nameConfirm2");
 
@@ -283,7 +269,6 @@
 		}
 	}
 	
-	
 	var phone2 = document.querySelector("#memberPhone2");
 	var phoneConfirm2 = document.querySelector("#phoneConfirm2");
 	  
@@ -299,11 +284,5 @@
 					}
 				}
 			}
-	
-	
-			
-		
-				
-		
 	</script>
 </html>

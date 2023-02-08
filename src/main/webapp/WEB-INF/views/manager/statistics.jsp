@@ -21,10 +21,8 @@
             text-align : right;
          }
       	</style>
-		<%@ include file="../header.jsp" %>
-		<%@ include file="managerside.jsp" %>
 		
-			    <!--Load the AJAX API-->
+		<!--Load the AJAX API-->
 	    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 	    <script type="text/javascript">
 	
@@ -218,11 +216,11 @@
 	    </style>
     </head>
     <body class="container">
+ 	   	<%@ include file="../header.jsp" %>
+		<%@ include file="managerside.jsp" %>
         <h1 class="title">관리자 통계</h1>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 		<h5 class = "title2">${sessionScope.sessionManagerNickname}</h5><br>
-
-		
 		<fieldset>
 	    <!--Div that will hold the pie chart-->
 	    <ul><div id="chart_div"></div></ul>
@@ -232,8 +230,4 @@
 	    <ul><div id="chart_div05"></div></ul>
 	    </fieldset>
 		
-<!-- 		<div class="d-grid gap-2 col-2 mx-auto"> -->
-<!--             <button class="btn btn-primary" type="button" onclick="location.href='http://localhost:8080/logus/manager/managerlogout'">관리자 로그아웃 하기</button> -->
-<!--         </div> -->
-	</body>
 </html>

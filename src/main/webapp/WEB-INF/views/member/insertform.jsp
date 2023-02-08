@@ -4,9 +4,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="UTF-8">
-
-	
+	<%@ include file="../include.jsp" %>
 	 		<style>
 			.id_ok, .nickname_ok, .phone_ok{
 				color:#008000;
@@ -31,15 +29,13 @@
 				margin : 40px auto;
 			}
 		</style>
-	
 	</head>
-
 	<body>
+	<%@ include file="../header_body.jsp" %>
 		<div class="container">
 			<div class="title">
 				<h1>회원가입을 환영 합니다!!!</h1>
 			</div>
-			
 			<form id ="insertForm" action = "<c:url value='/insert'/>" method="post"   onsubmit="return insertMember()" enctype="multipart/form-data" class="form-floating">
 				<fieldset class="title2">
 					<legend>사용자 정보</legend>
@@ -137,9 +133,6 @@
 					</div>
 			
 				</fieldset>
-				
-				
-				
 				<fieldset>
 					<legend>프로필</legend>
 					
@@ -287,11 +280,6 @@
 					sexConfirm.innerText = "";
 				}
 			}
-			
-			
-			
-
-		
 		var checkId = function(str) {
 			var re2 = /^[A-Za-z0-9]{5,20}$/;
 			return re2.test(str)
@@ -351,32 +339,6 @@
 			var re2 = /^[A-Za-z0-9]{5,20}$/;
 			return re2.test(str)
 		};
-
-/* ======================================================================================================== */
-		
-		
-/* 		var checkPhone = function(str) {
-				var re4 = /^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
-				return re4.test(str)
-			};
-			
-			var phone = document.querySelector("#memberPhone");
-			var phoneConfirm = document.querySelector("#phoneConfirm");
-	
-			phone.onkeyup = function(event) {
-				re4 = /^\d{3}-\d{3,4}-\d{4}$/;
-				if (phone.value == "") {
-					phoneConfirm.innerText = "필수 정보 입니다.";
-				} else {
-					if (re4.test(phone.value)) {
-						phoneConfirm.innerText = "";
-					} else {
-						phoneConfirm.innerText = "000-0000-000 형식을 맞춰주세요.";
-					}
-				}
-	
-			} */
-		
 		
 		var phone = document.querySelector("#memberPhone");
 		var phoneConfirm = document.querySelector("#phoneConfirm");
@@ -423,9 +385,6 @@
 				}
 			});
 		};
-		
-		
-		
 
 		var nickname = document.querySelector("#memberNickname");
 		var nicknameConfirm = document.querySelector("#nicknameConfirm");

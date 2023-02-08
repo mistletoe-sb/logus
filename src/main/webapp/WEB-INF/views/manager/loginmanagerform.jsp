@@ -19,7 +19,7 @@
          .title2{
             margin : 40px auto;
          }
-      </style>
+      	</style>
     </head>
     <body>
     	<%@ include file="../header.jsp" %>
@@ -39,7 +39,6 @@
 		        <div class="d-grid gap-2 col-2 mx-auto">
 		            <input type="submit"  class="btn btn-primary" value='로그인하기'>
 		        </div>
-		       
 		        </fieldset>
 	        </form>
         </div>
