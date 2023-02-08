@@ -6,13 +6,24 @@
 <!doctype html>
 <html lang="ko">
     <head>
-<!--         <meta charset="utf-8"> -->
-<!--         <meta name="viewport" content="width=device-width, initial-scale=1"> -->
-        <title>리포트 글보기</title>
-<!--         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous"> -->
-    </head>
+     		<style type="text/css">
+         .container{
+            width : 800px;
+            margin : 20px auto;
+            background-color: #f7f7f7;
+         }
+         .title{
+            margin : 40px auto;
+            text-align : center;
+         }
+         .title2{
+            margin : 40px auto;
+            text-align : right;
+         }
+      </style>
+      </head>
     <body>
-		<%
+    <%
 			if(session.getAttribute("sessionManagerNickname") != null) {
 				%>
 				<%@ include file="../header.jsp" %>
@@ -28,52 +39,46 @@
 				<%
 			}
 		%>
-<%--         <h2>로그인 관리자 별명 : ${sessionScope.sessionManagerNickname}</h2> --%>
+    	<div class ="container">
 
 	    <div class="inner">
 	        <div class="contents" id="bodyWrap">
-	            <h3 class="title">리포트</h3>
-	            <div class="subContents" id="contentBody">
-	                <div class="body" id="bodyCon">
-	                    <!-- 여기서부터 콘텐츠 s -->
-	                    <div class="bodyBox01">
-	                        <div class="bottomListBox">
-	                            <div class="tableWrap">
-	                                <table>
-	                                    <%-- <caption>자유게시판 뷰 페이지로 제목, 질문자, 등록일로 구성</caption> --%>
-	                                    <colgroup>
-	                                        <col style="width:16%;"/>
-	                                        <col style="width:48%;"/>
-	                                        <col style="width:16%;"/>
-	                                        <col style="width:20%;"/>
-	                                    </colgroup>
-	                                            <tr>
-	                                                <th scope="row">제목</th>
-	                                                <td colspan="3">
-	                                                    <div class="box01">
-	                                                        ${boarddetail.boardTitle}
-	                                                    </div>
-	                                                </td>
-	                                            </tr>
-	                                            <tr>
-	                                                <th scope="row">작성자</th>
-	                                                <td>
-	                                                    <div class="box01">${boarddetail.managerNickname}</div>
-	                                                </td>
-	                                                <th scope="row">등록일</th>
-	                                                <td>
-	                                                    <div class="box01">${boarddetail.boardDate}</div>
-	                                                </td>
-	                                            </tr>
-	                                </table>
-	                            </div><!--//tableWrap -->
-	                                    <div class="listView">
-	                                        <div class="viewTxt">${boarddetail.boardContent}</div>
-	                                    </div>
-	                                    <c:if test="${not empty boarddetail.boardImage}">
-		                                    <div class="listView">
-		                                        <div class="viewImg">
-<%-- 													<img src="${pageContext.request.contextPath}/resources/images/manager/${boarddetail.boardImage}" width="200" height="200" class="img-fluid"/> --%>
+	            <h1 class="title">리포트</h1>
+	             <h4 class="title2">${sessionScope.sessionManagerNickname}</h4>
+
+                    <table class="table table-bordered">
+                        <colgroup>
+                            <col style="width:16%;"/>
+                            <col style="width:48%;"/>
+                            <col style="width:16%;"/>
+                            <col style="width:20%;"/>
+                        </colgroup>
+                                <tr>
+                                    <th scope="row">제목</th>
+                                    <td colspan="3">
+                                        <div class="box01">
+                                            ${boarddetail.boardTitle}
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">작성자</th>
+                                    <td>
+                                        <div class="box01">${boarddetail.managerNickname}</div>
+                                    </td>
+                                    <th scope="row">등록일</th>
+                                    <td>
+                                        <div class="box01">${boarddetail.boardDate}</div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                	<td colspan="4" height="300">
+                                		<div class="listView">
+				                            <div class="viewTxt">${boarddetail.boardContent}</div>
+				                        </div>
+				                        <c:if test="${not empty boarddetail.boardImage}">
+				                            <div class="listView">
+				                                <div class="viewImg">
 													<img src="<c:url value='/resources/images/manager/${boarddetail.boardImage}'/>" width="200" height="200" class="img-fluid"/>
 												</div>
 		                                    </div>
@@ -93,6 +98,6 @@
 	            </div>
 	        </div>
 	    </div>
-
+	</div>
     </body>
 </html>

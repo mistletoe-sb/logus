@@ -39,10 +39,10 @@
 		     		<div class="btn-group" role="group" aria-label="Basic radio toggle button group">
 
 						<input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off" onclick="acyncMovePage('./updateMemberForm')" checked>
-						<label class="btn btn-outline-primary" for="btnradio2">Edit Profile</label>
+						<label class="btn btn-outline-primary" for="btnradio2">회원 수정</label>
 						
 						<input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off" onclick="acyncMovePage('./deleteMemberForm')">
-						<label class="btn btn-outline-primary" for="btnradio3">Secession</label>
+						<label class="btn btn-outline-primary" for="btnradio3">탈퇴하기</label>
 					</div>
 		     	</div>
 		     	<div id=contents></div>

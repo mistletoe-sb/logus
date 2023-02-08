@@ -32,30 +32,29 @@ public class FollowController {
 	@Autowired
 	private IFollowService followService;		//팔로우 서비스 객체
 	@Autowired	
-	private IMemberService	memberService;	//멤버 정보
+	private IMemberService	memberService;		//멤버 정보
 	
-	private static final String PATH = "C:\\project_labs\\spring_workspace\\logus\\src\\main\\webapp\\resources\\images\\member";
+	private static final String PATH = "C:\\project_labs\\spring_workspace\\logus\\src\\main\\webapp\\resources\\images\\member";			
 	
 	private String view_pos = "member/";
 	
 	//private static Logger logger = LoggerFactory.getLogger(DailystoryController.class);	// logger 객체
 	
-	@RequestMapping(value="/followList", method=RequestMethod.GET )		//url 과 method 매핑->jsp에서 버튼을 눌럿을때 연결해주는 주소 
+	@RequestMapping(value="/followList", method=RequestMethod.GET )		//url 과 method 매핑-> jsp에서 버튼을 눌렀을때 연결해주는 주소 
 	//팔로우 목록 반환
-	public String followList(HttpSession session, Model model) {		//세션에 있는 팔로우 리스트를 
+	public String followList(HttpSession session, Model model) {		// 세션에 있는 팔로우 리스트를 
 		String memberId = session.getAttribute("memberId").toString();		//세션에 저장되어있는 회원아이디를 'memberid'에 저장 
 
-		List<FollowVO> followList = null;
-		List<MemberVO> followImg = new ArrayList<MemberVO>();
+		List<FollowVO> followList = null;				
+		List<MemberVO> followImg = new ArrayList<MemberVO>();		//FollowVO 와 MemberVO 출력
 
 		try {
-			followList = followService.selectFollowList(memberId);
-			
-			for(int i=0; i<followList.size(); i++) {
-			MemberVO vo = memberService.selectMemberInfo(followList.get(i).getFollowingMemberId());
+			followList = followService.selectFollowList(memberId);								 
+			for(int i=0; i<followList.size(); i++) { 		
+			MemberVO vo = memberService.selectMemberInfo(followList.get(i).getFollowingMemberId());											
 			followImg.add(vo);
 			}
-		} catch (Exception e) {
+		} catch (Exception e) {			
 			e.printStackTrace();
 		}
 		

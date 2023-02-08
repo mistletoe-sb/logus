@@ -6,11 +6,31 @@
 <!doctype html>
 <html lang="ko">
     <head>
-<!--         <meta charset="utf-8"> -->
-<!--         <meta name="viewport" content="width=device-width, initial-scale=1"> -->
-        <title>공지사항 목록</title>
-<!--         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous"> -->
-    </head>
+        <style type="text/css">
+         .container{
+            width : 800px;
+            margin : 20px auto;
+            background-color: #f7f7f7;
+         }
+         .title{
+            margin : 40px auto;
+            text-align : center;
+         }
+         .title2{
+            margin : 40px auto;
+            text-align : right;
+         }
+      	</style>
+        
+        </head>
+    <body >
+    <div class = "container">
+        <h1 class="title">공지사항</h1>
+        <br>
+        <br>
+      <!--	<h6>총 공지사항 글 수 ${boardcount}개</h6>	-->
+        <h5 class="title2">${sessionScope.sessionManagerNickname}</h5>
+</head>
     <body>
 		<%
 			if(session.getAttribute("sessionManagerNickname") != null) {
@@ -28,9 +48,6 @@
 				<%
 			}
 		%>
-        <h1>공지사항</h1>
-        <h6>총 공지사항 글 수 ${boardcount}개</h6>
-<%--         <h2>로그인 관리자 별명 : ${sessionScope.sessionManagerNickname}</h2> --%>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
         <fieldset>
         <table class="table">
@@ -57,8 +74,8 @@
 	          <nav aria-label="Page navigation example">
 				  <ul class="pagination">
 				  	<c:if test="${nowPage!=1}">
-						<li class="page-item"><a class="page-link" href="<c:url value='/manager/board?boardcategory=1&nowPage=1' /> ">처음</a></li>
-						<li class="page-item"><a class="page-link" href="<c:url value='/manager/board?boardcategory=1&nowPage=${nowPage - 1}' /> ">이전</a></li>
+						<li class="page-item"><a class="page-link" href="<c:url value="http://localhost:8080/logus/manager/board?boardcategory=1&nowPage=1" /> ">◀◀</a></li>
+						<li class="page-item"><a class="page-link" href="<c:url value="http://localhost:8080/logus/manager/board?boardcategory=1&nowPage=${nowPage - 1}" /> ">◀</a></li>
 					</c:if>
 					
 					<c:forEach var="i" begin="${nowPage > 5 ? nowPage - 4 : 1}" end="${(nowPage > 5 ? nowPage + 4 : 10) > totalPage ? totalPage : (nowPage > 5 ? nowPage + 4 : 10)}">
@@ -75,16 +92,9 @@
 					</c:forEach>
 					
 					<c:if test="${nowPage!=totalPage}">
-						<li class="page-item"><a class="page-link" href="<c:url value='/manager/board?boardcategory=1&nowPage=${nowPage + 1}' /> ">다음</a></li>
-						<li class="page-item"><a class="page-link" href="<c:url value='/manager/board?boardcategory=1&nowPage=${totalPage}' /> ">마지막</a></li>
+						<li class="page-item"><a class="page-link" href="<c:url value="http://localhost:8080/logus/manager/board?boardcategory=1&nowPage=${nowPage + 1}" /> ">▶</a></li>
+						<li class="page-item"><a class="page-link" href="<c:url value="http://localhost:8080/logus/manager/board?boardcategory=1&nowPage=${totalPage}" /> ">▶▶</a></li>
 					</c:if>
-	
-
-<!-- 				    <li class="page-item"><a class="page-link" href="#">Previous</a></li> -->
-<!-- 				    <li class="page-item"><a class="page-link" href="#">1</a></li> -->
-<!-- 				    <li class="page-item"><a class="page-link" href="#">2</a></li> -->
-<!-- 				    <li class="page-item"><a class="page-link" href="#">3</a></li> -->
-<!-- 				    <li class="page-item"><a class="page-link" href="#">Next</a></li> -->
 				  </ul>
 				</nav>
 			</div>
@@ -94,5 +104,6 @@
 	        </div>
         </c:if>
         </fieldset>
+        </div>
     </body>
 </html>

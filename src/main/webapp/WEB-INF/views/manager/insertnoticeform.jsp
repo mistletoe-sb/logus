@@ -6,6 +6,21 @@
 <!doctype html>
 <html lang="ko">
     <head>
+    <style type="text/css">
+         .container{
+            width : 800px;
+            margin : 20px auto;
+            background-color: #f7f7f7;
+         }
+         .title{
+            margin : 40px auto;
+            text-align : center;
+         }
+         .title2{
+            margin : 40px auto;
+             text-align : right;
+         }
+      </style>
 <!--         <meta charset="utf-8"> -->
 <!--         <meta name="viewport" content="width=device-width, initial-scale=1"> -->
         <title>공지사항 등록</title>
@@ -14,8 +29,9 @@
 		<%@ include file="managerside.jsp" %>
     </head>
     <body>
-        <h1>공지사항</h1>
-<%--         <h2>로그인 관리자 별명 : ${sessionScope.sessionManagerNickname}</h2> --%>
+    <div class="container">
+        <h1 class="title">공지사항</h1>
+        <h4 class="title2">${sessionScope.sessionManagerNickname}</h4>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
         <form action="<c:url value='/manager/insertboard'/>" method="post" enctype="multipart/form-data">
 	        <fieldset>
@@ -31,7 +47,7 @@
 			  <label for="formFile" class="form-label">이미지 파일 업로드</label>
 			  <input class="form-control" type="file" id="boardFile" name="boardFile" accept="image/*">
 			</div>
-        	
+        
         	<input type="hidden" id="boardCategory" name="boardCategory" value='1'>
         	<input type="hidden" id="managerNickname" name="managerNickname" value='${sessionScope.sessionManagerNickname}'>
 	        <div class="d-grid gap-2 col-1 mx-auto">
@@ -39,5 +55,6 @@
 	        </div>
 	        </fieldset>
         </form>
+        </div>
     </body>
 </html>
