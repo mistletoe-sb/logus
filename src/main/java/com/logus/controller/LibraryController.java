@@ -301,7 +301,7 @@ public class LibraryController {
 	
 	@ResponseBody
 	@PostMapping(value="{memberNickname}/library/followin")	//서재 팔로우
-	public String insertFollow(HttpSession session, @RequestParam("followId") String followingMemberId) {
+	public int insertFollow(HttpSession session, @RequestParam("followId") String followingMemberId) {
 	
 		String memberId = session.getAttribute("memberId").toString();
 		FollowVO vo = new FollowVO();
@@ -310,13 +310,13 @@ public class LibraryController {
 		vo.setFollowingMemberId(followingMemberId);
 		followService.insertFollow(vo);
 		
-		String result ="성공";
+		int result =1;
 		return result;
 	}
 	
 	@ResponseBody
 	@PostMapping(value="{memberNickname}/library/followdl")	//서재 팔로우 삭제
-	public String deleteFollow(HttpSession session, @RequestParam("followId") String followingMemberId) {
+	public int deleteFollow(HttpSession session, @RequestParam("followId") String followingMemberId) {
 		
 		String memberId = session.getAttribute("memberId").toString();
 		int followCode=0;
@@ -328,7 +328,7 @@ public class LibraryController {
 				} 
 			followService.deleteFollow(followCode);
 			
-			String result ="성공";
+			int result =1;
 			return result;
 	}
 	

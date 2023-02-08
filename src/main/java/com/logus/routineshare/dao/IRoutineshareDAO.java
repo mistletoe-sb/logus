@@ -10,6 +10,6 @@ public interface IRoutineshareDAO {
 	//이미 받은 사람이라면 공유자 정보 insert 하지 않음, 새로운 사람이라면 공유자 정보 insert
 	public int insertRoutineshare(RoutineshareVO vo);
 	
-	//일정 기간 지나면 딜리트? 일단 보류
-	//public int deleteRoutineshare();
+	//루틴 삭제 시 공유 수도 삭제
+	public int deleteRoutineshare(@Param("dailyroutineCode") int dailyroutineCode);
 }

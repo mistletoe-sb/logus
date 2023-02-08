@@ -22,4 +22,9 @@ public class RoutineshareService implements IRoutineshareService {
 		return iRoutineshareDAO.insertRoutineshare(vo);
 	}
 
+	@Override
+	public int deleteRoutineshare(int dailyroutineCode) {
+		return iRoutineshareDAO.deleteRoutineshare(dailyroutineCode);
+	}
+
 }
