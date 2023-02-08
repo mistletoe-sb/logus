@@ -5,6 +5,7 @@
 <html>
 	<head>
 	<%@ include file="../include.jsp" %>
+	<link rel="stylesheet" href="<c:url value='/resources/css/achieve.css'/>">
 		<meta charset="UTF-8">
 		<title>출석체크</title>
 	</head>
@@ -18,7 +19,7 @@
 			<c:choose>
 			<c:when test="${not empty routine}">
 			<input type="hidden" name="today" id="today">
-			<table class="table table-bordered table-group-divider bg-success bg-opacity-10 ">
+			<table class="table table-bordered table-group-divider bg-success bg-opacity-10 rwd-table">
 		  <thead>
 		    <tr class="">
 		      <th scope="col">시간</th>

@@ -3,8 +3,19 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
+<head>
+<style>
+ #headercolor {
+ background-color: rgb(232, 247, 252);
+ }
+ .navbar-brand{
+ 
+ }
+ 
+</style>
+</head>
 		<header>
-			<nav class="navbar bg-light">
+			<nav id="headercolor" class="navbar">
 			
 			<a class="navbar-brand" 
 						<c:choose>
@@ -34,11 +45,11 @@
 				    	<button id="searchbutton" class="btn btn-outline-success" type="submit" value="Submit" id="submit">search</button>
 					</form>
 		
-				<div>
+				<div id="navcolor">
 					<c:choose>
 					  	<c:when test="${empty sessionScope.memberNickname}">
 							<button type="button" class="btn btn-outline-dark" onclick="location.href='<c:url value='/loginform'/>'">로그인</button>
-							<button type="button" class="btn btn-outline-dark"onclick="location.href='<c:url value='/insertform'/>'">회원가입</button>
+							<button type="button" class="btn btn-outline-dark" onclick="location.href='<c:url value='/insertform'/>'">회원가입</button>
 						</c:when>
 						<c:otherwise>
 							<li><a>${sessionScope.memberId}(${sessionScope.memberNickname})님 환영합니다.</a></li>

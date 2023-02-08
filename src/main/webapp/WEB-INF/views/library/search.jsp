@@ -3,6 +3,14 @@
 <html>
 	<head>
 		<%@ include file="../include.jsp" %>
+		<style>
+	    .card-body { 
+		height: 116px; 
+ 		} 
+		.card-text {
+		height: 100px;
+		}
+		</style>
 	</head>
 	<body>
 		<%@ include file="../header_body.jsp" %>
@@ -24,7 +32,7 @@
 									</c:choose>
 								</c:when>
 								<c:otherwise>
-								<h5>등록된 태그가 없습니다</h5>
+								<h5 class="row justify-content-center">등록된 태그가 없습니다</h5>
 								</c:otherwise>
 							</c:choose>
 						</c:forEach>
