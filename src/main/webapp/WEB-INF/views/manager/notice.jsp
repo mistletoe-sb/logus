@@ -85,7 +85,7 @@
 						
 						</c:forEach>
 						
-						<c:if test="${nowPage!=totalPage}">
+						<c:if test="${nowPage!=totalPage && totalPage != 0}">
 							<li class="page-item"><a class="page-link" href="<c:url value='/manager/board?boardcategory=1&nowPage=${nowPage + 1}' /> ">▶</a></li>
 							<li class="page-item"><a class="page-link" href="<c:url value='/manager/board?boardcategory=1&nowPage=${totalPage}' /> ">▶▶</a></li>
 						</c:if>
