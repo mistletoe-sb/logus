@@ -11,7 +11,9 @@
  .navbar-brand{
 	padding: 0px 0px 0px 30px;
  }
-
+ #header_btn_group{
+ 	margin-right: 20px;
+ }
  
 </style>
 </head>
@@ -45,7 +47,7 @@
 			    	<button id="searchbutton" class="btn btn-outline-success" type="submit" value="Submit" id="submit">search</button>
 				</form>
 
-				<div>
+				<div id="header_btn_group">
 					<c:choose>
 					  	<c:when test="${empty sessionScope.memberNickname}">
 							<button type="button" class="btn btn-outline-dark" onclick="location.href='<c:url value='/loginform'/>'">로그인</button>

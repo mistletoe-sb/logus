@@ -153,7 +153,7 @@
 						<div class="input-group mb-3">
 							<div class="image-container">
 								<span class="input-group-text" id="inputGroup-sizing-default">프로필</span>
-								<img style="width: 500px;" id="preview-image" class="rounded-4" src="https://dummyimage.com/500x500/ffffff/000000.png&text=preview+image">
+								<img style="width: 500px;" id="preview-image" class="rounded-4" src="<c:url value='/resources/images/preview_image.png'/>">
 								<input style="display: block;" type="file" name="profile" id="memberProfile" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
 							</div>
 						</div>
