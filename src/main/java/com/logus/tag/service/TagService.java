@@ -51,7 +51,10 @@ public class TagService implements ITagService {
 	// 태그 수정 알고리즘(게시물 수정 시 작동)
 	public void updateTags(List<TagVO> tags, List<Integer> tagCodes) {
 		int tagCount = tags.size();			// 수정된(입력 받은) 태그 수
-		int tagCodeCount = tagCodes.size();	// 기존의 태그 수
+		int tagCodeCount = 0;	
+		if((tagCodes.size() != 1) || (tagCodes.get(0) != -1)) {			
+			tagCodeCount = tagCodes.size();	// 기존의 태그 수
+		}
 		logger.info("수정된 태그 수 : " + tagCount);
 		logger.info("기존 태그 수 : " + tagCodeCount);
 		// 태그 코드 세팅
