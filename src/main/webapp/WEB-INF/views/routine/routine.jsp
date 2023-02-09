@@ -17,7 +17,8 @@
 		<div class="d-grid gap-2 col-6 mx-auto">
 		<h3><span class="badge bg-primary">태그</span>&nbsp;&nbsp;&nbsp;
 		<c:forEach items="${taglist}" var="taglist" varStatus="status">
-		${taglist.tagName}</c:forEach></h3>
+			<button class="tag_block" style="display: inline-block">${taglist.tagName}</button>
+		</c:forEach></h3>
 		<div>
 			<table class="table rwd-table">
 		  <thead>
