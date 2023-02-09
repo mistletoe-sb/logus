@@ -142,8 +142,8 @@
         <div class="input-group mb-3">
           <div class="image-container">
             <span class="input-group-text" id="inputGroup-sizing-default">프로필</span>
-            <img style="width: 500px;" id="preview-image" src="${root}/logus/resources/images/member/${selectMemberInfo.memberProfile}" >
-            <input style="display: block;" type="file" name="profile" value="${filePath}" id="memberProfile" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" required>
+            <img style="width: 500px;" id="preview-image" src="<c:url value='/resources/images/member/${selectMemberInfo.memberProfile}'/>" >
+            <input style="display: block;" type="file" name="profile" value="${filePath}" id="memberProfile" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" onchange="setPreview(event)" required>
           </div>
         </div>
       </div>
@@ -161,12 +161,21 @@
     </fieldset>
     <div class="d-grid gap-2">
       <button class="btn btn-primary" type="submit" >Edit Profile</button>
-      <button class="btn btn-primary" type="reset" onclick="location.href='<c:url value='index'/>'">home</button>
+      <button class="btn btn-primary" type="reset" onclick="location.href='<c:url value="/${selectMemberInfo.memberNickname}/library"/>'">home</button>
     </div>
   </form>
 </div>
 	</body>
 	<script type="text/javascript">
+	function setPreview(event){
+		var reader = new FileReader();
+		
+		reader.onload = function(event){
+			$('#preview-image').attr("src", event.target.result);
+		};
+		
+		reader.readAsDataURL(event.target.files[0]);
+	}
 	//alert('테스트');
 		document.addEventListener("DOMContentLoaded", function() {
 			var checkPassword = function(str) {

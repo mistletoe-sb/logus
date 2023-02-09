@@ -148,7 +148,7 @@
 						<c:choose>
 							<c:when test="${empty routine1}">
 								<div class="col">
-									<div class="card">
+									<div id="weekday_card1" class="card">
 										<div class="card-body">
 											<h3 class="card-title">
 												<span class="badge bg-secondary">평일</span>
@@ -160,7 +160,7 @@
 							</c:when>
 							<c:otherwise>
 								<div class="col">
-									<div class="card">
+									<div id="weekday_card2" class="card">
 										<div class="card-header bg-transparent border-success text-truncate">
 											<h3 class="card-title">
 												<span class="badge bg-secondary">평일</span>
@@ -199,7 +199,7 @@
 						<c:choose>
 							<c:when test="${empty routine2}">
 								<div class="col">
-									<div class="card">
+									<div id="weekend_card1" class="card">
 										<div class="card-body">
 											<h3 class="card-title">
 												<span class="badge bg-secondary">주말</span>
@@ -212,7 +212,7 @@
 							</c:when>
 							<c:otherwise>
 								<div class="col">
-									<div class="card">
+									<div id="weekend_card2" class="card">
 										<div class="card-header bg-transparent border-success text-truncate">
 											<h3 class="card-title">
 												<span class="badge bg-secondary">주말</span>
@@ -250,7 +250,7 @@
 						</c:choose>
 					</div>  
 				</div>
-				<div>
+				<div style="text-align: center; margin-right: 75px; margin-top: 10px;">
 					<c:if test="${memberVO.memberNickname eq sessionUser}">
 						<button type="button" class="btn btn-outline-secondary" onclick="location.href='<c:url value='/routinelist'/>'">루틴 리스트 더보기</button>
 					</c:if>
@@ -297,7 +297,7 @@
 					</div>
 				</c:forEach>
 		 	</div>
-			<div>
+			<div style="text-align: center; margin-right:75px;">
 				<c:choose>
 					<c:when test="${not empty dsList[0]}">				
 						<button type="button" class="btn btn-outline-secondary" onclick=

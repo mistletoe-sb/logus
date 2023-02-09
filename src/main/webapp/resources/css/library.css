@@ -108,10 +108,18 @@ th {
 #align_container_routine {
 	margin-left: auto;
 	margin-right: auto;
-	width: 624px;
+	width: 674px;
 }
 
 #mylib_info_btn {
 	width: 90%;
 	margin: 20px auto 0px auto;
+}
+
+#weekday_card1, #weekday_card2 {
+	right: 50px;
+}
+
+#weekend_card1, #weekend_card2 {
+	left: 50px;
 }

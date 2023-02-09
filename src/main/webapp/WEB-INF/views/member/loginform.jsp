@@ -6,7 +6,7 @@
  		<style type="text/css">
          #container{
             width : 800px;
-            margin : 20px auto;
+            margin : 60px auto;
             background-color: #f7f7f7;
          }
          .title{
@@ -46,20 +46,20 @@
 				</div>
 				<div>
 					<div>
-						<div class="d-grid gap-2 d-md-block">
-								<button class="btn btn-primary" type="submit" onclick="memberLogin()">로그인</button>
-								<button class="btn btn-primary" type="reset" onclick="location.href='<c:url value='/insertform'/>'">회원가입</button>
-								<button class="btn btn-primary" type="reset" onclick="location.href='<c:url value='index'/>'">Home</button>
+						<div class="d-grid gap-2 d-md-block" style="text-align: center;">
+								<button class="btn btn-primary" type="submit" style="width: 200px;" onclick="memberLogin()">로그인</button>
+								<button class="btn btn-primary" type="reset" style="width: 200px;" onclick="location.href='<c:url value='/insertform'/>'">회원가입</button>
 						</div>
 						<br>
-						<div class="d-grid gap-2 d-md-block">
+						<div class="d-grid gap-2 d-md-block" style="text-align: center;">
 							<!-- Button trigger modal -->
-							<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+							<button type="button" class="btn btn-primary" style="width: 148px;" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
 								아이디 찾기
 							</button>
-							<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop2">
+							<button type="button" class="btn btn-primary" style="width: 150px;" data-bs-toggle="modal" data-bs-target="#staticBackdrop2">
 								비밀번호 변경
 							</button>
+							<button class="btn btn-primary" type="reset" style="width: 96px;" onclick="location.href='<c:url value='index'/>'">Home</button>
 						</div>
 					</div>
 				</div>
