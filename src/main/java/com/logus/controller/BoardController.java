@@ -77,7 +77,7 @@ public class BoardController {
 				
 				String[] originalFilename = boardFile.getOriginalFilename().split("\\.");
 				String fileType = originalFilename[originalFilename.length - 1];
-				fileId = fileId + "\\." + fileType;
+				fileId = fileId + "." + fileType;
 				
 //				boardFile.transferTo(new File(CURR_IMAGE_REPO_PATH + "\\" + boardFile.getOriginalFilename()));
 //				boardFile.transferTo(new File(REAL_PATH + "\\" + boardFile.getOriginalFilename()));

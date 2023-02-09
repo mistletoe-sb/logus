@@ -305,6 +305,10 @@
 					</c:when>
 					<c:otherwise>
 						<h5>작성된 일일 스토리가 없습니다.</h5>
+						<c:if test="${memberVO.memberNickname == sessionScope.memberNickname}">
+							<button type="button" class="btn btn-outline-secondary" onclick=
+								"location.href='<c:url value="/${sessionScope.memberNickname}/library/story/insert"/>'">일일 스토리 작성하기</button>
+						</c:if>
 					</c:otherwise>
 				</c:choose>
 			</div>
