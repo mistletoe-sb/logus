@@ -84,8 +84,9 @@ public class DailystoryController {
 	
 	@PostMapping(value="/{memberNickname}/library/story/update")
 	// 일일 스토리 수정
-	public String updateDailystory(DailystoryVO vo, @RequestParam("tagNames") String tagNames, @RequestParam("tagCodes") List<Integer> tagCodes, 
+	public String updateDailystory(DailystoryVO vo, @RequestParam("tagNames") String tagNames, @RequestParam(value="tagCodes", required=false, defaultValue="-1" ) List<Integer> tagCodes, 
 								@RequestParam("thumbnail") MultipartFile thumbnail, HttpSession session) {
+		logger.info("태그 수:"+tagCodes.size()+"/태그내용"+tagCodes.get(0));
 		try{
 			String beforeThumbnail = vo.getDailystoryImage();
 			// 기존에 썸네일이 있었을 경우

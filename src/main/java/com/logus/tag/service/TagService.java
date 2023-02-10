@@ -51,7 +51,10 @@ public class TagService implements ITagService {
 	// 태그 수정 알고리즘(게시물 수정 시 작동)
 	public void updateTags(List<TagVO> tags, List<Integer> tagCodes) {
 		int tagCount = tags.size();			// 수정된(입력 받은) 태그 수
-		int tagCodeCount = tagCodes.size();	// 기존의 태그 수
+		int tagCodeCount = 0;	
+		if((tagCodes.size() != 1) || (tagCodes.get(0) != -1)) {			
+			tagCodeCount = tagCodes.size();	// 기존의 태그 수
+		}
 		logger.info("수정된 태그 수 : " + tagCount);
 		logger.info("기존 태그 수 : " + tagCodeCount);
 		// 태그 코드 세팅
@@ -64,14 +67,14 @@ public class TagService implements ITagService {
 		}
 		
 		// 태그 수 변화에 따라 실행 알고리즘 변경
-		if(tagCount < tagCodeCount) {		// 수정된 태그 수가 기존 태그 수보다 적으면
+		if(tagCount < tagCodeCount) {								// 수정된 태그 수가 기존 태그 수보다 적으면
 			updateTags(tags.subList(0, tagCount));					// 입력 받은 태그 수정
 			deleteTags(tagCodes.subList(tagCount, tagCodeCount));	// 남은 태그 삭제(delete)
-		} else if(tagCount == tagCodeCount) {	// 수정된 태그 수가 기존 태그 수와 동일하면
-			updateTags(tags);	// 태그 수정(update)			
-		} else {	// 그 외(수정된 태그 수가 기존 태그 수보다 많으면
-			updateTags(tags.subList(0, tagCodeCount));			// 입력 받은 태그 수정
-			insertTags(tags.subList(tagCodeCount, tagCount));	// 남은 태그 추가(insert)
+		} else if(tagCount == tagCodeCount) {						// 수정된 태그 수가 기존 태그 수와 동일하면
+			updateTags(tags);										// 태그 수정(update)			
+		} else {													// 그 외(수정된 태그 수가 기존 태그 수보다 많으면)
+			updateTags(tags.subList(0, tagCodeCount));				// 입력 받은 태그 수정
+			insertTags(tags.subList(tagCodeCount, tagCount));		// 남은 태그 추가(insert)
 		}
 	}
 	

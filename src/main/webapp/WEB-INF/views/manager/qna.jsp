@@ -91,7 +91,7 @@
 							</c:otherwise>
 						</c:choose>
 					</c:forEach>
-					<c:if test="${nowPage!=totalPage}">
+					<c:if test="${nowPage!=totalPage && totalPage != 0}">
 						<li class="page-item"><a class="page-link" href="<c:url value='/manager/qna?nowPage=${nowPage + 1}' /> ">▶</a></li>
 						<li class="page-item"><a class="page-link" href="<c:url value='/manager/qna?nowPage=${totalPage}' /> ">🞂🞂</a></li>
 					</c:if>

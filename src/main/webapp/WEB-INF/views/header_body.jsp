@@ -5,6 +5,9 @@
 <!DOCTYPE html>
 <head>
 <style>
+body { 
+	background-color: rgb(247, 245, 242);
+} 
  #headercolor {
  	background-color: rgb(232, 247, 252);
  }
