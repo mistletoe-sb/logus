@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 // redirect 시 문자열 인코딩(UTF-8)을 위한 클래스
+// 작성자 : 이수봉
 public class RedirEncoder {
 	private static String encodingType = "UTF-8";	// 인코딩 설정(UTF-8)
 	private static Logger logger = LoggerFactory.getLogger(RedirEncoder.class);		// logger 사용

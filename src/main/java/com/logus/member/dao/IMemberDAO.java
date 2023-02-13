@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Param;
 import com.logus.member.model.MemberVO;
 
 // 회원정보 DAO 인터페이스
+// 작성자 : 정재웅
 public interface IMemberDAO {
 	int countMember(@Param("isExit")boolean isExit);									// 전체 회원 수 반환
 	int countMemberId(String memberId);	

@@ -1,7 +1,7 @@
 package com.logus.controller;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+//import org.slf4j.Logger;
+//import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,14 +10,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.logus.reply.model.ReplyVO;
 import com.logus.reply.service.IReplyService;
-import com.logus.reply.service.ReplyService;
 import com.logus.util.redirectencoder.RedirEncoder;
 
 @Controller
 // 댓글 서비스 제어하는 컨트롤러 클래스
+// 작성자 : 이수봉
 public class ReplyController {
 
-	private static Logger logger = LoggerFactory.getLogger(ReplyService.class);	// 로깅을 위한 객체 참조
+//	private static Logger logger = LoggerFactory.getLogger(ReplyService.class);	// 로깅을 위한 객체 참조
 	
 	@Autowired
 	private IReplyService replyService;		// 댓글 서비스 객체

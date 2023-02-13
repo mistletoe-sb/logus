@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import com.logus.tag.model.TagVO;
 
 // 태그 DAO 인터페이스
+// 작성자 : 이수봉
 public interface ITagDAO {
 	public abstract int insertTag(TagVO vo);		// 태그 추가
 	public abstract int updateTag(TagVO vo);		// 태그 수정

@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.stereotype.Repository;
 
 @Repository
+// 작성자 : 배재연
 public interface IStatisticsDAO {
 	List<Map<String, Object>> countMemberJobList();
 	List<Map<String, Object>> countMemberGenerationList();

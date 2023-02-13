@@ -17,6 +17,7 @@ import com.logus.manager.service.IManagerService;
 import com.logus.member.service.IMemberService;
 
 @Controller
+// 작성자 : 배재연
 public class ManagerController {
 	
 	@Autowired
@@ -83,7 +84,7 @@ public class ManagerController {
 		System.out.println("로그인한 관리자암호 출력: " + managerPassword);
 
 		// 출력할 메세지 저장할 변수
-		String message = "";
+		// String message = "";
 		
 		try {
 			// 로그인 폼에서 입력한 관리자ID에 해당하는 관리자 정보 받아옴.

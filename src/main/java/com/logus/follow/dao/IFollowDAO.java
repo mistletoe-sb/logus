@@ -4,7 +4,8 @@ import java.util.List;
 
 import com.logus.follow.model.FollowVO;
 
-//팔로우 DAO 인터페이스
+// 팔로우 DAO 인터페이스
+// 작성자 : 노설아
 public interface IFollowDAO {
 	public abstract int countFollowing(String memberId);		//사용자가 팔로우한 개수 반환
 	public abstract List<FollowVO> selectFollowList(String memberId);		//팔로우한 목록 반환

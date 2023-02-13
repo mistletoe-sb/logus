@@ -6,6 +6,7 @@ import lombok.Data;
 
 @Data
 // 일일 스토리 VO 클래스
+// 작성자 : 이수봉
 public class DailystoryVO {
 	private int dailystoryCode;			// 스토리 코드
 	private String memberNickname;		// 작성자(닉네임)

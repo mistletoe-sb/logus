@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.logus.statistics.dao.IStatisticsDAO;
 
 @Service
+// 작성자 : 배재연
 public class StatisticsService implements IStatisticsService {
 	
 	@Autowired

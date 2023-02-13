@@ -21,6 +21,7 @@ import com.logus.dailyroutine.service.IDailyroutineService;
 import com.logus.util.redirectencoder.RedirEncoder;
 
 @Controller
+// 작성자 : 최영광
 public class AchieveController {
 	@Autowired
 	private IDailyroutineService DailyroutineService;	

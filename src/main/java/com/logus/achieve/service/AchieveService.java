@@ -3,7 +3,6 @@ package com.logus.achieve.service;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +12,7 @@ import com.logus.achieve.model.AchieveVO;
 
 
 @Service
+// 작성자 : 최영광
 public class AchieveService implements IAchieveService {
 	
 	@Autowired

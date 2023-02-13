@@ -14,6 +14,7 @@ import com.logus.qna.model.QnaVO;
 import com.logus.qna.service.IQnaService;
 
 @Controller
+// 작성자 : 배재연
 public class QnaController {
 	
 	@Autowired

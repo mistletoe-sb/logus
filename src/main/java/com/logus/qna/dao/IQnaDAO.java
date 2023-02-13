@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.logus.qna.model.QnaVO;
 
 @Repository
+// 작성자 : 배재연
 public interface IQnaDAO {
 	int countQna();
 	int countQna(@Param("memberNickname") String memberNickname);

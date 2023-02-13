@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 // 태그 VO 클래스
+// 작성자 : 이수봉
 public class TagVO {
 	private int tagCode;			// 태그 코드
 	private String dailystoryCode;		// 일일 스토리 코드

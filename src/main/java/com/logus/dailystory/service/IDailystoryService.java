@@ -7,6 +7,7 @@ import com.logus.dailystory.model.DailystoryVO;
 import com.logus.tag.model.TagVO;
 
 // 일일 스토리 서비스 인터페이스
+// 작성자 : 이수봉
 public interface IDailystoryService {
 	public abstract void insertDailystory(DailystoryVO vo, List<TagVO> tags);										// 일일 스토리 작성
 	public abstract void updateDailystory(DailystoryVO vo, List<TagVO> tags, List<Integer> tagCodes);										// 일일 스토리 수정

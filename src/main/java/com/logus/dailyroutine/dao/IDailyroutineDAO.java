@@ -5,8 +5,8 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.logus.dailyroutine.model.DailyroutineVO;
-import com.logus.dailystory.model.DailystoryVO;
 
+// 작성자 : 최영광
 public interface IDailyroutineDAO {
 	public int insertDailyroutine(DailyroutineVO vo);	//int로 key insert한거 반환받아서 check에 바로 써야 함
 	public int updateRoutineActive(@Param("memberNickname") String memberNickname, @Param("dailyroutineWeekopt") int dailyroutineWeekopt); //0 기본, 1번 메인   

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;*/
 //@Component
 //@Aspect
 // AOP 이용한 Logger 클래스
+// 작성자 : 이수봉
 public class LogAspect {
 	
 	//private static Logger logger = LoggerFactory.getLogger(LogAspect.class);

@@ -1,10 +1,7 @@
 package com.logus.controller;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.OutputStream;
 
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +17,11 @@ import com.logus.board.model.BoardVO;
 import com.logus.board.service.IBoardService;
 
 @Controller
+// 작성자 : 배재연
 public class BoardController {
 	
-	private static final String CURR_IMAGE_REPO_PATH = "C:\\project_labs\\spring_workspace\\logus\\src\\main\\webapp\\resources\\images\\manager";
-	private static final String REAL_PATH = "C:\\project_labs\\spring_workspace\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\logus\\resources\\images\\manager";
+//	private static final String CURR_IMAGE_REPO_PATH = "C:\\project_labs\\spring_workspace\\logus\\src\\main\\webapp\\resources\\images\\manager";
+//	private static final String REAL_PATH = "C:\\project_labs\\spring_workspace\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\logus\\resources\\images\\manager";
 
 	@Autowired
 	IBoardService boardService;

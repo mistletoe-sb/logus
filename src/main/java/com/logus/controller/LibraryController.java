@@ -38,6 +38,7 @@ import com.logus.util.constant.TagCategory;
 import com.logus.util.redirectencoder.RedirEncoder;
 
 @Controller
+// 작성자 : 이수봉, 최영광
 public class LibraryController {
 	@Autowired
 	private IDailyroutineService DailyroutineService;	//루틴 정보

@@ -9,6 +9,7 @@ import com.logus.dailyroutine.dao.IDailyroutineDAO;
 import com.logus.dailyroutine.model.DailyroutineVO;
 
 @Service
+// 작성자 : 최영광
 public class DailyroutineService implements IDailyroutineService {
 	
 	@Autowired

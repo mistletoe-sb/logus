@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Component
 // 파일 업로드, 다운로드, 삭제 기능 제공
+// 작성자 : 이수봉, 배재연
 public class FileManager {
 	private static Logger logger = LoggerFactory.getLogger(FileManager.class);
 	

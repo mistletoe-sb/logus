@@ -6,6 +6,7 @@ import lombok.Data;
 
 @Data
 // 댓글 VO 클래스
+// 작성자 : 이수봉
 public class ReplyVO {
 	private int replyCode;			// 댓글 코드
 	private String replyContent;	// 댓글 내용

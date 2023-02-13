@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.logus.qna.model.QnaVO;
 
+// 작성자 : 배재연
 public interface IQnaService {
 	int countQna();
 	int countQna(String memberNickname);
