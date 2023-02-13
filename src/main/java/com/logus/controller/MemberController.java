@@ -21,11 +21,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.logus.member.model.MemberVO;
 import com.logus.member.service.IMemberService;
-import com.logus.member.service.MemberService;
 import com.logus.util.redirectencoder.RedirEncoder;
 
 @Controller
 // 회원정보 서비스 컨트롤러 클래스
+// 작성자 : 정재웅
 public class MemberController {
 	
 	   public String getRamdomPassword(int size) {

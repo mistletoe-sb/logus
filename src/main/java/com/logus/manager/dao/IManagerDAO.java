@@ -9,6 +9,7 @@ import com.logus.manager.model.ManagerVO;
 import com.logus.member.model.MemberVO;
 
 @Repository
+// 작성자 : 배재연
 public interface IManagerDAO {
 	int countManager();
 	int countManager(@Param("managerId") String managerId);

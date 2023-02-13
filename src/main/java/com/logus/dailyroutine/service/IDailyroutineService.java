@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.logus.dailyroutine.model.DailyroutineVO;
 
+// 작성자 : 최영광
 public interface IDailyroutineService {
 	public int insertDailyroutine(DailyroutineVO vo);
 	public int updateRoutineActive(String memberNickname, int dailyroutineWeekopt);

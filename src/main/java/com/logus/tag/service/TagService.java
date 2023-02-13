@@ -17,6 +17,7 @@ import com.logus.util.constant.TagCategory;
 
 @Service
 // 태그 서비스 구현 클래스
+// 작성자 : 이수봉
 public class TagService implements ITagService {
 
 	private static Logger logger = LoggerFactory.getLogger(TagService.class);	// 로깅을 위한 객체 참조

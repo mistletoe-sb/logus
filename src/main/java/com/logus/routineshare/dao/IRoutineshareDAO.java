@@ -4,6 +4,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.logus.routineshare.model.RoutineshareVO;
 
+// 작성자 : 최영광
 public interface IRoutineshareDAO {
 	//이미 받은 사람 검증(공유수 조작 제어용)
 	public int selectRoutineshare(@Param("memberId") String memberId, @Param("dailyroutineCode") int dailyroutineCode);

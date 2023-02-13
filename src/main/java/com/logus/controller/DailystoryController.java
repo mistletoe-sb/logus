@@ -32,6 +32,7 @@ import com.logus.util.redirectencoder.RedirEncoder;
 
 @Controller
 // 일일 스토리 서비스 제어하는 컨트롤러 클래스
+// 작성자 : 이수봉
 public class DailystoryController {
 	@Autowired
 	private IDailystoryService dailystoryService;	// 일일 스토리 서비스 객체

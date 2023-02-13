@@ -1,6 +1,5 @@
 package com.logus.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -18,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.logus.statistics.service.IStatisticsService;
 
 @Controller
+// 작성자 : 배재연
 public class StatisticsController {
 	
 	@Autowired

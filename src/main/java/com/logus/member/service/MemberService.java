@@ -10,6 +10,7 @@ import com.logus.member.model.MemberVO;
 
 @Service
 // 회원정보 관련 서비스 구현 클래스
+// 작성자 : 정재웅
 public class MemberService implements IMemberService {
 
 	@Autowired

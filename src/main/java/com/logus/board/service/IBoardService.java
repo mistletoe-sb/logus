@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.logus.board.model.BoardVO;
 
+// 작성자 : 배재연
 public interface IBoardService {
 	int countBoard(int boardCategory);
 	int countTotalPage(int boardCategory, int pageLimit);

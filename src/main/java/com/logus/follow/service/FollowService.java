@@ -2,21 +2,19 @@ package com.logus.follow.service;
 
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.logus.dailystory.service.DailystoryService;
 import com.logus.follow.dao.IFollowDAO;
 import com.logus.follow.model.FollowVO;
 
 @Service
-//팔로우 서비스 구현 클래스
+// 팔로우 서비스 구현 클래스
+// 작성자 : 노설아
 public class FollowService implements IFollowService {
 	
 	
-	private static Logger logger = LoggerFactory.getLogger(DailystoryService.class); //로깅을 위한 객체 참조
+//	private static Logger logger = LoggerFactory.getLogger(DailystoryService.class); //로깅을 위한 객체 참조
 	
 	
 	

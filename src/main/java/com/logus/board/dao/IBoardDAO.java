@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import com.logus.board.model.BoardVO;
 
 @Repository
+// 작성자 : 배재연
 public interface IBoardDAO {
 	int countBoard(int boardCategory);
 	List<BoardVO> selectBoardList(int boardCategory);

@@ -6,6 +6,7 @@ import java.util.Map;
 import com.logus.tag.model.TagVO;
 
 // 태그 서비스 인터페이스
+// 작성자 : 이수봉
 public interface ITagService {
 	public abstract void insertTags(List<TagVO> tags, int selectKey);			// 태그 추가(게시물 추가 시 작동)
 	public abstract void insertTags(List<TagVO> tags);							// 태그 추가(게시물 수정 시 작동)

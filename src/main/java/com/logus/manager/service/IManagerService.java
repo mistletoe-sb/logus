@@ -6,6 +6,7 @@ import java.util.List;
 import com.logus.manager.model.ManagerVO;
 import com.logus.member.model.MemberVO;
 
+// 작성자 : 배재연
 public interface IManagerService {
 	int countManager();
 	int countManager(String managerId);

@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.logus.follow.model.FollowVO;
 
+// 작성자 : 노설아
 public interface IFollowService {
 	
 	

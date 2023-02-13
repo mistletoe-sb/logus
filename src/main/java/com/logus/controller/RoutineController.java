@@ -23,6 +23,7 @@ import com.logus.tag.service.ITagService;
 import com.logus.util.constant.TagCategory;
 
 @Controller
+// 작성자 : 최영광
 public class RoutineController {
 	@Autowired
 	private IDailyroutineService DailyroutineService;	// 일정 객체

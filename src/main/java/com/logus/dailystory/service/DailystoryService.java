@@ -18,6 +18,7 @@ import com.logus.util.constant.TagCategory;
 
 @Service
 // 일일 스토리 서비스 구현 클래스
+// 작성자 : 이수봉
 public class DailystoryService implements IDailystoryService {
 
 	private static Logger logger = LoggerFactory.getLogger(DailystoryService.class);	// 로깅을 위한 객체 참조

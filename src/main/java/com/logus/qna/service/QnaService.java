@@ -10,6 +10,7 @@ import com.logus.qna.dao.IQnaDAO;
 import com.logus.qna.model.QnaVO;
 
 @Service
+// 작성자 : 배재연
 public class QnaService implements IQnaService {
 
 	@Autowired

@@ -10,6 +10,7 @@ import com.logus.board.dao.IBoardDAO;
 import com.logus.board.model.BoardVO;
 
 @Service
+// 작성자 : 배재연
 public class BoardService implements IBoardService {
 
 	@Autowired

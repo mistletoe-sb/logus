@@ -5,6 +5,7 @@ import java.sql.Date;
 import lombok.Data;
 
 @Data
+// 작성자 : 배재연
 public class BoardVO {
 	private int boardCode;
 	private String boardTitle;

@@ -6,6 +6,7 @@ import lombok.Data;
 
 @Data
 // 회원정보 VO 클래스
+// 작성자 : 정재웅
 public class MemberVO {
 	private int memberCode;			// 회원번호
 	private String memberId;		// ID

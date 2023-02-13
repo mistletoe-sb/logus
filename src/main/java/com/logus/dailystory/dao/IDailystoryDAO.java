@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import com.logus.dailystory.model.DailystoryVO;
 
 // 일일 스토리 DAO 인터페이스
+// 작성자 : 이수봉
 public interface IDailystoryDAO {
 	public abstract int countDailystory(String memberNickname);		// 내 스토리 개수 반환
 	public abstract int insertDailystory(DailystoryVO vo);			// 일일 스토리 작성

@@ -4,6 +4,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.logus.achieve.model.AchieveVO;
 
+// 작성자 : 최영광
 public interface IAchieveDAO {
 	public void insertAchieve(AchieveVO vo);	//체크리스트를 통해 일일 달성률 체크(뷰에서 각 일정 상세 select로 받아서, DB에는 일일 총 달성율 하나만 저장)
 	public int selectAchieve(@Param("memberNickname") String memberNickname, @Param("today") String today);	//오늘했는지 이미 출석을 했는지 체크, 이미 출석을 한 상태라면 메시지 출력

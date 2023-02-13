@@ -5,12 +5,9 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,6 +24,7 @@ import com.logus.member.service.IMemberService;
 //팔로우 서비스 제어하는 컨트롤러 클래스
 // : 뷰에 어떻게 보내주고 버튼을 누르던지 어떤 액션이 있을때 어떻게 동작할지 정해줌
 @Controller		//컨트롤러 bean으로 등록
+// 작성자 : 노설아
 public class FollowController {
 	
 	@Autowired

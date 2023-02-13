@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.logus.dailycheck.model.DailycheckVO;
 
+// 작성자 : 최영광
 public interface IDailycheckDAO {
 	public void insertDailycheck(DailycheckVO vo);
 	public int updateDailycheck(DailycheckVO vo);	//인풋 전체를 받아서 수정 안했어도 업데이트	

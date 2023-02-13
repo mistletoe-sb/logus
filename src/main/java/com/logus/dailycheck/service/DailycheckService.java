@@ -7,9 +7,9 @@ import org.springframework.stereotype.Service;
 
 import com.logus.dailycheck.dao.IDailycheckDAO;
 import com.logus.dailycheck.model.DailycheckVO;
-import java.util.List;
 
 @Service
+// 작성자 : 최영광
 public class DailycheckService implements IDailycheckService {
 	
 	@Autowired

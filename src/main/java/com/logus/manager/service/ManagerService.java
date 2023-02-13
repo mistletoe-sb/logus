@@ -12,6 +12,7 @@ import com.logus.member.dao.IMemberDAO;
 import com.logus.member.model.MemberVO;
 
 @Service
+// 작성자 : 배재연
 public class ManagerService implements IManagerService {
 
 	@Autowired

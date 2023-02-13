@@ -7,6 +7,7 @@ import com.logus.routineshare.dao.IRoutineshareDAO;
 import com.logus.routineshare.model.RoutineshareVO;
 
 @Service
+// 작성자 : 최영광
 public class RoutineshareService implements IRoutineshareService {
 
 	@Autowired

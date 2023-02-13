@@ -13,6 +13,7 @@ import com.logus.reply.model.ReplyVO;
 
 @Service
 // 댓글 서비스 구현 클래스
+// 작성자 : 이수봉
 public class ReplyService implements IReplyService {
 
 	private static Logger logger = LoggerFactory.getLogger(ReplyService.class);	// 로깅을 위한 객체 참조

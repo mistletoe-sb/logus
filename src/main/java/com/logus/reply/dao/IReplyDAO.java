@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import com.logus.reply.model.ReplyVO;
 
 // 댓글 DAO 인터페이스
+// 작성자 : 이수봉
 public interface IReplyDAO {
 	public abstract int countReply(int dailystoryCode);								// 해당 게시글의 댓글 수 반환
 	public abstract List<Integer> countReplyEach(@Param("dailystoryCode") List<Integer> dailystoryCode);		// 게시글 목록의 각 댓글 수 반환
