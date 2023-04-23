@@ -45,7 +45,7 @@ KOSA 3차(Spring) 프로젝트 팀 LogUs project repository
 
   + project_labs
   
-    + adoptjdk_8u352b08 : JDK bin 경로
+    + adoptjdk_8u352b08 : JDK 경로
     
     + apache-tomcat-9.0.71 : tomcat 경로
     
