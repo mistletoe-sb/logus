@@ -7,6 +7,8 @@ KOSA 3차(Spring) 프로젝트 팀 LogUs project repository
 
 + 프로젝트 명 : LogUs
 
++ 프로젝트 소개 : LogUs는 자신의 공부 일정을 만들어 관리하고, 다른 사람들과 공유할 수 있는 플랫폼 제작을 위한 Spring MVC 기반 프로젝트입니다.
+
 ## 기간
 
 + 2023.01.18 ~ 2023.02.09
